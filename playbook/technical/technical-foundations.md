@@ -4,8 +4,8 @@ title: Technical foundations (Google's official rules)
 description: Google's documented rules for the technical basics that decide what gets crawled, indexed and shown — faceted navigation, canonicals, site moves, product variants, pagination, crawl budget, JavaScript, structured data policies, Core Web Vitals, hreflang and link spam — plus labelled additions on rendering checks, 404 vs 410 vs 301, URL hierarchy, server location, Gemini reading the indexed copy, Chrome-side AI features, Google-selected canonicals carrying over to ChatGPT, the Removals tool, PDF deindexing, viewport and CSS rendering pitfalls, signal drift between outputs, semantic landmarks, and HTML size limits for Googlebot and Bing.
 tags: [seo, technical-seo, google, crawling, indexing, canonical, migration, hreflang, structured-data, core-web-vitals, rendering, status-codes, url-structure, hosting, pdf, lazy-loading, semantic-html, html-size, cdn, ecommerce]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:15:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T09:22:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: chuleta-geo2027
@@ -101,11 +101,17 @@ sources:
   - id: dbb-psi
     resource: "https://www.debugbear.com/blog/pagespeed-insights"
     title: "DebugBear, How To Use PageSpeed Insights (2025-03-09, upd. 2026-10-08; explainer)"
+  - id: st-chatgpt-dr
+    resource: "https://stevetoth.ai/how-chatgpt-deep-research-works"
+    title: "Steve Toth, How ChatGPT Deep Research works (undated; 19 conversations; vendor data)"
+  - id: st-claude
+    resource: "https://stevetoth.ai/how-claude-search-works"
+    title: "Steve Toth, How Claude search works (undated; 30 conversations; vendor data)"
 ---
 
 # Technical foundations (Google's official rules)
 
-These are Google's own documented rules, so they rank above every practitioner claim in this playbook ([confidence scale](../reference/sources-and-confidence.md)). The topic list follows the gaps found against the LearningSEO roadmap.[^learningseo] Quotes were extracted on 2026-10-27; spot-check the live page before quoting it in a decision, since Google edits these docs often (the update dates are in the sources). Sections 12–24 add practitioner, patent and from-code material next to these rules; each item there carries its own, lower confidence label.
+These are Google's own documented rules, so they rank above every practitioner claim in this playbook ([confidence scale](../reference/sources-and-confidence.md)). The topic list follows the gaps found against the LearningSEO roadmap.[^learningseo] Quotes were extracted on 2026-10-27; spot-check the live page before quoting it in a decision, since Google edits these docs often (the update dates are in the sources). Sections 12–25 add practitioner, patent and from-code material next to these rules; each item there carries its own, lower confidence label.
 
 ## Rules
 - **Keep facet URLs out of the crawl with a robots.txt disallow**, and open only filter combinations with real search demand, using `&` separators, a fixed order and a 404 for empty results. *Official* — [evidence](#1-faceted-navigation)
@@ -274,6 +280,11 @@ Watch only; none of these is a ranking rule.
 
 - **Do:** keep category and product HTML well under 1 MB uncompressed (for Bing); move base64-inlined images and fonts and large inline JSON state into separate files; check the largest templates (long category pages, product pages with many variants) in Bing Webmaster Tools. *Practitioner; thresholds from the sources, template choice inference.*[^dbb-2mb]
 
+## 25. Assistants read passages from search results
+From Steve Toth, who sells a paid AI-search membership; his test conversations were B2B vendor comparisons.
+- **Claude only opens what its own search returned.** `web_fetch` refused a URL that hadn't come from a search (`PERMISSIONS_ERROR`), and every citation originated in `web_search`; 17 of 45 turns ran no search at all. *Measured, vendor data.*[^st-claude] A page has to be findable in the search index the assistant uses before it can be read ([AI crawlers and controls](ai-crawlers-and-controls.md#claudes-web-search-runs-on-brave)).
+- **Deep Research cites line ranges.** Quick-run citations reference ranges such as L569–L577, which suggests pages are converted to numbered plain text before reading; the cited passage matters, not the page. *Inference, vendor data.*[^st-chatgpt-dr] Keep each fact in plain server-rendered text near its heading ([semantic landmarks](#23-semantic-landmarks)).
+
 Related: [migration](../situations/migration.md), [AI crawlers and controls](ai-crawlers-and-controls.md), [performance and caching](performance-and-caching.md), [Search Console](../measure/search-console.md), [diagnostic tests](../measure/diagnostic-tests.md), [category pages](../page-types/category-pages.md).
 
 [^learningseo]: LearningSEO.io, read 2026-10-27: section map used as a gap checklist; its migration, pagination and ecommerce sections link practitioner guides, so the Google docs were read directly.
@@ -307,3 +318,5 @@ Related: [migration](../situations/migration.md), [AI crawlers and controls](ai-
 [^dbb-cdn-seo]: DebugBear, 2026-05-04: a CDN improves TTFB/LCP, reliability and crawl efficiency, no direct ranking boost. Explainer, no before/after data.
 [^dbb-psi]: DebugBear, 2025-03-09 (upd. 2026-10-08): confirms the thresholds and 28-day p75 CrUX window; field data can take 28 days to reflect a fix. Explainer, vendor.
 [^chuleta-geo2027]: Chuleta SEO (Emilio Rodríguez García), 2026-10-29, Spanish newsletter, read in full; claims translated. Own projects: a section redirected to the homepage (Sistrix estimate 21,645 → 3,065), ~9,340 robots.txt-blocked pages still indexed (Search Console, Aug–Oct 2026). Relays SE Ranking: 82.5 % of US brand searches show an AI Overview, 62 % of cited pages rank outside the organic top 10 (sample and period not stated).
+[^st-chatgpt-dr]: Steve Toth, undated guide: 19 ChatGPT Deep Research conversations on B2B SaaS questions; 80–94 searches per full run, 90.6 % of them `site:` lookups; quick-run citations reference line ranges (e.g. L569-L577); only the first ~100k characters of the guide were read.
+[^st-claude]: Steve Toth, undated guide: 30 Claude conversations; usually one query returning 9–10 results; 17 of 45 turns without search; `web_fetch` refused an unsearched URL (`PERMISSIONS_ERROR`); every citation from `web_search`; Brave link rests on a March 2025 subprocessor-list mention (not linked) and one test with matching citations.

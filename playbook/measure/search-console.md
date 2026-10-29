@@ -4,8 +4,8 @@ title: Search Console
 description: How to read Search Console without being fooled — the comparison checklist, num=100, filtered and inflated impressions, the Generative AI report and AI Mode clicks, where AI Overviews show, text ads, zero-click and organic-decline benchmarks, whole-site CTR benchmarks, brand-verification queries, bot-like LLM query bursts and AI Mode follow-ups, how much volume a title test needs, same-language hreflang click attribution, the URL Inspection API quota, Insights query groups, the zero-click series by country, and decay and striking-distance definitions.
 tags: [measurement, search-console, ai-overviews, ctr, zero-click, caveats, branded-search, hreflang, ai-mode]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:15:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T09:22:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: chuleta-timelines
@@ -92,6 +92,9 @@ sources:
   - id: mlseo-internal-linking
     resource: "https://www.mlforseo.com/machine-learning-implementation-guides/internal-link-analysis/automate-internal-linking-ai/"
     title: "MLforSEO, 10 ways to automate internal linking with AI (2026-10-22; one blog, synthetic DiD demo)"
+  - id: st-pronoun-queries
+    resource: "https://stevetoth.ai/research/simulated-ai-conversations"
+    title: "Steve Toth, Rebuild real AI Mode conversations from pronoun queries (2026-10-06; method, one property's GSC data plus client examples)"
 ---
 
 # Search Console
@@ -101,7 +104,7 @@ What Search Console numbers can and can't tell you, and which outside breaks to 
 ## Rules
 - **Before any comparison, list the breaks between the two periods** and say so next to every number that crosses one. *Practitioner* — [section 1](#1-before-every-comparison)
 - **Start impression and position baselines on 13 Sept 2025, split by device,** and don't read earlier impression growth as evidence about AI Overviews. *Official, samples measured* — [section 2](#2-num100-from-10-sept-2025)
-- **Trust clicks over impressions,** compare impressions only within the same period type, and treat zero-click bursts of long natural-language queries and AI Mode follow-ups ("yes", "tell me more") as machine or AI Mode traffic. *Measured, relayed; practitioner* — [section 3](#3-impressions-are-filtered-and-were-inflated), [section 12](#12-bot-like-llm-query-bursts)
+- **Trust clicks over impressions,** compare impressions only within the same period type, and treat zero-click bursts of long natural-language queries and AI Mode follow-ups ("yes", "tell me more") as machine or AI Mode traffic; pull AI Mode follow-ups monthly with a pronoun filter. *Measured, relayed; practitioner* — [section 3](#3-impressions-are-filtered-and-were-inflated), [section 12](#12-bot-like-llm-query-bursts), [section 20](#20-ai-mode-follow-ups-as-pronoun-queries)
 - **Use the Generative AI report for exposure only** and join its pages to organic clicks to see which AI-visible pages still earn clicks. *Official, relayed* — [section 4](#4-ai-reports-search-console-and-bing)
 - **Segment CTR losses by query type, brand / non-brand, device and country** before attributing them to an update or to AI Overviews; where two markets share a language, read each by country filter, not only its directory property. *Measured, relayed; practitioner* — [section 5](#5-where-ai-overviews-show), [section 7](#7-zero-click-is-the-baseline), [section 14](#14-same-language-hreflang-clicks-go-to-the-canonical)
 - **Track the organic / paid / zero-click split per query set** and annotate ad and UI changes on traffic charts before reading a trend. *Measured* — [section 6](#6-ads-and-ui-inside-the-results)
@@ -216,6 +219,12 @@ From MLforSEO (which sells courses).
 - **The steps add up.** Discovery, crawling, indexing and serving happen one after another, so a page change can take one to three weeks to show. *Practitioner.*[^chuleta-timelines]
 - **Do:** before concluding a change failed, check the page's last crawl date in URL Inspection, and compare absolute numbers, not only shares. See [diagnostic tests](diagnostic-tests.md).
 
+## 20. AI Mode follow-ups as pronoun queries
+From Steve Toth, who sells a paid AI-search membership.
+- AI Mode follow-ups appear in Search Console as queries built on a pronoun, because the follow-up refers back to the conversation. *Official statement, relayed (John Mueller via Search Engine Roundtable).*[^st-pronoun-queries]
+- **Filter:** regex `\b(it|its|they|them|their|this|these|those)\b` on queries, then exclude every brand spelling (one retailer had 27 variants), drop the dummy "it" and "IT", keep nicknames. On one property 2,226 rows gave 454 follow-up keywords (~20 %). *Practitioner; measured, one case.*[^st-pronoun-queries]
+- **Group by intent:** price checks, free or plan, stock and availability, link requests, "find this" photo queries, fit or variant, brand doubt, brand pivots, clarifiers; each group maps to a page fix. *Practitioner.*[^st-pronoun-queries] Full method: [test 36](diagnostic-tests.md#36-rebuild-ai-mode-conversations-from-pronoun-queries).
+
 Related: [analytics](analytics.md), [AI-visibility tracking](ai-visibility-tracking.md), [rank tracking](rank-tracking.md), [diagnostic tests](diagnostic-tests.md), [traffic drop](../situations/traffic-drop.md), [Google AI features](../how-it-works/google-ai-features.md).
 
 [^ignite-news]: Ignite Visibility weekly recap, read 2026-10-27: GSC impression inflation (week of 2026-04-04), GA4 AI Assistant channel (2026-05-09), GA4 bug (2026-08-29), GPT-6 referral loss with Adobe data (2026-10-10), Comscore, Seer and the field experiment on AIO clicks (2026-04-25), SparkToro zero-click; secondary reporting, primary sources not checked.
@@ -246,3 +255,4 @@ Related: [analytics](analytics.md), [AI-visibility tracking](ai-visibility-track
 [^mlseo-content-audit]: MLforSEO (Lazarina Stoy), 2026-10-24: decay, striking-distance and thin-content rules on a synthetic 24-URL site.
 [^mlseo-internal-linking]: MLforSEO (Lazarina Stoy), 2026-10-22: Search Console striking-distance linking on one 68–79-post blog; 242 queries → 110 suggestions.
 [^chuleta-timelines]: Chuleta SEO, 2026-10-22, Spanish, read in full; claims translated. Paraphrases Gary Illyes at Search Central Live Barcelona (no direct quote or recording given): new page discovered in ~20 hours, existing page re-crawled ~30 days, link signals processed in minutes to 3 weeks, title updates 1–2 days, site migration 1–3 months, core-update recovery 3–6 months (up to a year); the author notes the steps add up. Also relays a Cloudflare–OpenAI discovery pilot ("hundreds of millions" of pages, no method) and Bing's Topics Portfolio beta.
+[^st-pronoun-queries]: Steve Toth, 2026-10-06: method plus one property's GSC export (2,226 rows → 2,158 candidates → 1,745 without brand → 454 follow-up keywords) and client examples; relays John Mueller via Search Engine Roundtable that AI Mode follow-ups appear as pronoun queries.

@@ -4,8 +4,8 @@ title: How shopping surfaces pick products
 description: Where AI product cards and grids come from (ChatGPT, AI Mode, Google Shopping), shortlist behaviour, ads in grids and in ChatGPT answers, checkout on Google and agent readiness (native controls, offer accuracy, standing conditions), the 2026 EEA free-listings removal, and how Google reads product lines, Chrome's shopping classifier and AI Mode layout tags.
 tags: [geo, shopping, feeds, merchant-center, agentic-commerce, chatgpt, ai-mode, eea, dma, product-lines, chrome]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: ignite-news
@@ -89,6 +89,18 @@ sources:
   - id: gn-html
     resource: "https://www.seoforgooglenews.com/p/why-semantic-html-matters-for-seo"
     title: "Barry Adams, Why semantic HTML matters for SEO and AI (2025-08-06; practitioner)"
+  - id: st-how-ai-search-works
+    resource: "https://stevetoth.ai/how-ai-search-works"
+    title: "Steve Toth, How AI search works (2026-10-06; 277 HAR recordings of 3-turn B2B vendor-comparison conversations, 8 platforms, recorded 2026-09-25, US; vendor data)"
+  - id: st-ai-mode
+    resource: "https://stevetoth.ai/how-google-ai-mode-works"
+    title: "Steve Toth, How Google AI Mode works (undated; 30 conversations; vendor data)"
+  - id: st-gemini
+    resource: "https://stevetoth.ai/how-gemini-search-works"
+    title: "Steve Toth, How Gemini search works (undated; 47 conversations; vendor data)"
+  - id: st-perplexity
+    resource: "https://stevetoth.ai/how-perplexity-search-works"
+    title: "Steve Toth, How Perplexity search works (undated; 48 conversations; vendor data)"
 ---
 
 # How shopping surfaces pick products
@@ -109,6 +121,7 @@ This page answers where AI product cards, product grids and shopping agents get 
 - Check your branded prompts in ChatGPT weekly for competitors' ads. *Measured, early, mostly B2B* [why](#1-where-ai-product-cards-come-from)
 - Treat organic Shopping clicks in EEA countries after mid-September 2026 as a structural break. *Measured* [why](#3-eea-free-product-listings-removed-september-2026)
 - Name brand product lines the same way in titles, feeds and filters, and give each line a filterable, linkable facet. *Patent* [why](#4-how-google-reads-product-lines-and-product-pages)
+- Put product comparisons in plain HTML tables, because Gemini lifts them into its answers. *Measured, vendor data, small sample* [why](#5-shopping-signals-in-assistant-answers)
 
 ## 1. Where AI product cards come from
 - **ChatGPT.** Shopping cards come from OpenAI's own catalogue, fed by merchant feeds; Google still supplies best price, part of the product data and reviews. Cards are cached for weeks and identical for all users. *Measured.*[^chatgpt-retrieval] Since GPT-5.4 a shopping answer shows about 10 products instead of 1–2.[^chatgpt-53]
@@ -151,6 +164,12 @@ This page answers where AI product cards, product grids and shopping agents get 
 - **Chrome's shopping classifier is not a ranking input.** The extracted model takes `float32[1,1536]`: a 768-dimension embedding of title + URL plus the 768-dimension mean of passage embeddings. Content comes from AnnotatedPageContent 5 seconds after load: at most 10 passages of up to 100 words, each truncated to 64 tokens, with items under 5 words merged — an effective view of ~400–450 words. It feeds History Journeys and a "shopping user" segment, not rankings. *From code (extracted TFLite models).*[^dj-shopclf] It matches the 10 × ~100-word reading described in [AI assistants](ai-assistants.md#1-the-opening-of-the-page-carries-it). **Do:** use descriptive, product-specific titles and URLs, and put product text above boilerplate ([product pages](../page-types/product-pages.md)).
 - **AI Mode layout tags.** Leaked prompt content suggests `<ShoppingOffers>` is used only for "single, concrete product iterations" (SkuLevelProduct, GTIN), and `<Carousel>` or `<ImageGrid>` need at least 3 validated children of one entity type. *Inference — hypothesis from unverified prompt-leak content.*[^dj-tags] If true, exact GTINs and SKU-level product data decide whether an offer unit can show at all.
 
+## 5. Shopping signals in assistant answers
+Steve Toth sells a paid research membership; his recorded sessions (vendor data, 2026-09-25, US) were B2B vendor comparisons, not product shopping, so shopping coverage is thin and samples are small.
+- **Ads inside answers.** Ads appeared inside the answer only in ChatGPT signed out (an `assistant-ads` slot) and in Google AI Mode (a Sponsored block); none were seen in Gemini, Claude or Perplexity. *Measured, vendor data, small sample.*[^st-how-ai-search-works][^st-ai-mode] Compare the ChatGPT ad figures in [section 1](#1-where-ai-product-cards-come-from).
+- **Gemini lifts comparison tables.** Gemini showed a `ProductComparisonTable` for product comparisons, seen only signed out; comparison tables were lifted from source pages for 5 citations signed in and 12 signed out. `EntityCard` (Google's own records) was rare. *Measured, vendor data, small sample.*[^st-gemini] **Do:** put product comparisons in plain HTML tables on the page, which Gemini can reuse. *Inference.*
+- **Perplexity classifies shopping intent.** A named `shopping_intent` classifier appears in its traffic; no figures on what it changes. *Measured, vendor data.*[^st-perplexity]
+
 Related: [feeds and Merchant Center](../channels/feeds-and-merchant-center.md), [AI assistants](ai-assistants.md), [Google AI features](google-ai-features.md), [product pages](../page-types/product-pages.md), [Google updates timeline](../reference/google-updates-timeline.md).
 
 [^chatgpt-retrieval]: Resoneo × Oncrawl, read 2026-10-27: shopping catalogue, Google data inputs, card caching.
@@ -180,3 +199,7 @@ Related: [feeds and Merchant Center](../channels/feeds-and-merchant-center.md), 
 [^seer-chatgpt-ads]: Seer Interactive, 2026-07-15 (updated 2026-07-28): ~2 weeks, 97 tracking workspaces, 3,697 ads, US, mostly B2B; 7.1 % → 77 % of responses with ads; own ad on 7.3 % of branded prompts; advertiser mentioned 5.4 %; 38 % on-topic; no CTR/CPC.
 [^ja-condition]: Jono Alderson, 2026-09-27: argument that agents act on standing conditions and re-check; eligibility depends on offer accuracy across sources. No data.
 [^gn-html]: Barry Adams, 2025-08-06: practitioner advice on semantic HTML; structured data can't identify the add-to-cart control, native buttons and forms can.
+[^st-how-ai-search-works]: Steve Toth (sells a paid membership), 2026-10-06: 277 browser HAR recordings of 3-turn conversations (opening question, vendor comparison, final decision; B2B, not shopping), 8 platforms, 13 signed-in/out modes, all 2026-09-25, Chrome on Mac, US; HAR shows browser traffic only, label meanings are the author's inference; per-platform samples are smaller than 277.
+[^st-ai-mode]: Steve Toth, undated guide, read 2026-10-29: 30 AI Mode conversations, 280 cited sources; pool size inferred from `srcId`; relays Google's AI Mode announcement (UK, 2025-07-28) and Search Central; vendor data.
+[^st-gemini]: Steve Toth, undated guide, read 2026-10-29: 47 Gemini conversations (32 signed in, 15 signed out); 389 citation spans; vendor data.
+[^st-perplexity]: Steve Toth, undated guide, read 2026-10-29 (first ~100k characters): 48 Perplexity conversations (33 signed in, 15 incognito); vendor data.

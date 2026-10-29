@@ -1,11 +1,11 @@
 ---
 type: Checklist
 title: AI-visibility tracking
-description: How to count AI-assistant traffic and visibility — untagged clicks by design and by accident, Direct spikes that are bots, GA4's AI Assistant channel, one hostname-anchored channel group, the real size of the channel, per-engine reporting, mentions without links, the May 2026 ChatGPT link change, what Bing's AI Performance covers, prompt-tracker pitfalls (personalisation, clean accounts), re-baselining at model changes and fan-out volatility, entity tracking with search on and off, brand-canon accuracy, share of voice beyond presence, building the prompt set, runs and margin of error, AI as a brand channel, dark AI traffic and AI Overview citation tracking.
+description: How to count AI-assistant traffic and visibility — untagged clicks by design and by accident, Direct spikes that are bots, GA4's AI Assistant channel, one hostname-anchored channel group, the real size of the channel, per-engine reporting, mentions without links, the May 2026 ChatGPT link change, what Bing's AI Performance covers, prompt-tracker pitfalls (personalisation, clean accounts), re-baselining at model changes and fan-out volatility, entity tracking with search on and off, brand-canon accuracy, share of voice beyond presence, building the prompt set, runs and margin of error, AI as a brand channel, dark AI traffic, AI Overview citation tracking, retrieved vs cited vs named, replay and sign-in skew, AI Mode journeys from Search Console follow-ups and Gemini link tags.
 tags: [measurement, geo, ga4, chatgpt, ai-assistants, attribution, caveats, prompt-tracking, share-of-voice, brand-accuracy]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:15:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T09:22:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: chuleta-timelines
@@ -131,6 +131,18 @@ sources:
   - id: mlseo-aio-tracker
     resource: "https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/track-ai-overviews-python/"
     title: "MLforSEO, How to track AI Overviews for your keywords (2026-10-24; 29-keyword run, US desktop)"
+  - id: st-how-ai-search-works
+    resource: "https://stevetoth.ai/how-ai-search-works"
+    title: "Steve Toth, How AI Search Works: what telemetry labels and endpoints reveal (2026-10-06; 277 HAR recordings, 8 platforms; vendor data)"
+  - id: st-gemini
+    resource: "https://stevetoth.ai/how-gemini-search-works"
+    title: "Steve Toth, How Gemini search works (undated; 47 conversations; vendor data)"
+  - id: st-ai-mode
+    resource: "https://stevetoth.ai/how-google-ai-mode-works"
+    title: "Steve Toth, How Google AI Mode works (undated; 30 conversations; vendor data)"
+  - id: st-pronoun-queries
+    resource: "https://stevetoth.ai/research/simulated-ai-conversations"
+    title: "Steve Toth, Rebuild real AI Mode conversations from pronoun queries (2026-10-06; method, one property's GSC data plus client examples)"
 ---
 
 # AI-visibility tracking
@@ -143,9 +155,9 @@ How to count the traffic and visibility AI assistants bring, and why the analyti
 - **Rule out bots before explaining a Direct rise with AI,** segmenting Direct by landing page, country, browser, OS and screen size. *Measured* — [section 3](#3-direct-spikes-are-mostly-bots-not-hidden-ai)
 - **Build one custom channel group from assistant source names, anchored on hostnames,** and keep one definition per time series; AI-assistant links with `utm_source` but no `utm_medium` land in Unassigned, and GA4's own AI Assistant channel is still partial. *Practitioner* — [section 4](#4-one-channel-definition)
 - **Report assistant sessions and conversions side by side, per vertical, next to Google organic,** and read them with exposure and branded search rather than by referral clicks alone. *Measured; practitioner* — [section 5](#5-scale-of-the-channel), [section 7](#7-how-to-track)
-- **Report visibility per engine with a fixed model and reasoning mode, log the model per answer and re-baseline at every model change,** never as one blended AI score; count mentions separately from linked citations, since most mentions carry no link. *Measured, small samples; single brand for links* — [section 6](#6-one-ai-score-hides-more-than-it-shows), [section 11](#11-re-baseline-at-every-model-change)
+- **Report visibility per engine with a fixed model and reasoning mode, log the model per answer and re-baseline at every model change,** never as one blended AI score; count mentions separately from linked citations, since most mentions carry no link, and retrieved pages separately from cited and named ones. *Measured, small samples; single brand for links; vendor data* — [section 6](#6-one-ai-score-hides-more-than-it-shows), [section 11](#11-re-baseline-at-every-model-change), [section 20](#20-retrieved-cited-and-named-are-different-counts)
 - **Sample AI answers every 2–3 days, with several simultaneous runs per prompt drawn from real demand and from category entry points,** and report presence % with share of voice next to it, not position. *Measured, vendor data; practitioner* — [section 7](#7-how-to-track), [section 10](#10-what-prompt-trackers-dont-tell-you), [section 14](#14-share-of-voice-not-only-presence), [section 15](#15-building-the-prompt-set)
-- **Track from clean, unconnected, logged-out accounts and label it a non-personalised baseline;** ask vendors for model, version and access method (API or app). *Measured, relayed* — [section 10](#10-what-prompt-trackers-dont-tell-you)
+- **Track from clean, unconnected, logged-out accounts and label it a non-personalised baseline;** ask vendors for model, version and access method (API or app); log the sign-in state of every run and count a cited page once per answer, not once per replay. *Measured, relayed; vendor data* — [section 10](#10-what-prompt-trackers-dont-tell-you), [section 21](#21-replays-and-sign-in-state-skew-counts)
 - **Keep a brand canon of checkable facts and track accurate, wrong and no-answer rates,** fixing wrong facts on your own site and profiles first. *Measured, one brand* — [section 13](#13-brand-canon-accurate-wrong-no-answer)
 - **Publish the margin and read AI as a brand channel:** state run counts and ± points per pass (one pass of 490 results ≈ ±5 points), and judge AI visibility by correlation with branded search and Direct rather than by referral traffic. *Measured, vendor data; practitioner* — [section 16](#16-runs-phrasings-and-margin-of-error), [section 17](#17-ai-as-a-brand-channel)
 - **Split AI referrals by landing-page type** (homepage, category, product, content); a link-format change can move them between types overnight. *Measured, agency sample* — [section 8](#8-chatgpt-link-change-may-2026)
@@ -277,6 +289,26 @@ From SparkToro (which sells audience research) with Gumshoe.ai (which sells AI-v
 - **Cited domains differ from ranking domains.** On 29 keywords (US desktop, 2026-10-25) an AI Overview showed on all 29; the median overlap between cited and organically ranking domains was 22 %, and 0 % for seven keywords; one domain was cited first while absent from the organic top 10. *Measured, small sample, vendor tool (DataForSEO).*[^mlseo-aio-tracker]
 - **Method:** run weekly on a fixed set of 50–200 keywords with fixed location, language and device; report share of citations and keyword coverage separately (two domains each had 4 of 19 citations but coverage of 0.667 vs 0.333). Cost is up to ~$0.40 per 100 keywords. Citations aren't clicks. *Practitioner.*[^mlseo-aio-tracker] Rank-tracker view: [rank tracking](rank-tracking.md#7-cited-vs-ranking-domains-across-keywords).
 
+## 20. Retrieved, cited and named are different counts
+Steve Toth sells a paid AI-search membership, so his recordings are labelled vendor data. All his test conversations were B2B vendor comparisons, not product shopping.
+- **Most retrieved pages are never cited.** Across browser recordings of 3-turn conversations on 8 platforms, 52–75 % of the pages each assistant pooled went uncited: Gemini 52 % (320 pooled, 153 cited), ChatGPT 58 % (720 / 303), Claude 58 % (335 / 140), Perplexity 75 % (1,194 / 302). *Measured, vendor data.*[^st-how-ai-search-works] Being in the pool is not a citation; don't report retrieval as visibility.
+- **Named and cited diverge too.** One client was cited in 5 of 6 AI Mode runs on a query but named in the answer in none. *Measured, one case.*[^st-pronoun-queries] Record named and cited separately for every run.
+
+> **Note:** "a retrieved page gets cited" (common claim) vs half to three quarters of retrieved pages uncited on every platform measured.
+
+## 21. Replays and sign-in state skew counts
+- **Replays inflate citation counts.** In AI Mode, answers replayed after clicking out to a source raised one brand's citation count from 12 to 26. AI Mode citations attach to output slots (up to 8 pages per slot), not sentences, and the side panel and the "Show all" list agreed on the top source in only 10 of 34 answers. *Measured, vendor data.*[^st-ai-mode] Count a page once per answer and say which list you counted.
+- **Signed in and signed out are different products.** Gemini ran 3.6 Flash signed in and 3.5 Flash-Lite signed out, and showed its product comparison table only signed out;[^st-gemini] ChatGPT signed out didn't disclose its model and carried an ads slot, while signed-in chats used GPT-5.6 Instant. *Measured, vendor data.*[^st-how-ai-search-works] Keep one sign-in state per time series ([section 10](#10-what-prompt-trackers-dont-tell-you)).
+
+> **Note:** tools that count raw citations per answer vs replays raising one brand's AI Mode count from 12 to 26.
+
+## 22. AI Mode journeys from Search Console follow-ups
+- AI Mode follow-ups reach Search Console as pronoun queries; filter, group and replay them ([Search Console](search-console.md#20-ai-mode-follow-ups-as-pronoun-queries), [test 36](diagnostic-tests.md#36-rebuild-ai-mode-conversations-from-pronoun-queries)). *Practitioner.*[^st-pronoun-queries]
+- **Track monthly:** follow-up impressions, commercial follow-up impressions and product-page replies. They are floors, because Search Console hides rare queries. On one property 454 of 2,226 query rows (~20 %) were follow-ups. *Practitioner; measured, one case.*[^st-pronoun-queries]
+
+## 23. Gemini links: utm_source and text fragments
+- Gemini's outbound links carry `utm_source=gemini`, and 383 of 389 citation spans linked to the quoted words with a `#:~:text=` fragment. *Measured, vendor data.*[^st-gemini] Add the source to the channel group ([section 4](#4-one-channel-definition)); browsers don't send the fragment to the server, so the cited passage is visible in the answer, not in analytics ([analytics](analytics.md#7-ai-assistant-referrals-referrers-utms-and-bots)).
+
 Related: [analytics](analytics.md), [Search Console](search-console.md), [diagnostic tests](diagnostic-tests.md), [AI assistants](../how-it-works/ai-assistants.md), [third-party presence](../channels/third-party-presence.md).
 
 [^ignite-news]: Ignite Visibility weekly recap, read 2026-10-27: GSC impression inflation (week of 2026-04-04), GA4 AI Assistant channel (2026-05-09), GA4 bug (2026-08-29), GPT-6 referral loss with Adobe data (2026-10-10), Comscore, Seer and the field experiment on AIO clicks (2026-04-25), SparkToro zero-click; secondary reporting, primary sources not checked.
@@ -320,3 +352,7 @@ Related: [analytics](analytics.md), [Search Console](search-console.md), [diagno
 [^mlseo-dark-ai]: MLforSEO (Beatrice Gamba), 2026-08-21, updated 2026-10-24: relays Loamly vendor data (~446,000 identified AI visits; 70.6 % without referrer; CR 10.2 % vs 2.5 %); Direct vs branded proxy is illustrative.
 [^mlseo-aio-tracker]: MLforSEO (Lazarina Stoy), 2026-10-24: DataForSEO-based tracker, 29 keywords, US desktop, 2026-10-25; median cited/organic domain overlap 22 %; cost estimate at October 2026 list prices.
 [^chuleta-timelines]: Chuleta SEO, 2026-10-22, Spanish, read in full; claims translated. Paraphrases Gary Illyes at Search Central Live Barcelona (no direct quote or recording given): new page discovered in ~20 hours, existing page re-crawled ~30 days, link signals processed in minutes to 3 weeks, title updates 1–2 days, site migration 1–3 months, core-update recovery 3–6 months (up to a year); the author notes the steps add up. Also relays a Cloudflare–OpenAI discovery pilot ("hundreds of millions" of pages, no method) and Bing's Topics Portfolio beta.
+[^st-how-ai-search-works]: Steve Toth (sells a paid AI-search membership), 2026-10-06: 277 browser HAR recordings of 3-turn B2B vendor-comparison conversations, 8 platforms, 13 modes (signed in, signed out, incognito, temporary), all on 2026-09-25, Chrome on Mac, US; pooled vs cited pages per platform; HAR can't see crawlers or server-side fetches; label meanings are the author's inference; per-platform sample sizes differ between his pages, so treat figures as indicative.
+[^st-gemini]: Steve Toth, undated guide: 47 Gemini conversations (32 signed in, 15 signed out); 383 of 389 citation spans with a `#:~:text=` fragment; outbound links tagged `utm_source=gemini`; 3.6 Flash signed in, 3.5 Flash-Lite signed out; `ProductComparisonTable` seen signed out only; tables lifted from source pages for 5 citations signed in, 12 signed out.
+[^st-ai-mode]: Steve Toth, undated guide: 30 AI Mode conversations, 280 cited sources; citations attach to output slots (up to 8 pages each); side panel and "Show all" agreed at the top in 10 of 34 answers; replays after click-outs raised one brand's count from 12 to 26.
+[^st-pronoun-queries]: Steve Toth, 2026-10-06: method plus one property's GSC export (2,226 rows → 2,158 candidates → 1,745 without brand → 454 follow-up keywords) and client examples; relays John Mueller via Search Engine Roundtable that AI Mode follow-ups appear as pronoun queries.

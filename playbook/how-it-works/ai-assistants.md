@@ -4,8 +4,8 @@ title: How AI assistants retrieve and cite
 description: What ChatGPT, Gemini, Claude and Perplexity actually read — the ~200 characters after the H1 and per-chunk scores on fetched pages, mostly static HTML (Gemini reads JavaScript content), no schema, discovery, mode and model effects, English fan-out, engines that don't agree, citations outside Google's top 10, fresher content, ChatGPT's search config, rerankers and hybrid retrieval, HTML extraction, shrinking, volatile and site-restricted fan-outs, updated-vs-published recency, what models already know about brands, what academic GEO tests found, and how Perplexity's own index (Photon) ranks pages.
 tags: [geo, chatgpt, gemini, perplexity, claude, crawling, citations, fan-out, schema, freshness, rerankers, reddit, javascript, bing]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: pplx-photon
@@ -200,6 +200,27 @@ sources:
   - id: sp-ultimate-guide
     resource: "https://sparktoro.com/blog/the-death-of-the-ultimate-guide/"
     title: "SparkToro, The death of the ultimate guide? (2026-04-27; relays Indig/AirOps, 16,851 queries)"
+  - id: st-how-ai-search-works
+    resource: "https://stevetoth.ai/how-ai-search-works"
+    title: "Steve Toth, How AI search works (2026-10-06; 277 HAR recordings of 3-turn B2B vendor-comparison conversations, 8 platforms, recorded 2026-09-25, US; vendor data)"
+  - id: st-chatgpt
+    resource: "https://stevetoth.ai/how-chatgpt-search-works"
+    title: "Steve Toth, How ChatGPT search works (undated; 53 conversations; vendor data)"
+  - id: st-chatgpt-dr
+    resource: "https://stevetoth.ai/how-chatgpt-deep-research-works"
+    title: "Steve Toth, How ChatGPT Deep Research works (undated; 19 conversations; vendor data)"
+  - id: st-gemini
+    resource: "https://stevetoth.ai/how-gemini-search-works"
+    title: "Steve Toth, How Gemini search works (undated; 47 conversations; vendor data)"
+  - id: st-claude
+    resource: "https://stevetoth.ai/how-claude-search-works"
+    title: "Steve Toth, How Claude search works (undated; 30 conversations; vendor data)"
+  - id: st-perplexity
+    resource: "https://stevetoth.ai/how-perplexity-search-works"
+    title: "Steve Toth, How Perplexity search works (undated; 48 conversations; vendor data)"
+  - id: st-brave
+    resource: "https://stevetoth.ai/how-brave-search-works"
+    title: "Steve Toth, How Brave Search works (undated; 26 conversations, AI answer off; vendor data)"
 ---
 
 # How AI assistants retrieve and cite
@@ -216,7 +237,7 @@ This page answers what ChatGPT, Gemini, Claude and Perplexity actually fetch, re
 - Link every new page internally and keep it in the XML sitemap; sources disagree whether a sitemap alone gets it discovered. *Measured, one site each* [why](#3-discovery-and-caching-openai)
 - Fix the model and mode for every prompt-tracking run, log the model per answer and rollouts as events, and report fan-out counts as dated ranges per model, never one run. *Measured* [why](#4-fewer-sources-known-sources-english-queries) · [fan-outs](#13-fan-outs-shrink-and-sometimes-search-inside-sites)
 - Keep an English version of key pages and English entity data, but measure local-language citations per market. *Measured* [why](#4-fewer-sources-known-sources-english-queries)
-- Report AI visibility per engine and classify cited URLs separately from landing pages. *Measured* [why](#6-the-engines-dont-agree)
+- Report AI visibility per engine, count retrieved and cited pages separately, and classify cited URLs separately from landing pages. *Measured; vendor data* [why](#6-the-engines-dont-agree) · [retrieved](#19-retrieved-is-not-cited)
 - Don't use Google top-10 rankings as a proxy for assistant citations; most cited URLs don't rank for the query. *Measured, vendor data* [why](#7-assistants-cite-outside-googles-top-10)
 - Refresh data-driven, comparison and brand pages with real changes, show a true "updated" date and keep `dateModified` and sitemap `lastmod` accurate; never fake one. *Measured, vendor data; from code; cadence is practitioner* [why](#8-assistants-cite-fresher-content-than-search) · [config](#10-chatgpts-search-configuration)
 - Get your brand known by name in your category, and earn "need or category → brand" statements, because models recall brands they know and add them to their sub-queries. *Practitioner synthesis; research summary* [why](#4-fewer-sources-known-sources-english-queries) · [recall](#14-what-the-model-already-knows)
@@ -270,8 +291,8 @@ This page answers what ChatGPT, Gemini, Claude and Perplexity actually fetch, re
 
   > **Conflict:** studies put Reddit anywhere from most-cited to near zero, depending on engine, period and method — [details](../reference/conflicts.md#how-much-do-ai-engines-cite-reddit)
 - **Known sources win.** The model prefers sources it knows from training.[^chatgpt-53] Being named on the few trusted lists, guides and comparison pages per category likely matters more than on-page tweaks. *Inference.* Which third parties get cited, and how to get onto them: [third-party presence](../channels/third-party-presence.md). What the model recalls without searching: [section 14](#14-what-the-model-already-knows).
-- **ChatGPT puts known brands into its sub-queries.** It adds brand names it already knows to its fan-out queries, so brands it doesn't know get left out. Engines also differ in how many sources they cite: Perplexity 21.87 vs ChatGPT 7.92 citations per question (Qwairy), 16.35 vs 6.88 per prompt (arXiv 2604.25707); 79 % of ChatGPT retrievals were corporate or institutional domains (Peec, 1,500 chats); editorial and reference sites took 29 % of Perplexity's citations vs 9 % of ChatGPT's. In a 252,000-trial study, topical relevance and position in the retrieved results had the strongest effect on which source is cited first; explicit pricing and recent timestamps helped. *Relayed; an agency's synthesis of third-party studies, not checked at the originals.*[^bp-mentions]
-- **Each engine has its own index.** Claude's citations overlapped 86.7 % with Brave's top organic results.[^ipr-personalisation] Ranking in Bing and Brave matters for assistants that use them.
+- **ChatGPT puts known brands into its sub-queries.** It adds brand names it already knows to its fan-out queries, so brands it doesn't know get left out.[^st-chatgpt] Engines also differ in how many sources they cite: Perplexity 21.87 vs ChatGPT 7.92 citations per question (Qwairy), 16.35 vs 6.88 per prompt (arXiv 2604.25707); 79 % of ChatGPT retrievals were corporate or institutional domains (Peec, 1,500 chats); editorial and reference sites took 29 % of Perplexity's citations vs 9 % of ChatGPT's. In a 252,000-trial study, topical relevance and position in the retrieved results had the strongest effect on which source is cited first; explicit pricing and recent timestamps helped. *Relayed; an agency's synthesis of third-party studies, not checked at the originals.*[^bp-mentions]
+- **Each engine has its own index.** Claude's citations overlapped 86.7 % with Brave's top organic results.[^ipr-personalisation][^st-claude] Ranking in Bing and Brave matters for assistants that use them.
 - **ChatGPT citations can ignore Google — and even Bing.** A site with almost no Google rankings was cited in "over 90K" ChatGPT prompts, in line with its Bing visibility; Bing deindexed it on 10 July 2026, yet its ChatGPT citations rose to "over 464K" responses by 3 August. Where ChatGPT grounded those answers is unresolved. *Practitioner, one case, Ahrefs Brand Radar data.*[^gg-chatgpt-bing] **Do:** track Bing indexing too; don't read ChatGPT citations as a quality signal. Google losses usually do carry over: see [Google ranking](google-ranking.md#9-spam-handling-brand-size-and-preferred-sources).
 - **Personalisation acts before retrieval.** Memory and chat context change the sub-queries themselves, not only the order of results; content can shape an answer without being cited. *Patents plus anecdotal tests.*[^ipr-personalisation] Logged-in tracking is contaminated by memory: ChatGPT injects `user_profile`, `turn_summary` and `summarized_turn_messages` from other chats into the context of an answer. *From code, one account.*[^mt-memory] Label logged-out tracking as a non-personalised baseline ([AI visibility tracking](../measure/ai-visibility-tracking.md)).
 - **Local answers** draw on the business's own website and listings: see [local](../channels/local.md).
@@ -369,6 +390,24 @@ SparkToro sells audience research; most figures below come from clickstream pane
 - In ChatGPT's retrieval pipeline (16,851 queries, 353,799 pages; Kevin Indig and AirOps), the first retrieved result was cited 58.4 % of the time vs 14.2 % at position 10; heading similarity to the query was the strongest content signal; pages covering 26–50 % of the fan-out subtopics beat pages covering all of them; domain authority and backlinks didn't correlate positively with citation. *Measured, relayed; associations only.*[^sp-ultimate-guide] It supports [section 4](#4-fewer-sources-known-sources-english-queries) on focused pages and authority.
 - **Do:** one clear question per page, with headings that match how the question is asked. *Practitioner.*[^sp-ultimate-guide]
 
+## 19. Retrieved is not cited
+Steve Toth sells a paid research membership; figures below are his vendor data from recorded browser sessions (HAR) of 3-turn B2B vendor-comparison conversations, not shopping. The study has 277 conversations overall, but each platform's sample is much smaller (53 for ChatGPT), so read per-platform numbers as indicative.
+- **Half to three quarters of retrieved pages go uncited.** Pages pooled vs cited: ChatGPT 720 vs 303 (58 % never cited), Gemini 320 vs 153 (52 %), Claude 335 vs 140 (58 %), Perplexity 1,194 vs 302 (75 %). *Measured, vendor data, small sample.*[^st-how-ai-search-works] It matches the 34 of 40 retrieved-but-uncited URLs in [section 13](#13-fan-outs-shrink-and-sometimes-search-inside-sites).[^seer-chatgpt-structure]
+- **ChatGPT's citation gates.** A page must be in the search pool, pass a `url_moderation` safety check and attach to a specific sentence. Signed out, 282 of 297 approved URLs were cited; the 15 uncited were vendor homepages used as inline brand links. *Measured, vendor data, small sample; the gate reading is inference.*[^st-chatgpt]
+- **The cited passage matters, not the page.** Deep Research quick-run citations point to line ranges (e.g. L569–L577), which suggests pages are converted to numbered plain text before reading. *Inference, vendor data.*[^st-chatgpt-dr] It fits the chunk scoring in [section 9](#9-what-each-engine-receives-and-how-chatgpt-scores-it).
+- **Do:** count retrieved and cited separately in tracking; being in the pool is not visibility. Make each passage quotable on its own sentence ([AI visibility tracking](../measure/ai-visibility-tracking.md)).
+
+## 20. Per-assistant search behaviour (recorded sessions)
+Same source and caveats as [section 19](#19-retrieved-is-not-cited): one recording day (2026-09-25), US, B2B vendor comparisons, browser traffic only (crawlers and server-side fetches are invisible).
+- **ChatGPT.** OpenAI says the prompt is rewritten into one or more queries sent to search partners, with follow-up searches after the first results; the recordings don't name the partner index. *Official, relayed.*[^st-chatgpt] Recorded lookups ran 3–9 fan-out searches with ~15 pages pooled per search, and its own query strings (`search_model_queries`) often added brand names the user hadn't typed (see [section 4](#4-fewer-sources-known-sources-english-queries)). Time to first word was ~1–16 s (mostly 2.5–6 s); ~80 % of answers ended with follow-up questions. Signed-out answers carry an `assistant-ads` slot and don't name the model; signed-in and temporary chats used GPT-5.6 Instant. *Measured, vendor data, small sample (53 conversations).*[^st-chatgpt][^st-how-ai-search-works]
+
+  > **Conflict:** 3–9 fan-out searches per ChatGPT lookup in recorded app sessions (Sept 2026) vs 1.10 fan-out queries per searched response in an API sample (Aug 2026, [section 13](#13-fan-outs-shrink-and-sometimes-search-inside-sites)). — [details](../reference/conflicts.md#how-many-searches-does-chatgpt-run-per-answer)
+- **ChatGPT Deep Research.** A full run made 80–94 searches, 90.6 % of them `site:` lookups on vendor, review and government domains; the research brief is ~10× the typed question, and the 5-step plan is editable for about a minute. Full runs used GPT-5 Thinking, quick runs Deep Research mini. *Measured, vendor data, small sample (19 conversations).*[^st-chatgpt-dr] Another data point for `site:` searches inside brand and review sites ([section 13](#13-fan-outs-shrink-and-sometimes-search-inside-sites)).
+- **Gemini.** One Google Search block per turn, 5–10 pages consulted per answer; the search strings it runs are "mostly different from what was typed". 383 of 389 citation spans carried a `#:~:text=` fragment pointing at the quoted words, and outbound links are tagged `utm_source=gemini`. Signed in it ran Gemini 3.6 Flash, signed out 3.5 Flash-Lite. *Measured, vendor data, small sample.*[^st-gemini] **Do:** segment `utm_source=gemini` in analytics alongside `utm_source=openai` ([analytics](../measure/analytics.md)). More on Google's surfaces: [Google AI features](google-ai-features.md#16-what-recorded-sessions-show-on-googles-ai-surfaces).
+- **Claude.** Claude decides itself whether to search; usually one query returning 9–10 results, and 17 of 45 turns ran no search. Its `web_fetch` opened only URLs returned by its own searches: an unsearched URL was refused (`PERMISSIONS_ERROR`), and Claude searched instead. Every citation came from `web_search`. It cites at paragraph end, sometimes several pages per citation, rarely asks follow-ups and usually picks a winner. *Measured, vendor data, small sample.*[^st-claude][^st-how-ai-search-works] Its search runs on Brave: Anthropic listed Brave as a subprocessor in March 2025, and one test search returned the same citations as Brave. *Official, relayed; one test.*[^st-claude] Brave (AI answer off) returned 20 organic results per query and ran every query exactly as typed. *Measured, vendor data.*[^st-brave] This supports the Brave overlap in [section 4](#4-fewer-sources-known-sources-english-queries).
+- **Perplexity.** Usually 15–45 web results per answer; each source goes REVIEWING, then REVIEWED (read, not cited, ~70 %) or SELECTED (cited, ~30 %). Most answers ran one search step (up to five), usually with 3 reworded queries. It has a named `shopping_intent` classifier (no figures; see [shopping surfaces](shopping-surfaces.md#5-shopping-signals-in-assistant-answers)), and 85 of 220 signed-in suggested follow-ups (38 %) were upsells to its paid agent. *Measured, vendor data, small sample.*[^st-perplexity]
+- **Do:** make sure key pages rank in Brave as well as Bing and Google; don't assume a URL an assistant hasn't found in search can be fetched on request; log the model per answer, signed in and out ([AI visibility tracking](../measure/ai-visibility-tracking.md)).
+
 Related: [Google AI features](google-ai-features.md), [Google ranking](google-ranking.md), [third-party presence](../channels/third-party-presence.md), [AI crawlers and controls](../technical/ai-crawlers-and-controls.md), [AI visibility tracking](../measure/ai-visibility-tracking.md).
 
 [^chatgpt-retrieval]: Resoneo × Oncrawl, read 2026-10-27: funnel 58k retrieved → 7.6k shown → 5k cited → 760 opened; ~202-character snippet from the H1; JSON-LD stripped; bot roles and cache; utm on ~95 % of displayed links; instant vs thinking search counts.
@@ -435,3 +474,10 @@ Related: [Google AI features](google-ai-features.md), [Google ranking](google-ra
 [^sp-affinity-vs-traffic]: Fractl (a digital PR agency) on the SparkToro blog, 2026-06-17: SparkToro affinity data, 8 industries, aggregate, sample undisclosed; relays Muck Rack 2025 and Stacker.
 [^sp-website-matters]: SparkToro, 2026-08-14: opinion, one case (AI answers about SparkToro's products drew on old content; it built a new help hub).
 [^sp-ultimate-guide]: SparkToro, 2026-04-27: relays Kevin Indig and AirOps, 16,851 queries and 353,799 pages in ChatGPT's retrieval pipeline; associations only.
+[^st-how-ai-search-works]: Steve Toth (sells a paid membership), 2026-10-06: 277 browser HAR recordings of 3-turn conversations (opening question, vendor comparison, final decision; B2B, not shopping), 8 platforms, 13 signed-in/out modes, all 2026-09-25, Chrome on Mac, US; HAR shows browser traffic only, label meanings are the author's inference; per-platform samples are smaller than 277.
+[^st-chatgpt]: Steve Toth, undated guide, read 2026-10-29: 53 ChatGPT conversations (20 signed in, 15 temporary, 18 signed out), HAR captures; relays the OpenAI Help Center on query rewriting; vendor data.
+[^st-chatgpt-dr]: Steve Toth, undated guide, read 2026-10-29 (first ~100k characters): 19 Deep Research conversations on B2B SaaS questions; vendor data.
+[^st-gemini]: Steve Toth, undated guide, read 2026-10-29: 47 Gemini conversations (32 signed in, 15 signed out); 389 citation spans; vendor data.
+[^st-claude]: Steve Toth, undated guide, read 2026-10-29: 30 Claude conversations; Brave link rests on a subprocessor-list mention (not linked) plus one matching test search; vendor data.
+[^st-perplexity]: Steve Toth, undated guide, read 2026-10-29 (first ~100k characters): 48 Perplexity conversations (33 signed in, 15 incognito); vendor data.
+[^st-brave]: Steve Toth, undated guide, read 2026-10-29: 26 Brave Search sessions with the AI answer off; vendor data.

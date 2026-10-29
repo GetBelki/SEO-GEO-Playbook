@@ -4,8 +4,8 @@ title: Diagnostic tests
 description: Repeatable checks, with a symptom-to-test table — exact-term gap, satisfaction per page type, loss by directory, fetching a page as an AI assistant does, feed attribute coverage, country controls, prompt tracking, AI-bot logs, raw vs rendered internal links, daily index status per URL, passage tests with open rerankers, order-swapped LLM comparisons, ChatGPT site: fan-outs, Gemini's indexed view of a page, brand-canon accuracy, AI-invented URLs, Google-selected canonicals, anomaly detection without LLMs, support-type queries, GA4 triage, UTM and consent checks, friction causes, form abandonment, A/B guardrails, test vs control, AI shopping agents and CrUX field vs lab.
 tags: [seo, geo, method, search-console, ga4, feeds, testing, internal-links, indexing, passages, canonicals, anomaly-detection]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: aleyda-prompts
@@ -206,6 +206,9 @@ sources:
   - id: dbb-inp-global
     resource: "https://www.debugbear.com/blog/global-inp-statistics"
     title: "DebugBear, Website INP scores in 2025 (2025-06-09, updated 2025-10-27; CrUX BigQuery, HTTP Archive)"
+  - id: st-pronoun-queries
+    resource: "https://stevetoth.ai/research/simulated-ai-conversations"
+    title: "Steve Toth, Rebuild real AI Mode conversations from pronoun queries (2026-10-06; method, one property's GSC data plus client examples)"
 ---
 
 # Diagnostic tests
@@ -251,6 +254,7 @@ Each test turns a claim from the principles pages ([Google ranking](../how-it-wo
 | Did a site change (e.g. internal links) work? | [33](#33-test-vs-control-for-site-changes) |
 | Conversion rate or tests may include AI shopping agents | [34](#34-separate-ai-shopping-agents-from-humans) |
 | Lab speed scores and Core Web Vitals field data disagree | [35](#35-field-crux-vs-lab-measurement) |
+| What do people ask AI Mode about us after the first answer? | [36](#36-rebuild-ai-mode-conversations-from-pronoun-queries), [9](#9-prompt-tracking-per-engine) |
 
 ## 1. Exact-term gap on lost queries
 **Claim tested:** terms missing from title, H1 or slug cost rankings.[^qus]
@@ -541,6 +545,15 @@ Aleyda Solis' 12-step checklist works as the outline: steps 1–2 measure presen
 
 **Reading:** reference values — CrUX US p75 (2025) LCP 1.9 s mobile / 1.7 s desktop, TTFB 0.8 s / 0.6 s (period not stated);[^dbb-speed-stats] origins with good INP rose from 57 % (March 2022) to 76 % (2025), with typical mobile p75 INP around 100 ms. *Measured; vendor data.*[^dbb-inp-global] Fixes: [performance and caching](../technical/performance-and-caching.md).
 
+## 36. Rebuild AI Mode conversations from pronoun queries
+**Claim tested:** AI Mode follow-ups land in Search Console as pronoun queries, so real conversations can be rebuilt and replayed.[^st-pronoun-queries] Steve Toth sells a paid AI-search membership.
+1. **Filter** Search Console queries with `\b(it|its|they|them|their|this|these|those)\b`, exclude every brand spelling and drop the dummy "it" and "IT" ([Search Console](search-console.md#20-ai-mode-follow-ups-as-pronoun-queries)). *Practitioner.*[^st-pronoun-queries]
+2. **Group by buying intent** (price, stock, link requests, fit or variant, brand doubt…) and map each group to a fix: a price passage on the page that should answer price, a feed fix when "find me the link" goes to a reseller. *Practitioner.*[^st-pronoun-queries]
+3. **Rebuild journeys** from queries hitting the same page on the same day; widen to ±1 day, then the same page, then an assembled journey, and label each with its evidence level. *Practitioner.*[^st-pronoun-queries]
+4. **Replay turn by turn** in each assistant, in a fresh session, three spaced runs; record named vs cited, list position, the cited page and whether the buy link goes to the brand or a marketplace. *Practitioner.*[^st-pronoun-queries]
+
+**Reading:** one client was cited in 5 of 6 runs but named in none ([AI-visibility tracking](ai-visibility-tracking.md#20-retrieved-cited-and-named-are-different-counts)). Search Console hides rare queries, so counts are floors.
+
 Related: [Search Console](search-console.md), [analytics](analytics.md), [AI-visibility tracking](ai-visibility-tracking.md), [rank tracking](rank-tracking.md), [sources and confidence](../reference/sources-and-confidence.md), [traffic drop](../situations/traffic-drop.md), [core-update recovery](../situations/core-update-recovery.md).
 
 [^qus]: Resoneo, QUS, 2025-07-22: per-term scoring, title weight.
@@ -609,3 +622,4 @@ Related: [Search Console](search-console.md), [analytics](analytics.md), [AI-vis
 [^dbb-ad-metrics]: DebugBear, 2026-09-16: relays Google's CrUX ad metrics (~2026-09-15), p75 over 28 days, visits with ads only.
 [^dbb-speed-stats]: DebugBear, 2025-01-20, updated 2025-12-13: CrUX US and UK p75 values; period not stated.
 [^dbb-inp-global]: DebugBear, 2025-06-09, updated 2025-10-27: CrUX BigQuery and HTTP Archive; good INP 57 % (Mar 2022) → 76 % (2025); device quality as main driver is the author's interpretation.
+[^st-pronoun-queries]: Steve Toth, 2026-10-06: method plus one property's GSC export (2,226 rows → 2,158 candidates → 1,745 without brand → 454 follow-up keywords) and client examples; relays John Mueller via Search Engine Roundtable that AI Mode follow-ups appear as pronoun queries.

@@ -4,8 +4,8 @@ title: Glossary
 description: Short definitions of the terms, systems and acronyms used across the playbook — Google systems from the leak and trial, AI-search surfaces, crawlers, feeds and measurement terms — each linked to the page that explains it.
 tags: [glossary, reference, terms]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: playbook
@@ -83,6 +83,9 @@ One-line definitions; follow the link for evidence and sources.[^playbook] Terms
 - **Entity salience** — how central an entity is to a text, as scored by NLP APIs. → [ML methods for SEO](../measure/ml-methods-for-seo.md)
 - **Difference-in-differences** — comparing a changed group with an unchanged one before and after, to separate the change's effect from the trend. → [diagnostic tests](../measure/diagnostic-tests.md)
 - **Fuzzy matching** — pairing old and new URLs by text similarity when building redirect maps. → [migration](../situations/migration.md)
+- **Retrieved vs cited** — the pages an assistant fetches or scores, versus the ones it shows as sources; most retrieved pages go uncited. → [AI visibility tracking](../measure/ai-visibility-tracking.md)
+- **Pronoun query** — an AI Mode follow-up ("does it ship…") that shows up in Search Console and reveals the conversation behind it. → [diagnostic tests](../measure/diagnostic-tests.md#36-rebuild-ai-mode-conversations-from-pronoun-queries)
+- **Text fragment** — a link ending in `#:~:text=` that opens a page scrolled to the quoted words, as in Gemini's citations. → [analytics](../measure/analytics.md)
 
 ## Measurement
 - **num=100** — a results parameter Google stopped supporting in September 2025; Search Console impressions fell and average position improved without real change. → [Search Console](../measure/search-console.md)

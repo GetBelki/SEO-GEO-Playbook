@@ -4,8 +4,8 @@ title: Analytics
 description: Where web analytics under- and over-counts — missing orders, payment redirects, double page views, session bugs, meaningless bounce, click IDs lost in redirects, Performance Max channel quirks, paused feeds, engagement benchmarks, self-reported attribution, AI-assistant referrals (referrers, UTMs, bots, server-log checks, conversion value), speculative prefetch hits, anomaly detection without LLMs, friction signals, GA4 bounce and conversion benchmarks, AI shopping agents, demand by correlation, URL joins and real-user Web Vitals outside Chrome.
 tags: [measurement, ga4, google-ads, tracking, attribution, caveats, ai-assistants, server-logs, anomaly-detection]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: ignite-news
@@ -116,6 +116,9 @@ sources:
   - id: dbb-ff-safari
     resource: "https://www.debugbear.com/blog/firefox-safari-web-vitals"
     title: "DebugBear, Firefox and Safari now support two Core Web Vitals metrics (2025-12-15, updated 2026-03-19)"
+  - id: st-gemini
+    resource: "https://stevetoth.ai/how-gemini-search-works"
+    title: "Steve Toth, How Gemini search works (undated; 47 conversations; vendor data)"
 ---
 
 # Analytics
@@ -172,7 +175,7 @@ Which analytics numbers can't be taken at face value — orders, page views, ses
 What server logs show that analytics misses, from logs compared with GA4 on several sites. *Measured.*[^nz-aimeas]
 - **ChatGPT:** web citations carry `utm_source=chatgpt.com`, but 96–99 % arrive without a referrer; free-plan inline links and app clicks land in Direct. When OpenAI's search was probed through the API, cited links carried `utm_source=openai` — segment that source too. *Measured, probing, one query.*[^dj-grounding]
 - **Claude** uses dated referral paths (`claude.ai/referral/YYYY-MM-DD`); group them under one source.
-- **Gemini:** the iOS app (user agent `GeminiiOS`) lands in Direct. Google's grounding citations are wrapped in `vertexaisearch.cloud.google.com/grounding/...` links.[^dj-grounding]
+- **Gemini:** the iOS app (user agent `GeminiiOS`) lands in Direct. Google's grounding citations are wrapped in `vertexaisearch.cloud.google.com/grounding/...` links.[^dj-grounding] In the Gemini web app, outbound citation links carry `utm_source=gemini`, and 383 of 389 citation spans added a `#:~:text=` fragment pointing to the quoted words. *Measured, vendor data (Steve Toth, who sells a paid AI-search membership).*[^st-gemini]
 - **GA4 "AI Assistant" channel** since 13 May 2026 (dated May 2026 elsewhere); channel definition in [AI-visibility tracking](ai-visibility-tracking.md#4-one-channel-definition).
 - **UTM bug, 7–16 Oct 2026:** ChatGPT-attributed visits fell 68–74 % in server logs and 20–60 % in GA4. Mark the window as a gap ([AI-visibility tracking](ai-visibility-tracking.md#2-untagged-by-accident)).
 - **Bots inside the AI channel:** on one site up to 35 % of visits tagged chatgpt.com were bots (data-centre IPs, outdated user agents). ChatGPT-User fetches 2–7× more pages than the visits it sends.
@@ -301,3 +304,4 @@ Related: [Search Console](search-console.md), [AI-visibility tracking](ai-visibi
 [^mlseo-dark-ai]: MLforSEO (Beatrice Gamba), 2026-08-21, updated 2026-10-24: referrer behaviour per assistant; Direct vs branded-search proxy; relays Loamly vendor data.
 [^mlseo-content-audit]: MLforSEO (Lazarina Stoy), 2026-10-24: URL join rules and coverage check on a synthetic 24-URL site.
 [^dbb-ff-safari]: DebugBear, 2025-12-15, updated 2026-03-19: Safari 26.2 adds LCP and INP; Firefox supports LCP and INP; CrUX Chrome-only; the Firefox INP date in the source is likely wrong.
+[^st-gemini]: Steve Toth, undated guide: 47 Gemini conversations (32 signed in, 15 signed out); 383 of 389 citation spans with a `#:~:text=` fragment; outbound links tagged `utm_source=gemini`; 3.6 Flash signed in, 3.5 Flash-Lite signed out; `ProductComparisonTable` seen signed out only; tables lifted from source pages for 5 citations signed in, 12 signed out.

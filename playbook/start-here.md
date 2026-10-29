@@ -1,11 +1,11 @@
 ---
 type: Guide
 title: Start here
-description: The playbook on one page — 49 rules for SEO, AI-search visibility and measurement, each with its confidence level and a link to the evidence, plus where to go next by task.
+description: The playbook on one page — 51 rules for SEO, AI-search visibility and measurement, each with its confidence level and a link to the evidence, plus where to go next by task.
 tags: [start-here, rules, seo, geo, measurement, ecommerce]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: playbook
@@ -82,6 +82,8 @@ The playbook on one page, for an ecommerce site in any market. Each rule ends wi
 47. **Decide which keywords share a URL by SERP overlap, not embedding similarity.** *Measured, small sample.* → [conflict](reference/conflicts.md#embedding-clusters-or-serp-clusters)
 48. **Read AI visibility as a brand channel and publish the margin of error:** one pass of ~500 answers is about ±5 points, and the order of names is noise. *Measured, vendor data.* → [AI visibility tracking](measure/ai-visibility-tracking.md#16-runs-phrasings-and-margin-of-error)
 49. **Build redirect maps by fuzzy matching, check partial matches by hand, and send no-match URLs to 404 or 410, not the homepage.** *Practitioner.* → [migration](situations/migration.md#9-fuzzy-matched-redirect-maps)
+50. **Count retrieved, cited and named separately:** assistants left half to three quarters of the pages they retrieved uncited. *Measured, vendor data, small sample.* → [AI visibility tracking](measure/ai-visibility-tracking.md#20-retrieved-cited-and-named-are-different-counts)
+51. **Each month, pull AI Mode follow-ups from Search Console with a pronoun filter, and fix the pages they land on.** *Practitioner; official statement, relayed.* → [test](measure/diagnostic-tests.md#36-rebuild-ai-mode-conversations-from-pronoun-queries)
 
 ## Crawlers
 21. **Decide AI crawler access per role:** allow search bots and user fetchers; training bots are a business decision. Check robots.txt daily against a written policy. *Official.* → [AI crawlers and controls](technical/ai-crawlers-and-controls.md)

@@ -4,8 +4,8 @@ title: Product pages
 description: What to do on a product page — factual opening sentence, price, specs and stock as server-rendered text in one main container (never in CSS pseudo-content), model codes as visible text, descriptive titles and URLs, variant URLs and markup, the same facts as the feed, "will it fit?" and use-case copy tested with task-style prompts, reviews and Q&A, own images for Lens and indexing, the page as ad landing page, "confirm and go" for AI visitors, out-of-stock and discontinued products, image and video speed, and checkout and form friction.
 tags: [seo, geo, product-pages, ecommerce, structured-data, variants, feeds, lens, google-ads, out-of-stock, soft-404, html-extraction, reviews, indexing, rendering, css, performance, lcp, checkout]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: chatgpt-retrieval
@@ -161,6 +161,12 @@ sources:
   - id: dbb-ecom-seo
     resource: "https://www.debugbear.com/blog/ecommerce-website-seo"
     title: "DebugBear, The complete guide to ecommerce SEO in 2026 (2026-02-04, upd. 2026-04-24; practitioner guide)"
+  - id: st-gemini
+    resource: "https://stevetoth.ai/how-gemini-search-works"
+    title: "Steve Toth, How Gemini search works (undated; 47 conversations; vendor data)"
+  - id: st-pronoun-queries
+    resource: "https://stevetoth.ai/research/simulated-ai-conversations"
+    title: "Steve Toth, Rebuild real AI Mode conversations from pronoun queries (2026-10-06; method, one property's GSC data plus client examples)"
 ---
 
 # Product pages
@@ -284,6 +290,11 @@ FullStory sells session replay and behavioural analytics; all points below are v
 - **Personalisation errors.** Promoting out-of-stock items and recommending products already bought are listed as bounce causes;[^fs-bounce-rate] such errors often start months after launch, when inventory or purchase data stops syncing, so pre-launch QA misses them. *Practitioner; vendor data.*[^fs-ai-personalization] In one vendor-reported case (MOO), behavioural fixes brought 67 % fewer errors on a beta product page and 12 % less checkout abandonment. *Measured; vendor data, one case.*[^fs-ai-personalization]
 - **Do:** check that recommendation blocks exclude out-of-stock and already-bought items on a schedule, not only at launch, and review checkout replays after every checkout change ([analytics](../measure/analytics.md)).
 
+## 13. Answer the follow-ups people ask AI Mode
+From Steve Toth, who sells a paid AI-search membership. His test conversations were B2B vendor comparisons, not shopping, so the product-page use is inference.
+- **Follow-ups show what the first answer left open.** Grouped Search Console pronoun queries fall into price checks, stock and availability, link requests, "find this" photo queries, fit or variant, and brand doubt. Fix the page each group lands on: a price passage where price is asked, a feed fix when "find me the link" goes to a reseller. On one retailer, "yes" replies landed on dozens of product pages. *Practitioner; measured, one case.*[^st-pronoun-queries] Method: [test 36](../measure/diagnostic-tests.md#36-rebuild-ai-mode-conversations-from-pronoun-queries).
+- **Plain HTML tables get reused.** Gemini lifted comparison tables from source pages for 5 citations signed in and 12 signed out, and showed its own product comparison table only signed out. *Measured, vendor data, small sample.*[^st-gemini] Put specs in an HTML table, not an image or a script-built widget. *Inference.*
+
 Related: [category pages](category-pages.md), [comparison pages and guides](comparison-and-guides.md), [shopping surfaces](../how-it-works/shopping-surfaces.md), [satisfaction per page type](../measure/diagnostic-tests.md#2-satisfaction-per-page-type), [titles and snippets](../technical/titles-and-snippets.md).
 
 [^chatgpt-retrieval]: Resoneo × Oncrawl, read 2026-10-27: funnel 58k retrieved → 7.6k shown → 5k cited → 760 opened; ~202-character snippet from the H1; JSON-LD stripped; bot roles and cache; utm on ~95 % of displayed links; instant vs thinking search counts.
@@ -337,3 +348,5 @@ Related: [category pages](category-pages.md), [comparison pages and guides](comp
 [^mlseo-schema-automation]: ML for SEO, 2026-10-22: LLMs only classify page types or draft mappings; deterministic code builds JSON-LD as one @graph linked by @id; validation steps. Method, "a handful of real sites", no counts.
 [^srp-commodity-content]: SERPrecon, 2026-10-15: relays Google's generative-AI guide ("non-commodity content"), Danny Sullivan via Search Engine Journal and John Mueller (2019); Google hasn't said commodity content is penalised or that a commodity score exists; de-commoditising procedure. Vendor sells a commodity-scoring tool; no validation data.
 [^dbb-ecom-seo]: DebugBear, 2026-02-04 (upd. 2026-04-24): practitioner guide; restrictive facets only, sort parameters rarely rank, crawlable pagination (rel next/prev dropped by Google 2019, used by Bing); out-of-stock handling; Black Friday interest rises from summer.
+[^st-gemini]: Steve Toth, undated guide: 47 Gemini conversations (32 signed in, 15 signed out); 383 of 389 citation spans with a `#:~:text=` fragment; outbound links tagged `utm_source=gemini`; 3.6 Flash signed in, 3.5 Flash-Lite signed out; `ProductComparisonTable` seen signed out only; tables lifted from source pages for 5 citations signed in, 12 signed out.
+[^st-pronoun-queries]: Steve Toth, 2026-10-06: method plus one property's GSC export (2,226 rows → 2,158 candidates → 1,745 without brand → 454 follow-up keywords) and client examples; relays John Mueller via Search Engine Roundtable that AI Mode follow-ups appear as pronoun queries.

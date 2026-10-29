@@ -4,8 +4,8 @@ title: AI crawlers and controls
 description: Official per-vendor reference for AI crawlers and user agents (OpenAI, Anthropic, Perplexity, Google, Apple, Microsoft) — what each bot does, what blocking it costs, robots.txt behaviour, IP lists — plus Google's AI-feature eligibility and snippet controls, Google-Extended and Knowledge Graph facts, sitemap discovery and bot verification, WebMCP and WAFs blocking agents, hallucinated brand hostnames and invented URL paths, Bing's AI Performance report, IndexNow, whether anyone reads llms.txt or Markdown copies, user-triggered fetchers and robots.txt, and status codes per bot in server logs.
 tags: [geo, crawling, robots-txt, llms-txt, markdown, openai, anthropic, perplexity, google, bing, apple, google-extended, knowledge-graph, webmcp, waf, sitemaps, server-logs, status-codes, reference]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-01-28T00:00:00Z
 sources:
   - id: openai-bots
@@ -74,6 +74,12 @@ sources:
   - id: cc-kpis
     resource: "https://www.wix.com/studio/ai-search-lab/ai-search-visibility-kpis"
     title: "Crystal Carter, AI search visibility KPIs (2025-07-29, updated 2025-08-03; Wix AI Search Lab; framework)"
+  - id: st-claude
+    resource: "https://stevetoth.ai/how-claude-search-works"
+    title: "Steve Toth, How Claude search works (undated; 30 conversations; vendor data)"
+  - id: st-brave
+    resource: "https://stevetoth.ai/how-brave-search-works"
+    title: "Steve Toth, How Brave Search works (undated; 26 conversations, AI answer off; vendor data)"
 ---
 
 # AI crawlers and controls
@@ -171,6 +177,11 @@ Sources: OpenAI,[^openai-bots] Anthropic,[^anthropic-bots] Perplexity,[^perplexi
 - A first-party log dashboard (Rachel Anderson, relayed) found a security tool returning HTTP 406 to Googlebot and every AI bot; Search Console's Crawl Stats didn't show it, and the speaker called Crawl Stats unreliable for large domains. *Practitioner, one case, relayed.*[^lr-techseo]
 - **Do:** report status codes per verified bot (Googlebot, Bingbot, OAI-SearchBot, ChatGPT-User, Claude-User, PerplexityBot and the others in the [table](#whos-who)) from server or CDN logs, and alert on any 4xx or 5xx to a verified bot; recheck after every security-tool or WAF change ([AI-bot reliability in logs](../measure/diagnostic-tests.md#12-ai-bot-reliability-in-server-logs)).
 
+## Claude's web search runs on Brave
+- Anthropic added Brave Search to its subprocessor list in March 2025, and one test search in Claude returned the same citations as Brave. *Official, relayed (source list not linked); measured, one test, vendor data (Steve Toth, who sells a paid AI-search membership).*[^st-claude] The evidence is thin: no systematic comparison.
+- Brave Search with the AI answer off returns 20 organic results per query and runs every query exactly as typed. *Measured, vendor data.*[^st-brave]
+- **Do:** don't block Brave's crawler if you want Claude to cite you, and check your key pages rank in Brave Search; Claude only opens URLs its own search returned ([technical foundations](technical-foundations.md#25-assistants-read-passages-from-search-results)).
+
 Related: [AI assistants](../how-it-works/ai-assistants.md), [Google AI features](../how-it-works/google-ai-features.md), [technical foundations](technical-foundations.md), [performance and caching](performance-and-caching.md), [fetch test](../measure/diagnostic-tests.md#4-fetch-a-page-the-way-an-ai-assistant-does), [AI visibility tracking](../measure/ai-visibility-tracking.md).
 
 [^learningaisearch]: LearningAISearch.com, read 2026-10-27: section map used as a gap checklist; it links OpenAI's, Perplexity's, Google's and Microsoft's docs but nothing from Anthropic or Apple, which were read directly.
@@ -195,3 +206,5 @@ Related: [AI assistants](../how-it-works/ai-assistants.md), [Google AI features]
 [^ja-cloak]: Jono Alderson, 2026-10-26: llms.txt "occasionally useful as hints"; judge new AI protocols by adoption cost (six hours vs six months). Argument.
 [^seer-robots]: Seer Interactive, 2026-08-07: user-initiated fetchers (ChatGPT-User, Perplexity-User) don't reliably obey robots.txt; OpenAI removed its compliance wording for ChatGPT-User in December 2025; one client audit with ~559 paid-landing pages indexed without noindex. Agency practitioner post.
 [^cc-kpis]: Crystal Carter, 2025-07-29 (updated 2025-08-03), Wix AI Search Lab: AI bots and assistants send traffic to invented URL paths; monthly log filter for AI user agents/referrers hitting 404s, 301 the recurring ones. Framework, no measured sample.
+[^st-claude]: Steve Toth, undated guide: 30 Claude conversations; usually one query returning 9–10 results; 17 of 45 turns without search; `web_fetch` refused an unsearched URL (`PERMISSIONS_ERROR`); every citation from `web_search`; Brave link rests on a March 2025 subprocessor-list mention (not linked) and one test with matching citations.
+[^st-brave]: Steve Toth, undated guide: 26 Brave Search conversations with the AI answer off; 20 organic results per query (19 on five queries); queries run exactly as typed.

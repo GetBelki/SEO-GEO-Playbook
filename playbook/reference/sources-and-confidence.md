@@ -4,10 +4,13 @@ title: Sources and confidence
 description: The research sources, what each is good for, the six-level confidence scale, how to read research, and what not to adopt.
 tags: [sources, confidence, research, method]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:15:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T09:22:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: toth
+    resource: "https://stevetoth.ai/research"
+    title: "Steve Toth, research index and studies (2026)"
   - id: chuleta
     resource: "https://newsletter.chuletaseo.com/p/geo-2027-la-guia-de-los-expertos"
     title: "Chuleta SEO, GEO 2027: la guía de los expertos (2026-10-29)"
@@ -174,6 +177,7 @@ A claim relayed by a secondary source (an agency blog citing a study) says "rela
 - **ML for SEO** (Lazarina Stoy and contributors).[^mlforseo] Methods for keyword clustering, intent classification, internal-link suggestions, redirect mapping, content audits and AI-traffic analysis; samples are often small or synthetic. Sells courses; some data comes from DataForSEO and Loamly.
 - **SERPrecon** (Ryan Jones).[^serprecon] SEO tool vendor: a model of the ranking pipeline built from leaks and testimony, commodity content, its own scoring method, and a commentary on Perplexity's Photon post. Used as vendor inference; claims beyond its cited sources are marked.
 - **Chuleta SEO** (Emilio Rodríguez García).[^chuleta] Spanish-language practitioner newsletter: own-project cases (redirects, robots.txt indexing), relayed third-party studies, and a paraphrase of Google's typical crawl, indexing and recovery times from Search Central Live. Claims are translated; one-case evidence; its 2027 predictions are opinion and not used.
+- **Steve Toth** (stevetoth.ai).[^toth] Recorded sessions (browser traffic captures) of 8 AI search platforms in 277 conversations: what each assistant retrieves, cites and shows, signed in and out; a Search Console method for AI Mode follow-ups; a LinkedIn ranking study. Sells a paid membership, so his data is vendor data; all test conversations were B2B vendor comparisons, not shopping, and per-platform samples are small.
 - **Not read:** MobileMoxie (reading stopped). A first ML for SEO reading cited pages that don't exist and was discarded; the source was re-read with every page fetched and every URL checked.
 - **Brodie Clark** (brodieclark.com).[^brodie] Dated sightings of Google and ChatGPT SERP tests, nearly all with screenshots, plus a few how-to articles. Best source for *when a surface changed*. No measured data; notes have no permalinks, only month anchors.
 - **Searchind** (searchind.com).[^searchind] One consultant's ecommerce SEO blog. Practical checklists (Merchant Center audit, seasonal SEO, D2C, market analysis). Case results are anecdotal, never quantified. Use it for *procedures*, not for evidence.
@@ -208,6 +212,7 @@ Related: [conflicts register](conflicts.md), [glossary](glossary.md), [Google up
 [^adams]: SEO for Google News, read 2026-10-28: 10 posts, Feb 2025 – Sep 2026.
 [^alderson]: Jono Alderson, read 2026-10-28: 12 posts, Jul 2025 – Oct 2026.
 [^scholz]: SEO Brief, read 2026-10-28: 4 posts, Apr – Jul 2026.
+[^toth]: Steve Toth, read 2026-10-29: 12 pages (research index, the cornerstone study, a method, a LinkedIn study, 8 platform guides; two guides read to their first 100,000 characters). Nothing behind the paywall.
 [^chuleta]: Chuleta SEO, read 2026-10-29: two Spanish posts (2026-10-22 and 2026-10-29), translated; unrelated news items were ignored.
 [^sparktoro]: SparkToro blog, read 2026-10-29: 14 posts, 2026.
 [^fullstory]: FullStory blog, read 2026-10-29: 14 posts, all marked updated in 2026.

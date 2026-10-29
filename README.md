@@ -7,16 +7,16 @@ A sourced knowledge base for search (SEO) and AI-search visibility (GEO), writte
 You can drop it into any project as a reference that you or your AI agent can rely on. Every claim cites its source and says how strong the evidence is. Where sources disagree, the disagreement is written down instead of quietly settled.
 
 - **36 pages** grouped by task: page types, situations, channels, technical, measurement
-- **49 rules** on one page ([start here](playbook/start-here.md)), each linked to its evidence
-- **35 diagnostic tests** you can repeat on your own data
-- **28 conflicts** where sources disagree, each with the positions, a reading and a working rule
-- **~450 footnoted sources**: vendor documentation from Google, OpenAI, Anthropic and others; Google's web.dev performance course; measured studies and clickstream panels; leak and trial documents; patents; and practitioner research on SEO, analytics, performance and machine-learning methods
+- **51 rules** on one page ([start here](playbook/start-here.md)), each linked to its evidence
+- **36 diagnostic tests** you can repeat on your own data
+- **29 conflicts** where sources disagree, each with the positions, a reading and a working rule
+- **~470 footnoted sources**: vendor documentation from Google, OpenAI, Anthropic and others; Google's web.dev performance course; measured studies and clickstream panels; leak and trial documents; patents; and practitioner research on SEO, analytics, performance and machine-learning methods
 
 ## How the topics fit together
 
 ```mermaid
 flowchart TD
-    START["Start here<br/>49 rules on one page"]
+    START["Start here<br/>51 rules on one page"]
 
     subgraph DO["Do"]
         PT["Page types<br/>product · category · comparison/guide · homepage/brand"]
@@ -26,7 +26,7 @@ flowchart TD
     end
 
     HW["How it works<br/>Google ranking and intent · Google AI features ·<br/>AI assistants incl. Perplexity · shopping surfaces"]
-    ME["Measure<br/>Search Console · analytics · AI visibility ·<br/>rank tracking · ML methods · 35 diagnostic tests"]
+    ME["Measure<br/>Search Console · analytics · AI visibility ·<br/>rank tracking · ML methods · 36 diagnostic tests"]
     RF["Reference<br/>sources and confidence · conflicts ·<br/>updates timeline · glossary"]
 
     START --> DO
@@ -58,10 +58,10 @@ Every claim carries one of seven confidence labels. Across the playbook, they br
 ```mermaid
 pie showData
     title Claims by confidence label
-    "Practitioner" : 413
-    "Measured" : 391
-    "Official" : 104
-    "Inference" : 63
+    "Practitioner" : 427
+    "Measured" : 427
+    "Official" : 112
+    "Inference" : 67
     "Patent" : 39
     "From code" : 29
     "From the leak" : 28

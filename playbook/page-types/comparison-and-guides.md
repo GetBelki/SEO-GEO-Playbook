@@ -4,8 +4,8 @@ title: Comparison pages and guides
 description: What to do on "X vs Y" pages, buying guides and product documentation — verdict first, comparison table and "best for", HTML not PDF, decision-stage over how-to, one topic in depth, no length targets, true dates and real refreshes, consolidation into one guide with anchors, link assets, FAQ content after FAQ rich results were dropped, self-contained answer-first passages, the first ~500 words, original statistics pages with sourced numbers and quotes, no "according to X" rankings of your own products, headlines and summaries for editorial guides, and the strip-the-logo test.
 tags: [seo, geo, content, comparison, buying-guides, documentation, faq, links, ecommerce, freshness, content-length, passages, statistics, ai-assistants, pdf, headlines, discover, distinctiveness]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: rs-intent
@@ -113,6 +113,12 @@ sources:
   - id: brief-distinct
     resource: "https://seobrief.substack.com/p/when-the-logo-comes-off-is-it-still"
     title: "Jes Scholz, SEO Brief: distinctiveness (2026-06-18; essay + one client case)"
+  - id: st-chatgpt-dr
+    resource: "https://stevetoth.ai/how-chatgpt-deep-research-works"
+    title: "Steve Toth, How ChatGPT Deep Research works (undated; 19 conversations; vendor data)"
+  - id: st-gemini
+    resource: "https://stevetoth.ai/how-gemini-search-works"
+    title: "Steve Toth, How Gemini search works (undated; 47 conversations; vendor data)"
 ---
 
 # Comparison pages and guides
@@ -219,6 +225,11 @@ For anyone planning or writing "X vs Y" pages, "best X for Y" pages, buying guid
 ## 11. Lists and "best" pages are a labelled format
 - Google labels listicles and top-N pages as their own format and measures them; commerce pages are split into product page, review, comparison, buying guide and top-N roles. Self-promotional rankings were the format that declined in early 2026. *From the leak; the decline is practitioner-reported.*[^rs-intent] Back every list with stated criteria and how you tested, and match the role the results show ([Google ranking](../how-it-works/google-ranking.md#10-intent-decides-the-kind-of-page-per-market)).
 
+## 12. Deep Research searches vendor sites directly
+From Steve Toth, who sells a paid AI-search membership. All his test conversations were B2B vendor comparisons, not shopping.
+- A full ChatGPT Deep Research run made 80–94 searches, 90.6 % of them `site:` lookups on vendor, review and government domains; the brief it writes is about ten times the typed question. *Measured, vendor data, B2B SaaS questions.*[^st-chatgpt-dr] Your own comparison and spec pages are searched directly, so state the facts a comparison needs on them.
+- Gemini lifted comparison tables from source pages for 5 citations signed in and 12 signed out. *Measured, vendor data, small sample.*[^st-gemini] Keep the comparison table in plain HTML ([section 2](#2-verdict-table-best-for-onward-links)).
+
 Related: [product pages](product-pages.md), [homepage and brand](homepage-and-brand.md), [seasonal peaks](../situations/seasonal-peaks.md), [third-party presence](../channels/third-party-presence.md), [links and digital PR](../channels/links-and-digital-pr.md).
 
 [^siege-bofu]: Siege Media, 2026-03-24: ~1,000 BOFU prompts, 57,095 citations (Peec AI).
@@ -256,3 +267,5 @@ Related: [product pages](product-pages.md), [homepage and brand](homepage-and-br
 [^gn-article]: Barry Adams, 2025-02-10: first 8 words, up to 110-character article headline, summary after the H1, question subheads, topic-hub links, Discover images; practitioner advice for news publishers.
 [^brief-distinct]: Jes Scholz, 2026-06-18: essay; strip-the-logo test; relays NN/g and System1 (primaries not read, their figures not used here).
 [^rs-intent]: Resoneo, Oct 2026 (captures dated 2026-10-28): Intent Brain with 20 broad intents per query, language and country; Orbit with 86 page categories scored 0–100; 5 snippet-date age tiers (1, 3, 30, 90, 365 days); commerce split into merchant product page, review, comparison, buying guide, top N; LISTICLE label measured, not filtered; AUTHENTICITY counted since 2023-07-03, UGC_DISCUSSION since 2023-08-29; "mercury" 82 % fintech on google.com vs "mercure" 50 % planet on google.fr. Internal schemas plus patent US8346815B2; 8-query sample.
+[^st-chatgpt-dr]: Steve Toth, undated guide: 19 ChatGPT Deep Research conversations on B2B SaaS questions; 80–94 searches per full run, 90.6 % of them `site:` lookups; quick-run citations reference line ranges (e.g. L569-L577); only the first ~100k characters of the guide were read.
+[^st-gemini]: Steve Toth, undated guide: 47 Gemini conversations (32 signed in, 15 signed out); 383 of 389 citation spans with a `#:~:text=` fragment; outbound links tagged `utm_source=gemini`; 3.6 Flash signed in, 3.5 Flash-Lite signed out; `ProductComparisonTable` seen signed out only; tables lifted from source pages for 5 citations signed in, 12 signed out.

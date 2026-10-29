@@ -4,8 +4,8 @@ title: Third-party presence
 description: Why most AI citations come from third parties — known sources, authorities and testing organisations, affiliate and review sites, marketplaces, Reddit (which differs by engine), forums and YouTube — what drives brand mentions, Knowledge Graph corroboration, and what to do: audit cited domains, keep facts identical across domains, publish verifiable proof points, earn need-to-brand statements and mentions with proprietary data, keep an active review-platform profile.
 tags: [geo, citations, third-party, reviews, review-platforms, affiliates, marketplaces, reddit, forums, youtube, digital-pr, links, brand-mentions, knowledge-graph, model-changes]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: chatgpt-53
@@ -95,6 +95,12 @@ sources:
   - id: sp-affinity-vs-traffic
     resource: "https://sparktoro.com/blog/audience-affinity-vs-traffic-why-high-affinity-media-belongs-in-your-earned-media-strategy/"
     title: "Fractl on the SparkToro blog, Audience affinity vs traffic (2026-06-17; SparkToro affinity data, 8 industries)"
+  - id: st-chatgpt
+    resource: "https://stevetoth.ai/how-chatgpt-search-works"
+    title: "Steve Toth, How ChatGPT search works (undated; 53 conversations; vendor data)"
+  - id: st-linkedin-study
+    resource: "https://stevetoth.ai/research/linkedin-posts-study"
+    title: "Steve Toth, I tested and tracked 60 LinkedIn posts ranking in Google and AI Overviews (2026-09-10; 60 posts, ~810 keywords, US; vendor data)"
 ---
 
 # Third-party presence
@@ -171,6 +177,7 @@ A synthesis of third-party studies, *relayed* — each number comes from the nam
 - **ChatGPT dropped Reddit.** Reddit's share of ChatGPT citations fell from ~4.6 % to 0.23 % between early August and 21 August 2026 (−95 %), in steps on 8 and 14 August; Google's AI surfaces were not affected the same way. *Measured, large vendor log sample (Peec AI, the author's employer), not reproducible outside it.*[^mt-sitequeries]
 - **Reddit follows search, not AI preference.** OpenAI selected 0.61 % of 491,024 Reddit retrievals vs 12.85 % for all sources; Reddit made up 2.0 % of 697,768 Google AI citations and appeared in 26.6 % of a 3,450-search sample; it was 0 of 139,601 Anthropic grounding sources. *Measured, biased to the author's own prompts.*[^dj-reddit]
 - **Translated Reddit in non-English markets.** Machine-translated Reddit pages (`?tl=` URLs) took 5.71 % of Reddit's AI citations across 20 countries and 4 engines (2026-03-01 – 06-10): in Germany 52 % of Google AI Overviews' Reddit citations, in Spain 72 % of AI Mode's. ChatGPT dropped them from 6.14 % (April) to 0.30 % (1–10 June; Germany 18.06 % → 1.54 %); Perplexity cited none. In Germany they clustered in commercial categories (bags/fashion 13.0 %, tech hardware 12.7 %, audio/smart home 11.6 %). *Measured, vendor data (Peec AI).*[^mt-reddit-tl]
+- **Reddit may be a separate feed.** In recorded ChatGPT sessions (B2B vendor comparisons, not shopping; Steve Toth, who sells a paid membership), 168 of 169 pool entries came from "search" and 1 from "reddit". *Measured, vendor data, small sample.*[^st-chatgpt]
 - **Do:** invest in forum work only where forum threads already rank in Google for your queries; weight ChatGPT-oriented third-party work toward review platforms and official sources; in non-English markets, treat translated English Reddit threads as competitors for product queries in Google's AI surfaces. Recheck monthly — these shares moved within weeks. *Inference from the measurements above.*
 - The studies disagree on how much engines cite Reddit at all (from ~62 % of bottom-funnel responses to 2.0 % of Google AI citations); the figures and why they differ: [conflicts](../reference/conflicts.md#how-much-do-ai-engines-cite-reddit).
 
@@ -196,6 +203,14 @@ SparkToro sells audience research; Fractl, author of the affinity study, is a di
 - **Reddit wins generic category queries.** Across 8,566 keywords and 14 B2B SaaS domains, Reddit outranked every vendor on 50–66 % of shared keywords in 3 of 4 verticals; 77 % of the volume it won came from generic category keywords, and on queries of 6+ words it won 73–100 %. *Measured, relayed (Foundation); B2B SaaS, not ecommerce.*[^sp-public-evidence] See [section 12](#12-reddit-differs-by-engine).
 - **Pick outlets by audience affinity, not traffic.** Niche publishers had 1.7× higher audience affinity than major outlets with ~130× less traffic; YouTube was the top high-affinity destination in 7 of 8 industries, Reddit usually second. *Measured, agency and vendor data, sample undisclosed.*[^sp-affinity-vs-traffic]
 - **Do:** keep correcting data public and dated, republish it when false claims return, and score PR targets by affinity with your buyers rather than by traffic or domain rating ([links and digital PR](links-and-digital-pr.md)).
+
+## 17. LinkedIn posts in Google and AI Overviews
+Steve Toth sells a paid research membership; the study covers one niche (SEO keywords, US), not ecommerce.
+- **High churn.** Of 60 LinkedIn posts in Google's top 3 for "SEO" keywords (500+ searches), 37 % (20 of 54) were gone within a week; 31 % held at 1 month, 13 % at 3 and 12 % at 6; ~72 % of the current top 3 had entered within the last month. Posts dropped out in blocks per query. *Measured, vendor data.*[^st-linkedin-study]
+- **What held.** Median 167 words; posts under 100 words survived best (12 of 14). Week-over-week survival was 93 % for video, 60 % for image, 50 % for text posts; video posts ranked for a median 11.5 keywords vs 2.5 for text. 6 of 11 posts holding a month or more had a referring domain vs 1 of 29 newer posts. *Measured, vendor data, small sample.*[^st-linkedin-study]
+- **LinkedIn rewrites titles.** LinkedIn AI-rewrote the title tag and H1 of 67 % of ranking posts (40 of 60), at the same rate for held, lost and new posts; one rewrite dropped the ranking keyword. Posts with their original title had a median position of 1 vs 2 for AI-titled ones. *Measured, vendor data.*[^st-linkedin-study]
+- **Fast AI Overview pickup.** The author's three own posts were cited in AI Overviews within days; one ranked about 10 minutes after publishing. *Practitioner, one case.*[^st-linkedin-study]
+- **Do:** treat LinkedIn posts as short-lived visibility, not a durable asset; prefer short video posts, keep your own title, and earn a link to posts worth keeping ([links and digital PR](links-and-digital-pr.md)).
 
 Related: [AI assistants](../how-it-works/ai-assistants.md), [links and digital PR](links-and-digital-pr.md), [homepage and brand](../page-types/homepage-and-brand.md), [AI visibility tracking](../measure/ai-visibility-tracking.md), [diagnostic tests](../measure/diagnostic-tests.md#14-third-party-citation-audit), [AI crawlers and controls](../technical/ai-crawlers-and-controls.md).
 
@@ -228,3 +243,5 @@ Related: [AI assistants](../how-it-works/ai-assistants.md), [links and digital P
 [^sp-influence-5000]: SparkToro, 2026-03-25: Similarweb panel, top 5,000 domains, Jan 2026, apps excluded; Gmail counted as google.com; category shares only in charts.
 [^sp-public-evidence]: SparkToro, 2026-04-01: share of searches across 41 major US desktop sites, Q4 2025 (Google 73.7 %, commerce ~10 %, social 5.5 %, AI tools 3.2 %); relays a Seer Interactive case (one brand) and Foundation Inc (8,566 keywords, 14 B2B SaaS domains).
 [^sp-affinity-vs-traffic]: Fractl (a digital PR agency) on the SparkToro blog, 2026-06-17: SparkToro affinity data, 8 industries, aggregate, sample undisclosed; relays Muck Rack 2025 and Stacker.
+[^st-chatgpt]: Steve Toth, undated guide, read 2026-10-29: 53 ChatGPT conversations (20 signed in, 15 temporary, 18 signed out), HAR captures; relays the OpenAI Help Center on query rewriting; vendor data.
+[^st-linkedin-study]: Steve Toth, 2026-09-10: 60 LinkedIn posts ranking in Google's top 3 for "SEO" keywords with 500+ searches, ~810 keywords, Ahrefs + DataForSEO, US, snapshot 2026-08-24; one niche, not ecommerce; the author's three own posts are one case.

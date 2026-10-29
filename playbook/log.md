@@ -2,6 +2,9 @@
 
 ## 2026-10-29
 
+**Update** — Human review: the 16 pages changed by the Steve Toth update stamped `verified` again (Martin Aberastegue).
+**Update** — Added Steve Toth's research (12 pages, every URL checked; recorded sessions of 8 AI search platforms, 277 conversations, B2B comparisons; vendor data): retrieved vs cited pages (52–75 % of retrieved pages uncited), per-assistant search behaviour, Google AI surfaces in recorded sessions, shopping signals in assistant answers, LinkedIn posts in Google, replay-inflated citation counts and sign-in state, Gemini link tagging, AI Mode follow-ups as pronoun queries in Search Console (test 36), Claude's search on Brave. One new conflict (ChatGPT searches per answer, app vs API); start-here rules 50–51; glossary +3. Changed pages lost their `verified` stamp.
+**Lint** — 0 errors, 0 warnings; all section anchors, footnotes and sources resolve.
 **Update** — Human review: the 8 pages changed by the Chuleta SEO posts stamped `verified` again (Martin Aberastegue); their `generated` times corrected to 09:15 UTC.
 **Update** — Added Chuleta SEO's post on Google's typical timelines (Spanish, translated; Gary Illyes at Search Central Live Barcelona, paraphrased): new search-console section 19 (how long changes take to show), recovery timeline in core-update-recovery, Bing Topics Portfolio in ai-visibility-tracking. Link-patent commentary and Chartbeat figures without numbers were not added. Three pages lost their `verified` stamp.
 **Update** — Added Chuleta SEO's "GEO 2027" post (Spanish, translated): a homepage-redirect case in migration, robots.txt-blocked pages still indexed in technical-foundations, and SE Ranking's branded-AIO (82.5 %) and outside-top-10 (62 %) figures as second studies in homepage-and-brand and google-ai-features. Its 2027 predictions are opinion and were not added. Five pages lost their `verified` stamp.

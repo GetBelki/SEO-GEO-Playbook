@@ -4,8 +4,8 @@ title: How Google's AI features pick sources
 description: AI Overviews, AI Mode and Gemini — Google's official "still SEO" line, schema and AI citations, grounding from ranking (FastSearch), passage citation, top-10 overlap, fan-out depth, how users behave, ads and citation UI, personalisation, when AI Overviews trigger, the click loss by position, how often answers change, the grounding word budget, reading from the index, uncited Knowledge Graph facts, Personal Intelligence, Pew's click data and how easily thinly covered questions sway AI answers.
 tags: [seo, geo, google, ai-overviews, ai-mode, gemini, citations, fan-out, ctr, branded-search, grounding, knowledge-graph, personalisation, misinformation]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:15:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T09:22:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: chuleta-geo2027
@@ -131,6 +131,15 @@ sources:
   - id: mlseo-aio-tracker
     resource: "https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/track-ai-overviews-python/"
     title: "MLforSEO, How to track AI Overviews for your keywords (2026-10-24; 29-keyword run, US desktop)"
+  - id: st-ai-mode
+    resource: "https://stevetoth.ai/how-google-ai-mode-works"
+    title: "Steve Toth, How Google AI Mode works (undated; 30 conversations; vendor data)"
+  - id: st-aio
+    resource: "https://stevetoth.ai/how-google-ai-overviews-work"
+    title: "Steve Toth, How Google AI Overviews work (undated; 24 conversations; vendor data)"
+  - id: st-gemini
+    resource: "https://stevetoth.ai/how-gemini-search-works"
+    title: "Steve Toth, How Gemini search works (undated; 47 conversations; vendor data)"
 ---
 
 # How Google's AI features pick sources
@@ -146,7 +155,7 @@ This page answers how AI Overviews and AI Mode choose and show their sources, an
 - Make the passage that answers a sub-question easy to lift and put the answer, specs and differentiators in the first ~500 words, because citations go to passages and the grounding budget per page is small. *Measured; budget from private data, directional* [why](#3-citations-go-to-passages-not-ranks) · [budget](#10-how-much-of-a-page-grounding-uses)
 - Keep "as of" dates and `dateModified` true and current. *Practitioner* [why](#4-ai-overviews-and-ai-mode-are-separate-but-linked)
 - Don't count on a brand query to bring a click when an AI Overview shows; about two thirds of US Google searches end without any click. *Measured; vendor data* [why](#5-users-behave-differently-on-each-surface) · [zero-click](#14-most-searches-end-without-a-click)
-- Track organic position, AIO citation and AI Mode citation separately, sample every 2–3 days rather than one snapshot, and keep Search Console as the source of truth. *Measured, vendor data; inference* [why](#6-the-results-page-keeps-changing) · [volatility](#9-ai-overviews-change-every-few-days)
+- Track organic position, AIO citation and AI Mode citation separately, sample every 2–3 days rather than one snapshot, de-duplicate AI Mode citations replayed after click-outs, and keep Search Console as the source of truth. *Measured, vendor data; inference* [why](#6-the-results-page-keeps-changing) · [volatility](#9-ai-overviews-change-every-few-days) · [replays](#16-what-recorded-sessions-show-on-googles-ai-surfaces)
 - Before blaming content for a click change on an AI surface, check for UI tests and new ad units. *Practitioner* [why](#6-the-results-page-keeps-changing)
 - Keep schema for rich results, not as an AI-citation lever: adding it didn't raise AI citations; put key facts in visible text and keep them identical everywhere, since Knowledge Graph facts reach AI Mode without a link. *Measured, vendor data; from code* [why](#1-googles-official-line-its-still-seo) · [KG](#12-knowledge-graph-facts-arrive-without-a-citation)
 - Expect AI Overviews mostly on informational and question queries; commercial, transactional and Shopping queries rarely trigger them (Sept 2025). *Measured, vendor data* [why](#7-when-ai-overviews-show)
@@ -256,6 +265,17 @@ SparkToro sells audience research; its numbers come from Similarweb's clickstrea
 - **AI Overview citations barely overlap the organic top 10.** On 29 US desktop keywords (25 Oct 2026), every keyword showed an AI Overview; the median overlap between cited and organically ranking domains was 22 %, and 0 % for seven keywords. One domain was cited first while absent from the organic top 10. *Measured, small sample; MLforSEO, which sells courses.*[^mlseo-aio-tracker] Confirms [section 3](#3-citations-go-to-passages-not-ranks).
 - How to test a page's coverage of likely sub-queries: [keyword research](../channels/keyword-research.md#11-checking-a-pages-fan-out-coverage).
 
+## 16. What recorded sessions show on Google's AI surfaces
+Steve Toth sells a paid research membership; the measurements below are his vendor data from recorded browser sessions of B2B vendor-comparison conversations, not shopping, on one day (2026-09-25, US). Samples per surface are small: 30 AI Mode conversations, 24 for AI Overviews, 47 for Gemini.
+- **Both surfaces fan out.** Google says AI Mode splits a question into subtopics and runs many queries at once, and Search Central says AI Overviews and AI Mode can both use query fan-out; at I/O 2026 Google said it is merging the two into one AI Search experience. *Official, relayed.*[^st-ai-mode]
+- **AI Mode hides its pool.** The candidate pool, inferred from the highest `srcId`, was 9–62 pages per answer (one turn ran past 62 while 16 sources showed); 280 sources were cited across 30 conversations; hidden, context-enriched rewrites of each follow-up appear in the traffic. *Measured, vendor data, small sample; pool size is inference.*[^st-ai-mode]
+- **AI Mode citations attach to slots, not sentences**, with up to 8 pages per slot. The side panel (3–8 items) and the "Show all" list agreed on the top entry in only 10 of 34 answers. Replays after clicking out inflated one brand's citation count from 12 to 26. Answers often carried a Sponsored ad block inside the answer, 98 % ended with a question, and 5 sessions cited timestamped YouTube videos. *Measured, vendor data, small sample.*[^st-ai-mode]
+
+  > **Note:** replays after click-outs doubled one brand's AI Mode citation count (12 → 26), so tools that count raw citations per answer may overstate visibility.
+- **AI Overviews load after the results page** via `/async/folsrch`. Pages with an Overview finished loading in 2,070–3,551 ms (13 pages), pages without in 13,928–19,505 ms (46); the `aio` value didn't reliably show whether an Overview appeared. *Measured, vendor data, small sample.*[^st-aio] Google said in July 2026 that Gemini 3.5 Flash-Lite is rolling out in AI Overviews; the traffic didn't confirm the model. *Official, relayed.*[^st-aio]
+- **Gemini** ran one Google Search block per turn and consulted 5–10 pages per answer, with search strings "mostly different from what was typed"; signed in Gemini 3.6 Flash, signed out 3.5 Flash-Lite. *Measured, vendor data, small sample.*[^st-gemini] Details per assistant: [AI assistants](ai-assistants.md#20-per-assistant-search-behaviour-recorded-sessions).
+- **Do:** de-duplicate AI Mode citations per answer before counting them, record side panel and "Show all" separately, and check a page's coverage of likely sub-queries rather than the typed query alone ([AI visibility tracking](../measure/ai-visibility-tracking.md)).
+
 Related: [Google ranking](google-ranking.md), [AI assistants](ai-assistants.md), [shopping surfaces](shopping-surfaces.md), [AI crawlers and controls](../technical/ai-crawlers-and-controls.md), [comparison pages and guides](../page-types/comparison-and-guides.md).
 
 [^google-ai-guide]: Google generative-AI optimization guide, updated 2026-07-10.
@@ -299,3 +319,6 @@ Related: [Google ranking](google-ranking.md), [AI assistants](ai-assistants.md),
 [^srp-commodity-content]: SERPrecon, 2026-10-15: relays Google's generative-AI features guide section on non-commodity content, Danny Sullivan and John Mueller (via Search Engine Journal), the leak's OriginalContentScore and patent US11354342B2; the vendor's commodity metric is not validated against rankings.
 [^mlseo-aio-tracker]: MLforSEO, 2026-10-24: AI Overview tracker run on 29 keywords, US desktop, 2026-10-25, DataForSEO data.
 [^chuleta-geo2027]: Chuleta SEO (Emilio Rodríguez García), 2026-10-29, Spanish newsletter, read in full; claims translated. Own projects: a section redirected to the homepage (Sistrix estimate 21,645 → 3,065), ~9,340 robots.txt-blocked pages still indexed (Search Console, Aug–Oct 2026). Relays SE Ranking: 82.5 % of US brand searches show an AI Overview, 62 % of cited pages rank outside the organic top 10 (sample and period not stated).
+[^st-ai-mode]: Steve Toth, undated guide, read 2026-10-29: 30 AI Mode conversations, 280 cited sources; pool size inferred from `srcId`; relays Google's AI Mode announcement (UK, 2025-07-28) and Search Central; vendor data.
+[^st-aio]: Steve Toth, undated guide, read 2026-10-29: 24 conversations; load times on 13 pages with and 46 without an Overview; no citation counts; vendor data.
+[^st-gemini]: Steve Toth, undated guide, read 2026-10-29: 47 Gemini conversations (32 signed in, 15 signed out); 389 citation spans; vendor data.

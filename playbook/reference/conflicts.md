@@ -4,10 +4,13 @@ title: Conflicts register
 description: Every point where the sources disagree — the positions with their evidence, how to read them, and what to do meanwhile; other pages link here instead of repeating the argument.
 tags: [conflicts, sources, method, geo, seo, measurement]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: st-chatgpt
+    resource: "https://stevetoth.ai/how-chatgpt-search-works"
+    title: "Steve Toth, How ChatGPT search works (undated; 53 conversations; vendor data)"
   - id: sp-similarweb-ai-mentions
     resource: "https://sparktoro.com/blog/new-research-from-similarweb-how-ai-brand-mentions-influence-direct-visits-traditional-search-queries/"
     title: "SparkToro with Similarweb, How AI brand mentions influence direct visits and search (2026-06-28; clickstream panel, sample not stated)"
@@ -238,6 +241,7 @@ Where the sources disagree. Each entry gives the positions with their evidence, 
 | [Embedding clusters or SERP clusters?](#embedding-clusters-or-serp-clusters) | Leaning | Embeddings to explore, SERP overlap to map keywords to URLs |
 | [Is the 2 MB HTML limit enforced?](#is-the-2-mb-html-limit-enforced) | Open | Keep important content and links well inside the first 2 MB |
 | [Update or merge first when pruning?](#update-or-merge-first-when-pruning) | Settled by scope | Merge true duplicates first; update the rest |
+| [How many searches does ChatGPT run per answer?](#how-many-searches-does-chatgpt-run-per-answer) | Method difference | App and API differ; check in the app you care about |
 | [Track answer position or presence?](#track-answer-position-or-presence) | Leaning | Presence % and share of voice first; position as a noisy extra |
 
 ## Google's guidance vs assistant findings
@@ -402,6 +406,11 @@ The figures describe different layers, not one number:
 - **Merge first:** a rule-based audit template checks for duplicates (merge) before decay (update); the first matching rule wins. *Practitioner.*[^mlseo-content-audit]
 - **Do:** settled by scope — merge true duplicates first, then update the pages that remain.
 
+## How many searches does ChatGPT run per answer?
+- **About one:** an API sample found 1.10 fan-out queries per searched response (Aug 2026) ([AI assistants](../how-it-works/ai-assistants.md#13-fan-outs-shrink-and-sometimes-search-inside-sites)).
+- **Three to nine:** recorded sessions in the ChatGPT app showed 3–9 searches per lookup, often with brand names the user didn't type (Sept 2026). *Measured, vendor data, small sample.*[^st-chatgpt]
+- **Do:** a method difference — the API and the consumer app behave differently. Test in the surface your customers use, and cover the sub-questions a buyer would search, not only the head query.
+
 Related: [sources and confidence](sources-and-confidence.md), [glossary](glossary.md).
 
 [^google-ai-guide]: Google generative-AI optimization guide, updated 2026-07-10.
@@ -469,3 +478,4 @@ Related: [sources and confidence](sources-and-confidence.md), [glossary](glossar
 [^mlseo-content-audit]: MLforSEO, 2026-10-24: rule-based audit template, merge checked before update.
 [^mlseo-dark-ai]: MLforSEO (Beatrice Gamba), 2026-08-21: Loamly data, 70.6 % of identified AI visits without referrer; 10.2 % vs 2.5 % conversion.
 [^sp-track-ai-visibility]: SparkToro x Gumshoe.ai, 2026-05-07: 142 prompts, 7 model families, 994 runs.
+[^st-chatgpt]: Steve Toth, 2026: recorded ChatGPT app sessions (53 conversations, B2B vendor comparisons); 3–9 searches per lookup.
