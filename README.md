@@ -1,5 +1,7 @@
 # SEO / GEO Playbook
 
+![SEO / GEO Playbook: a treemap of all 36 pages by section, sized by length, and a bar chart of claims by evidence type](assets/playbook-overview.png)
+
 A sourced knowledge base for search (SEO) and AI-search visibility (GEO), written for ecommerce and kept brand-neutral. It covers how Google, AI assistants (ChatGPT, Gemini, Claude, Perplexity, Copilot) and shopping surfaces find, rank and cite pages, what to do about it, and how to measure the result without fooling yourself.
 
 You can drop it into any project as a reference that you or your AI agent can rely on. Every claim cites its source and says how strong the evidence is. Where sources disagree, the disagreement is written down instead of quietly settled.
