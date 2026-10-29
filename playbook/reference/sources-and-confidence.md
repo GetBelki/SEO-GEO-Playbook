@@ -4,12 +4,28 @@ title: Sources and confidence
 description: The research sources, what each is good for, the six-level confidence scale, how to read research, and what not to adopt.
 tags: [sources, confidence, research, method]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: sparktoro
+    resource: "https://sparktoro.com/blog/"
+    title: "SparkToro blog, 14 posts 2026"
+  - id: fullstory
+    resource: "https://www.fullstory.com/blog/"
+    title: "FullStory blog, 14 posts 2026"
+  - id: webdev
+    resource: "https://web.dev/learn/performance/"
+    title: "web.dev, Learn Performance course (Google Chrome team)"
+  - id: debugbear
+    resource: "https://www.debugbear.com/blog"
+    title: "DebugBear blog, 17 posts 2025–2026"
+  - id: mlforseo
+    resource: "https://www.mlforseo.com/blog/"
+    title: "ML for SEO blog and resources library, 16 posts"
   - id: serprecon
-    resource: "https://www.serprecon.com/blog/how-to-rank-in-perplexity-photon"
-    title: "SERPrecon (Ryan Jones), How to rank in Perplexity Photon (2026-10-14)"
+    resource: "https://www.serprecon.com/blog"
+    title: "SERPrecon blog (Ryan Jones), 7 posts 2025–2026"
   - id: analyticsmania
     resource: "https://www.analyticsmania.com/blog/"
     title: "Analytics Mania (Julius Fedorovicius), GA4 and GTM troubleshooting guides, 8 posts updated Sep–Oct 2026"
@@ -148,8 +164,13 @@ A claim relayed by a secondary source (an agency blog citing a study) says "rela
 - **Jes Scholz** (SEO Brief).[^scholz] Brand-science essays applied to SEO and GEO; four posts, inactive since July 2026. Pew's primary study, which she cites, was read directly.
 - **Crystal Carter.**[^carter] Practitioner frameworks for AI visibility (RAPP audit, KPIs) and entity work; no measured study of her own.
 - **Analytics Mania** (Julius Fedorovicius).[^analyticsmania] GA4 and Google Tag Manager troubleshooting: UTMs, Unassigned traffic, consent mode, cross-domain checkout, ecommerce events, GTM's 2026 optimized tagging. Practitioner procedures, tested in the author's own containers; few measurements. The author sells GA4/GTM courses.
-- **SERPrecon** (Ryan Jones).[^serprecon] SEO tool vendor; one commentary on Perplexity's Photon post. Used only where it matches the primary post, which was read directly.
-- **Not read yet:** SparkToro, MobileMoxie, FullStory, DebugBear and web.dev's performance course. Their figures quoted here come via other sources. ML for SEO was attempted, but the result cited pages that don't exist, so none of it is used.
+- **SparkToro** (Rand Fishkin).[^sparktoro] Audience-research tool vendor publishing large clickstream studies with Similarweb and Datos (zero-click by country, share of search, AI tool use) and an AI-answer consistency study with Gumshoe.ai (994 runs). Strong on *how people search and what AI answers repeat*; panels change between studies, so trends across years compare loosely.
+- **FullStory.**[^fullstory] Behavioural-analytics vendor: frustration signals, form and checkout friction, separating AI shopping agents from people. Vendor surveys with stated samples but no fieldwork dates; unsourced speed figures on its pages are not used.
+- **web.dev Learn Performance** (Google Chrome team).[^webdev] Official course on loading performance, mostly last updated late 2023. Its business cases are success stories Google picked, marked as relayed.
+- **DebugBear.**[^debugbear] Performance-monitoring vendor: how Core Web Vitals are measured (CrUX vs lab), TTFB and cache keys, consent-banner INP, HTML size limits, ecommerce speed. Own tests are vendor data and often single cases.
+- **ML for SEO** (Lazarina Stoy and contributors).[^mlforseo] Methods for keyword clustering, intent classification, internal-link suggestions, redirect mapping, content audits and AI-traffic analysis; samples are often small or synthetic. Sells courses; some data comes from DataForSEO and Loamly.
+- **SERPrecon** (Ryan Jones).[^serprecon] SEO tool vendor: a model of the ranking pipeline built from leaks and testimony, commodity content, its own scoring method, and a commentary on Perplexity's Photon post. Used as vendor inference; claims beyond its cited sources are marked.
+- **Not read:** MobileMoxie (reading stopped). A first ML for SEO reading cited pages that don't exist and was discarded; the source was re-read with every page fetched and every URL checked.
 - **Brodie Clark** (brodieclark.com).[^brodie] Dated sightings of Google and ChatGPT SERP tests, nearly all with screenshots, plus a few how-to articles. Best source for *when a surface changed*. No measured data; notes have no permalinks, only month anchors.
 - **Searchind** (searchind.com).[^searchind] One consultant's ecommerce SEO blog. Practical checklists (Merchant Center audit, seasonal SEO, D2C, market analysis). Case results are anecdotal, never quantified. Use it for *procedures*, not for evidence.
 - **Thrive and Ignite Visibility.**[^thrive][^ignite] Agency blogs with almost no original research. Used only for third-party studies they relay (Ahrefs, Moz, SE Ranking, Adobe…), marked "relayed"; their own case figures have no baseline or method and are not used.
@@ -183,7 +204,12 @@ Related: [conflicts register](conflicts.md), [glossary](glossary.md), [Google up
 [^adams]: SEO for Google News, read 2026-10-28: 10 posts, Feb 2025 – Sep 2026.
 [^alderson]: Jono Alderson, read 2026-10-28: 12 posts, Jul 2025 – Oct 2026.
 [^scholz]: SEO Brief, read 2026-10-28: 4 posts, Apr – Jul 2026.
-[^serprecon]: SERPrecon, 2026-10-14: read alongside Perplexity's own Photon post (2026-09-24), which is cited as vendor documentation.
+[^sparktoro]: SparkToro blog, read 2026-10-29: 14 posts, 2026.
+[^fullstory]: FullStory blog, read 2026-10-29: 14 posts, all marked updated in 2026.
+[^webdev]: web.dev Learn Performance, read 2026-10-29: 13 of 14 modules.
+[^debugbear]: DebugBear blog, read 2026-10-29: 17 posts, 2025–2026.
+[^mlforseo]: ML for SEO, read 2026-10-29: 16 posts, every URL fetched and checked.
+[^serprecon]: SERPrecon blog, read 2026-10-29: 6 posts, plus the Photon commentary (2026-10-14).
 [^analyticsmania]: Analytics Mania, read 2026-10-28: 8 troubleshooting posts (most marked updated 12 Oct 2026; the GTM optimized-tagging post dated 21 Oct 2026).
 [^carter]: Crystal Carter, read 2026-10-28: 6 resources incl. Wix SEO Hub / AI Search Lab articles; her book not read.
 [^natzir]: Natzir Turrado, read 2026-10-28: 16 articles, May 2025 – Oct 2026.

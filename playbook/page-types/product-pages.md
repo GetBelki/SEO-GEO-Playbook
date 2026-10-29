@@ -1,11 +1,11 @@
 ---
 type: Playbook
 title: Product pages
-description: What to do on a product page — factual opening sentence, price, specs and stock as server-rendered text in one main container (never in CSS pseudo-content), model codes as visible text, descriptive titles and URLs, variant URLs and markup, the same facts as the feed, "will it fit?" and use-case copy tested with task-style prompts, reviews and Q&A, own images for Lens and indexing, the page as ad landing page, "confirm and go" for AI visitors, and out-of-stock and discontinued products.
-tags: [seo, geo, product-pages, ecommerce, structured-data, variants, feeds, lens, google-ads, out-of-stock, soft-404, html-extraction, reviews, indexing, rendering, css]
+description: What to do on a product page — factual opening sentence, price, specs and stock as server-rendered text in one main container (never in CSS pseudo-content), model codes as visible text, descriptive titles and URLs, variant URLs and markup, the same facts as the feed, "will it fit?" and use-case copy tested with task-style prompts, reviews and Q&A, own images for Lens and indexing, the page as ad landing page, "confirm and go" for AI visitors, out-of-stock and discontinued products, image and video speed, and checkout and form friction.
+tags: [seo, geo, product-pages, ecommerce, structured-data, variants, feeds, lens, google-ads, out-of-stock, soft-404, html-extraction, reviews, indexing, rendering, css, performance, lcp, checkout]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: chatgpt-retrieval
@@ -116,6 +116,51 @@ sources:
   - id: seer-ai-interview
     resource: "https://www.seerinteractive.com/insights/ai-doesnt-just-answer-questions-it-rewrites-which-brands-you-even-consider"
     title: "Seer Interactive, Can a prompt undo years of brand building? (2026-07-01; 28 participants × 3 tasks = 84 sessions)"
+  - id: wd-why-speed
+    resource: "https://web.dev/learn/performance/why-speed-matters"
+    title: "web.dev (Google Chrome team), Why speed matters (2023-11-01; relayed case studies)"
+  - id: dbb-shopify
+    resource: "https://www.debugbear.com/blog/shopify-speed-optimization"
+    title: "DebugBear, Shopify speed optimization: fixing the real bottlenecks (2026-04-20; practitioner examples)"
+  - id: wd-video
+    resource: "https://web.dev/learn/performance/video-performance"
+    title: "web.dev, Video performance (2026-04-02; guidance + HTTP Archive data)"
+  - id: wd-resource-hints
+    resource: "https://web.dev/learn/performance/resource-hints"
+    title: "web.dev, Assist the browser with resource hints (2023-11-01; guidance)"
+  - id: wd-lazy
+    resource: "https://web.dev/learn/performance/lazy-load-images-and-iframe-elements"
+    title: "web.dev, Lazy load images and iframe elements (2023-11-01; guidance)"
+  - id: dbb-lazy
+    resource: "https://www.debugbear.com/blog/lazy-loading-performance"
+    title: "DebugBear, How to use lazy loading without hurting web performance (2026-04-10; guidance)"
+  - id: wd-images
+    resource: "https://web.dev/learn/performance/image-performance"
+    title: "web.dev, Image performance (2023-11-01; guidance)"
+  - id: wd-resource-loading
+    resource: "https://web.dev/learn/performance/optimize-resource-loading"
+    title: "web.dev, Optimize resource loading (2023-11-01; guidance)"
+  - id: fs-ecom-cro
+    resource: "https://www.fullstory.com/blog/ecommerce-conversion-rate-optimization/"
+    title: "FullStory, How to master ecommerce CRO with behavioral data (updated 2026-06-15; guide)"
+  - id: fs-form-abandonment
+    resource: "https://www.fullstory.com/blog/form-abandonment/"
+    title: "FullStory, Form abandonment: how to avoid it (updated 2026-08-19; guide, no data)"
+  - id: fs-bounce-rate
+    resource: "https://www.fullstory.com/blog/what-is-a-good-bounce-rate/"
+    title: "FullStory, What is bounce rate? And how to lower yours (updated 2026-09-28; guide)"
+  - id: fs-ai-personalization
+    resource: "https://www.fullstory.com/blog/ai-powered-personalization"
+    title: "FullStory, Nearly 3 in 4 enterprises hear customer complaints on AI personalization (updated 2026-10-26; Centiment survey for FullStory, n=573)"
+  - id: mlseo-schema-automation
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/structured-data-audit/structured-data-automation-python/"
+    title: "ML for SEO, Structured data automation with Python (2026-10-22; method, no counts)"
+  - id: srp-commodity-content
+    resource: "https://serprecon.com/blog/what-is-commodity-content"
+    title: "SERPrecon, What is commodity content? (2026-10-15; Google guide and statements relayed, vendor scoring method)"
+  - id: dbb-ecom-seo
+    resource: "https://www.debugbear.com/blog/ecommerce-website-seo"
+    title: "DebugBear, The complete guide to ecommerce SEO in 2026 (2026-02-04, upd. 2026-04-24; practitioner guide)"
 ---
 
 # Product pages
@@ -130,9 +175,9 @@ For anyone writing, templating or auditing a single product page (PDP) that has 
 - **State the same facts as the feed** — price, availability, variants, return and support policies. *Practitioner* ([§3](#3-the-same-facts-as-the-feed)).
 - **Say what the product is best for, its limits, what it is not for and its exact dimensions, and test the copy with task-style prompts that name no brand.** *Practitioner*; shopper panel *Measured, 84 sessions* ([§4](#4-answer-will-it-fit)).
 - **Add reviews, Q&A and a use or assembly video, and answer the real buyer questions**; ask reviewers for specific detail (use, fit, shipping). *Practitioner*; review selection *Patent* ([§4](#4-answer-will-it-fit)).
-- **Use your own images — one dominant, centred product per image, the same image as in the feed, never a placeholder — and every `<picture>` source showing the same product.** *From code* for Lens; indexing *Practitioner, correlation, relayed*; the rule is practitioner ([§5](#5-images-and-ads), [§9](#9-what-gets-a-crawled-page-indexed), [§10](#10-what-css-and-responsive-images-hide)).
+- **Use your own images — one dominant, centred product per image, the same image as in the feed, never a placeholder — and every `<picture>` source showing the same product.** *From code* for Lens; indexing *Practitioner, correlation, relayed*; the rule is practitioner ([§5](#5-images-and-ads), [§9](#9-what-gets-a-crawled-page-indexed), [§10](#10-what-css-and-responsive-images-hide)). Keep the hero image light, never lazy-load it and give it `fetchpriority="high"`. *Official*; size target *Practitioner, one case* ([§11](#11-images-video-and-speed)).
 - **Treat the page as ad creative**: check ad copy when the page changes, and keep the query string on every redirect. *From code* ([§5](#5-images-and-ads)).
-- **Let AI visitors confirm and go**: the cited fact and its proof above the fold. *Measured, panel data* ([§6](#6-what-a-product-page-earns)).
+- **Let AI visitors confirm and go**: the cited fact and its proof above the fold. *Measured, panel data* ([§6](#6-what-a-product-page-earns)). Let human buyers finish too: shipping cost early, guest checkout by default, inline validation. *Practitioner; vendor data* ([§12](#12-checkout-and-form-friction)).
 - **Keep temporarily out-of-stock products indexable** with the right availability value and alternatives on the page; 410 or 301 discontinued ones. *Official definitions; the rule is inference* ([§7](#7-out-of-stock-and-discontinued)).
 
 ## Checklist
@@ -154,6 +199,11 @@ For anyone writing, templating or auditing a single product page (PDP) that has 
 - [ ] Copy names the use cases and who the product is not for; a few task-style prompts ("I need something to…") checked in assistants.
 - [ ] Main images are the product's own photos, not placeholders; `<picture>` sources for every breakpoint show the same product.
 - [ ] No price, stock, label or other fact in CSS `::before`/`::after` content; no height-based media query changes the content.
+- [ ] Hero image light (under ~180 KB), `fetchpriority="high"`, in the server HTML and not lazy-loaded; `srcset` has `sizes`; every image has `width` and `height`.
+- [ ] Videos have a poster; YouTube embeds sit behind a click-to-load facade.
+- [ ] Request waterfall of the product template checked after every app install or theme update.
+- [ ] Shipping cost visible before checkout; guest checkout is the default; form fields use autocomplete and inline validation.
+- [ ] Recommendation blocks checked on a schedule for out-of-stock and already-bought items.
 
 ## 1. The facts up top, as text
 - ChatGPT judges each candidate by title, URL and a **~202-character snippet starting at the H1**; Gemini takes 80 % of cited passages from the first half of the page.[^chatgpt-retrieval][^gemini-convo] Pattern and before/after: [AI assistants](../how-it-works/ai-assistants.md).
@@ -167,6 +217,7 @@ For anyone writing, templating or auditing a single product page (PDP) that has 
 - Near-identical variant URLs compete for a host's limited result slots instead of adding slots. *From the leak.*[^leak-2]
 - Markup "must be a true representation of the page content".[^g-sd-policies] Product markup supports Google's own results features (*opinion, no test shown*)[^gm-intents] but isn't read by assistants on live fetches ([policies](../technical/technical-foundations.md#8-structured-data-policies)).
 - **Assistants answered nothing from schema alone.** ChatGPT, Perplexity, Claude and Gemini were asked about 3 test pages whose facts sat only in schema (schema facts differing from the visible text; schema with an empty body; JSON-LD and Microdata with no visible content): 0 of 12 responses returned a schema-only fact — 10 said there was no answer, 2 answered from the open web. *Measured, n=12, directional.*[^bp-schema-test] The same post relays a test in which 0 of 280 fetched pages kept their JSON-LD, and Gemini preferred a stale FAQPage answer over the visible text in 8 of 20 trials. *Relayed.*[^bp-schema-test]
+- **Generate markup with code, not a language model.** Never let an LLM write prices, dates or authors into live markup; use it at most to classify page types or draft field-to-property mappings, and let deterministic code build the JSON-LD as one `@graph` linked by `@id`. *Practitioner.*[^mlseo-schema-automation] (ML for SEO sells courses.)
 - **Do:** state price, stock and specs as visible text in the initial HTML, and update the markup whenever the visible facts change — stale schema can hurt. Adding schema did not raise AI citations in a controlled test ([third-party presence](../channels/third-party-presence.md#2-most-citations-are-third-party)).
 
 ## 3. The same facts as the feed
@@ -179,6 +230,7 @@ For anyone writing, templating or auditing a single product page (PDP) that has 
 - Agents lean on reviews and Q&A: ask for reviews 7–14 days after delivery with product-specific prompts, add Q&A and assembly or use videos. *Practitioner, anecdotal tests.*[^ipr-agentic-ecom]
 - Answer 8–10 real buyer questions per page (*opinion*);[^gm-2027] pages that rose in a core update answered the follow-ups and showed first-hand testing and original photos (5 cases).[^mh-june2025]
 - Product pages without original content were among those dropped from the index from 27 May 2025. *Case observations.*[^mh-deindex]
+- **De-commoditise the copy.** Cover the facts every shop states briefly, then add first-hand material, take a clear position, use precise vocabulary and write one quotable original passage. *Practitioner.*[^srp-commodity-content] (SERPrecon sells a content-scoring tool.) Background: [core update recovery](../situations/core-update-recovery.md#8-commodity-content-and-audit-rules).
 - **Prompt for detailed reviews.** A Google application describes choosing which reviews to display by clustering them (topic, star band) and then scoring quality: grammar, length, no all-caps or profanity, specific vocabulary for the review type. *Patent (application, status not verified).*[^sbs-reviews] **Do:** ask reviewers about use, fit and delivery rather than for a star rating alone.
 - **Write for the task, not the brand.** In a shopper panel (28 participants × 3 tasks = 84 sessions), only 9.5 % of first prompts named a brand, and AI reshaped which brands shoppers considered — one brand's mentions fell from 18 to 8, another's rose from 3 to 9. *Measured, small panel, no significance test.*[^seer-ai-interview] **Do:** write product copy around use cases and who the product is not for, and test a few task-style prompts ("I need a … for …") per category to see whether your products come up ([AI visibility tracking](../measure/ai-visibility-tracking.md)).
 
@@ -195,7 +247,7 @@ For anyone writing, templating or auditing a single product page (PDP) that has 
 ## 7. Out of stock and discontinued
 - **Stockouts drift into Soft 404.** Out-of-stock product pages get flagged Soft 404 even when they show related products. The same practitioner source recommends 410 for discontinued products and a conditional noindex for temporary stockouts. *Practitioner, vendor.*[^bp-soft404]
 - **Google's default.** Google's product markup defines availability values such as `OutOfStock`, `BackOrder` and `Discontinued`, but gives no rule on indexing.[^g-product-snippet] Keep temporarily out-of-stock products indexable with the right availability value and useful alternatives on the page, so they keep their rankings. *Official definitions; the rule is inference.*
-- **Do:** 410 a permanently discontinued product, or 301 it to a close successor; consider a noindex only for long stockouts; write the rules down and watch the Soft 404 count per page type ([scaling content and templates](../situations/scaling-content-and-templates.md#6-soft-404s-on-inventory)).
+- **Do:** 410 a permanently discontinued product, or 301 it to a close successor; consider a noindex only for long stockouts; write the rules down and watch the Soft 404 count per page type ([scaling content and templates](../situations/scaling-content-and-templates.md#6-soft-404s-on-inventory)). A practitioner guide draws the same lines: keep the page for short restocks, 301 or 302 for replacements or long gaps, 404 or 410 when there is no demand and no links. *Practitioner.*[^dbb-ecom-seo]
 
 > **Conflict:** noindex temporarily out-of-stock pages vs keep them indexed — [details](../reference/conflicts.md#out-of-stock-pages-noindex-or-keep-indexed)
 
@@ -212,6 +264,25 @@ For anyone writing, templating or auditing a single product page (PDP) that has 
 - **CSS content isn't indexed.** Text in CSS `::before`/`::after` isn't in the DOM and isn't indexed; bots don't scroll or click, and Google expands the viewport height once to trigger lazy loading — so lazy-load with Intersection Observer, use `visibility:hidden` rather than `display:none` for content that must keep its dimensions, and cap `vh`-based hero images with `max-height`. *Practitioner talk (Giacomo Zecchini), relayed.*[^lr-techseo]
 - **Unintended differences between what people and Google see.** Google renders mobile pages with a very tall viewport (an old Mueller remark from 2017 suggested ~9,000 px, unconfirmed; a newer 2026 observation saw a ~1,750 px screenshot cut-off and no scrolling), so `@media (min-height: …)` rules, `<picture>` sources with different subjects and CSS-generated text can show Google something other than what visitors see. Google judges cloaking by intent. *Practitioner, with Google docs and relayed statements.*[^ja-cloak]
 - **Do:** never put prices, stock, labels or badges with facts in CSS pseudo-content; let every `<picture>` source show the same product; no height-based media queries that change content. Compare raw and rendered output: [diagnostic tests](../measure/diagnostic-tests.md), [technical foundations](../technical/technical-foundations.md).
+
+## 11. Images, video and speed
+web.dev is the Google Chrome team's official guidance; DebugBear sells performance monitoring, so its examples are vendor data.
+- **Why it matters.** Vodafone saw 8 % more sales after a 31 % LCP improvement and made LCP its main page-performance KPI. *Official; relayed, one case.*[^wd-why-speed] Rankings use field data, not lab scores: [performance and caching](../technical/performance-and-caching.md).
+- **Hero weight.** Hero images of 300–400 KB (sometimes over 900 KB) were common on slow Shopify stores; DebugBear's target is under 180 KB. A hero video's first frame took over 9 s; a poster image brought LCP to 2.7 s. *Practitioner; one case.*[^dbb-shopify] A video's first frame can be the LCP element: give videos a poster, use `preload="none"` for videos the user starts, and replace animated GIFs with muted looping video; about 20 % of web videos autoplay and download even off-screen. *Official; HTTP Archive data.*[^wd-video]
+- **Priority.** Images start at low priority and are raised only after layout; set `fetchpriority="high"` on the LCP image, lower priority for thumbnails, and preload a responsive LCP image with `imagesrcset`. *Official.*[^wd-resource-hints] On a product page that means the first visible image high and the rest low; in a carousel, slide 1 only. *Practitioner.*[^dbb-shopify]
+- **Lazy-load below the fold only.** `loading="lazy"` belongs on images outside the initial viewport, never on the hero or another LCP candidate, because lazy images wait for layout; `loading` doesn't change priority. *Official.*[^wd-lazy] Never lazy-load above-the-fold images. *Practitioner.*[^dbb-lazy]
+- **Embeds.** YouTube embeds block the main thread for more than 1.7 s at the median, hurting INP; a lazy-loaded iframe saves more than 500 KiB for a YouTube embed. **Do:** use a click-to-load facade. *Official; HTTP Archive data.*[^wd-video][^wd-lazy]
+- **srcset, formats, dimensions.** `srcset` width descriptors need a `sizes` attribute or they don't work, and a 1,000 px image in a 500 px slot is twice the needed bytes; serve AVIF, then WebP, then JPEG (AVIF saved over 50 % against JPEG in some tests; content negotiation needs a `Vary` header for CDN caching); set `width` and `height` on every image against layout shift. *Official.*[^wd-images] Every `<picture>` source still shows the same product ([§10](#10-what-css-and-responsive-images-hide)).
+- **Keep the hero discoverable.** The browser's preload scanner can't see CSS background images, injected scripts or client-rendered markup; put the hero `<img>` in the server HTML or preload it. *Official.*[^wd-resource-loading]
+- **App bloat.** On one Shopify store a cart-drawer app loaded ~540 KB of script against ~6 KB for the native equivalent; apps can inject duplicate libraries and keep loading scripts after removal. *Practitioner; one case.*[^dbb-shopify] **Do:** audit the request waterfall of the product template after every app install or theme update ([performance and caching](../technical/performance-and-caching.md)).
+
+## 12. Checkout and form friction
+FullStory sells session replay and behavioural analytics; all points below are vendor data.
+- **Checkout fixes.** Show shipping cost early, make guest checkout the default, use autocomplete and inline validation, a numeric keyboard for postcodes, the payment methods customers ask for, and trust signals (return policy, payment icons) where they are seen. *Practitioner; vendor data.*[^fs-ecom-cro]
+- **Watch what people try.** Heatmaps, scroll maps and replays show which elements (price, reviews, size charts, images) shoppers skip or try to use, e.g. attempts to zoom or open a size chart. *Practitioner; vendor data.*[^fs-ecom-cro]
+- **Forms: started vs finished.** Baseline form starts against completions; check page bounce separately (a form nobody starts is a different problem from one quit midway); find the fields with most hesitation and errors; track completion time. *Practitioner; vendor data.*[^fs-form-abandonment] Methods: [diagnostic tests](../measure/diagnostic-tests.md).
+- **Personalisation errors.** Promoting out-of-stock items and recommending products already bought are listed as bounce causes;[^fs-bounce-rate] such errors often start months after launch, when inventory or purchase data stops syncing, so pre-launch QA misses them. *Practitioner; vendor data.*[^fs-ai-personalization] In one vendor-reported case (MOO), behavioural fixes brought 67 % fewer errors on a beta product page and 12 % less checkout abandonment. *Measured; vendor data, one case.*[^fs-ai-personalization]
+- **Do:** check that recommendation blocks exclude out-of-stock and already-bought items on a schedule, not only at launch, and review checkout replays after every checkout change ([analytics](../measure/analytics.md)).
 
 Related: [category pages](category-pages.md), [comparison pages and guides](comparison-and-guides.md), [shopping surfaces](../how-it-works/shopping-surfaces.md), [satisfaction per page type](../measure/diagnostic-tests.md#2-satisfaction-per-page-type), [titles and snippets](../technical/titles-and-snippets.md).
 
@@ -251,3 +322,18 @@ Related: [category pages](category-pages.md), [comparison pages and guides](comp
 [^lr-techseo]: Lily Ray, Tech SEO Connect 2025 recap, 2025-12-05: Tyler Gargula on crawled-not-indexed pages (unique images, in stock; correlation, sample not given); Giacomo Zecchini on viewport expansion, lazy loading, CSS pseudo-content, `visibility:hidden` vs `display:none`, `vh` heroes. Her summaries of the speakers' talks.
 [^ja-cloak]: Jono Alderson, 2026-10-26: argument with Google docs; relays Mueller (2017, ~9,000 px viewport, old and unconfirmed) and a 2026 observation of a ~1,750 px screenshot cut-off; height media queries, `<picture>` subjects, CSS content; cloaking judged by intent.
 [^seer-ai-interview]: Seer Interactive, 2026-07-01: 28 participants × 3 tasks = 84 sessions; 9.5 % of first prompts named a brand; brand mentions 18 → 8 and 3 → 9; no statistical test.
+[^wd-why-speed]: web.dev, 2023-11-01: relayed case studies; Vodafone 31 % LCP improvement → 8 % more sales, LCP adopted as main KPI. Vendor-selected success case relayed by Google, not a controlled study.
+[^dbb-shopify]: DebugBear, 2026-04-20: Shopify examples; hero images 300–400 KB (sometimes >900 KB), target <180 KB; hero video first frame >9 s, poster → LCP 2.7 s; fetchpriority on first 1–4 collection images; cart-drawer app ~540 KB vs ~6 KB native. One case per example; vendor sells performance monitoring.
+[^wd-video]: web.dev, 2026-04-02: video first frame as LCP candidate; poster, preload="none", muted looping video instead of GIFs; ~20 % of web videos autoplay; YouTube embeds block the main thread >1.7 s at the median (HTTP Archive).
+[^wd-resource-hints]: web.dev, 2023-11-01: images start at low priority and are raised after layout; fetchpriority="high" on the LCP image, lower for thumbnails; preload responsive LCP images with imagesrcset.
+[^wd-lazy]: web.dev, 2023-11-01: loading="lazy" only outside the initial viewport, never on LCP candidates, doesn't change priority; lazy iframes save >500 KiB for a YouTube embed; facades for third-party embeds.
+[^dbb-lazy]: DebugBear, 2026-04-10: lazy loading hurts LCP above the fold, causes CLS without reserved dimensions; never lazy-load above-the-fold images. Guidance.
+[^wd-images]: web.dev, 2023-11-01: srcset width descriptors need sizes; format order AVIF, WebP, JPEG (AVIF >50 % smaller than JPEG in some tests); Vary header for Accept negotiation; width and height against CLS.
+[^wd-resource-loading]: web.dev, 2023-11-01: the preload scanner can't see CSS background images, injected scripts, dynamic import(), client-rendered markup or CSS @import; don't render the LCP element client-side.
+[^fs-ecom-cro]: FullStory, updated 2026-06-15: checkout fixes (shipping cost early, guest checkout default, autocomplete, inline validation, numeric ZIP keyboard, payment methods, trust signals); heatmaps and replays on product pages. Guide, no own data; vendor sells session replay.
+[^fs-form-abandonment]: FullStory, updated 2026-08-19: form-abandonment method (starts vs completions, page bounce separately, hesitation and error fields, completion time, post-exit actions). Guide, no data.
+[^fs-bounce-rate]: FullStory, updated 2026-09-28: personalisation errors (out-of-stock items promoted, bought items recommended) listed as a bounce cause. Guide; benchmarks unsourced.
+[^fs-ai-personalization]: FullStory, updated 2026-10-26: Centiment survey for FullStory, n=573; personalisation errors surface months after launch when data stops syncing; MOO case (67 % fewer errors on a beta product page, 12 % less checkout abandonment, 12 % more viewing 2+ products), vendor-reported.
+[^mlseo-schema-automation]: ML for SEO, 2026-10-22: LLMs only classify page types or draft mappings; deterministic code builds JSON-LD as one @graph linked by @id; validation steps. Method, "a handful of real sites", no counts.
+[^srp-commodity-content]: SERPrecon, 2026-10-15: relays Google's generative-AI guide ("non-commodity content"), Danny Sullivan via Search Engine Journal and John Mueller (2019); Google hasn't said commodity content is penalised or that a commodity score exists; de-commoditising procedure. Vendor sells a commodity-scoring tool; no validation data.
+[^dbb-ecom-seo]: DebugBear, 2026-02-04 (upd. 2026-04-24): practitioner guide; restrictive facets only, sort parameters rarely rank, crawlable pagination (rel next/prev dropped by Google 2019, used by Bing); out-of-stock handling; Black Friday interest rises from summer.

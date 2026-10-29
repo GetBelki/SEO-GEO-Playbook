@@ -4,8 +4,8 @@ title: Organic traffic drop
 description: A decision flow for a fall in organic or AI-referred traffic — rule out measurement breaks, date it against Google updates, split by device, country, brand and query type, then test directories, lost queries, satisfaction, indexing, AI Overview launches per market, AI referral shifts by page type, platform-side citation shifts such as ChatGPT dropping Reddit, structural surface changes, branded CTR lost to a missing favicon, country-section losses from cross-country canonicalisation, paid CTR falling too, skewed industry decline figures, mid-rollout tremors and security tools serving 4xx to bots — and don't disavow tool-flagged links.
 tags: [seo, traffic-drop, diagnosis, search-console, ga4, core-update, measurement, ai-overviews, links, chatgpt, reddit, favicon, hreflang, canonicals, paid-search, server-logs]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: brodie-num100
@@ -95,6 +95,12 @@ sources:
   - id: lr-techseo
     resource: "https://lilyray.nyc/tech-seo-connect-2025-summary-takeaways/"
     title: "Lily Ray, Tech SEO Connect 2025 takeaways (2025-12-05; talk summaries, speakers named per item)"
+  - id: sp-zero-click-2026
+    resource: "https://sparktoro.com/blog/in-2026-less-than-one-third-of-google-searches-still-send-a-click/"
+    title: "SparkToro, In 2026, less than one third of Google searches still send a click (2026-06-09; Similarweb US web panel, Jan–Apr 2026)"
+  - id: mlseo-content-audit
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/content-audit/content-audit-template/"
+    title: "ML for SEO, Content audit template (2026-10-24; rules plus synthetic 24-URL site)"
 ---
 
 # Organic traffic drop
@@ -170,7 +176,7 @@ Core rollouts take about 12–19 days; several overlapped (March 2024 core and s
 - **Device.** 46.96 % of searches ended without a click (desktop-heavy); US mobile reached 66 %.[^ipr-zero-click]
 - **Query type and brand.** In 10,000 US keywords (Dec 2024), AI Overviews showed on 74 % of problem-solving queries, 69 % of explicit questions, 33 % non-brand vs 19.6 % brand.[^thrive-traffic]
 - **Ads.** For headphones, text ads went from 3 % to 16 % of clicks between January 2025 and January 2026; text ads were the largest measurable driver of the organic decline in that data.[^aleyda-ads] Ads also moved into formerly organic product grids.[^brodie-notes]
-- **Benchmark.** Modelled US organic visits fell 13.2 % from Aug 2024 to Aug 2026, unevenly; compare with comparable sites, not country averages.[^gm-organic]
+- **Benchmark.** Modelled US organic visits fell 13.2 % from Aug 2024 to Aug 2026, unevenly; compare with comparable sites, not country averages.[^gm-organic] SparkToro (which sells audience research) put US zero-click at 68.01 % of Google web searches in Jan–Apr 2026 (Similarweb panel, Google app excluded, so likely higher) and relays an Ahrefs tracker in which Google's share of site traffic fell 8 points (~22 % relative) from June 2025 to May 2026, on a sample skewed to professionally marketed sites. *Measured, vendor data; relayed.*[^sp-zero-click-2026] Rates by country: [new market](new-market.md#9-zero-click-differs-by-country).
 - **Read industry decline figures critically.** Similarweb/Graphite data put the decline in Google traffic to top global sites at "two and a half percent", with Google still "nearly 20%" of all web visits; Chartbeat's "33%" decline was an aggregate skewed by a few big sites and by a year-over-year comparison against the 2024 US election (Jan–Nov year to date about −15 %). *Relayed, publisher context.*[^gn-zero] **Do:** before quoting an industry figure as context for your drop, check whether a few large domains or a one-off event drive it.
 - **Branded CTR.** When branded clicks fall while branded impressions and position stay flat, check the favicon and site-name display first: in one case a developer had removed the favicon by accident, and the fix took minutes. *One case.*[^brief-distinct] Display checklist: [homepage and brand](../page-types/homepage-and-brand.md).
 - **Paid CTR falls too.** Across one agency's client portfolio (6 verticals, mostly B2B/lead-gen), nonbrand paid CTR fell from 16.39 % to 14.13 % while impressions rose 28 % (Dec 2025 → May 2026); organic sessions fell 32.3 %, Direct rose 53.6 % and overtook organic in Nov 2025, and organic conversion rate rose 133 %; informational queries had the lowest paid CTR in all 6 verticals. *Measured, agency portfolio, mostly B2B.*[^seer-zero-click-paid] **Do:** if paid CTR is falling on the same queries, the click loss is page-wide; track branded impressions plus Direct as a zero-click health check, and use geo holdouts to test changes.
@@ -184,6 +190,7 @@ Core rollouts take about 12–19 days; several overlapped (March 2024 core and s
 - **Exact terms.** A term in the title adds ~3.5 to its score on average; numbers score 0.[^qus] In one shop, 6 of 7 lost queries already had their phrase; the one without it dropped hardest.[^field-notes]
 - **Satisfaction.** NavBoost remembers short visits per query and page, by device; compare within page type.[^navboost] One category set that lost clicks bounced less than its type (12.5 % vs 20.8 %) — the loss wasn't dissatisfaction.[^field-notes]
 - **Indexing.** From 27 May 2025 Google dropped low-engagement pages from the index on ~40 reviewed sites; clicks mostly didn't fall.[^mh-deindex] "Crawled – currently not indexed" usually means quality; rule out blocked CSS/JS first.[^mh-cni]
+- **Decay or drop?** A practitioner audit rule calls a page decaying when its clicks fall 30 % or more between two consecutive 3-month periods (pages with at least 20 clicks before); a two-period comparison can't see slow declines or separate seasonality. *Practitioner.*[^mlseo-content-audit] (ML for SEO sells courses.) Pages that decay one by one point at content; whole directories at the section ([scaling content and templates](scaling-content-and-templates.md#11-content-audit-rules)).
 - **Bots blocked by your own security tools.** A first-party log dashboard found a security tool returning HTTP 406 to Googlebot and every AI bot; Search Console Crawl Stats didn't show it (unreliable for large domains). *Practitioner talk (Rachel Anderson), relayed.*[^lr-techseo] **Do:** report status codes per bot from server logs and alert on any 4xx served to verified bots ([AI crawlers and controls](../technical/ai-crawlers-and-controls.md), [diagnostic tests](../measure/diagnostic-tests.md)).
 - **Links: don't disavow by tool score.** Google has "no notion" of toxic links (Mueller); disavow only with "a considerable number of spammy, artificial, or low-quality links" that caused or will likely cause a manual action. Illyes found no case where negative SEO really caused a drop. In a poll 38 % of SEOs still disavow; anecdotes include one site −60 % after a tool-driven disavow and a test disavow whose dip reversed. *Google statements relayed by a vendor; poll and anecdotes.*[^ah-toxic] **Do:** check Search Console's Manual actions report; only if there is one, look for exact-match anchor patterns ([links and digital PR](../channels/links-and-digital-pr.md), [spam policies](../technical/technical-foundations.md#11-links-and-spam-policies)).
 
@@ -218,3 +225,5 @@ Related: [core update recovery](core-update-recovery.md), [Google ranking](../ho
 [^gg-may2026]: Glenn Gabe, 2026-06-10: May 2026 core update visible ~48 h in, mid-rollout tremors, Discover losses at the final tremor; cases.
 [^gg-dec2025]: Glenn Gabe, 2026-01-07: December 2025 core update, tremor on 20 December; 3,000+ tracked sites, qualitative.
 [^lr-techseo]: Lily Ray, Tech SEO Connect 2025 recap, 2025-12-05: Rachel Anderson's log dashboard (security tool returning 406 to Googlebot and AI bots; GSC Crawl Stats didn't show it); her summary of the talk.
+[^sp-zero-click-2026]: SparkToro, 2026-06-09: Similarweb US desktop+mobile web panel, Jan–Apr 2026, 68.01 % zero-click, Google app excluded; relays Ahrefs tracker (75,000+ opted-in domains): Google's share of traffic −8 points Jun 2025–May 2026.
+[^mlseo-content-audit]: ML for SEO, 2026-10-24: rule order, first match wins; decay = clicks −30 % or more between two consecutive 3-month Search Console periods (≥20 clicks earlier); striking distance = position 4–20 with ≥200 impressions; thin = <300 words with demand; prune if <10 clicks, <200 impressions, <20 sessions and no key events. Demonstrated on a synthetic 24-URL site.

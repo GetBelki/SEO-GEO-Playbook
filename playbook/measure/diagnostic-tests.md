@@ -1,10 +1,11 @@
 ---
 type: Playbook
 title: Diagnostic tests
-description: Repeatable checks, with a symptom-to-test table — exact-term gap, satisfaction per page type, loss by directory, fetching a page as an AI assistant does, feed attribute coverage, country controls, prompt tracking, AI-bot logs, raw vs rendered internal links, daily index status per URL, passage tests with open rerankers, order-swapped LLM comparisons, ChatGPT site: fan-outs, Gemini's indexed view of a page, brand-canon accuracy, AI-invented URLs, Google-selected canonicals, anomaly detection without LLMs and support-type queries.
+description: Repeatable checks, with a symptom-to-test table — exact-term gap, satisfaction per page type, loss by directory, fetching a page as an AI assistant does, feed attribute coverage, country controls, prompt tracking, AI-bot logs, raw vs rendered internal links, daily index status per URL, passage tests with open rerankers, order-swapped LLM comparisons, ChatGPT site: fan-outs, Gemini's indexed view of a page, brand-canon accuracy, AI-invented URLs, Google-selected canonicals, anomaly detection without LLMs, support-type queries, GA4 triage, UTM and consent checks, friction causes, form abandonment, A/B guardrails, test vs control, AI shopping agents and CrUX field vs lab.
 tags: [seo, geo, method, search-console, ga4, feeds, testing, internal-links, indexing, passages, canonicals, anomaly-detection]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: aleyda-prompts
@@ -154,6 +155,57 @@ sources:
   - id: am-events-not-showing
     resource: "https://www.analyticsmania.com/post/google-analytics-4-events-not-showing-up-in-reports/"
     title: "Analytics Mania, GA4 events not showing up (undated)"
+  - id: fs-digital-friction
+    resource: "https://www.fullstory.com/blog/cost-of-digital-friction"
+    title: "FullStory, 65% of teams have misdiagnosed digital friction (updated 2026-08-26; Centiment survey for FullStory, n=647 US pros)"
+  - id: fs-dx-analytics
+    resource: "https://www.fullstory.com/blog/digital-experience-analytics/"
+    title: "FullStory, What is digital experience analytics? (updated 2026-04-21; guide)"
+  - id: fs-cro
+    resource: "https://www.fullstory.com/blog/conversion-rate-optimization/"
+    title: "FullStory, What is conversion rate optimization? (updated 2026-08-14; guide)"
+  - id: fs-bounce-rate
+    resource: "https://www.fullstory.com/blog/what-is-a-good-bounce-rate/"
+    title: "FullStory, What is bounce rate? (updated 2026-09-28; guide, benchmarks unsourced)"
+  - id: fs-form-abandonment
+    resource: "https://www.fullstory.com/blog/form-abandonment/"
+    title: "FullStory, Form abandonment (updated 2026-08-19; guide, no data)"
+  - id: fs-ecom-cro
+    resource: "https://www.fullstory.com/blog/ecommerce-conversion-rate-optimization/"
+    title: "FullStory, How to master ecommerce CRO with behavioral data (updated 2026-06-15; guide citing third parties)"
+  - id: mlseo-internal-linking
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/internal-link-analysis/automate-internal-linking-ai/"
+    title: "MLforSEO, 10 ways to automate internal linking with AI (2026-10-22; one blog, synthetic DiD demo)"
+  - id: fs-before-block-agent
+    resource: "https://www.fullstory.com/blog/before-you-block-an-ai-agent/"
+    title: "FullStory, Before you block an AI agent, find out what it came to do (updated 2026-10-21; practitioner, no data)"
+  - id: fs-agentic-commerce
+    resource: "https://www.fullstory.com/blog/agentic-commerce-can-you-see-it/"
+    title: "FullStory, Agentic commerce is live on your site. Can you see it? (updated 2026-10-15; vendor dashboard observations, no counts)"
+  - id: fs-agent-observability
+    resource: "https://www.fullstory.com/blog/ai-agent-observability-undercover-shoppers"
+    title: "FullStory, Agent observability in the age of undercover AI shoppers (updated 2026-10-26; vendor observations, no sample)"
+  - id: dbb-psi
+    resource: "https://www.debugbear.com/blog/pagespeed-insights"
+    title: "DebugBear, How to use PageSpeed Insights (2025-03-09, updated 2026-10-08; explainer)"
+  - id: dbb-ttfb-field
+    resource: "https://www.debugbear.com/blog/ttfb-lab-vs-field"
+    title: "DebugBear, Why is Google field TTFB worse than Lighthouse lab data? (2025-01-10, updated 2025-10-19; explainer)"
+  - id: dbb-consent-cwv
+    resource: "https://www.debugbear.com/blog/cookie-consent-banner-performance"
+    title: "DebugBear, Cookie consent banners, page speed and Core Web Vitals (2025-03-20; one example test)"
+  - id: dbb-cmp-inp
+    resource: "https://www.debugbear.com/blog/consent-management-platforms-performance-comparison"
+    title: "DebugBear, A web performance analysis of consent management platforms (2026-02-06, updated 2026-03-17; lab, 11 CMPs x 5 sites)"
+  - id: dbb-ad-metrics
+    resource: "https://www.debugbear.com/blog/chrome-ad-performance-insights"
+    title: "DebugBear, New data from Google: how ads impact web performance (2026-09-16; relays CrUX release)"
+  - id: dbb-speed-stats
+    resource: "https://www.debugbear.com/blog/website-speed-statistics"
+    title: "DebugBear, Website load time statistics (2025-01-20, updated 2025-12-13; CrUX, period not stated)"
+  - id: dbb-inp-global
+    resource: "https://www.debugbear.com/blog/global-inp-statistics"
+    title: "DebugBear, Website INP scores in 2025 (2025-06-09, updated 2025-10-27; CrUX BigQuery, HTTP Archive)"
 ---
 
 # Diagnostic tests
@@ -193,6 +245,12 @@ Each test turns a claim from the principles pages ([Google ranking](../how-it-wo
 | Analytics shows no data, missing events or missing revenue | [27](#27-ga4-no-data-and-missing-revenue-triage), [29](#29-consent-signal-check-in-the-network-request) |
 | Campaign or AI-assistant visits land in Direct or Unassigned | [28](#28-utm-survival-check), [27](#27-ga4-no-data-and-missing-revenue-triage) |
 | Does the tag respect the visitor's consent choice? | [29](#29-consent-signal-check-in-the-network-request) |
+| A fix didn't move the metric; complaints point at friction | [30](#30-confirm-the-friction-cause-before-fixing), [31](#31-form-and-checkout-abandonment) |
+| Visitors start forms or checkout but don't finish | [31](#31-form-and-checkout-abandonment) |
+| Planning or reading a conversion A/B test | [32](#32-ab-test-with-guardrails), [34](#34-separate-ai-shopping-agents-from-humans) |
+| Did a site change (e.g. internal links) work? | [33](#33-test-vs-control-for-site-changes) |
+| Conversion rate or tests may include AI shopping agents | [34](#34-separate-ai-shopping-agents-from-humans) |
+| Lab speed scores and Core Web Vitals field data disagree | [35](#35-field-crux-vs-lab-measurement) |
 
 ## 1. Exact-term gap on lost queries
 **Claim tested:** terms missing from title, H1 or slug cost rankings.[^qus]
@@ -427,6 +485,62 @@ Aleyda Solis' 12-step checklist works as the outline: steps 1–2 measure presen
 
 **Reading:** in one test, denied gave `gcs=G100` and granted gave `gcs=G111`. This checks the signal only, not every Consent Mode setting. *Measured, one case.*[^am-optimized-tagging]
 
+## 30. Confirm the friction cause before fixing
+**Claim tested:** teams often fix the wrong cause of friction. In a survey of 647 US professionals, 65 % had shipped a fix and later found the root cause was different, and 52 % learned of friction mostly from complaints. *Measured; vendor data (FullStory, which sells behavioural analytics; Centiment survey).*[^fs-digital-friction]
+1. Start from the symptom (e.g. checkout abandonment) and list candidate causes (a slow payment page, a broken discount-code field). The example is illustrative. *Practitioner; vendor data.*[^fs-digital-friction]
+2. Look at rage and dead clicks on the step: they are framed as leading indicators that show before funnel data does, and slow loads "often appear first as rage clicks". *Practitioner; vendor data.*[^fs-dx-analytics][^fs-cro]
+3. Reproduce across browsers, devices and regions, not only your own browser; blank pages and errors often hit one combination. *Practitioner; vendor data.*[^fs-bounce-rate]
+4. Watch a handful of replays of affected sessions before writing the ticket.
+
+**Reading:** fix what the behaviour shows, not what the symptom suggests; definitions of the signals in [analytics](analytics.md#15-friction-signals-in-behavioural-data).
+
+## 31. Form and checkout abandonment
+**Claim tested:** a form nobody starts and a form people quit midway need different fixes.[^fs-form-abandonment]
+1. Baseline form starts vs completions.
+2. Check the page's bounce separately from the form's abandonment.
+3. Find the fields with the most hesitation and errors, and track completion time.
+4. Review what people do after leaving the form.
+
+**Reading:** high bounce means the page or offer; drop-off at one field means that field. *Practitioner; vendor data.*[^fs-form-abandonment]
+
+## 32. A/B test with guardrails
+**Claim tested:** conversion tests mislead without a baseline, a single variable and segmented results.[^fs-ecom-cro]
+1. Baseline conversion rate, add-to-cart, checkout completion, revenue per visitor and AOV; map funnel drop-offs; prioritise with ICE; write an evidence-based hypothesis.
+2. Change one variable; avoid peaks such as Black Friday; run to at least 95 % significance (2–4 weeks is typical).
+3. Analyse losing variants too, and document every test so it isn't repeated. *Practitioner; vendor data.*[^fs-ecom-cro]
+4. Segment results by user type before declaring a winner, track micro-conversions (newsletter, wishlist) next to the main conversion rate, and keep multivariate tests for high traffic. *Practitioner; vendor data.*[^fs-cro]
+
+**Reading:** exclude AI shopping agents first ([test 34](#34-separate-ai-shopping-agents-from-humans)).
+
+## 33. Test vs control for site changes
+**Claim tested:** a change's effect can be separated from seasonality with a control group.[^mlseo-internal-linking]
+1. Split comparable pages into test and control groups before the change (e.g. internal links added to half).
+2. Wait about a week after the change, then compare the change in clicks in both groups (difference-in-differences).
+3. Report the difference with its uncertainty, not the test group's change alone.
+
+**Reading:** on synthetic data with a planted 15 % uplift, the script reported +11.8 points (test +12.1 %, control +0.3 %), so it under-recovered the effect; treat small differences with caution. *Practitioner, synthetic validation (MLforSEO, which sells courses).*[^mlseo-internal-linking] More methods: [ML methods for SEO](ml-methods-for-seo.md#11-measuring-a-change).
+
+## 34. Separate AI shopping agents from humans
+**Claim tested:** AI shopping agents skew conversion rates and experiments unless segmented out.[^fs-before-block-agent]
+1. Flag sessions with pointer jumps from click to click, high inactive time, direct entry on deep pages and no highlighting, copying or pasting; a copy/paste event marks a human taking over. *Practitioner; vendor data.*[^fs-agentic-commerce]
+2. Compare landing pages: on one travel site results pages drew more agent visits than the homepage.[^fs-agentic-commerce]
+3. Report conversion rate and test results for humans and agents apart; re-check the rules regularly, because agents change behaviour once detected. *Measured; vendor data, no magnitude.*[^fs-agent-observability]
+4. Before blocking an agent, look at what it came to do and fix the controls it fails on. *Practitioner; vendor data.*[^fs-before-block-agent]
+
+**Reading:** with tag-based analytics you may need to rebuild this from raw data; autocapture tools can apply new rules retroactively. Bot policy: [AI crawlers and controls](../technical/ai-crawlers-and-controls.md).
+
+## 35. Field (CrUX) vs lab measurement
+**Claim tested:** lab scores and Google's field data measure different things, and only field data feeds the Core Web Vitals assessment.[^dbb-psi] DebugBear sells performance monitoring.
+1. **Read the field data window.** PageSpeed Insights' CrUX data covers the last 28 days at the 75th percentile, so a page passes even if a quarter of visits are slower, and a fix takes up to 28 days to show fully. *Practitioner; vendor data.*[^dbb-psi]
+2. **Check the level.** URL-level CrUX appears only with enough traffic; otherwise PSI falls back to origin data or shows none. Only Chrome users with sync and usage statistics on contribute, and iOS never counts. *Practitioner; vendor data.*[^dbb-psi]
+3. **Don't expect lab INP.** Lighthouse can't measure INP without interactions (TBT is the lab proxy), and mobile Lighthouse simulates 150 ms RTT, so a request takes at least 600 ms even with an instant server. *Practitioner; vendor data.*[^dbb-psi][^dbb-ttfb-field]
+4. **Explain field TTFB above lab TTFB:** redirects (ad click URLs), CDN edge-cache misses, short app-cache lifetimes on low-traffic pages, logged-in or personalised pages, `utm_campaign` or `gclid` creating unique cache keys, and long-tail pages dominating origin data. *Practitioner; vendor data.*[^dbb-ttfb-field]
+5. **Consent banners in lab tests:** set a consent cookie or disable the banner to mimic returning visitors, profile the Accept click in DevTools, and use real-user INP breakdowns (LoAF) to find the script behind a delay. *Practitioner; vendor data.*[^dbb-consent-cwv][^dbb-cmp-inp]
+6. **Ad sites:** since ~2026-09-15 CrUX also reports Ad Count, Ad Density, Ad CPU Weight and Ad Network Weight (p75, 28 days, visits with ads only; needs third-party ads, ads.txt and enough traffic). *Official, relayed; vendor data.*[^dbb-ad-metrics]
+7. **Real-user data from other browsers:** filter to Chrome before comparing with CrUX ([analytics](analytics.md#20-real-user-web-vitals-beyond-chrome)).
+
+**Reading:** reference values — CrUX US p75 (2025) LCP 1.9 s mobile / 1.7 s desktop, TTFB 0.8 s / 0.6 s (period not stated);[^dbb-speed-stats] origins with good INP rose from 57 % (March 2022) to 76 % (2025), with typical mobile p75 INP around 100 ms. *Measured; vendor data.*[^dbb-inp-global] Fixes: [performance and caching](../technical/performance-and-caching.md).
+
 Related: [Search Console](search-console.md), [analytics](analytics.md), [AI-visibility tracking](ai-visibility-tracking.md), [rank tracking](rank-tracking.md), [sources and confidence](../reference/sources-and-confidence.md), [traffic drop](../situations/traffic-drop.md), [core-update recovery](../situations/core-update-recovery.md).
 
 [^qus]: Resoneo, QUS, 2025-07-22: per-term scoring, title weight.
@@ -478,3 +592,20 @@ Related: [Search Console](search-console.md), [analytics](analytics.md), [AI-vis
 [^am-unassigned]: Analytics Mania, updated 2026-09-18, plus reader comments: processing delay 24–48 h; reader reports of missing session_start (3–5 %, 10 sites, 2023), holiday spike (2024), config tag delayed until consent (2025, disputed by the author).
 [^am-no-revenue]: Analytics Mania, undated, read 2026-10-28: Send Ecommerce Data option, Modify Event rules, revenue-restricted permissions, consent test in GTM Preview.
 [^am-events-not-showing]: Analytics Mania, undated, read 2026-10-28: DevTools and CSP checks for missing events.
+[^fs-digital-friction]: FullStory, updated 2026-08-26: Centiment survey for FullStory, n=647 US product, engineering, data, CX and IT professionals; 65 % shipped a fix for the wrong cause, 52 % learned of friction from complaints; per-question bases not reported; the checkout example is illustrative.
+[^fs-dx-analytics]: FullStory, updated 2026-04-21: rage and dead clicks as leading indicators; guide.
+[^fs-cro]: FullStory, updated 2026-08-14: slow loads "often appear first as rage clicks"; segment results by user type, micro-conversions, multivariate needs more traffic; guide.
+[^fs-bounce-rate]: FullStory, updated 2026-09-28: blank pages and errors often affect only one browser, device or region; guide.
+[^fs-form-abandonment]: FullStory, updated 2026-08-19: form-abandonment method (starts vs completions, bounce apart, field hesitation, completion time, post-exit actions); guide, no data.
+[^fs-ecom-cro]: FullStory, updated 2026-06-15: CRO test procedure (baseline, funnel map, ICE, one variable, ≥95 % significance, 2–4 weeks, document); guide.
+[^fs-before-block-agent]: FullStory, updated 2026-10-21: segment agents, inspect what they do before blocking; practitioner, no data.
+[^fs-agentic-commerce]: FullStory, updated 2026-10-15: agent tells; results pages drew more agent visits than the homepage on one travel site; vendor dashboard observations, no counts.
+[^fs-agent-observability]: FullStory, updated 2026-10-26: agent traffic dropped sharply around 2026-10-16 after being exposed, then changed behaviour; vendor observations, no magnitude.
+[^mlseo-internal-linking]: MLforSEO (Lazarina Stoy), 2026-10-22: difference-in-differences on synthetic data with a planted 15 % uplift; reported +11.8 points (test +12.1 %, control +0.3 %); wait ~1 week.
+[^dbb-psi]: DebugBear, 2025-03-09, updated 2026-10-08: CrUX 28 days, p75, URL vs origin fallback, who contributes; Lighthouse can't measure INP; 150 ms RTT.
+[^dbb-ttfb-field]: DebugBear, 2025-01-10, updated 2025-10-19: causes of field TTFB above lab TTFB; explainer.
+[^dbb-consent-cwv]: DebugBear, 2025-03-20: consent cookie for synthetic tests; one example test.
+[^dbb-cmp-inp]: DebugBear, 2026-02-06, updated 2026-03-17: lab test, 11 CMPs × 5 sites, desktop, 4× CPU throttle; profile the Accept click; RUM INP breakdowns.
+[^dbb-ad-metrics]: DebugBear, 2026-09-16: relays Google's CrUX ad metrics (~2026-09-15), p75 over 28 days, visits with ads only.
+[^dbb-speed-stats]: DebugBear, 2025-01-20, updated 2025-12-13: CrUX US and UK p75 values; period not stated.
+[^dbb-inp-global]: DebugBear, 2025-06-09, updated 2025-10-27: CrUX BigQuery and HTTP Archive; good INP 57 % (Mar 2022) → 76 % (2025); device quality as main driver is the author's interpretation.

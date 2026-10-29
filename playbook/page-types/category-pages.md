@@ -1,10 +1,11 @@
 ---
 type: Playbook
 title: Category pages
-description: What to do on a category or listing page — factual opening sentence, the searcher's exact terms in title and H1, one idea per passage, filter pages only with demand, crawlable pagination, internal links and section quality, the buyer's main uncertainty, consolidation, satisfaction per page type, listings near zero stock, body copy and a real meta description, customer vocabulary, URLs that mirror the taxonomy, links to complementary categories, footer category links and cross-sell blocks in `<aside>`, and feed-generated category templates audited before spam updates.
-tags: [seo, geo, category-pages, ecommerce, faceted-navigation, pagination, internal-links, consolidation, secondary-keywords, soft-404, meta-description, taxonomy, gemini, spam-update, programmatic, semantic-html]
+description: What to do on a category or listing page — factual opening sentence, the searcher's exact terms in title and H1, one idea per passage, filter pages only with demand, crawlable pagination, internal links and section quality, the buyer's main uncertainty, consolidation, satisfaction per page type, listings near zero stock, body copy and a real meta description, customer vocabulary, URLs that mirror the taxonomy, links to complementary categories, footer category links and cross-sell blocks in `<aside>`, feed-generated category templates audited before spam updates, and listing speed.
+tags: [seo, geo, category-pages, ecommerce, faceted-navigation, pagination, internal-links, consolidation, secondary-keywords, soft-404, meta-description, taxonomy, gemini, spam-update, programmatic, semantic-html, performance, lcp]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: chatgpt-retrieval
@@ -103,6 +104,36 @@ sources:
   - id: am-content-groups
     resource: "https://www.analyticsmania.com/post/content-groups-in-google-analytics-4/"
     title: "Analytics Mania, Content Groups in GA4 (updated 2026-10-12)"
+  - id: dbb-ecom-seo
+    resource: "https://www.debugbear.com/blog/ecommerce-website-seo"
+    title: "DebugBear, The complete guide to ecommerce SEO in 2026 (2026-02-04, upd. 2026-04-24; practitioner guide)"
+  - id: fs-agentic-commerce
+    resource: "https://www.fullstory.com/blog/agentic-commerce-can-you-see-it/"
+    title: "FullStory, Agentic commerce is live on your site. Can you see it? (updated 2026-10-15; vendor observations, no counts)"
+  - id: srp-commodity-content
+    resource: "https://serprecon.com/blog/what-is-commodity-content"
+    title: "SERPrecon, What is commodity content? (2026-10-15; Google guide and statements relayed, vendor scoring method)"
+  - id: wd-resource-hints
+    resource: "https://web.dev/learn/performance/resource-hints"
+    title: "web.dev, Assist the browser with resource hints (2023-11-01; guidance)"
+  - id: dbb-shopify
+    resource: "https://www.debugbear.com/blog/shopify-speed-optimization"
+    title: "DebugBear, Shopify speed optimization: fixing the real bottlenecks (2026-04-20; practitioner examples)"
+  - id: wd-lazy
+    resource: "https://web.dev/learn/performance/lazy-load-images-and-iframe-elements"
+    title: "web.dev, Lazy load images and iframe elements (2023-11-01; guidance)"
+  - id: dbb-lazy
+    resource: "https://www.debugbear.com/blog/lazy-loading-performance"
+    title: "DebugBear, How to use lazy loading without hurting web performance (2026-04-10; guidance)"
+  - id: wd-images
+    resource: "https://web.dev/learn/performance/image-performance"
+    title: "web.dev, Image performance (2023-11-01; guidance)"
+  - id: wd-resource-loading
+    resource: "https://web.dev/learn/performance/optimize-resource-loading"
+    title: "web.dev, Optimize resource loading (2023-11-01; guidance)"
+  - id: wd-prefetch
+    resource: "https://web.dev/learn/performance/prefetching-prerendering-precaching"
+    title: "web.dev, Prefetching, prerendering, and service worker precaching (2023-11-01; guidance)"
 ---
 
 # Category pages
@@ -113,7 +144,7 @@ For anyone writing, templating or auditing a category, subcategory or filtered l
 - **Open with one factual sentence** after the H1 — what the range is, key attributes, sizes, price from, delivery. *Measured* for assistants; Google says no special writing is needed ([§1](#1-the-opening-and-the-words)).
 - **Use the searcher's exact term in title and H1**, including the compound noun people actually type, and the main facet variants in H2s; use customers' own word variants in copy and filter labels; test before renaming slugs. *From code, observed output, few US examples; Practitioner; Patent* ([§1](#1-the-opening-and-the-words), [§8](#8-body-copy-meta-description-and-customer-words)).
 - **Keep one idea per passage** under a descriptive heading that names the subject; don't tune text to similarity scores. *Practitioner, one test* ([§1](#1-the-opening-and-the-words)).
-- **Block facet crawling by default; index only filter combinations with proven search demand**, built to Google's URL rules. *Official* + *Practitioner* ([§2](#2-filters-and-pagination)).
+- **Block facet crawling by default; index only filter combinations with proven search demand**, built to Google's URL rules; keep sort parameters out of the index. *Official* + *Practitioner* ([§2](#2-filters-and-pagination)).
 - **Paginate with real `<a href>` links, one URL per page, each self-canonical.** *Official* ([§2](#2-filters-and-pagination)).
 - **Link to every page you want found** — subcategory links rendered in the HTML, not added by JavaScript, plus complementary and accessory categories; split-test footer category links rather than packing the footer — and keep the section free of thin URL sets. *Measured* / *From the leak* / *Practitioner, one case*; complementary links *Inference from research*; footer *Measured, split test, relayed* ([§3](#3-internal-links-and-section-quality), [§9](#9-structure-demand-taxonomy-and-adjacent-needs)).
 - **Name the category's main buyer uncertainty and link to the guide that answers it.** *Measured, 25 US sites, search extracts* ([§4](#4-the-buyers-main-uncertainty)).
@@ -141,6 +172,8 @@ For anyone writing, templating or auditing a category, subcategory or filtered l
 - [ ] Listing and copy sit in `<main>`; cross-sell and recommendation blocks sit in `<aside>`.
 - [ ] Any change to footer category links runs as a split test.
 - [ ] Category pages generated from a feed have images, unique copy and enough products each; audited before the next spam-update window.
+- [ ] Sort parameters aren't indexable.
+- [ ] First 1–4 product images and the banner use `fetchpriority="high"` and aren't lazy-loaded; images below the fold are; the grid is server-rendered ([§11](#11-listing-speed)).
 
 ## 1. The opening and the words
 - ChatGPT sees title, URL and **~202 characters from the H1**, and ignores meta descriptions. *Measured.*[^chatgpt-retrieval] **Example.** A category opening with "Anyone looking into desks will sooner or later come across…" gave an assistant nothing to cite; no dimensions, material or price appeared in its static HTML.[^field-notes]
@@ -154,6 +187,7 @@ For anyone writing, templating or auditing a category, subcategory or filtered l
 - Google's default: "Use robots.txt to disallow crawling of faceted navigation URLs"; facets that should rank use `&`, a fixed order and **404** for empty or nonsensical combinations.[^g-facets] Rules: [faceted navigation](../technical/technical-foundations.md#1-faceted-navigation).
 - Filter pages can be a long-tail source,[^not-enough] but only after technical issues are fixed.[^organic-analysis] *Practitioner.*
 - "Google's crawlers don't 'click' buttons": load-more and infinite scroll need crawlable paginated links; page 2+ is self-canonical, not canonicalised to page 1.[^g-pagination] Rules: [pagination](../technical/technical-foundations.md#5-pagination-and-infinite-scroll).
+- **Only restrictive facets earn URLs.** Facets that narrow the product set and match demand deserve indexable URLs; sort parameters (`?sortBy=priceAsc`) rarely rank. Keep pagination crawlable so deep products are found; Google dropped `rel=next/prev` in 2019, Bing still uses it. *Practitioner.*[^dbb-ecom-seo] (DebugBear sells performance monitoring.)
 - **Watch:** if Chrome's Decisions API ships (Canary only in 2026), every filter value will need a one-sentence description.[^decisions-api]
 
 ## 3. Internal links and section quality
@@ -161,6 +195,7 @@ For anyone writing, templating or auditing a category, subcategory or filtered l
 - **Render subcategory links in the HTML.** Category pages need a visible forward-navigation block to their subcategories. In one jewelry shop, JavaScript filtering hid those links; the fix went live by Dec 2021 and gains followed by Mar 2022 (no figures published). *Practitioner, one case.*[^ah-navigation] Put only commercially important pages in the global navigation, generate related-category and related-product links from the taxonomy and "bought together" data, and give each new page 3+ contextual links from exact mentions on existing pages. *Practitioner.*[^ah-onpage][^ah-navigation] Methods and the raw-vs-rendered link check: [internal linking](../technical/internal-linking.md).
 - Quality is scored per section, and a new page inherits its section's average. *From the leak.*[^leak-6] Hundreds of thousands of filter or variant URLs are a quality problem for the whole section; thin category and list pages were among those dropped from the index from 27 May 2025.[^mh-deindex] Background: [Google ranking](../how-it-works/google-ranking.md).
 - **Footer category links: test, don't pack.** In a SearchPilot split test relayed by a practitioner, growing a footer from 30 to 100+ category links gave about +10 % organic desktop traffic (95 % confidence) and +5 % mobile (90 %); SearchPilot itself warns against packing footers. *Measured, split test, relayed.*[^ls-links] **Do:** change footer category links only as a split test. Methods: [internal linking](../technical/internal-linking.md).
+- **Agents land deep.** AI shopping agents enter on deep pages rather than the homepage, so check that a category works as an entry page: navigation, context and prerequisites on the page itself. *Practitioner; vendor data.*[^fs-agentic-commerce] (FullStory sells behavioural analytics.)
 - **Cross-sell in `<aside>`.** Wrap the listing and copy in `<main>`, and put cross-sell and recommendation blocks in `<aside>`, so machines can tell the page's own content from the extras. *Practitioner.*[^gn-html] Product-page structure: [product pages](product-pages.md#8-markup-structure-machines-can-read).
 
 ## 4. The buyer's main uncertainty
@@ -189,6 +224,7 @@ For anyone writing, templating or auditing a category, subcategory or filtered l
 
 > **Conflict:** Gemini sometimes reads only the meta description; ChatGPT ignores it and Google often rewrites it — [details](../reference/conflicts.md#do-meta-descriptions-still-matter)
 
+- **Say something only you can say.** Cover the shared basics briefly, then add first-hand material and a clear position, e.g. which range you recommend for what. *Practitioner.*[^srp-commodity-content] (SERPrecon sells a content-scoring tool.)
 - **Customer vocabulary.** A Google patent prunes synonym substitutions when the substituted term rarely appears in the returned pages or the rewritten results get no clicks. *Patent.*[^sbs-rewrite] **Do:** use the variants customers type (from Search Console and site search) in category copy and filter labels ([keyword research](../channels/keyword-research.md)).
 
 ## 9. Structure: demand, taxonomy and adjacent needs
@@ -199,6 +235,15 @@ For anyone writing, templating or auditing a category, subcategory or filtered l
 ## 10. Feed-generated templates and spam updates
 - The August 2026 spam update targeted content, not links. A thin affiliate site whose category and product pages were built programmatically from a marketplace feed — some without images, footer text 97 %+ likely AI-written — lost 14K+ queries; a 1.5M-URL product-information site, ~85 % programmatic, took a site-wide, core-like hit. Recovery takes months. *Practitioner, 4 cases.*[^gg-spam]
 - **Do:** before a spam-update window, audit category templates generated from a feed: does each page have images, copy of its own and enough products to exist for users? Merge or noindex those that don't ([scaling content and templates](../situations/scaling-content-and-templates.md), [core update recovery](../situations/core-update-recovery.md), [update dates](../reference/google-updates-timeline.md)).
+
+## 11. Listing speed
+web.dev is the Google Chrome team's official guidance; DebugBear sells performance monitoring.
+- **First row first.** Images start at low priority until layout; set `fetchpriority="high"` on the LCP image and lower priority for thumbnails. *Official.*[^wd-resource-hints] On collection pages that means the first 1–4 product images high and the rest low; in a banner carousel, slide 1 only. *Practitioner.*[^dbb-shopify]
+- **Lazy-load below the fold only.** `loading="lazy"` only for images outside the initial viewport, never for the first row or the banner. *Official.*[^wd-lazy] *Practitioner.*[^dbb-lazy] Give grid images `srcset` with `sizes`, or the browser can't pick the small file. *Official.*[^wd-images]
+- **Render the grid on the server.** Don't render critical content or the LCP element with client-side JavaScript: it creates request chains and long tasks. *Official.*[^wd-resource-loading] JavaScript grids also drift into Soft 404 ([§7](#7-listings-near-zero-stock)).
+- **Banner weight.** Hero banners of 300–400 KB were common on slow Shopify stores; target under 180 KB. *Practitioner; one case.*[^dbb-shopify]
+- **Prerender only the likely next click.** Speculation Rules can prefetch or prerender product pages (Chromium only); prerender runs the page's JavaScript, so use it only when the next navigation is fairly certain; viewport-based prefetching matches intent better than prefetching every link. *Official.*[^wd-prefetch]
+- **Do:** check the category template's LCP element and its priority after every theme or app change ([performance and caching](../technical/performance-and-caching.md), [product pages](product-pages.md#11-images-video-and-speed)).
 
 Related: [product pages](product-pages.md), [homepage and brand](homepage-and-brand.md), [traffic drop](../situations/traffic-drop.md), [core update recovery](../situations/core-update-recovery.md), [keyword research](../channels/keyword-research.md), [internal linking](../technical/internal-linking.md).
 
@@ -234,3 +279,13 @@ Related: [product pages](product-pages.md), [homepage and brand](homepage-and-br
 [^ls-links]: Lazarina Stoy, 2026-10-25: relays a SearchPilot split test (footer 30 → 100+ category links: ~+10 % organic desktop at 95 % confidence, +5 % mobile at 90 %) and SearchPilot's warning against packing footers; primary test not read.
 [^gn-html]: Barry Adams, 2025-08-06: one `<h1>`, `<article>`/`<main>` around main content, `<aside>` for sidebars and recommendations; practitioner advice from a publisher context.
 [^am-content-groups]: Analytics Mania, updated 2026-10-12: content_group via dataLayer push or GTM RegEx table; must run before page_view; not retroactive; unmatched pages "(not set)".
+[^dbb-ecom-seo]: DebugBear, 2026-02-04 (upd. 2026-04-24): practitioner guide; restrictive facets only, sort parameters rarely rank, crawlable pagination (rel next/prev dropped by Google 2019, used by Bing); out-of-stock handling; Black Friday interest rises from summer.
+[^fs-agentic-commerce]: FullStory, updated 2026-10-15: vendor dashboard observations, no counts; agents enter on deep pages, not the homepage.
+[^srp-commodity-content]: SERPrecon, 2026-10-15: relays Google's generative-AI guide ("non-commodity content"), Danny Sullivan via Search Engine Journal and John Mueller (2019); Google hasn't said commodity content is penalised or that a commodity score exists; de-commoditising procedure. Vendor sells a commodity-scoring tool; no validation data.
+[^wd-resource-hints]: web.dev, 2023-11-01: images start at low priority and are raised after layout; fetchpriority="high" on the LCP image, lower for thumbnails; preload responsive LCP images with imagesrcset.
+[^dbb-shopify]: DebugBear, 2026-04-20: Shopify examples; hero images 300–400 KB (sometimes >900 KB), target <180 KB; hero video first frame >9 s, poster → LCP 2.7 s; fetchpriority on first 1–4 collection images; cart-drawer app ~540 KB vs ~6 KB native. One case per example; vendor sells performance monitoring.
+[^wd-lazy]: web.dev, 2023-11-01: loading="lazy" only outside the initial viewport, never on LCP candidates, doesn't change priority; lazy iframes save >500 KiB for a YouTube embed; facades for third-party embeds.
+[^dbb-lazy]: DebugBear, 2026-04-10: lazy loading hurts LCP above the fold, causes CLS without reserved dimensions; never lazy-load above-the-fold images. Guidance.
+[^wd-images]: web.dev, 2023-11-01: srcset width descriptors need sizes; format order AVIF, WebP, JPEG (AVIF >50 % smaller than JPEG in some tests); Vary header for Accept negotiation; width and height against CLS.
+[^wd-resource-loading]: web.dev, 2023-11-01: the preload scanner can't see CSS background images, injected scripts, dynamic import(), client-rendered markup or CSS @import; don't render the LCP element client-side.
+[^wd-prefetch]: web.dev, 2023-11-01: Speculation Rules prefetch and prerender (Chromium only); prerender runs the page's JS, so only for likely navigations; viewport-based prefetching (Quicklink).

@@ -5,7 +5,7 @@ description: What links still do and what Domain Rating doesn't, ecommerce link 
 tags: [seo, geo, links, digital-pr, link-building, disavow, link-reclamation, brand-mentions, implied-links, statistics-pages, anchor-text, ecommerce]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: ah-dr

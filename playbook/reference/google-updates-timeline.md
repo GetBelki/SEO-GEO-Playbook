@@ -5,7 +5,7 @@ description: Every core, spam, helpful-content and reviews update and ranking in
 tags: [seo, google, core-update, spam-update, timeline, measurement]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T02:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-01-31T00:00:00Z
 sources:
   - id: status

@@ -4,7 +4,8 @@ title: Glossary
 description: Short definitions of the terms, systems and acronyms used across the playbook — Google systems from the leak and trial, AI-search surfaces, crawlers, feeds and measurement terms — each linked to the page that explains it.
 tags: [glossary, reference, terms]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: playbook
@@ -68,9 +69,24 @@ One-line definitions; follow the link for evidence and sources.[^playbook] Terms
 - **Speculation rules** — browser instructions to prefetch or prerender pages; can be abused by third parties against uncached URLs. → [performance and caching](../technical/performance-and-caching.md)
 - **Brand canon** — the list of checkable facts about a brand (locations, services, delivery, returns) used to score AI answers as accurate, wrong or unanswered. → [homepage and brand](../page-types/homepage-and-brand.md)
 
+## Speed, behaviour and ML methods
+- **CrUX, field vs lab** — Chrome's real-user data (75th percentile over 28 days) is what Google uses; Lighthouse lab scores are for debugging and aren't a ranking signal. → [performance and caching](../technical/performance-and-caching.md)
+- **LCP, INP, CLS, TTFB** — time to the largest content, response to input, layout shift, and time to the first byte. → [performance and caching](../technical/performance-and-caching.md)
+- **fetchpriority, preload scanner** — a hint that raises a resource's loading priority; the browser's early scan of HTML, which only sees resources written in the markup. → [performance and caching](../technical/performance-and-caching.md)
+- **No-Vary-Search** — a header telling caches which URL parameters (such as utm) don't change the page. → [performance and caching](../technical/performance-and-caching.md)
+- **Facade** — a lightweight placeholder that loads an embed, such as a video player, only on click. → [performance and caching](../technical/performance-and-caching.md)
+- **Rage, dead and error clicks** — repeated clicks in one spot, clicks that do nothing, clicks followed by an error: signs of friction. → [analytics](../measure/analytics.md)
+- **Dark AI traffic** — visits from AI assistants that arrive without a referrer and land in Direct. → [conflicts](conflicts.md#is-ai-traffic-hiding-in-direct)
+- **Commodity content, information gain** — content that repeats what already ranks, versus content that adds something new. → [Google ranking](../how-it-works/google-ranking.md)
+- **Content decay, striking distance** — clicks down 30 % or more between two three-month periods; pages ranking 4–20 that a small push could lift. → [Search Console](../measure/search-console.md)
+- **Adjusted Rand index (ARI)** — a measure of how far two clusterings agree (1 = identical, around 0 = chance). → [ML methods for SEO](../measure/ml-methods-for-seo.md)
+- **Entity salience** — how central an entity is to a text, as scored by NLP APIs. → [ML methods for SEO](../measure/ml-methods-for-seo.md)
+- **Difference-in-differences** — comparing a changed group with an unchanged one before and after, to separate the change's effect from the trend. → [diagnostic tests](../measure/diagnostic-tests.md)
+- **Fuzzy matching** — pairing old and new URLs by text similarity when building redirect maps. → [migration](../situations/migration.md)
+
 ## Measurement
 - **num=100** — a results parameter Google stopped supporting in September 2025; Search Console impressions fell and average position improved without real change. → [Search Console](../measure/search-console.md)
-- **Zero-click** — a search that ends without a click to any site; rates differ widely by method. → [conflicts](conflicts.md#how-high-is-zero-click)
+- **Zero-click** — a search that ends without a click to any site; about 68 % of US Google searches in early 2026, with rates differing by method and country. → [conflicts](conflicts.md#how-high-is-zero-click)
 - **Poisoned SERP** — a rank-tracker capture that doesn't match what users see. → [rank tracking](../measure/rank-tracking.md)
 - **Prompt tracking** — running a fixed set of prompts through AI engines repeatedly to measure citations and mentions. → [diagnostic tests](../measure/diagnostic-tests.md#9-prompt-tracking-per-engine)
 - **Exposure / behaviour / outcomes** — a monthly read of AI visibility, branded search and Direct, and orders together. → [diagnostic tests](../measure/diagnostic-tests.md#11-monthly-read-exposure-behaviour-outcomes)

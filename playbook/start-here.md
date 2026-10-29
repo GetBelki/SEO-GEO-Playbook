@@ -1,10 +1,11 @@
 ---
 type: Guide
 title: Start here
-description: The playbook on one page — 45 rules for SEO, AI-search visibility and measurement, each with its confidence level and a link to the evidence, plus where to go next by task.
+description: The playbook on one page — 49 rules for SEO, AI-search visibility and measurement, each with its confidence level and a link to the evidence, plus where to go next by task.
 tags: [start-here, rules, seo, geo, measurement, ecommerce]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: playbook
@@ -24,7 +25,7 @@ The playbook on one page, for an ecommerce site in any market. Each rule ends wi
 | Understand how it works | [Google ranking](how-it-works/google-ranking.md) · [Google AI features](how-it-works/google-ai-features.md) · [AI assistants](how-it-works/ai-assistants.md) · [shopping surfaces](how-it-works/shopping-surfaces.md) |
 | Work a channel | [Google Discover](channels/google-discover.md) · [keyword research](channels/keyword-research.md) · [feeds and Merchant Center](channels/feeds-and-merchant-center.md) · [third-party presence](channels/third-party-presence.md) · [links and digital PR](channels/links-and-digital-pr.md) · [local](channels/local.md) |
 | Check the technical basics | [technical foundations](technical/technical-foundations.md) · [internal linking](technical/internal-linking.md) · [performance and caching](technical/performance-and-caching.md) · [titles and snippets](technical/titles-and-snippets.md) · [AI crawlers and controls](technical/ai-crawlers-and-controls.md) |
-| Measure without fooling yourself | [Search Console](measure/search-console.md) · [analytics](measure/analytics.md) · [AI visibility tracking](measure/ai-visibility-tracking.md) · [rank tracking](measure/rank-tracking.md) · [diagnostic tests](measure/diagnostic-tests.md) |
+| Measure without fooling yourself | [Search Console](measure/search-console.md) · [analytics](measure/analytics.md) · [AI visibility tracking](measure/ai-visibility-tracking.md) · [rank tracking](measure/rank-tracking.md) · [diagnostic tests](measure/diagnostic-tests.md) · [ML methods for SEO](measure/ml-methods-for-seo.md) |
 
 ## Pages and content
 1. **Open every product, category and guide page with one self-contained factual sentence** after the H1: what it is, key attributes, sizes, price from, availability. *Measured for ChatGPT and Gemini; good practice for Google.* → [AI assistants](how-it-works/ai-assistants.md)
@@ -77,6 +78,10 @@ The playbook on one page, for an ecommerce site in any market. Each rule ends wi
 43. **Generate sitemaps, hreflang, canonicals and feed availability from one record**, so a change reaches every output at once. *Practitioner.* → [migration](situations/migration.md)
 44. **When branded CTR drops but impressions and position hold, check the favicon and site name in the results first.** *One case.* → [traffic drop](situations/traffic-drop.md)
 45. **Keep UTMs, click IDs and `_gl` intact from ad or AI link to purchase, and give AI sources their own channel group.** A link with `utm_source` but no `utm_medium` lands in Unassigned, and GA4's own AI Assistant channel is still partial. *Practitioner.* → [analytics](measure/analytics.md#12-ga4-attribution-leaks-utms-consent-and-cross-domain)
+46. **Put the main product image in the server HTML with `fetchpriority="high"` and never lazy-load it; keep tracking parameters out of the cache key.** *Official; practitioner, vendor data.* → [performance and caching](technical/performance-and-caching.md#10-resource-hints-and-preload-pitfalls)
+47. **Decide which keywords share a URL by SERP overlap, not embedding similarity.** *Measured, small sample.* → [conflict](reference/conflicts.md#embedding-clusters-or-serp-clusters)
+48. **Read AI visibility as a brand channel and publish the margin of error:** one pass of ~500 answers is about ±5 points, and the order of names is noise. *Measured, vendor data.* → [AI visibility tracking](measure/ai-visibility-tracking.md#16-runs-phrasings-and-margin-of-error)
+49. **Build redirect maps by fuzzy matching, check partial matches by hand, and send no-match URLs to 404 or 410, not the homepage.** *Practitioner.* → [migration](situations/migration.md#9-fuzzy-matched-redirect-maps)
 
 ## Crawlers
 21. **Decide AI crawler access per role:** allow search bots and user fetchers; training bots are a business decision. Check robots.txt daily against a written policy. *Official.* → [AI crawlers and controls](technical/ai-crawlers-and-controls.md)

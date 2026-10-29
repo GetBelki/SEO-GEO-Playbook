@@ -1,11 +1,11 @@
 ---
 type: Checklist
 title: Rank tracking
-description: Why rank trackers drift from Search Console — personalisation, generated and "poisoned" result pages, shallower depth after num=100, AI Overviews that change every ~2 days, AIO citations drifting away from the organic top 10 — and how to use them as a trend, not a truth.
+description: Why rank trackers drift from Search Console — personalisation, generated and "poisoned" result pages, shallower depth after num=100, AI Overviews that change every ~2 days, AIO citations drifting away from the organic top 10 and cited vs ranking domains across keywords — and how to use them as a trend, not a truth.
 tags: [measurement, rank-tracking, search-console, ai-overviews, ai-mode, caveats]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: intent-engine
@@ -23,6 +23,15 @@ sources:
   - id: ls-serp
     resource: "https://lazarinastoy.com/how-to-incorporate-machine-learning-into-your-serp-analysis/"
     title: "Lazarina Stoy, ML in SERP analysis (2026-10-25; one-keyword time series)"
+  - id: mlseo-aio-tracker
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/track-ai-overviews-python/"
+    title: "MLforSEO, How to track AI Overviews for your keywords (2026-10-24; 29-keyword run, US desktop)"
+  - id: mlseo-kw-clustering
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/keyword-research/keyword-clustering-serp-vs-semantic/"
+    title: "MLforSEO, Keyword clustering: SERP-based vs semantic (2026-10-24; synthetic 160 keywords plus 29 real keywords)"
+  - id: sp-track-ai-visibility
+    resource: "https://sparktoro.com/blog/office-hours-can-you-actually-track-ai-visibility/"
+    title: "SparkToro, Office Hours: Can you actually track AI visibility? (2026-05-07; SparkToro x Gumshoe.ai, ~600 volunteers, 142 prompts, 994 runs)"
 ---
 
 # Rank tracking
@@ -61,6 +70,10 @@ What a rank tracker's position still means when no single results page exists, a
 - For one keyword tracked on 5 dates in 2026, 2–4 of the URLs cited in the AI Overview were also in the organic top 10 from January to August; on 22 October none of the 8 cited URLs were. *Anecdote, one keyword.*[^ls-serp]
 - **Do:** keep AIO citations as their own series next to organic position, and track the overlap between the two over time instead of assuming a top-10 ranking implies an AIO citation ([Google AI features](../how-it-works/google-ai-features.md)).
 
+## 7. Cited vs ranking domains across keywords
+- On 29 keywords (US desktop, 2026-10-25) the median overlap between domains cited in the AI Overview and domains in the organic top 10 was 22 %, and 0 % for seven keywords. The organic top 10 also held only 7–9 organic URLs per keyword, because AI Overviews, People Also Ask and video blocks took slots. *Measured, small sample, vendor tool.*[^mlseo-aio-tracker][^mlseo-kw-clustering] MLforSEO sells courses.
+- **Do:** keep AIO citation share as its own weekly series on a fixed keyword set ([AI-visibility tracking](ai-visibility-tracking.md#19-ai-overview-citation-tracking)); position in AI answers is close to random, so track presence, not rank.[^sp-track-ai-visibility]
+
 Related: [Search Console](search-console.md), [AI-visibility tracking](ai-visibility-tracking.md), [diagnostic tests](diagnostic-tests.md), [Google AI features](../how-it-works/google-ai-features.md).
 
 [^intent-engine]: Resoneo, "What Google is building", Jun 2026: personalisation signals, rerankers.
@@ -68,3 +81,6 @@ Related: [Search Console](search-console.md), [AI-visibility tracking](ai-visibi
 [^brodie-num100]: Brodie Clark, updated 2025-09-26, and notes #sep-2025: impressions down from 10 Sep, desktop-heavy; Google quote; third-party samples (LOCOMOTIVE 319 sites, ThotSEO 1,334, JetOctopus 1,000); bot-impression reading is his inference. Marie Haynes dates the change "around September 11".
 [^ah-aio-change]: Ahrefs, 2025-11-11: 43,000+ keywords, ≥ 16 observations each over ~1 month; 70 % of consecutive observations changed text, persistence 2.15 days, 54.5 % shared URLs, semantic similarity 0.95.
 [^ls-serp]: Lazarina Stoy, 2026-10-25: one keyword, 5 capture dates in 2026; 2–4 AIO-cited URLs in the organic top 10 Jan–Aug, 0 of 8 on 22 Oct; anecdote.
+[^mlseo-aio-tracker]: MLforSEO (Lazarina Stoy), 2026-10-24: 29 keywords, US desktop, 2026-10-25, DataForSEO; median cited/organic domain overlap 22 %, 0 % for seven keywords.
+[^mlseo-kw-clustering]: MLforSEO (Lazarina Stoy), 2026-10-24: organic top 10 yields 7–9 organic URLs per keyword (Google US desktop via DataForSEO, 2026-10-25).
+[^sp-track-ai-visibility]: SparkToro (Rand Fishkin), 2026-05-07: SparkToro x Gumshoe.ai study, 994 runs; position in AI output essentially random (paraphrase).

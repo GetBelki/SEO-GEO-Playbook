@@ -4,7 +4,8 @@ title: Keyword research
 description: How far to trust search volume, valuing topics by the traffic of the page that ranks, long-tail and zero-volume keywords, multi-facet intent, clustering and keyword-to-URL mapping, secondary keywords, customer vocabulary and complementary sub-needs, seeding AI prompts from Search Console, how reliable AI classification is, and support-type volume as a bug report.
 tags: [seo, keyword-research, search-volume, long-tail, intent, clustering, keyword-mapping, cannibalisation, synonyms, fan-out, embeddings, classification, ecommerce]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: rs-intent
@@ -61,6 +62,27 @@ sources:
   - id: ja-bugreport
     resource: "https://www.jonoalderson.com/conjecture/search-volume-bug-report/"
     title: "Jono Alderson, Sometimes search volume is a bug report (2026-10-17; argument)"
+  - id: mlseo-kw-clustering
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/keyword-research/keyword-clustering-serp-vs-semantic/"
+    title: "MLforSEO, Keyword clustering: SERP-based vs semantic (2026-10-24; synthetic 160 keywords plus 29 real keywords, Google US desktop)"
+  - id: mlseo-intent-classification
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/serp-analysis/search-intent-classification-with-machine-learning-approaches/"
+    title: "MLforSEO, Search-intent classification with ML (2026-08-01, upd. 2026-10-22; methods, no accuracy figures)"
+  - id: mlseo-fanout
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/query-fan-out-tool/"
+    title: "MLforSEO, Query fan-out tool (2026-10-24; runs 2026-10-25, few seeds)"
+  - id: sp-track-ai-visibility
+    resource: "https://sparktoro.com/blog/office-hours-can-you-actually-track-ai-visibility/"
+    title: "SparkToro, Office Hours: Can you actually track AI visibility? (2026-05-07; SparkToro x Gumshoe.ai, 142 prompts, 994 runs, 7 model families)"
+  - id: sp-search-vs-prompt
+    resource: "https://sparktoro.com/blog/how-much-is-your-audience-searching-google-vs-prompting-ai-tools-sparktoros-answers-just-got-an-upgrade/"
+    title: "SparkToro, How much is your audience searching Google vs prompting AI tools? (2026-03-08; Datos, 41 sites)"
+  - id: sp-click-optional
+    resource: "https://sparktoro.com/blog/zero-click-search-what-still-works/"
+    title: "SparkToro, The click is now optional (2026-06-10; synthesis of SparkToro, Adobe and other data)"
+  - id: sp-skincare-bf
+    resource: "https://sparktoro.com/blog/how-wed-market-a-400-skincare-device-before-black-friday/"
+    title: "SparkToro, How we'd market a $400 skincare device before Black Friday (2026-08-25; audience report, one case)"
 ---
 
 # Keyword research
@@ -77,6 +99,7 @@ How far to trust keyword data, how to value and group keywords, and how to map t
 - **Use AI for ideation and deduplication, fed with Search Console, Ads and tool exports, never for volumes or difficulty; cluster with embeddings and a fixed algorithm and let an LLM only name the clusters.** Check any LLM classifier against ~100 hand-labelled pages first. *Practitioner; arXiv studies relayed* — [evidence](#7-ai-assisted-research)
 - **Use the customers' own words for categories and filters, and cluster by complementary sub-need, not only by synonym**: cover the accessory and companion categories a buyer needs alongside the head term. *Patent; Google Research paper, production use unconfirmed* — [evidence](#8-customer-vocabulary-and-complementary-sub-needs)
 - **Tag support-type clusters (returns, delivery, order tracking, contact) and route them to their owners**; don't report their decline as an SEO loss. *Practitioner argument; the shop examples are inference* — [evidence](#9-support-type-volume-is-a-bug-report)
+- **Decide which keywords share a URL by SERP overlap, not embedding similarity**, and check a page's fan-out coverage with a reranker and repeated runs, not cosine similarity from one run. *Measured, small samples* — [evidence](#10-embedding-clusters-and-serp-clusters-disagree), [fan-out](#11-checking-a-pages-fan-out-coverage)
 
 ## 1. Search volume is an estimate
 - Keyword Planner volume was "roughly accurate" in only 45 % of cases when compared with the Search Console impressions of pages ranking #1. *Measured, vendor data, sample not stated, dated 2021.*[^ah-volume]
@@ -130,7 +153,31 @@ How far to trust keyword data, how to value and group keywords, and how to map t
 - Some query volume is caused by the business itself: hidden contact details, unclear cancellation, pricing or compatibility information. A "double the volume" test — would you want twice as many of these searches? — separates demand from friction. Fixing the cause can lower traffic. *Practitioner argument, no data.*[^ja-bugreport]
 - **Do:** tag support-type clusters (for a shop: returns, delivery, order tracking — *inference*), route them to the team that owns the cause, and don't report their decline as an SEO loss ([analytics](../measure/analytics.md)). *Inference.*
 
-Related: [category pages](../page-types/category-pages.md), [comparison and guides](../page-types/comparison-and-guides.md), [titles and snippets](../technical/titles-and-snippets.md), [internal linking](../technical/internal-linking.md), [Google AI features](../how-it-works/google-ai-features.md), [AI visibility tracking](../measure/ai-visibility-tracking.md), [new market](../situations/new-market.md).
+## 10. Embedding clusters and SERP clusters disagree
+MLforSEO sells courses and promotes its own notebooks; its tests are small.
+- **They barely agree.** On 29 real keywords (Google US desktop, 25 Oct 2026), embedding clusters and SERP-overlap clusters agreed almost not at all (adjusted Rand index 0.04); 12 keywords one embedding cluster held fell into 10 SERP clusters. On a synthetic 160-keyword set agreement was 0.37. *Measured, small sample, one case.*[^mlseo-kw-clustering]
+- **Similar meaning, different results, and the reverse.** Pairs with 0.87–0.97 embedding similarity shared 0–1 top-10 URLs ("ai overview tracker" vs "track ai overviews": 0.89, none shared), while pairs at 0.04–0.22 shared 7–8 URLs. *Measured, small sample.*[^mlseo-kw-clustering]
+
+  > **Conflict:** section 7 advises clustering with embeddings and a fixed algorithm; this test found embedding clusters barely match SERP clusters and recommends SERP overlap for the final keyword → URL mapping. — [details](../reference/conflicts.md#embedding-clusters-or-serp-clusters)
+- **Stated defaults.** Semantic: all-MiniLM-L6-v2 with agglomerative clustering at distance 0.40. SERP: highest-volume head keyword plus members sharing ≥ 3 top-10 URLs. Hybrid: 60 % SERP / 40 % embedding at 0.60. Tuned on short English keywords; MiniLM is English-only, so use a multilingual model in other languages. *Practitioner.*[^mlseo-kw-clustering]
+- **Fewer organic URLs per page.** An organic "top 10" now often holds only 7–9 organic URLs because AI Overviews, People Also Ask and video blocks take slots; lower overlap thresholds accordingly. *Measured, small sample.*[^mlseo-kw-clustering]
+- **Cost.** SERP data for clustering cost about $0.002 per keyword (live) or $0.0006 (standard queue) at October 2026 list prices. *Vendor data.*[^mlseo-kw-clustering]
+- **Rule-based intent needs whole-word matching**: "top" otherwise matches "laptop". Other options are SERP-feature mapping, zero-shot models or entity types (consumer good, price → transactional); no accuracy figures were published, and keyword tools don't disclose how they label intent. *Practitioner.*[^mlseo-intent-classification]
+- **Do:** use embeddings to group ideas, and SERP overlap to decide which keywords share a URL ([section 5](#5-clustering-and-mapping)).
+
+## 11. Checking a page's fan-out coverage
+- **Method.** Generate sub-queries for a seed, split the page into 40–160-word passages, retrieve the top 5 passages per sub-query by cosine similarity, then rerank with a cross-encoder. Covered = rerank ≥ 6 (cosine ≥ 0.75), partial = 3–6 (0.60–0.75), gap below. Thresholds were set by reading samples. *Practitioner, small sample.*[^mlseo-fanout]
+- **Cosine alone misleads.** It rated "is buying a used espresso machine worth it" covered on a page that never mentions used machines; the reranker fixed it. Review 10–15 rows before changing thresholds. *Measured, one case.*[^mlseo-fanout]
+- **LLM fan-out isn't repeatable.** For the same seed, 20 sub-queries each: one LLM gave 7 covered / 6 partial / 7 gaps, another 8 / 9 / 3; rule-based sub-queries found no gaps. Google doesn't publish its fan-out queries. *Measured, small sample.*[^mlseo-fanout]
+- **People phrase the same goal very differently.** In one prompt study the average pairwise semantic similarity of human-written prompts was 0.0809. *Measured, vendor data (SparkToro, which sells audience research, with Gumshoe.ai, which sells AI visibility tracking).*[^sp-track-ai-visibility]
+- **Do:** run each seed 2–3 times with two LLM providers, act on sub-queries that recur, and build prompt sets from varied real phrasings (Search Console queries, customer questions), not one synthetic prompt ([fan-out test](../measure/diagnostic-tests.md#13-fan-out-coverage), [Google AI features](../how-it-works/google-ai-features.md)).
+
+## 12. Branded demand, prompts and audiences
+- **Brand terms are a large share of search.** Branded terms make up about 44 % of Google searches. *Measured, vendor data (SparkToro, 332 million queries).*[^sp-click-optional] Track branded and non-branded demand separately ([Search Console](../measure/search-console.md)).
+- **Search and prompting differ by site.** 97 % of Google's visitors search there, 56 % of ChatGPT's prompt. *Measured, vendor data (Datos).*[^sp-search-vs-prompt] Detail: [AI assistants](../how-it-works/ai-assistants.md#17-how-much-people-prompt-versus-search).
+- **Use the over-index, not the reach.** In one audience report, Claude use was 16.9 % vs 5.3 % of the US web (221 % over-index), while YouTube reached 87.9 % and Reddit 75 %. Pick channels and AI tools to research by where the audience over-indexes. *Measured, vendor data, one case.*[^sp-skincare-bf]
+
+Related: [category pages](../page-types/category-pages.md), [comparison and guides](../page-types/comparison-and-guides.md), [titles and snippets](../technical/titles-and-snippets.md), [internal linking](../technical/internal-linking.md), [Google AI features](../how-it-works/google-ai-features.md), [AI visibility tracking](../measure/ai-visibility-tracking.md), [new market](../situations/new-market.md), [ML methods for SEO](../measure/ml-methods-for-seo.md).
 
 [^ah-volume]: Ahrefs, 2021-12-01: Keyword Planner vs GSC impressions of #1 pages ("roughly accurate" 45 %, sample not stated); variant merging; seasonality; 27× volume vs ~half the traffic example. Vendor interest in its own volume metric.
 [^ah-secondary]: Ahrefs, 2026-03-06: secondary-keyword placement (3–5, H2/H3, openers, alt text, ≤ 1–2 in meta description); traffic potential over volume.
@@ -150,3 +197,10 @@ Related: [category pages](../page-types/category-pages.md), [comparison and guid
 [^lr-techseo]: Lily Ray, 2025-12-05, her summary of Tech SEO Connect 2025 talks; this item is Michael King's statement that 95 % of fan-out queries have no monthly search volume. Not checked against the slides.
 [^ja-bugreport]: Jono Alderson, 2026-10-17: argument that some search volume signals product or service friction (contact, cancellation, pricing, compatibility); "double the volume" test; fixing the cause can lower traffic. No data.
 [^rs-intent]: Resoneo, Oct 2026 (captures dated 2026-10-28): Intent Brain with 20 broad intents per query, language and country; Orbit with 86 page categories scored 0–100; 5 snippet-date age tiers (1, 3, 30, 90, 365 days); commerce split into merchant product page, review, comparison, buying guide, top N; LISTICLE label measured, not filtered; AUTHENTICITY counted since 2023-07-03, UGC_DISCUSSION since 2023-08-29; "mercury" 82 % fintech on google.com vs "mercure" 50 % planet on google.fr. Internal schemas plus patent US8346815B2; 8-query sample.
+[^mlseo-kw-clustering]: MLforSEO (Lazarina Stoy; MLforSEO sells courses), 2026-10-24: synthetic 160-keyword set and 29 real keywords, Google US desktop via DataForSEO, 2026-10-25; adjusted Rand index (ARI) between embedding and SERP clusters; DataForSEO list prices October 2026.
+[^mlseo-intent-classification]: MLforSEO, 2026-08-01 (upd. 2026-10-22): intent-classification methods; no accuracy figures.
+[^mlseo-fanout]: MLforSEO, 2026-10-24: fan-out coverage tool run 2026-10-25 on a few seeds, 20 sub-queries per provider; thresholds set by reading samples.
+[^sp-track-ai-visibility]: SparkToro x Gumshoe.ai (Gumshoe sells AI visibility tracking), 2026-05-07: ~600 volunteers, 142 human-written prompts, 994 runs across 7 model families; average pairwise semantic similarity of prompts 0.0809; Office Hours desktop figures (AI tools ~2.9 % of visits vs search engines 34 %). Video transcript.
+[^sp-search-vs-prompt]: SparkToro, 2026-03-08: Datos (a Semrush company) data on 41 sites with search activity; share of visitors who search or prompt there: Google 97 %, ChatGPT 56 %, Yahoo 35 %.
+[^sp-click-optional]: SparkToro, 2026-06-10: synthesis; SparkToro analysis of 332 million queries (branded ~44 %); relays Adobe Digital Insights Q2 2026 (AI-sourced US retail traffic almost +400 % YoY, converting ~42 % better).
+[^sp-skincare-bf]: SparkToro, 2026-08-25: SparkToro audience report for one product audience (worked example; vendor tool).

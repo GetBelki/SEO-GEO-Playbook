@@ -4,7 +4,8 @@ title: Comparison pages and guides
 description: What to do on "X vs Y" pages, buying guides and product documentation — verdict first, comparison table and "best for", HTML not PDF, decision-stage over how-to, one topic in depth, no length targets, true dates and real refreshes, consolidation into one guide with anchors, link assets, FAQ content after FAQ rich results were dropped, self-contained answer-first passages, the first ~500 words, original statistics pages with sourced numbers and quotes, no "according to X" rankings of your own products, headlines and summaries for editorial guides, and the strip-the-logo test.
 tags: [seo, geo, content, comparison, buying-guides, documentation, faq, links, ecommerce, freshness, content-length, passages, statistics, ai-assistants, pdf, headlines, discover, distinctiveness]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: rs-intent

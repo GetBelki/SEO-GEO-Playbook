@@ -4,8 +4,8 @@ title: Entering a new market
 description: Launching a shop in a new country or language — hreflang and x-default, visible-language content, English fan-out vs local sources, native prompt sets, each market's marketplaces, EEA vs non-EEA surfaces, feeds and local listings, no IP auto-redirects, AI Overview launches per market, country controls in measurement, hosting location (not a geotargeting signal), machine-translated Reddit threads competing in Google AI surfaces, assistants that ignore hreflang, per-language anchor pages, and choosing ccTLD or subfolder by what the market's results show.
 tags: [seo, geo, international, hreflang, markets, eea, feeds, local, measurement, ai-overviews, hosting, reddit, cctld, ai-assistants, multilingual]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: g-hreflang
@@ -95,6 +95,12 @@ sources:
   - id: ja-multiling
     resource: "https://www.jonoalderson.com/conjecture/localisation-without-borders/"
     title: "Jono Alderson, Shaping visibility in a multilingual internet (2025-08-08; opinion)"
+  - id: sp-zero-click-countries
+    resource: "https://sparktoro.com/blog/zero-click-searches-highest-in-the-uk-lowest-in-germany-and-france-has-the-most-efficient-searchers/"
+    title: "SparkToro with Similarweb, Zero-click searches by country (2026-06-16; Similarweb web panel, Jan–Apr 2026, 6 countries)"
+  - id: srp-feb-2026-update
+    resource: "https://serprecon.com/blog/feb-2026-serprecon-update"
+    title: "SERPrecon, Feb 2026 SERPrecon update (2026-02-06; product method changes)"
 ---
 
 # Entering a new market
@@ -109,7 +115,7 @@ Use this page when you add a country, a language version or a ccTLD, or start se
 - **Build each market's prompt set natively** rather than translating one list, and pin geography per run ([section 2](#2-ai-assistants-english-fan-out-local-winners)). *Practitioner; measured method.*
 - **Map each market's leading marketplaces and local champions** as citation and corroboration channels ([section 3](#3-marketplaces-and-local-competitors)). *Measured, one month.*
 - **Check which surfaces exist in the market** — EEA vs non-EEA product listings, US-first agent features, loyalty eligibility ([section 4](#4-surfaces-and-feeds-differ-by-market)). *Several sources; practitioner.*
-- **Report every metric per country, with an unaffected country as control** ([section 5](#5-measure-per-country)). *Measured in field notes.*
+- **Report every metric per country, with an unaffected country as control**, and set click targets from each country's own zero-click baseline ([section 5](#5-measure-per-country), [section 9](#9-zero-click-differs-by-country)). *Measured in field notes*; country rates *Measured, vendor data.*
 - **Note the date AI Overviews launch in each market** — CTR falls on exposed queries while rankings hold ([section 5](#5-measure-per-country)). *Measured, vendor data.*
 - **Don't move hosting into the market for SEO**; server location isn't used for geotargeting — use a CDN for speed ([section 6](#6-hosting-and-speed)). *Official statement, relayed.*
 - **In non-English markets, treat machine-translated English Reddit threads as competitors** for product queries in Google's AI surfaces ([section 7](#7-translated-forum-threads)). *Measured, vendor data.*
@@ -169,6 +175,13 @@ Use this page when you add a country, a language version or a ccTLD, or start se
 
 > **Conflict:** ccTLDs beyond a few countries vs follow the market's results vs Google's neutral docs — [details](../reference/conflicts.md#cctld-or-subfolder-for-a-new-market)
 
+## 9. Zero-click differs by country
+SparkToro sells audience research; Similarweb co-authored the study.
+- **Rates by country.** Share of Google searches ending without a click: Germany 62.1 %, Italy 63.4 %, Canada 63.8 %, France 65.3 %, US 68.0 %, UK 69.5 %. Web browsers only, Google app excluded; the period is labelled Jan–Apr 2026 for the US, so the non-US period is ambiguous. *Measured, vendor data.*[^sp-zero-click-countries]
+- **Where the clicks go.** Clicks to Alphabet-owned sites were 7.3 % (UK) to 9.4 % (Canada) of clicks; clicks to the open web per 1,000 Google searches were 287 in Germany, 280 Italy, 271 France, 268 Canada, 232 UK and 231 US. *Measured, vendor data.*[^sp-zero-click-countries]
+- **Tools by language.** One content-scoring vendor states its lexical and semantic metrics are fully supported for English, Spanish, French, German, Italian and Portuguese, but less accurate for Russian, Japanese, Korean and Chinese because of tokenisation. *Practitioner, vendor data.*[^srp-feb-2026-update] Check language support before comparing tool scores across markets.
+- **Do:** set click targets per market from that market's own baseline, not from US figures; a UK launch can expect fewer clicks per search than a German one ([section 5](#5-measure-per-country), [traffic drop](traffic-drop.md#3-segment-then-name-the-surface)).
+
 Related: [migration](migration.md), [AI assistants](../how-it-works/ai-assistants.md), [shopping surfaces](../how-it-works/shopping-surfaces.md), [AI visibility tracking](../measure/ai-visibility-tracking.md).
 
 [^g-hreflang]: Google, localized versions, read 2026-10-27; nothing explicit on IP-based redirects in the extracted text.
@@ -200,3 +213,5 @@ Related: [migration](migration.md), [AI assistants](../how-it-works/ai-assistant
 [^lr-techseo]: Lily Ray, Tech SEO Connect 2025 recap, 2025-12-05: Max Prin — hreflang has no effect on Discover; choose domain structure by what the market's SERP shows ("78% of the German SERP was already .de"). Her summary of the talk.
 [^gn-intl]: Barry Adams, 2026-09-16: consulting projects; hreflang "hints, not directives"; prefers ccTLDs beyond a few countries (one consultant's news-publisher view); relays Google's localisation docs (duplicates only if main content stays untranslated).
 [^ja-multiling]: Jono Alderson, 2025-08-08: opinion, no data; models borrow from other languages or similar companies; anchor pages per language; clean mistranslated mentions.
+[^sp-zero-click-countries]: SparkToro with Similarweb, 2026-06-16: desktop+mobile web panel, Jan–Apr 2026 (period label for non-US countries ambiguous), Google app excluded; zero-click share, clicks to Alphabet properties and open-web clicks per 1,000 searches for DE, IT, CA, FR, US, UK.
+[^srp-feb-2026-update]: SERPrecon, 2026-02-06: product notes; lexical and semantic metrics fully supported for EN, ES, FR, DE, IT, PT; BM25 and bigram NPMI less accurate for RU, JA, KO, ZH. Vendor data.

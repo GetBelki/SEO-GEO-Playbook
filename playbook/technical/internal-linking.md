@@ -1,11 +1,11 @@
 ---
 type: Guide
 title: Internal linking
-description: Internal links that crawlers and AI bots can see — links in the initial HTML, forward navigation on category pages, contextual links for new pages, a lean global navigation, related links generated from taxonomy and purchase data, click depth and orphan pages, anchor text and redirected link targets, physical and virtual silos without stripping relevant cross-links, linking to pages that satisfy, split-testing footer category links, finding link opportunities with embeddings, and linking key pages close to pages that AI assistants cite.
-tags: [seo, geo, internal-links, navigation, category-pages, orphan-pages, crawl-depth, javascript, anchor-text, siloing, breadcrumbs, footer, embeddings, ecommerce]
+description: Internal links that crawlers and AI bots can see — links in the initial HTML, forward navigation on category pages, contextual links for new pages, a lean global navigation, related links generated from taxonomy and purchase data, click depth and orphan pages, anchor text and redirected link targets, physical and virtual silos without stripping relevant cross-links, linking to pages that satisfy, split-testing footer category links, finding link opportunities with embeddings, linking key category and product pages within two clicks of pages that AI assistants cite, automating link suggestions with embeddings, Search Console data and LLM anchors under human approval, and redirect mapping by fuzzy matching.
+tags: [seo, geo, internal-links, navigation, category-pages, orphan-pages, crawl-depth, javascript, anchor-text, siloing, breadcrumbs, footer, embeddings, llm, fuzzy-matching, redirects, ecommerce]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: bp-rendered-links
@@ -44,6 +44,15 @@ sources:
   - id: lr-techseo
     resource: "https://lilyray.nyc/tech-seo-connect-2025-summary-takeaways/"
     title: "Lily Ray, Tech SEO Connect 2025 takeaways (2025-12-05; talk summaries, speakers named per item)"
+  - id: mlseo-internal-linking
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/internal-link-analysis/automate-internal-linking-ai/"
+    title: "MLforSEO (Lazarina Stoy), 10 Ways to Automate Internal Linking with AI (2026-10-22; one 68–79-post blog, 12-suggestion LLM test, synthetic DiD demo)"
+  - id: mlseo-migration
+    resource: "https://www.mlforseo.com/machine-learning-tutorials/fuzzy-matching/seo-site-migration-checklist/"
+    title: "MLforSEO (Lazarina Stoy), The SEO Site Migration Checklist I Use (2026-10-24; procedure)"
+  - id: mlseo-404-fuzzy
+    resource: "https://www.mlforseo.com/machine-learning-tutorials/fuzzy-matching/404-and-redirect-mapping-with-fuzzy-matching-in-google-colab-python/"
+    title: "MLforSEO (Lazarina Stoy), 404 and Redirect Mapping with Fuzzy Matching (2025-08-09; method, no benchmarks)"
 ---
 
 # Internal linking
@@ -60,7 +69,7 @@ How to link an ecommerce site internally so that Google and AI crawlers find eve
 - **Use descriptive, varied anchors and link straight to the final URL**, not through redirects. *Practitioner* — [evidence](#7-anchor-text-and-link-targets)
 - **Mirror the category hierarchy in navigation, URLs and breadcrumbs, but keep relevant cross-category links** — there is no evidence for "pure" silos. *Practitioner, no data; Patent (URLs)* — [evidence](#8-silos-mirror-the-taxonomy-keep-relevant-cross-links), [virtual silos](#9-virtual-silos)
 - **From category and guide pages, link to products and subcategories that satisfy; prune links to dead-end, out-of-stock or thin pages.** *Patent* — [evidence](#10-link-to-pages-that-satisfy)
-- **Split-test footer category links before rolling them out, and find in-text link targets with passage embeddings**, a human approving each link. *Measured, one relayed SEO split test; Practitioner* — [evidence](#11-footer-links-and-link-opportunities)
+- **Split-test footer category links before rolling them out, and find in-text link targets with passage embeddings and Search Console striking-distance queries**, a human approving each link and a control group measuring it. *Measured, one relayed SEO split test; Practitioner* — [evidence](#11-footer-links-and-link-opportunities), [automation](#13-automating-link-suggestions)
 - **Link key category and product pages within two clicks of the pages AI assistants already cite.** *Practitioner, low confidence* — [evidence](#12-link-key-pages-close-to-cited-pages)
 
 ## 1. Links in HTML, not after JavaScript
@@ -90,6 +99,7 @@ How to link an ecommerce site internally so that Google and AI crawlers find eve
 
 ## 6. Depth and orphan pages
 - On one travel site (28 domains), graph-based internal linking cut orphan pages from 50 % to ~1 %. It targeted 90 % of pages within a click depth of 5 and gave high-demand pages more links. *Practitioner, self-reported, dated 2022.*[^bp-graph-linking]
+- Working definitions from one practitioner: weak page = exactly one contextual inlink; deep = more than 4 clicks from the start page; orphan = a URL in the sitemap, Search Console or GA4 that the crawl didn't find. *Practitioner.*[^mlseo-internal-linking]
 - **Do:** crawl regularly, compare crawled URLs with sitemap and Search Console URLs to find orphans, and check click depth for revenue pages. Pages predicted low quality are crawled less and lose anchors ([Google ranking](../how-it-works/google-ranking.md#1-quality-is-scored-per-section-and-new-urls-start-from-its-average)).
 
 ## 7. Anchor text and link targets
@@ -112,14 +122,28 @@ How to link an ecommerce site internally so that Google and AI crawlers find eve
 ## 11. Footer links and link opportunities
 - **Footer test.** In a SearchPilot split test, growing a footer from 30 to 100+ category links gave ~+10 % organic traffic on desktop (95 % confidence) and +5 % on mobile (90 % confidence). SearchPilot itself warns against packing footers, so read it as one test, not a rule. *Measured, one SEO split test, relayed by a practitioner.*[^ls-links]
 - **Unlinked mentions are common.** An InLinks analysis found 82 % of entity-mention link opportunities unlinked (5,112 projects). *Vendor data, relayed.*[^ls-links]
-- **Similarity threshold.** Screaming Frog's semantic-similarity default of 0.95 is set for finding near-duplicates; lower it when you look for link opportunities, or you only find pages that say the same thing. *Practitioner.*[^ls-links]
+- **Similarity threshold.** Screaming Frog's semantic-similarity default of 0.95 is set for finding near-duplicates; lower it when you look for link opportunities, or you only find pages that say the same thing. *Practitioner.*[^ls-links][^mlseo-internal-linking]
 - **Do:** split-test added footer category links on part of the templates before a full rollout; find in-text link targets by comparing passage embeddings with the target page, and have a human approve each link ([section 3](#3-contextual-links-for-new-pages), [section 7](#7-anchor-text-and-link-targets)). *Practitioner.*[^ls-links]
 
 ## 12. Link key pages close to cited pages
 - A conference talk (Jori Ford, relayed) reported that AI retrieval bots rarely go more than ~3 pages deep from where they land. *Practitioner, low confidence, sample not given.*[^lr-techseo]
 - **Do:** find the pages assistants already cite ([AI visibility tracking](../measure/ai-visibility-tracking.md)) and link your key category and product pages within two clicks of them, in the initial HTML ([section 1](#1-links-in-html-not-after-javascript)). *Inference from a low-confidence claim; cheap to do.*
 
-Related: [category pages](../page-types/category-pages.md), [product pages](../page-types/product-pages.md), [technical foundations](technical-foundations.md), [AI crawlers and controls](ai-crawlers-and-controls.md), [links and digital PR](../channels/links-and-digital-pr.md), [keyword research](../channels/keyword-research.md), [diagnostic tests](../measure/diagnostic-tests.md).
+## 13. Automating link suggestions
+*From MLforSEO, a site that sells ML-for-SEO courses; one blog as the test bed.*
+- **Embeddings.** Compare paragraphs, not whole pages, by cosine similarity; keep only unlinked pairs in the top 10 % of the site's own similarity distribution (not a fixed cutoff), drop pairs ≥ 0.95 (near-duplicates), and cap new links at 3 per source and per target per batch. A human approves every link before anything is written: "automate the finding, not the deciding". *Practitioner.*[^mlseo-internal-linking]
+- **Search Console.** Take pages at average position 4–20 with ≥ 50 impressions for 2–7-word queries and link to them from pages that mention the query; check for cannibalisation first. On one blog, 242 striking-distance queries gave 110 suggestions. It misses the long tail, which Search Console omits. *Practitioner.*[^mlseo-internal-linking]
+- **LLM anchors.** With guardrails (2–7 words, a verbatim span of the source text, confidence ≥ 0.5, one anchor used at most twice per target), Claude Opus 5.5 passed 7 of 12 suggestions (the author would publish 5 unchanged) for ~$0.05; Claude Haiku 4.5 passed 6, often broke the length rule, for ~$0.01. The guardrails check form, not meaning. *Measured, one case, small sample.*[^mlseo-internal-linking]
+- **Measuring.** Compare test and control page groups with difference-in-differences, waiting about a week after the change. On synthetic data with a planted 15 % uplift the script reported +11.8 points, so it under-estimated the true effect. *Practitioner, synthetic validation.*[^mlseo-internal-linking]
+- **Do:** generate suggestions from embeddings and Search Console, cap them per page, have a person approve each link and anchor, and roll out on a test group with a control group ([diagnostic tests](../measure/diagnostic-tests.md)). *Practitioner.*
+
+## 14. Redirect mapping by fuzzy matching
+*Same publisher; methods without accuracy benchmarks.*
+- Map old to new URLs by fuzzy matching (Levenshtein via TheFuzz, RapidFuzz or PolyFuzz) on URL, title, H1, H2 and meta description, scored 0–100, and count how many algorithms agree. Flag matches below 70 for review; prioritise URLs with ≥ 100 clicks or ≥ 5 referring domains. In the author's example a 71-score partial still pointed to the wrong page, and a 38 led to a 410 rather than a homepage redirect. *Practitioner.*[^mlseo-migration]
+- For 404s, thresholds depend on the data: 60–70 for inconsistent datasets, 85–90 for minor URL variations; labels Exact = 100, Partial = 50–< 100, No match = < 50; partials ≥ 70 can be pre-built as redirects but still need a manual check. No-code tools suffice below ~100–300 URLs, Python above ~1,000. No accuracy figures. *Practitioner.*[^mlseo-404-fuzzy]
+- Each mapped redirect should go in one hop to a 200, and internal links should then point to the final URL ([section 7](#7-anchor-text-and-link-targets)); the full launch bar is in [migration](../situations/migration.md). *Practitioner.*[^mlseo-migration]
+
+Related: [category pages](../page-types/category-pages.md), [product pages](../page-types/product-pages.md), [technical foundations](technical-foundations.md), [AI crawlers and controls](ai-crawlers-and-controls.md), [links and digital PR](../channels/links-and-digital-pr.md), [keyword research](../channels/keyword-research.md), [diagnostic tests](../measure/diagnostic-tests.md), [migration](../situations/migration.md), [ML methods for SEO](../measure/ml-methods-for-seo.md).
 
 [^bp-rendered-links]: Botpresso, ≈2023: script diffing internal links in raw vs rendered HTML; claim that render-only links are missed by AI bots and some crawlers. Practitioner, no measured sample.
 [^ah-navigation]: Ahrefs, 2023-02-08: one jewelry ecommerce case (JS filtering hid subcategory links; fix live by Dec 2021, gains by Mar 2022, no figures); global navigation only for commercially important pages.
@@ -133,3 +157,6 @@ Related: [category pages](../page-types/category-pages.md), [product pages](../p
 [^mt-gptbot]: Metehan Yeşilyurt, 2026-03-04: server logs of one new 60,000-page site; GPTBot found it through the XML sitemap within minutes, no links. Author works at Peec AI.
 [^ls-links]: Lazarina Stoy, 2026-10-25: relays a SearchPilot footer test (30 → 100+ category links: ~+10 % organic desktop at 95 % confidence, +5 % mobile at 90 %; SearchPilot warns against packing footers) and InLinks (82 % of entity-mention link opportunities unlinked, 5,112 projects, vendor); Screaming Frog semantic-similarity default 0.95; passage embeddings plus human approval. Primaries not read.
 [^lr-techseo]: Lily Ray, 2025-12-05, her summary of Tech SEO Connect 2025; this item is Jori Ford's talk (retrieval bots rarely go more than ~3 pages deep). Sample and method not given.
+[^mlseo-internal-linking]: MLforSEO (Lazarina Stoy), 2026-10-22: one 68–79-post blog — paragraph embeddings (top 10 % of the site's own distribution, skip ≥ 0.95, cap 3 per source/target), Search Console striking distance (position 4–20, ≥ 50 impressions, 2–7-word queries; 242 queries → 110 suggestions), LLM anchors with guardrails on 12 suggestions (Opus 5.5 7 passed, ~$0.05; Haiku 4.5 6 passed, ~$0.01), synthetic DiD (+11.8 points vs planted 15 %), weak/deep/orphan definitions, Screaming Frog 0.95 default. Course seller.
+[^mlseo-migration]: MLforSEO (Lazarina Stoy), 2026-10-24: migration checklist — fuzzy redirect mapping on URL, title, H1, H2, meta description, 0–100 score, < 70 flagged, priority ≥ 100 clicks or ≥ 5 referring domains; one-hop 301/308 to a 200. Procedure, no benchmarks.
+[^mlseo-404-fuzzy]: MLforSEO (Lazarina Stoy), 2025-08-09: 404-to-live-page fuzzy thresholds (60–70 / 85–90), Exact/Partial/No-match tiers, no-code vs Python by URL count. Method, no accuracy benchmark.

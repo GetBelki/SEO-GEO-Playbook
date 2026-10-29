@@ -4,7 +4,8 @@ title: Site migration and URL renames
 description: How to rename URLs, move a domain or relaunch a site without losing search, ads or AI visibility — Google's official move rules, same-day internal links and sitemaps, a control set, redirects that keep query strings, feed and ad URLs, pre-launch checks on staging, a separate bucket for parameter and facet URLs, short stable core URLs, daily per-URL and per-template monitoring afterwards, signals derived from one record so sitemaps, hreflang, canonicals and feeds don't drift, and the Removals tool only as a stopgap for a leaked staging or login host.
 tags: [seo, migration, redirects, url-renames, site-move, hreflang, google-ads, feeds, staging, monitoring, faceted-navigation, parameters, signal-drift, removals-tool, replatforming]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: g-indexing-api
@@ -85,6 +86,15 @@ sources:
   - id: am-cross-domain
     resource: "https://www.analyticsmania.com/post/google-analytics-4-cross-domain-tracking-not-working/"
     title: "Analytics Mania, GA4 cross-domain tracking not working (updated 2026-10-12)"
+  - id: mlseo-migration
+    resource: "https://www.mlforseo.com/machine-learning-tutorials/fuzzy-matching/seo-site-migration-checklist/"
+    title: "ML for SEO, The SEO site migration checklist I use (2026-10-24; procedure, 43 checks)"
+  - id: wd-html
+    resource: "https://web.dev/learn/performance/general-html-performance"
+    title: "web.dev, General HTML performance considerations (2023-11-01; guidance)"
+  - id: mlseo-404-fuzzy
+    resource: "https://www.mlforseo.com/machine-learning-tutorials/fuzzy-matching/404-and-redirect-mapping-with-fuzzy-matching-in-google-colab-python/"
+    title: "ML for SEO, 404 and redirect mapping with fuzzy matching (2025-08-09; method, no benchmarks)"
 ---
 
 # Site migration and URL renames
@@ -92,7 +102,7 @@ sources:
 Use this page before any change that alters URLs: slug renames, category restructures, a new shop system, a domain or subdomain move, or a redesign that touches templates.
 
 ## Rules
-- **Map every old URL to one new URL and 301 or 308 it in one hop — one hop even when protocol and host change together — for at least a year** ([section 1](#1-googles-official-rules), [section 7](#7-parameter-and-facet-urls-in-the-redirect-map)). *Official; practitioner for combined changes.*
+- **Map every old URL to one new URL and 301 or 308 it in one hop — one hop even when protocol and host change together — for at least a year** ([section 1](#1-googles-official-rules), [section 7](#7-parameter-and-facet-urls-in-the-redirect-map)). *Official; practitioner for combined changes.* Build the map by fuzzy matching and check every partial match by hand ([section 9](#9-fuzzy-matched-redirect-maps)). *Practitioner.*
 - **Switch internal links and sitemaps on the same day as the redirects, and on the new platform derive sitemaps, hreflang, canonicals, schema and feeds from one record so they never drift apart** ([section 2](#2-what-the-official-rules-leave-out), [section 8](#8-signal-drift-trace-ordinary-edits-before-replatforming)). *Official for the map; same day is from the leak plus inference; drift is practitioner, worked examples.*
 - **Keep an unchanged control set of URLs** so you can tell a migration loss from a market-wide move ([section 2](#2-what-the-official-rules-leave-out)). *Inference.*
 - **Every redirect must keep the query string**, or ad clicks lose gclid and UTM ([section 3](#3-ads-feeds-and-ai-crawlers)). *Field notes.*
@@ -106,7 +116,7 @@ Use this page before any change that alters URLs: slug renames, category restruc
 
 ## Steps
 1. **Inventory:** export every URL with clicks, impressions, backlinks, ad final URLs, sitelinks and feed `link` values — including every legacy URL pattern that still earns clicks ([section 5](#5-monitoring-after-launch)). Crawl production and record per template: status, canonicals, robots, schema, internal links and anchors, Core Web Vitals, top pages ([section 6](#6-pre-launch-checks)). Before replatforming, trace ordinary edits (noindex, delete, price or stock change, new variant) and list every output that reacts ([section 8](#8-signal-drift-trace-ordinary-edits-before-replatforming)).
-2. **Map** old → new, one to one where possible, with no chains, no JavaScript redirects and no meta refresh; pages with no successor and no backlinks can return 404 or 410. Add the most-linked URLs that already return 404 ([section 5](#5-monitoring-after-launch)). Put parameter, filter and facet URLs in a separate bucket and decide per pattern ([section 7](#7-parameter-and-facet-urls-in-the-redirect-map)).
+2. **Map** old → new, one to one where possible, with no chains, no JavaScript redirects and no meta refresh; pages with no successor and no backlinks can return 404 or 410. Score candidates by fuzzy matching and review partials by hand ([section 9](#9-fuzzy-matched-redirect-maps)). Add the most-linked URLs that already return 404 ([section 5](#5-monitoring-after-launch)). Put parameter, filter and facet URLs in a separate bucket and decide per pattern ([section 7](#7-parameter-and-facet-urls-in-the-redirect-map)).
 3. **Pick a control set** of URLs that won't change, from the same sections.
 4. **Prepare new URLs:** self-canonical, updated hreflang, temporary noindex removed ([technical foundations](../technical/technical-foundations.md#3-site-moves-and-url-renames), [canonicals](../technical/technical-foundations.md#2-canonicals-and-duplicates)).
 5. **Check staging:** blocked by robots.txt disallow plus server-side auth; crawled and diffed 1:1 with production; server rendering and mobile/desktop parity on samples; trailing slash, 404 probe and sitemap checks ([section 6](#6-pre-launch-checks)). Get an SEO review of any redesign ([section 2](#2-what-the-official-rules-leave-out)).
@@ -148,9 +158,9 @@ A term in the title adds ~3.5 to its query score on average; some terms must mat
 
 ## 5. Monitoring after launch
 - **Index status per URL, daily.** In one Magento migration a developer's bulk redirect hit a legacy URL template of 77,493 URLs (prior 3 months: 8.23K clicks, 196K impressions, 4.2 % CTR, average position 6.9). Search Console only showed the decline; a daily per-URL check through the URL Inspection API showed each URL move from "Indexed" to "Page with redirect" on a dated crawl. *Practitioner, one case, vendor promoting its tool.*[^bp-77k] **Do:** before a migration or template change, export every indexed URL pattern that earns clicks, legacy ones included; check status, reason and last crawl per URL daily; alert the same day ([test 17](../measure/diagnostic-tests.md#17-daily-index-status-per-url)).
-- **Sample crawls per template.** After launch, crawl a daily sample of URLs that covers every template, plus a smaller crawl after each production push. *Practitioner.*[^ah-enterprise-tech] No source gives a monitoring length; keep the daily crawl until clicks and indexation per template have settled. *Inference; gap open.* See [scaling content and templates](scaling-content-and-templates.md#5-per-template-sample-crawls).
+- **Sample crawls per template.** After launch, crawl a daily sample of URLs that covers every template, plus a smaller crawl after each production push. *Practitioner.*[^ah-enterprise-tech] One practitioner checklist sets daily monitoring for 2 weeks after launch and reviews at 3, 6 and 12 months, and keeps redirects permanently rather than for Google's minimum of a year. *Practitioner.*[^mlseo-migration] Keep the daily crawl at least that long, and until clicks and indexation per template have settled. *Inference.* See [scaling content and templates](scaling-content-and-templates.md#5-per-template-sample-crawls).
 - **List-crawl the old URLs** after launch (each should 301 in one hop) and check the top URLs with a second crawler. *Practitioner.*[^bp-migration]
-- **Redirect chains.** Fix chains at 5+ hops; Google follows up to 10 (Mueller, relayed by Ahrefs). *Practitioner, relayed.*[^ah-overopt][^ah-enterprise-tech]
+- **Redirect chains.** Fix chains at 5+ hops; Google follows up to 10 (Mueller, relayed by Ahrefs). *Practitioner, relayed.*[^ah-overopt][^ah-enterprise-tech] Link internally to the final URL, in its correct trailing-slash form; every redirect adds a request. *Official.*[^wd-html]
 - **Reclaim links to 404s.** Monthly, 301 the most-linked URLs that return 404 to the closest live equivalent. One domain lost 6,285 links in 30 days, 594 of which passed a "best links" filter; redirected linking pages are "rarely worth pursuing". *Practitioner, one domain, vendor data.*[^ah-reclamation]
 - **Clicks by directory**, migrated vs control set, weekly ([test 3](../measure/diagnostic-tests.md#3-loss-by-directory)); see [Search Console](../measure/search-console.md).
 - **Indexed pages by page type** ([test 8](../measure/diagnostic-tests.md#8-indexed-pages-by-page-type)).
@@ -162,6 +172,7 @@ A term in the title adds ~3.5 to its query score on average; some terms must mat
 ## 6. Pre-launch checks
 - **Baseline.** Crawl production and record per template: status codes, canonicals, robots directives, schema, internal links and anchors, Core Web Vitals, top pages. *Practitioner.*[^bp-migration]
 - **Staging.** Block it with a robots.txt disallow plus server-side authentication; crawl it and diff 1:1 against the production baseline; confirm server-side rendering and mobile/desktop parity on samples. *Practitioner.*[^bp-migration][^ah-enterprise-tech]
+- **AI-search baseline.** Before launch, record rich results, AI Overview appearances and citations in ChatGPT, Perplexity and Gemini; keep entity `@id` values stable; diff the new production robots.txt against the old one; submit changed URLs via IndexNow. *Practitioner.*[^mlseo-migration]
 - **Redirect map.** 1:1 301s, no chains, no JavaScript redirects, no meta refresh — tested on a separate stage. *Practitioner.*[^bp-migration]
 - **If staging or a login host leaks into the index.** Search Console's Removals tool hid a public login subdomain in about 8–10 hours, but it doesn't deindex — the hiding is temporary. Pair it with a lasting fix: 404/410, noindex or authentication; a robots.txt disallow is not a fix. List every subdomain as a property so you see such leaks. *Practitioner case.*[^gg-canonical]
 - **Static and JavaScript sites.** One trailing-slash format, set in both framework and host; request URLs you know don't exist and confirm they return 404 (single-page-app fallbacks cause soft 404s); keep noindex pages out of sitemaps; test several pages per template; compare old vs new canonicals, metadata, schema and sitemap rules; test the live site, not only staging. Ahrefs' own migration accidentally nofollowed every internal link. *Practitioner.*[^ah-static] Compare raw and rendered internal links per template ([test 16](../measure/diagnostic-tests.md#16-raw-vs-rendered-internal-links)).
@@ -175,6 +186,12 @@ A term in the title adds ~3.5 to its query score on average; some terms must mat
 ## 8. Signal drift: trace ordinary edits before replatforming
 - **Outputs drift when they don't share a source.** Example: a page is noindexed at 09:00 but the sitemap regenerates at midnight — about 15 hours of conflicting signals. Hreflang siblings, canonicals, schema availability and feeds must all derive from one record; output that is valid but wrong passes every validator. *Practitioner, worked examples.*[^ja-brain]
 - **Do:** before replatforming, trace a handful of ordinary edits — noindex a page, delete a product, change a price or stock level, add a variant — and list every output that reacts (sitemap, hreflang, canonical, schema, feed, internal links); on the new platform, update sitemaps and hreflang on the event, not on a nightly batch, and test outputs against the intended state, not only against a validator ([technical foundations](../technical/technical-foundations.md), [feeds and Merchant Center](../channels/feeds-and-merchant-center.md)).
+
+## 9. Fuzzy-matched redirect maps
+ML for SEO sells courses and promotes its own notebooks; the methods below come without accuracy benchmarks.
+- **Score candidates, then review.** Match old to new URLs by fuzzy string matching (Levenshtein, via libraries such as TheFuzz, RapidFuzz or PolyFuzz) on URL, title, H1, H2 and meta description, score 0–100, and count how many algorithms agree; flag every match below 70. Priority URLs are those with at least 100 clicks or 5 referring domains. In the author's example a 71-score partial still pointed at the wrong page, and a 38 led to a 410 rather than a homepage redirect. *Practitioner.*[^mlseo-migration]
+- **Thresholds depend on the data.** Use 60–70 for inconsistent datasets and 85–90 for minor URL variations; label Exact = 100, Partial = 50 to under 100, No match = under 50; partials of 70 or more can be pre-built redirects but still need a manual check. No-code tools suffice below about 100–300 URLs; use Python above about 1,000. *Practitioner, no accuracy benchmark.*[^mlseo-404-fuzzy]
+- **Do:** check every priority URL and every partial match by hand; send "no match" URLs to 404 or 410, not to the homepage ([section 1](#1-googles-official-rules)).
 
 Related: [technical foundations](../technical/technical-foundations.md), [new market](new-market.md), [feeds and Merchant Center](../channels/feeds-and-merchant-center.md), [scaling content and templates](scaling-content-and-templates.md), [internal linking](../technical/internal-linking.md), [links and digital PR](../channels/links-and-digital-pr.md).
 
@@ -204,3 +221,6 @@ Related: [technical foundations](../technical/technical-foundations.md), [new ma
 [^gg-canonical]: Glenn Gabe, 2026-02-17: client cases; Removals tool hid a public login subdomain in ~8–10 hours but doesn't deindex; pair with 404/410, noindex or auth; robots.txt not a fix; list every subdomain in Search Console.
 [^am-utm-not-working]: Analytics Mania, updated 2026-10-12: sites, SPAs and CDNs stripping or 404ing on unknown parameters lose UTMs.
 [^am-cross-domain]: Analytics Mania, updated 2026-10-12: stripped query strings break the _gl cross-domain linker.
+[^mlseo-migration]: ML for SEO, 2026-10-24: 43-check procedure; one hop 301/308 to a 200, daily monitoring for 2 weeks, reviews at 3, 6, 12 months, redirects kept permanently; fuzzy-matched redirect map (URL, title, H1, H2, meta description; flag <70; priority = ≥100 clicks or ≥5 referring domains); AI-search baseline, stable @id, robots.txt diff, IndexNow.
+[^wd-html]: web.dev, 2023-11-01: avoid redirects and chains (e.g. HTTP → HTTPS then trailing slash); link to final URLs; each redirect adds a request.
+[^mlseo-404-fuzzy]: ML for SEO, 2025-08-09: fuzzy thresholds 60–70 for inconsistent data, 85–90 for minor URL variations; Exact 100 / Partial 50–<100 / No match <50; no-code below ~100–300 URLs, Python above ~1,000. Method, no accuracy benchmark.

@@ -4,7 +4,8 @@ title: Third-party presence
 description: Why most AI citations come from third parties — known sources, authorities and testing organisations, affiliate and review sites, marketplaces, Reddit (which differs by engine), forums and YouTube — what drives brand mentions, Knowledge Graph corroboration, and what to do: audit cited domains, keep facts identical across domains, publish verifiable proof points, earn need-to-brand statements and mentions with proprietary data, keep an active review-platform profile.
 tags: [geo, citations, third-party, reviews, review-platforms, affiliates, marketplaces, reddit, forums, youtube, digital-pr, links, brand-mentions, knowledge-graph, model-changes]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T10:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: chatgpt-53
@@ -85,6 +86,15 @@ sources:
   - id: ls-context
     resource: "https://lazarinastoy.com/context-not-content-is-king-ai-search/"
     title: "Lazarina Stoy, Context (not content) is king in AI search (2026-10-25; review of patents and third-party studies)"
+  - id: sp-influence-5000
+    resource: "https://sparktoro.com/blog/new-research-influence-happens-everywhere-an-analysis-of-the-5000-most-visited-sites-on-the-mobile-and-desktop-web/"
+    title: "SparkToro, Influence happens everywhere: the 5,000 most-visited sites (2026-03-25; Similarweb, Jan 2026)"
+  - id: sp-public-evidence
+    resource: "https://sparktoro.com/blog/if-search-captures-demand-public-evidence-creates-it/"
+    title: "SparkToro, If search captures demand, public evidence creates it (2026-04-01; search-share study, relayed Seer and Foundation data)"
+  - id: sp-affinity-vs-traffic
+    resource: "https://sparktoro.com/blog/audience-affinity-vs-traffic-why-high-affinity-media-belongs-in-your-earned-media-strategy/"
+    title: "Fractl on the SparkToro blog, Audience affinity vs traffic (2026-06-17; SparkToro affinity data, 8 industries)"
 ---
 
 # Third-party presence
@@ -99,7 +109,7 @@ Why AI answers mostly cite sites other than yours, which third parties carry wei
 - **Publish verifiable proof points as text on the homepage** (review score with count, years trading, assortment size, awards). *Measured, mid-authority brands* — [evidence](#3-proof-points-and-topical-focus)
 - **Don't add schema markup expecting more citations**; keep it for rich results. *Measured, vendor data* — [evidence](#2-most-citations-are-third-party)
 - **Treat each market's leading marketplace as a citation and corroboration channel.** *Measured* — [evidence](#4-marketplaces-per-market)
-- **Earn mentions and links with proprietary data, tools and guides**, and be present on Reddit and YouTube where answers cite them. *Measured correlation; the tactic is inference* — [evidence](#5-link-assets), [what to do](#6-what-to-do)
+- **Earn mentions and links with proprietary data, tools and guides, placed with outlets your buyers actually follow (affinity, not traffic)**, and be present on Reddit and YouTube where answers cite them. *Measured correlation; the tactic is inference* — [evidence](#5-link-assets), [what to do](#6-what-to-do)
 - **Monitor and openly take part in Reddit and Facebook Groups threads for your category — but invest in forums only where they already rank in Google for your queries**; ChatGPT cut Reddit citations by about 95 % in August 2026. *Measured (prevalence), vendor data; the tactic is inference* — [evidence](#7-forums-and-discussions), [by engine](#12-reddit-differs-by-engine)
 - **Build brand demand, not only rankings**: ChatGPT adds known brand names to its searches, and branded mentions correlate with AI visibility more than links do. Publish and earn "need/category → brand" statements, the direction models recall worst. *Measured correlation, vendor data; Relayed; one weak case* — [evidence](#8-what-gets-a-brand-mentioned), [case](#9-ranking-well-is-not-ai-visibility), [recall](#13-need-to-brand-statements)
 - **Keep an active profile on the review platforms your market's answers cite**, with a steady flow of reviews and regular replies; brands without a profile almost never appear in answers that cite the platform. *Measured, sponsored vendor study, relayed* — [evidence](#14-review-platform-profiles)
@@ -179,6 +189,14 @@ A synthesis of third-party studies, *relayed* — each number comes from the nam
 - **Minimise or avoid:** passing mentions and logo walls, reach-first coverage on irrelevant big sites, syndicated press releases (more domains, no new corroboration), thin or paid listicles without method, sponsored posts repeating brand claims, mass directory submissions, stale or contradictory listings (fix the influential ones instead), content made only because one platform is cited right now, and bulk AI-generated articles or reviews. Fake reviews, astroturfing and undisclosed endorsements are out entirely. *Practitioner framework.*[^aleyda-3p]
 - **Do:** list the third-party presences you have or could build, score them with your marketing teams, and fund the ones that would still help customers if the engines stopped citing them. See [links and digital PR](links-and-digital-pr.md) for earning coverage.
 
+## 16. Audience, affinity and public evidence
+SparkToro sells audience research; Fractl, author of the affinity study, is a digital PR agency.
+- **Influence is spread out.** Search plus social make up nearly half of visits to the 5,000 most-visited sites, and Google less than a quarter; Google's ~85.8bn visits roughly equal the next 13 sites combined. *Measured, vendor data (Similarweb, Jan 2026; apps excluded).*[^sp-influence-5000]
+- **Publish the evidence that answers a false claim.** In one brand's AI answers, "high account manager turnover" came up 67 times and traced back to a few thin review domains. After the brand published real retention data, Perplexity cited it quickly and models stopped repeating the claim after two citations; the effect faded until the data was republished. *Measured, relayed (Seer Interactive), one case.*[^sp-public-evidence]
+- **Reddit wins generic category queries.** Across 8,566 keywords and 14 B2B SaaS domains, Reddit outranked every vendor on 50–66 % of shared keywords in 3 of 4 verticals; 77 % of the volume it won came from generic category keywords, and on queries of 6+ words it won 73–100 %. *Measured, relayed (Foundation); B2B SaaS, not ecommerce.*[^sp-public-evidence] See [section 12](#12-reddit-differs-by-engine).
+- **Pick outlets by audience affinity, not traffic.** Niche publishers had 1.7× higher audience affinity than major outlets with ~130× less traffic; YouTube was the top high-affinity destination in 7 of 8 industries, Reddit usually second. *Measured, agency and vendor data, sample undisclosed.*[^sp-affinity-vs-traffic]
+- **Do:** keep correcting data public and dated, republish it when false claims return, and score PR targets by affinity with your buyers rather than by traffic or domain rating ([links and digital PR](links-and-digital-pr.md)).
+
 Related: [AI assistants](../how-it-works/ai-assistants.md), [links and digital PR](links-and-digital-pr.md), [homepage and brand](../page-types/homepage-and-brand.md), [AI visibility tracking](../measure/ai-visibility-tracking.md), [diagnostic tests](../measure/diagnostic-tests.md#14-third-party-citation-audit), [AI crawlers and controls](../technical/ai-crawlers-and-controls.md).
 
 [^chatgpt-53]: Resoneo, ChatGPT 5.3/5.4, read 2026-10-27: domains per answer 19.1 → 15.2 after 4 Mar 2026; preference for known sources.
@@ -207,3 +225,6 @@ Related: [AI assistants](../how-it-works/ai-assistants.md), [links and digital P
 [^dj-parametric]: DEJAN, 2026-08-17: summary of a Google Research study (13 LLMs, 2,150 facts): 95–98 % encoded, 26–34 % not recalled, long tail −20 to −35 points, reverse queries weaker, thinking recovers 40–65 %. Primary study not checked here.
 [^ls-context]: Lazarina Stoy, 2026-10-25: relays a Seer Interactive study for Trustpilot (sponsored, May 2026, ~800,000 AI responses): no profile median 1 % of answers citing Trustpilot, minimal profile 53.5 %, 80+ reviews with regular replies ~75 %+. Primary not read.
 [^aleyda-3p]: Aleyda Solis, 2026-10-28, read in full in a browser: external domains 69.6–82.3 % of top cited sources across SaaS, ecommerce and finance; ecommerce led by marketplaces and competitor domains; six scoring criteria; 13 formats to maximise and 11 to minimise, with directional scores. The author offers a worksheet and a Claude skill.
+[^sp-influence-5000]: SparkToro, 2026-03-25: Similarweb panel, top 5,000 domains, Jan 2026, apps excluded; Gmail counted as google.com; category shares only in charts.
+[^sp-public-evidence]: SparkToro, 2026-04-01: share of searches across 41 major US desktop sites, Q4 2025 (Google 73.7 %, commerce ~10 %, social 5.5 %, AI tools 3.2 %); relays a Seer Interactive case (one brand) and Foundation Inc (8,566 keywords, 14 B2B SaaS domains).
+[^sp-affinity-vs-traffic]: Fractl (a digital PR agency) on the SparkToro blog, 2026-06-17: SparkToro affinity data, 8 industries, aggregate, sample undisclosed; relays Muck Rack 2025 and Stacker.

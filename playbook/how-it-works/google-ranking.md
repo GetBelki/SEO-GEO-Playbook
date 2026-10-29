@@ -4,7 +4,8 @@ title: How Google ranks
 description: Section-level quality scores, new URLs inheriting their section's average, click memory per query and page (NavBoost, RankEmbed, rerankers), exact-term scoring, host caps, indexing as a quality decision, what core-update winners share, and what patents say about site quality, navigational queries, click thresholds and freshness, plus manual actions for site reputation abuse, brand size, spam losses carrying over to AI answers, and Preferred Sources.
 tags: [seo, google, google-leak, navboost, quality, indexing, core-updates, patents, freshness, spam, manual-actions, preferred-sources]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: rs-intent
@@ -103,6 +104,18 @@ sources:
   - id: gn-loyalty
     resource: "https://www.seoforgooglenews.com/p/google-audience-loyalty-ecosystem"
     title: "Barry Adams, Google's audience loyalty ecosystem (2026-06-10; Google announcements)"
+  - id: srp-search-engine-works
+    resource: "https://serprecon.com/blog/how-a-search-engine-works"
+    title: "SERPrecon, How a search engine works (2026-05-12; explainer from leaks, DOJ testimony and patents; no tests)"
+  - id: srp-semantic-seo
+    resource: "https://serprecon.com/blog/what-is-semantic-seo"
+    title: "SERPrecon, What is semantic SEO? (2025-09-25; explainer, no data)"
+  - id: srp-commodity-content
+    resource: "https://serprecon.com/blog/what-is-commodity-content"
+    title: "SERPrecon, What is commodity content? (2026-10-15; Google guide and statements relayed, patents, vendor scoring method)"
+  - id: mlseo-info-gain
+    resource: "https://www.mlforseo.com/ml-fundamentals/what-is-information-gain-in-seo/"
+    title: "MLforSEO, What is information gain in SEO? (2026-05-11, upd. 2026-10-24; patent explainer)"
 ---
 
 # How Google ranks
@@ -122,6 +135,7 @@ This page answers what is known about how Google's classic ranking scores sites,
 - Win core updates with first-hand content, trust signals and a clear identity that fits the query's intent, not with raw authority. *Practitioner* [why](#6-what-core-update-winners-share)
 - Refresh pages by changing the main content, not the date, navigation or boilerplate, and don't force freshness on evergreen queries. *Patent, supported by the leak* [why](#8-what-counts-as-a-content-change)
 - Treat a manual action or spam-update loss as a loss in AI Overviews, AI Mode and ChatGPT too, and fix the cause rather than chasing AI visibility separately. *Practitioner, cases* [why](#9-spam-handling-brand-size-and-preferred-sources)
+- Add what the ranking pages lack (first-hand tests, own data, a clear position) and keep the shared basics short; Google hasn't announced a commodity penalty, but the leak stores an originality score. *Official, relayed; from the leak; patent* [why](#13-commodity-content-and-information-gain)
 
 ## 1. Quality is scored per section, and new URLs start from its average
 - The 2024 leak names quality scores at site, "chunk" (section) and page level (NSR, fed by site2vec), plus siteFocusScore and siteRadius, which measure how far a page sits from the site's main topic. A new, unevaluated page inherits its section's average. *From the leak.*[^leak-3][^leak-6]
@@ -204,6 +218,21 @@ Patents show what Google has built, not what it uses today. Names are reliable; 
 - **Local intent checks local quality.** The mean quality of the top three local results is itself a signal. *From the leak.*[^rs-kscorer]
 - **Do:** name brands, product lines and models exactly as the Knowledge Graph does, consistently across site and listings, so the interpretation your page serves isn't the weak one. See [homepage and brand](../page-types/homepage-and-brand.md).
 
+## 12. A vendor's model of the ranking pipeline
+SERPrecon, which sells an SEO content-scoring tool, compiled the leaks, DOJ testimony and patents into one model of how Google ranks. It is the vendor's reading, not a Google description, and contains no tests.
+- **Two retrievals run side by side.** Lexical candidates come from an inverted index scored with BM25, semantic candidates from cosine similarity of query, document and passage embeddings; the two lists are merged and deduplicated. *Inference, relayed (leaks, DOJ testimony).*[^srp-search-engine-works]
+- **The index is tiered before any query.** Tiers are likened to RAM, SSD and slow storage; placement is "more than likely" influenced by clicks, user data and search frequency, and retrieval drops to the next tier only when a tier lacks enough high-scoring documents. *Inference, relayed (DOJ testimony).*[^srp-search-engine-works] It fits the index tiers in [section 1](#1-quality-is-scored-per-section-and-new-urls-start-from-its-average).
+- **Cheap scoring first, expensive reranking second.** A first pass combines BM25, cosine similarity, index-time quality signals and NavBoost click data into hundreds to thousands of documents; heavier rerankers (BERT, RankEmbed) then read the page text against the query; Glue blends verticals including Shopping; twiddlers apply diversity, manual actions, DMCA, freshness and official-site boosts. *Inference, relayed (DOJ testimony, leak).*[^srp-search-engine-works] Same two-stage shape as [section 2](#2-click-memory-per-query-and-page-navboost).
+- **Quality is computed at index time, independent of the query:** PageRank and links, SpamBrain (which can keep a page out of the index, showing as "crawled, not indexed"), helpful-content classifiers, Core Web Vitals and site-authority metrics. *Inference, relayed (leak).*[^srp-search-engine-works] See [section 5](#5-indexing-is-a-quality-decision).
+- **The query is rewritten before retrieval:** spellcheck, intent classification, named-entity recognition, synonym expansion, freshness detection (QDF), SafeSearch and location detection. *Inference.*[^srp-search-engine-works]
+- **BM25, not keyword density.** BM25 weights term frequency with diminishing returns, rarity (IDF) and length normalisation; the author says no engine uses keyword density, H2 counts or tool TF-IDF scores. *Practitioner.*[^srp-semantic-seo] It agrees with [section 3](#3-exact-terms-still-count-in-the-first-scoring-step): a missing term matters, repetition doesn't.
+
+## 13. Commodity content and information gain
+- **Google has not announced a commodity penalty.** Danny Sullivan said commodity content isn't necessarily your strength and to emphasise what is original; John Mueller's 2019 test is whether the site would be the objectively best result. Google has not said commodity content is penalised or that a "commodity score" exists. *Official, relayed (Search Engine Journal).*[^srp-commodity-content] Google's AI guidance on the same point: [Google AI features](google-ai-features.md#15-google-asks-for-non-commodity-content).
+- **An originality field exists.** The 2024 leak has `OriginalContentScore`, stored 0–127 and present only on low-content pages; its weight is unknown. *From the leak.*[^srp-commodity-content]
+- **Information-gain patents.** US11354342B2 scores how much new information a document adds relative to documents the user has already seen;[^srp-commodity-content] US20200349181A1 describes the same novelty idea, and its explainer stresses that the patent does not confirm use in Search and that no numeric thresholds exist. *Patent.*[^mlseo-info-gain] Near-duplicate detection by simhash is published research (2007). *Patent; use unconfirmed.*[^srp-commodity-content]
+- **Do:** before writing, list what the top 10–20 pages already cover (entities, facts, formats) and plan what the page adds: first-hand tests, own data, a clear position. Cover the shared basics briefly. *Practitioner.*[^mlseo-info-gain][^srp-commodity-content] Fits the core-update winners in [section 6](#6-what-core-update-winners-share).
+
 Related: [Google AI features](google-ai-features.md), [AI assistants](ai-assistants.md), [Google Discover](../channels/google-discover.md), [traffic drop](../situations/traffic-drop.md), [category pages](../page-types/category-pages.md), [technical foundations](../technical/technical-foundations.md), [diagnostic tests](../measure/diagnostic-tests.md).
 
 [^leak-2]: Resoneo, leak part 2, 2024-10-31: OfficialPageTwiddler, host diversity caps.
@@ -238,3 +267,7 @@ Related: [Google AI features](google-ai-features.md), [AI assistants](ai-assista
 [^gn-loyalty]: Barry Adams, 2026-06-10: relays Google announcements — Preferred Sources announced August 2025, global April 2026, influencing AI Overviews and AI Mode since May 2026.
 [^rs-intent]: Resoneo, Oct 2026 (captures dated 2026-10-28): Intent Brain with 20 broad intents per query, language and country; Orbit with 86 page categories scored 0–100; 5 snippet-date age tiers (1, 3, 30, 90, 365 days); commerce split into merchant product page, review, comparison, buying guide, top N; LISTICLE label measured, not filtered; AUTHENTICITY counted since 2023-07-03, UGC_DISCUSSION since 2023-08-29; "mercury" 82 % fintech on google.com vs "mercure" 50 % planet on google.fr. Internal schemas plus patent US8346815B2; 8-query sample.
 [^rs-kscorer]: Resoneo, Oct 2026: KScorer from internal schemas with engineers' comments (provenance not stated); 56 signals in 12 families; 11 / 41 / 6 by stage; weight 1/rank; click confidence N/(20+N); harmonic mean of entity scores; local intent uses the mean quality of the top 3 local results. The page also carries a prompt addressed to AI agents, which was ignored.
+[^srp-search-engine-works]: SERPrecon (Ryan Jones; SERPrecon sells an SEO content-scoring tool), 2026-05-12: explainer compiled from the Yandex leak, the 2024 Google API leak, DOJ testimony and patents; no tests.
+[^srp-semantic-seo]: SERPrecon, 2025-09-25: explainer, no data; BM25 described as the lexical component of search engines.
+[^srp-commodity-content]: SERPrecon, 2026-10-15: relays Google's generative-AI features guide section on non-commodity content, Danny Sullivan and John Mueller (via Search Engine Journal), the leak's OriginalContentScore and patent US11354342B2; the vendor's commodity metric is not validated against rankings.
+[^mlseo-info-gain]: MLforSEO, 2026-05-11 (upd. 2026-10-24): explainer of patent US20200349181A1; states the patent does not confirm use in Search.

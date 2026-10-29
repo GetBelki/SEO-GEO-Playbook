@@ -4,8 +4,8 @@ title: Core update recovery
 description: What to do after losing visibility in a Google core update — confirm the dates and wait out mid-rollout tremors, compare clicks in clean windows, find the loss by directory and page type, compare with what winners and losers share (including intrusive ads and sister sites), treat indexing as a quality signal, tell spam and manual actions from core (feed-generated templates, site reputation abuse), avoid rewrites that only win briefly, watch brand demand and unlinked mentions, and expect the loss to carry into AI answers.
 tags: [seo, core-update, spam-update, recovery, quality, google, diagnosis, brand, pruning, manual-actions, ai-overviews, chatgpt, discover]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: status
@@ -80,6 +80,15 @@ sources:
   - id: lr-gsc-meetup
     resource: "https://lilyray.nyc/what-i-learned-at-the-2025-google-search-central-meetup-in-nyc/"
     title: "Lily Ray, 2025 Google Search Central meetup NYC (2025-03-24; her account of Google staff statements)"
+  - id: sp-5-features
+    resource: "https://sparktoro.com/blog/5-strategic-features-that-predict-survival-in-the-zero-click-era/"
+    title: "SparkToro, 5 strategic features that predict survival in the zero-click era (2026-04-20; relays Zyppy, 400+ sites)"
+  - id: srp-commodity-content
+    resource: "https://serprecon.com/blog/what-is-commodity-content"
+    title: "SERPrecon, What is commodity content? (2026-10-15; Google guide and statements relayed, vendor scoring method)"
+  - id: mlseo-content-audit
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/content-audit/content-audit-template/"
+    title: "ML for SEO, Content audit template (2026-10-24; rules plus synthetic 24-URL site)"
 ---
 
 # Core update recovery
@@ -97,6 +106,7 @@ Use this page once [traffic drop](traffic-drop.md) has ruled out measurement bre
 - **Track branded and navigational demand and unlinked mentions per section, not only links** ([step 6](#6-brand-demand-and-mentions)). *Patent.*
 - **If a spam update overlaps, check the Manual actions report and any feed-generated or programmatic templates first** — site reputation abuse is handled by manual actions, and the August 2026 spam update hit feed-built category and product pages ([step 5](#5-recovery-time-spam-vs-core-and-what-not-to-do)). *Google staff, relayed; practitioner, 4 cases.*
 - **Expect a Google loss to show up in AI answers too**, and fix the affected section rather than chasing AI visibility separately ([step 7](#7-losses-carry-into-ai-answers)). *Practitioner cases.*
+- **Check lost sections for commodity content and run fixed audit rules** (decay = clicks down 30 % or more) instead of rewriting everything ([step 8](#8-commodity-content-and-audit-rules)). *Official, relayed; Practitioner.*
 
 ## Steps
 1. **Dates:** look up start and end in the [timeline](../reference/google-updates-timeline.md#updates); note overlapping updates ([patterns](../reference/google-updates-timeline.md#patterns)).
@@ -106,7 +116,7 @@ Use this page once [traffic drop](traffic-drop.md) has ruled out measurement bre
 5. **Lost queries:** who took them, and what kind of source they are ([test 1](../measure/diagnostic-tests.md#1-exact-term-gap-on-lost-queries)).
 6. **Indexing by page type** ([test 8](../measure/diagnostic-tests.md#8-indexed-pages-by-page-type)).
 7. **Spam or core?** If a spam update overlapped, check the spam policies first, the Manual actions report and any feed-generated templates ([step 5](#5-recovery-time-spam-vs-core-and-what-not-to-do)).
-8. **Fix** the losing sections against the winner traits: consolidate thin URL sets, improve the pages people use, fix trust signals ([product pages](../page-types/product-pages.md), [category pages](../page-types/category-pages.md)).
+8. **Fix** the losing sections against the winner traits, after checking them for commodity content and running the audit rules ([step 8](#8-commodity-content-and-audit-rules)): consolidate thin URL sets, improve the pages people use, fix trust signals ([product pages](../page-types/product-pages.md), [category pages](../page-types/category-pages.md)).
 9. **Track** monthly against a control section, and re-check after each later core update — including the share of branded and navigational queries per section and unlinked brand mentions ([step 6](#6-brand-demand-and-mentions)), and AI Overview, AI Mode and ChatGPT visibility for the affected section ([step 7](#7-losses-carry-into-ai-answers)).
 
 ## 1. Confirm and measure cleanly
@@ -126,7 +136,7 @@ Use this page once [traffic drop](traffic-drop.md) has ruled out measurement bre
 - **Trust.** Shops that recovered fixed customer service, navigation and checkout, and off-site reputation; the rater guidelines call reliable customer service vital for online stores.[^mh-dec2025]
 - **Brand identity.** In March 2026, brands with product identity gained (Hermès +99.8 %) while retailers competing on broad category demand lost (Wayfair −37.4 %).[^aleyda-mar2026] A risk for multi-brand shops on generic queries.
 - **Intent and market fit.** In May 2026 the source type that fits the query and market won; UK local marketplaces gained about 21–23 % while their US .com versions fell about 54 %.[^aleyda-may2026]
-- **Assets.** Across 400 sites, proprietary assets (+92 %), task completion (+83 %) and a product offering (+70 %) predicted organic gains. *Relayed.*[^ignite-news]
+- **Assets.** Across 400 sites, proprietary assets (+92 %), task completion (+83 %) and a product offering (+70 %) predicted organic gains. *Relayed.*[^ignite-news] As relayed by SparkToro (which sells audience research), sites with none of five traits (product, task completion, proprietary assets, tight topical focus, strong brand) gained in 13.5 % of cases, with four traits 68.1 % and with five 69.7 %. *Measured, relayed.*[^sp-5-features]
 - **What losers share.** Sites with aggressive ads (content-blocking video pop-ups) lost; sister sites on shared technical, ad or affiliate setups moved together. *Practitioner, cases.*[^gg-may2026][^gg-dec2025] **Do:** include intrusive-ad UX in the quality check, and if you run several sites on one setup, check them together.
 
 ## 4. Indexing is part of the verdict
@@ -151,6 +161,12 @@ Pruning inside a category can hurt its head terms: clients who deleted low-perfo
 ## 7. Losses carry into AI answers
 - After a scaled-content manual action removed an 850K-URL AI-generated directory, its ChatGPT citations mostly disappeared and its AI Overview and AI Mode visibility fell; the rest of the site was unaffected. Spam-update losers also dropped in AI Overviews and AI Mode. *Practitioner cases.*[^gg-mtai][^gg-spam]
 - **Do:** expect a Google loss to show up in AI answers for the same section; fix the section in Google rather than chasing AI visibility separately, and track AI visibility for the affected section alongside clicks ([AI visibility tracking](../measure/ai-visibility-tracking.md), [Google AI features](../how-it-works/google-ai-features.md), [AI assistants](../how-it-works/ai-assistants.md)).
+
+## 8. Commodity content and audit rules
+- **Commodity content.** Google's guide for generative-AI search has a section on creating "non-commodity content"; Danny Sullivan said commodity content isn't necessarily your strength, and John Mueller (2019) framed the test as whether the site would be the objectively best result. Google hasn't said commodity content is penalised or that a commodity score exists. *Official, relayed.*[^srp-commodity-content] (SERPrecon sells a commodity-scoring tool.) How to de-commoditise a page: [product pages](../page-types/product-pages.md#4-answer-will-it-fit).
+- **Replaceable models.** SparkToro's Rand Fishkin argues that tactical SEO can't save a site whose business model a search engine or AI can replace; survival needs products, tools or data. *Practitioner.*[^sp-5-features]
+- **Audit with fixed rules.** Flag decay (clicks down 30 % or more between two consecutive 3-month periods, for pages with at least 20 clicks before), striking distance and thin pages with demand, then decide redirect, merge, update or prune in a fixed order. *Practitioner.*[^mlseo-content-audit] (ML for SEO sells courses.) Rules and the pruning order: [scaling content and templates](scaling-content-and-templates.md#11-content-audit-rules).
+- **Do:** for each lost section, ask what it offers that competitors don't; if the answer is nothing, add own data, tests or tools before rewriting text.
 
 Related: [Google ranking](../how-it-works/google-ranking.md), [traffic drop](traffic-drop.md), [seasonal peaks](seasonal-peaks.md), [diagnostic tests](../measure/diagnostic-tests.md).
 
@@ -178,3 +194,6 @@ Related: [Google ranking](../how-it-works/google-ranking.md), [traffic drop](tra
 [^gg-may2026]: Glenn Gabe, 2026-06-10: May 2026 core update visible ~48 h in, mid-rollout tremors, Discover losses at the final tremor; unconfirmed January 2026 update not recovered by May; sister sites moved together; aggressive ads lost; quotes Google on Discover's "minimal overlap with Search ranking".
 [^gg-dec2025]: Glenn Gabe, 2026-01-07: December 2025 core update, tremor on 20 December; 3,000+ tracked sites, qualitative.
 [^lr-gsc-meetup]: Lily Ray, 2025-03-24: her account of Google staff statements at the Search Central meetup NYC, March 2025 — site reputation abuse via manual actions, only third-party content abusing host signals, freelancers not a violation.
+[^sp-5-features]: SparkToro (Rand Fishkin), 2026-04-20: relays Cyrus Shepard/Zyppy, 400+ sites, 2024–2026 YoY Google traffic; win rate 13.5 % with 0 traits, ~15 % with 1, 68.1 % with 4, 69.7 % with 5; Fishkin's view that tactical SEO can't save a replaceable business model. Video transcript; figures approximate.
+[^srp-commodity-content]: SERPrecon, 2026-10-15: relays Google's generative-AI guide ("non-commodity content"), Danny Sullivan via Search Engine Journal and John Mueller (2019); Google hasn't said commodity content is penalised or that a commodity score exists; de-commoditising procedure. Vendor sells a commodity-scoring tool; no validation data.
+[^mlseo-content-audit]: ML for SEO, 2026-10-24: rule order, first match wins; decay = clicks −30 % or more between two consecutive 3-month Search Console periods (≥20 clicks earlier); striking distance = position 4–20 with ≥200 impressions; thin = <300 words with demand; prune if <10 clicks, <200 impressions, <20 sessions and no key events. Demonstrated on a synthetic 24-URL site.

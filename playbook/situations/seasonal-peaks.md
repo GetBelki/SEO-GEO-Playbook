@@ -4,8 +4,8 @@ title: Seasonal peaks
 description: Preparing for Black Friday, Christmas and other peaks — evergreen URLs with the year in title and H1, pages kept between seasons, publishing ~6 months ahead, branded promo intents, Merchant Center promotions, measurement around peaks, update rollouts that land in peak season, and real dated refreshes for AI rerankers that favour recent pages.
 tags: [seo, seasonal, black-friday, christmas, merchant-center, promotions, measurement, core-update, freshness, chatgpt]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: seasonal
@@ -41,6 +41,12 @@ sources:
   - id: mt-recency
     resource: "https://metehan.ai/blog/i-found-it-in-the-code-science-proved-it-in-the-lab-the-recency-bias-thats-reshaping-ai-search/"
     title: "Metehan Yeşilyurt, Recency bias in AI search (2025-10-03; config + Fang et al. arXiv:2509.11353, 7 LLMs)"
+  - id: dbb-ecom-seo
+    resource: "https://www.debugbear.com/blog/ecommerce-website-seo"
+    title: "DebugBear, The complete guide to ecommerce SEO in 2026 (2026-02-04, upd. 2026-04-24; practitioner guide)"
+  - id: sp-skincare-bf
+    resource: "https://sparktoro.com/blog/how-wed-market-a-400-skincare-device-before-black-friday/"
+    title: "SparkToro, How we'd market a $400 skincare device before Black Friday (2026-08-25; worked example)"
 ---
 
 # Seasonal peaks
@@ -50,7 +56,7 @@ Use this page when planning a recurring peak — Black Friday or Black Week, Chr
 ## Rules
 - **Give every seasonal page one evergreen URL with no year in the slug**; the year goes in title and H1 ([section 1](#1-one-url-that-lives-all-year)). *Practitioner.*
 - **Keep seasonal pages live between seasons and update them each year** — never delete them after the campaign ([section 1](#1-one-url-that-lives-all-year)). *Practitioner; official on 404s.*
-- **Publish or refresh about six months before the peak**, and plan from at least 16 months of data ([section 1](#1-one-url-that-lives-all-year)). *Practitioner.*
+- **Publish or refresh about six months before the peak** — for Black Friday, indexed by summer — and plan from at least 16 months of data ([section 1](#1-one-url-that-lives-all-year), [section 6](#6-indexed-before-interest-rises)). *Practitioner.*
 - **Give branded promo questions their own answer pages** — discount codes, student discounts, sale dates ([section 2](#2-branded-promo-intents-and-merchant-center)). *Practitioner.*
 - **Run long-lived promotions through Merchant Center**, not only on the site ([section 2](#2-branded-promo-intents-and-merchant-center)). *Practitioner how-to.*
 - **Compare peaks with the same weeks of last year, aligned by week**, after listing breaks like a paused feed ([section 3](#3-measuring-around-a-peak)). *Practitioner; field notes.*
@@ -60,11 +66,12 @@ Use this page when planning a recurring peak — Black Friday or Black Week, Chr
 ## Steps
 1. **~6 months ahead:** review the last 16+ months of Search Console for seasonal queries and pages; list which seasonal pages exist, which 404 and which carry a year in the slug.
 2. **Fix URLs:** move dated pages to one evergreen path with single-hop 301s; restore deleted pages that still earn impressions ([migration](migration.md)).
-3. **Refresh content:** update title, H1 (with the year), dates, the factual opening and the offer; keep internal links from navigation and category pages ([category pages](../page-types/category-pages.md)). Show a visible updated date that matches the real edit ([section 5](#5-fresh-dates-for-ai-answers)).
-4. **Brand intents:** check where "[brand] discount code", "[brand] Black Friday" and similar queries land; build a policy page if they land on a form ([homepage and brand](../page-types/homepage-and-brand.md)).
-5. **Feeds:** set up Merchant Center promotions and sale prices; check feed links and that no feed pause is planned ([feeds and Merchant Center](../channels/feeds-and-merchant-center.md)).
-6. **Before the peak:** write down every planned tracking, checkout or feed change and check the [update timeline](../reference/google-updates-timeline.md#updates).
-7. **After the peak:** compare the same weeks year on year; keep the page live and note what to change next year.
+3. **By mid-summer for Black Friday:** seasonal hub and comparison pages live and indexed ([section 6](#6-indexed-before-interest-rises)).
+4. **Refresh content:** update title, H1 (with the year), dates, the factual opening and the offer; keep internal links from navigation and category pages ([category pages](../page-types/category-pages.md)). Show a visible updated date that matches the real edit ([section 5](#5-fresh-dates-for-ai-answers)).
+5. **Brand intents:** check where "[brand] discount code", "[brand] Black Friday" and similar queries land; build a policy page if they land on a form ([homepage and brand](../page-types/homepage-and-brand.md)).
+6. **Feeds:** set up Merchant Center promotions and sale prices; check feed links and that no feed pause is planned ([feeds and Merchant Center](../channels/feeds-and-merchant-center.md)).
+7. **Before the peak:** write down every planned tracking, checkout or feed change and check the [update timeline](../reference/google-updates-timeline.md#updates).
+8. **After the peak:** compare the same weeks year on year; keep the page live and note what to change next year.
 
 ## 1. One URL that lives all year
 - **Evergreen slugs** (`/black-friday/`, not `/black-friday-2024/`). Keep the page between seasons and update content and metadata each year; the year goes in title and H1, where searchers use it. Publish ~6 months before the peak; analyse ≥ 16 months of data. *Practitioner.*[^seasonal]
@@ -93,6 +100,11 @@ From the dashboard's ranking history:[^status]
 - ChatGPT's search config (Aug 2025) sets `use_freshness_scoring_profile: true`. *From code.*[^mt-config] In a peer study, LLM rerankers shifted their top 10 toward newer dates by +0.82 to +4.78 years from injected dates alone, with up to 95-rank jumps and 8.25–25.23 % preference reversals. *Measured, 7 LLMs.*[^mt-recency]
 - **Do:** before each peak, refresh gift guides and seasonal hubs with real changes (this year's range, prices, dates) and show the updated date visibly; never change a date without changing the content ([comparison pages and guides](../page-types/comparison-and-guides.md#4-one-topic-in-depth-dated-honestly)). How assistants weigh freshness: [AI assistants](../how-it-works/ai-assistants.md#8-assistants-cite-fresher-content-than-search).
 
+## 6. Indexed before interest rises
+- **Black Friday starts in summer.** Search interest in Black Friday rises from summer, so the pages must be indexed before then. *Practitioner.*[^dbb-ecom-seo] (DebugBear sells performance monitoring.) That fits the six-month lead time in [section 1](#1-one-url-that-lives-all-year).
+- **A phased plan.** SparkToro (which sells audience research) laid out a worked example for a premium device: August–September evidence content and seeding with editors and reviewers; September–October borrowed trust (editorial, YouTube, experts); October to early November comparison pages against the main competitor and monitoring of the questions asked in AI assistants and on Reddit; Black Friday itself only paid, email and affiliates to close. *Practitioner; vendor's worked example.*[^sp-skincare-bf]
+- **Do:** have the seasonal hub and its comparison pages live and indexed by mid-summer; schedule evidence and comparison content in the months before, not in Black Friday week ([comparison pages and guides](../page-types/comparison-and-guides.md)).
+
 Related: [page types: comparison and guides](../page-types/comparison-and-guides.md), [Google updates timeline](../reference/google-updates-timeline.md).
 
 [^seasonal]: Searchind, seasonal SEO, read 2026-10-27: evergreen URLs, keep pages between seasons, ~6 months ahead, ≥ 16 months of data.
@@ -106,3 +118,5 @@ Related: [page types: comparison and guides](../page-types/comparison-and-guides
 [^status]: Google Search Status Dashboard, Ranking history and incident pages (`https://status.search.google.com/incidents/<id>`), read 2026-10-27. Durations are rounded to whole days except under one day. End of the Oct 2023 spam update is logged 19 Oct 22:15 PT; its note says complete as of 20 Oct.
 [^mt-config]: Metehan Yeşilyurt, 2025-08-20: ChatGPT search configuration from the page source of one Plus session; may be stale. Author works at Peec AI.
 [^mt-recency]: Metehan Yeşilyurt, 2025-10-03, citing Fang et al. (arXiv:2509.11353): 7 LLM rerankers, injected dates shift top-10 by +0.82 to +4.78 years, up to 95-rank jumps, 8.25–25.23 % preference reversals.
+[^dbb-ecom-seo]: DebugBear, 2026-02-04 (upd. 2026-04-24): practitioner guide; restrictive facets only, sort parameters rarely rank, crawlable pagination (rel next/prev dropped by Google 2019, used by Bing); out-of-stock handling; Black Friday interest rises from summer.
+[^sp-skincare-bf]: SparkToro, 2026-08-25: worked example for a $469.99 LED mask using SparkToro's own audience data; phases Aug–Sep, Sep–Oct, Oct–early Nov, Black Friday. Vendor sells audience research.

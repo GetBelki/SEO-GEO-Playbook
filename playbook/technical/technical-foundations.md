@@ -1,11 +1,11 @@
 ---
 type: Checklist
 title: Technical foundations (Google's official rules)
-description: Google's documented rules for the technical basics that decide what gets crawled, indexed and shown — faceted navigation, canonicals, site moves, product variants, pagination, crawl budget, JavaScript, structured data policies, Core Web Vitals, hreflang and link spam — plus labelled additions on rendering checks, 404 vs 410 vs 301, URL hierarchy, server location, Gemini reading the indexed copy, Chrome-side AI features, Google-selected canonicals carrying over to ChatGPT, the Removals tool, PDF deindexing, viewport and CSS rendering pitfalls, signal drift between outputs, and semantic landmarks.
-tags: [seo, technical-seo, google, crawling, indexing, canonical, migration, hreflang, structured-data, core-web-vitals, rendering, status-codes, url-structure, hosting, pdf, lazy-loading, semantic-html, ecommerce]
+description: Google's documented rules for the technical basics that decide what gets crawled, indexed and shown — faceted navigation, canonicals, site moves, product variants, pagination, crawl budget, JavaScript, structured data policies, Core Web Vitals, hreflang and link spam — plus labelled additions on rendering checks, 404 vs 410 vs 301, URL hierarchy, server location, Gemini reading the indexed copy, Chrome-side AI features, Google-selected canonicals carrying over to ChatGPT, the Removals tool, PDF deindexing, viewport and CSS rendering pitfalls, signal drift between outputs, semantic landmarks, and HTML size limits for Googlebot and Bing.
+tags: [seo, technical-seo, google, crawling, indexing, canonical, migration, hreflang, structured-data, core-web-vitals, rendering, status-codes, url-structure, hosting, pdf, lazy-loading, semantic-html, html-size, cdn, ecommerce]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: g-facets
@@ -86,11 +86,23 @@ sources:
   - id: gn-html
     resource: "https://www.seoforgooglenews.com/p/why-semantic-html-matters-for-seo"
     title: "Barry Adams, Why semantic HTML matters for SEO and AI (2025-08-06; practitioner)"
+  - id: wd-html
+    resource: "https://web.dev/learn/performance/general-html-performance"
+    title: "web.dev (Google Chrome team), General HTML performance considerations (2023-11-01; guidance)"
+  - id: dbb-2mb
+    resource: "https://www.debugbear.com/blog/googlebot-crawler-file-size-limit"
+    title: "DebugBear, What Googlebot's 2MB Crawl Size Limit Means For SEO (2026-02-16; Google docs, forum report, author's own URL Inspection tests)"
+  - id: dbb-cdn-seo
+    resource: "https://www.debugbear.com/blog/cdn-seo"
+    title: "DebugBear, Can A Content Delivery Network Boost Website SEO? (2026-05-04; explainer)"
+  - id: dbb-psi
+    resource: "https://www.debugbear.com/blog/pagespeed-insights"
+    title: "DebugBear, How To Use PageSpeed Insights (2025-03-09, upd. 2026-10-08; explainer)"
 ---
 
 # Technical foundations (Google's official rules)
 
-These are Google's own documented rules, so they rank above every practitioner claim in this playbook ([confidence scale](../reference/sources-and-confidence.md)). The topic list follows the gaps found against the LearningSEO roadmap.[^learningseo] Quotes were extracted on 2026-10-27; spot-check the live page before quoting it in a decision, since Google edits these docs often (the update dates are in the sources). Sections 12–23 add practitioner, patent and from-code material next to these rules; each item there carries its own, lower confidence label.
+These are Google's own documented rules, so they rank above every practitioner claim in this playbook ([confidence scale](../reference/sources-and-confidence.md)). The topic list follows the gaps found against the LearningSEO roadmap.[^learningseo] Quotes were extracted on 2026-10-27; spot-check the live page before quoting it in a decision, since Google edits these docs often (the update dates are in the sources). Sections 12–24 add practitioner, patent and from-code material next to these rules; each item there carries its own, lower confidence label.
 
 ## Rules
 - **Keep facet URLs out of the crawl with a robots.txt disallow**, and open only filter combinations with real search demand, using `&` separators, a fixed order and a 404 for empty results. *Official* — [evidence](#1-faceted-navigation)
@@ -125,7 +137,7 @@ These are Google's own documented rules, so they rank above every practitioner c
 
 ## 3. Site moves and URL renames
 - "It's important to map your old site's URLs to the URLs for the new site"; use the map to update internal links and sitemaps.[^g-site-move]
-- "Use HTTP permanent redirects if possible, such as 301 and 308" — server-side, no chains. Keep them "for as long as possible, generally at least 1 year".[^g-site-move]
+- "Use HTTP permanent redirects if possible, such as 301 and 308" — server-side, no chains. Keep them "for as long as possible, generally at least 1 year".[^g-site-move] web.dev adds the speed side: each redirect costs a request, so link straight to the final URL, including the right trailing-slash form (HTTP→HTTPS then slash is a typical chain). *Official.*[^wd-html]
 - New URLs: self-canonical, updated hreflang, temporary noindex removed; submit the new sitemap (redirect warnings on the old one can be ignored during the move).[^g-site-move]
 - Change of Address in Search Console is for domain or subdomain moves only — not for HTTP→HTTPS, www or path changes.[^g-site-move]
 - Expect "a few weeks or more" for a medium site until the new URLs show; larger sites take longer.[^g-site-move]
@@ -168,7 +180,7 @@ These are Google's own documented rules, so they rank above every practitioner c
 | INP (responsiveness) | ≤ 200 ms | ≤ 500 ms | > 500 ms |
 | CLS (layout stability) | ≤ 0.1 | ≤ 0.25 | > 0.25 |
 
-Measured at "the 75th percentile of page loads, segmented across mobile and desktop". Search Console uses the last 28 days, and a URL group's status "defaults to the slowest status assigned to it for that device type".[^g-cwv] For AI crawlers, timeouts matter more than these scores ([page reliability](../how-it-works/ai-assistants.md)). Caching headers, fonts and navigation that move these numbers: [performance and caching](performance-and-caching.md).
+Measured at "the 75th percentile of page loads, segmented across mobile and desktop". Search Console uses the last 28 days, and a URL group's status "defaults to the slowest status assigned to it for that device type".[^g-cwv][^dbb-psi] For AI crawlers, timeouts matter more than these scores ([page reliability](../how-it-works/ai-assistants.md)). Caching headers, fonts and navigation that move these numbers: [performance and caching](performance-and-caching.md).
 
 ## 10. International and hreflang
 - HTML link elements, HTTP headers or the sitemap: "The three methods are equivalent".[^g-hreflang]
@@ -201,6 +213,7 @@ Measured at "the 75th percentile of page loads, segmented across mobile and desk
 ## 15. Hosting and server location
 - "With regards to SEO, the server's location is not used for geotargeting" (Mueller, relayed). *Official statement, relayed.*[^bc-servers] Geotargeting comes from [hreflang](#10-international-and-hreflang) and content.
 - Speed still pays: a Deloitte study ("Milliseconds Make Millions") found a 0.1 s mobile speed gain went with ≈ 10 % more retail spend. *Measured, relayed.*[^bc-servers]
+- A CDN doesn't directly boost rankings; it lowers TTFB and LCP, keeps the site up under traffic spikes and makes crawling cheaper. *Practitioner, vendor data.*[^dbb-cdn-seo] Caching HTML at the edge: [performance and caching](performance-and-caching.md#3-cdn-notes).
 - **Do:** don't move hosting for SEO when entering a new market ([new market](../situations/new-market.md)); use a CDN for latency.
 
 ## 16. Gemini reads the indexed copy
@@ -249,6 +262,15 @@ Watch only; none of these is a ranking rule.
 - LLM fetchers other than Gemini don't render JavaScript ([section 7](#7-javascript)), so the HTML structure is what they parse: one `<h1>` at the start of the main content, `<article>` around headline and body, `<aside>` for sidebars and recommendations, real `<p>`, lists and `<a href>` links.
 - **Do:** wrap the main content of product, category and guide templates in `<main>` (and `<article>` where it is one piece of content); put cross-sell, "customers also bought" and recommendation blocks in `<aside>`, so parsers can separate the page's own content from the rest. *Practitioner; transfer from editorial to shop templates is inference.*
 
+## 24. HTML size limits
+*Measured and relayed by DebugBear, a vendor that sells performance monitoring.*
+- Google's Googlebot docs now list a 2 MB limit on uncompressed HTML (previously 15 MB; changed around February 2026 without an announcement). Each subresource is fetched separately under the same limit; PDFs are excepted. *Official (Google docs), relayed.*[^dbb-2mb]
+- Few pages come near it: median uncompressed HTML is ~20 KB, the 90th percentile ~392 KB. Bing has a 1 MB soft limit ("HTML size is too long" in Bing Webmaster Tools), and Bing problems also reach DuckDuckGo. *Measured, relayed (Dave Smart analysis).*[^dbb-2mb]
+
+> **Conflict:** Google's documentation and a forum report (truncation at ~1.9 MB) point to a hard 2 MB cut-off, but the author's own URL Inspection live tests did not truncate pages above 2 MB; enforcement is unclear. — [details](../reference/conflicts.md#is-the-2-mb-html-limit-enforced)
+
+- **Do:** keep category and product HTML well under 1 MB uncompressed (for Bing); move base64-inlined images and fonts and large inline JSON state into separate files; check the largest templates (long category pages, product pages with many variants) in Bing Webmaster Tools. *Practitioner; thresholds from the sources, template choice inference.*[^dbb-2mb]
+
 Related: [migration](../situations/migration.md), [AI crawlers and controls](ai-crawlers-and-controls.md), [performance and caching](performance-and-caching.md), [Search Console](../measure/search-console.md), [diagnostic tests](../measure/diagnostic-tests.md), [category pages](../page-types/category-pages.md).
 
 [^learningseo]: LearningSEO.io, read 2026-10-27: section map used as a gap checklist; its migration, pagination and ecommerce sections link practitioner guides, so the Google docs were read directly.
@@ -277,3 +299,7 @@ Related: [migration](../situations/migration.md), [AI crawlers and controls](ai-
 [^ja-cloak]: Jono Alderson, 2026-10-26: argument on unintended cloaking (tall viewport, `min-height` media queries, `<picture>` sources, CSS content; Google judges by intent); relays Mueller 2017 (~9,000 px, unconfirmed) and Dave Smart's July 2026 test (no 5-second render limit; WRS pauses its virtual clock).
 [^ja-brain]: Jono Alderson, 2026-10-04: worked examples of signal drift (noindex at 09:00 vs midnight sitemap, ~15 h), one record for hreflang, canonicals, availability and feeds; event-driven updates; trace edits before replatforming. No measurements.
 [^gn-html]: Barry Adams, 2025-08-06: semantic HTML for search and LLM parsers (one `<h1>`, `<article>`, `<aside>`, real paragraphs, lists, links; non-Gemini fetchers don't render JS). Publisher-focused practitioner advice.
+[^wd-html]: web.dev, 2023-11-01: avoid redirects and chains (HTTP→HTTPS then trailing slash), link to final URLs; each redirect adds a request. Guidance.
+[^dbb-2mb]: DebugBear, 2026-02-16: Googlebot docs list 2 MB uncompressed HTML (was 15 MB, changed ~Feb 2026), subresources separate, PDFs excepted; forum report of truncation at ~1.9 MB vs the author's URL Inspection tests without truncation; relays Dave Smart (median ~20 KB, p90 ~392 KB); Bing 1 MB soft limit, also affects DuckDuckGo. Vendor blog.
+[^dbb-cdn-seo]: DebugBear, 2026-05-04: a CDN improves TTFB/LCP, reliability and crawl efficiency, no direct ranking boost. Explainer, no before/after data.
+[^dbb-psi]: DebugBear, 2025-03-09 (upd. 2026-10-08): confirms the thresholds and 28-day p75 CrUX window; field data can take 28 days to reflect a fix. Explainer, vendor.

@@ -4,7 +4,8 @@ title: How AI assistants retrieve and cite
 description: What ChatGPT, Gemini, Claude and Perplexity actually read — the ~200 characters after the H1 and per-chunk scores on fetched pages, mostly static HTML (Gemini reads JavaScript content), no schema, discovery, mode and model effects, English fan-out, engines that don't agree, citations outside Google's top 10, fresher content, ChatGPT's search config, rerankers and hybrid retrieval, HTML extraction, shrinking, volatile and site-restricted fan-outs, updated-vs-published recency, what models already know about brands, what academic GEO tests found, and how Perplexity's own index (Photon) ranks pages.
 tags: [geo, chatgpt, gemini, perplexity, claude, crawling, citations, fan-out, schema, freshness, rerankers, reddit, javascript, bing]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: pplx-photon
@@ -169,6 +170,36 @@ sources:
   - id: cc-entity
     resource: "https://www.crystalcarter.ai/post/managing-your-brand-entity-for-generative-search"
     title: "Crystal Carter, Managing your brand entity for generative search (≈2026-03; practitioner)"
+  - id: sp-public-evidence
+    resource: "https://sparktoro.com/blog/if-search-captures-demand-public-evidence-creates-it/"
+    title: "SparkToro, If search captures demand, public evidence creates it (2026-04-01; search-share study, relayed Seer and Foundation data)"
+  - id: sp-search-vs-prompt
+    resource: "https://sparktoro.com/blog/how-much-is-your-audience-searching-google-vs-prompting-ai-tools-sparktoros-answers-just-got-an-upgrade/"
+    title: "SparkToro, How much is your audience searching Google vs prompting AI tools? (2026-03-08; Datos, 41 sites)"
+  - id: sp-track-ai-visibility
+    resource: "https://sparktoro.com/blog/office-hours-can-you-actually-track-ai-visibility/"
+    title: "SparkToro, Office Hours: Can you actually track AI visibility? (2026-05-07; SparkToro x Gumshoe.ai, 142 prompts, 994 runs, 7 model families)"
+  - id: sp-influence-5000
+    resource: "https://sparktoro.com/blog/new-research-influence-happens-everywhere-an-analysis-of-the-5000-most-visited-sites-on-the-mobile-and-desktop-web/"
+    title: "SparkToro, Influence happens everywhere: the 5,000 most-visited sites (2026-03-25; Similarweb, Jan 2026)"
+  - id: sp-similarweb-ai-mentions
+    resource: "https://sparktoro.com/blog/new-research-from-similarweb-how-ai-brand-mentions-influence-direct-visits-traditional-search-queries/"
+    title: "SparkToro with Similarweb, How AI brand mentions influence direct visits and search (2026-06-28; clickstream panel, sample not stated)"
+  - id: sp-ai-boondoggle
+    resource: "https://sparktoro.com/blog/is-ai-visibility-a-marketing-boondoggle/"
+    title: "SparkToro, Is AI visibility a marketing boondoggle? (2026-10-22; review of 4 third-party studies)"
+  - id: sp-click-optional
+    resource: "https://sparktoro.com/blog/zero-click-search-what-still-works/"
+    title: "SparkToro, The click is now optional (2026-06-10; synthesis of SparkToro, Adobe and other data)"
+  - id: sp-affinity-vs-traffic
+    resource: "https://sparktoro.com/blog/audience-affinity-vs-traffic-why-high-affinity-media-belongs-in-your-earned-media-strategy/"
+    title: "Fractl on the SparkToro blog, Audience affinity vs traffic (2026-06-17; SparkToro affinity data, 8 industries)"
+  - id: sp-website-matters
+    resource: "https://sparktoro.com/blog/does-your-website-still-matter-in-the-zero-click-era/"
+    title: "SparkToro, Does your website still matter in the zero-click era? (2026-08-14; opinion)"
+  - id: sp-ultimate-guide
+    resource: "https://sparktoro.com/blog/the-death-of-the-ultimate-guide/"
+    title: "SparkToro, The death of the ultimate guide? (2026-04-27; relays Indig/AirOps, 16,851 queries)"
 ---
 
 # How AI assistants retrieve and cite
@@ -189,6 +220,7 @@ This page answers what ChatGPT, Gemini, Claude and Perplexity actually fetch, re
 - Don't use Google top-10 rankings as a proxy for assistant citations; most cited URLs don't rank for the query. *Measured, vendor data* [why](#7-assistants-cite-outside-googles-top-10)
 - Refresh data-driven, comparison and brand pages with real changes, show a true "updated" date and keep `dateModified` and sitemap `lastmod` accurate; never fake one. *Measured, vendor data; from code; cadence is practitioner* [why](#8-assistants-cite-fresher-content-than-search) · [config](#10-chatgpts-search-configuration)
 - Get your brand known by name in your category, and earn "need or category → brand" statements, because models recall brands they know and add them to their sub-queries. *Practitioner synthesis; research summary* [why](#4-fewer-sources-known-sources-english-queries) · [recall](#14-what-the-model-already-knows)
+- Treat AI assistants as a brand channel, not a traffic channel: search still has ~20× the search activity and AI referrals are small, so report both, and keep your own site the current source of facts. *Measured, vendor data; one case* [why](#17-how-much-people-prompt-versus-search)
 
 ## 1. The opening of the page carries it
 - **ChatGPT** retrieves about 20 pages per answer, shows about 5 and cites about 3; it usually opens none of them. For each candidate the model sees the title, the URL and a **~202-character snippet starting at the H1**. Meta descriptions are ignored. *Measured.*[^chatgpt-retrieval]
@@ -319,6 +351,24 @@ Leaked and dumped configs are snapshots of 2025; values may have changed since.
 - **Do:** use the buyer's exact terms (including attribute words) in the title, headings and the opening passage, rather than repeating the head term. Cover every term of the question a page should answer, so it passes the strict-coverage pass. *Inference from the published ranking design; a practitioner tool vendor gives the same advice.*[^pplx-photon][^serprecon-photon]
 - **Read vendor write-ups carefully.** One SEO tool vendor's summary adds BM25 and "answers quote passages" to Perplexity's design. The post names neither. *Practitioner, vendor.*[^serprecon-photon]
 
+## 17. How much people prompt versus search
+SparkToro sells audience research; most figures below come from clickstream panels (Datos, a Semrush company, and Similarweb).
+- **Search still dwarfs prompting.** Across 41 major US desktop sites in Q4 2025, Google had 73.7 % of searches, traditional engines together ~80 %, commerce sites ~10 %, social 5.5 % and AI tools 3.2 %; Amazon, Bing and YouTube each had more search activity than ChatGPT. *Measured, vendor data.*[^sp-public-evidence]
+- **Not every visit is a prompt.** 97 % of Google's visitors search there, 56 % of ChatGPT's prompt. *Measured, vendor data (Datos, 41 sites).*[^sp-search-vs-prompt] On desktop, AI tools had ~2.9 % of visits vs 34 % for search engines; ChatGPT visits were ~75 % desktop, Google search ~66 % mobile. *Measured, relayed; video transcript.*[^sp-track-ai-visibility] Among the 5,000 most-visited sites, AI tools' share of visits was tiny next to their share of press coverage. *Measured, vendor data.*[^sp-influence-5000]
+- **AI mentions may lift brand visits.** Devices that saw AI answers recommending a credit card brand were more likely to visit it within 7 days (+7.2 % and +14.2 % for two brands). Only large brands in three sectors, and no counterfactual. *Measured, vendor data, sample not stated.*[^sp-similarweb-ai-mentions]
+
+  > **Conflict:** the Similarweb study finds a brand-visit lift after AI recommendations, while Kevin Indig found no reliable correlation between AI visibility and branded or direct traffic on 12 sites.[^sp-ai-boondoggle] — [details](../reference/conflicts.md#do-ai-recommendations-lift-brand-demand)
+- **Small traffic, disputed conversion.** LLMs sent 0.73 % of referral traffic across 100 sites, less than DuckDuckGo, and Google drove 97 % of conversions (Marie Haynes); organic search sent ~39× more traffic than AI (SEOWorks). *Measured, relayed.*[^sp-ai-boondoggle] Adobe reports AI-sourced US retail traffic up almost 400 % year on year and converting ~42 % better. *Measured, relayed.*[^sp-click-optional]
+
+  > **Conflict:** Adobe says AI referrals convert ~42 % better, while SEOWorks found AI converting worse than organic on 23 of 63 sites and Haynes found Google drove 97 % of conversions. — [details](../reference/conflicts.md#does-ai-traffic-convert-better)
+- **Earned media gets cited.** 95 % of AI citations come from non-paid media and 89 % from earned media (Muck Rack); stories distributed through third-party outlets had ~325 % more AI citation visibility than owned-only publishing (Stacker). *Measured, relayed by a digital PR agency.*[^sp-affinity-vs-traffic] Where to earn them: [third-party presence](../channels/third-party-presence.md#16-audience-affinity-and-public-evidence).
+- **Keep the website the current source of facts.** SparkToro found AI answers about its own products were wrong because they drew on old content, and built a new help hub. *Practitioner, one case.*[^sp-website-matters]
+- **Do:** budget AI assistants as a brand channel, not a traffic channel, and report search and AI demand side by side ([AI visibility tracking](../measure/ai-visibility-tracking.md)).
+
+## 18. What ChatGPT's retrieval cites
+- In ChatGPT's retrieval pipeline (16,851 queries, 353,799 pages; Kevin Indig and AirOps), the first retrieved result was cited 58.4 % of the time vs 14.2 % at position 10; heading similarity to the query was the strongest content signal; pages covering 26–50 % of the fan-out subtopics beat pages covering all of them; domain authority and backlinks didn't correlate positively with citation. *Measured, relayed; associations only.*[^sp-ultimate-guide] It supports [section 4](#4-fewer-sources-known-sources-english-queries) on focused pages and authority.
+- **Do:** one clear question per page, with headings that match how the question is asked. *Practitioner.*[^sp-ultimate-guide]
+
 Related: [Google AI features](google-ai-features.md), [Google ranking](google-ranking.md), [third-party presence](../channels/third-party-presence.md), [AI crawlers and controls](../technical/ai-crawlers-and-controls.md), [AI visibility tracking](../measure/ai-visibility-tracking.md).
 
 [^chatgpt-retrieval]: Resoneo × Oncrawl, read 2026-10-27: funnel 58k retrieved → 7.6k shown → 5k cited → 760 opened; ~202-character snippet from the H1; JSON-LD stripped; bot roles and cache; utm on ~95 % of displayed links; instant vs thinking search counts.
@@ -375,3 +425,13 @@ Related: [Google AI features](google-ai-features.md), [Google ranking](google-ra
 [^cc-entity]: Crystal Carter, ≈2026-03: practitioner note on training cut-offs and recent launches.
 [^pplx-photon]: Perplexity Engineering, 2026-09-24: Photon architecture; scoring by "weighted query-term coverage and a frequency contribution", strict then relaxed coverage, "document-length normalization and a cap on gains from repeated terms", per-field passes with field weights, posting lists ordered by "usefulness"; index rebuild in single-digit hours, freshness-sensitive documents in single-digit minutes. Fields and usefulness not specified.
 [^serprecon-photon]: SERPrecon (sells an SEO/GEO measurement tool), 2026-10-14: summary of Perplexity's post plus recommendations; BM25 and passage-level quoting are the author's reading; no own test; case study without method.
+[^sp-public-evidence]: SparkToro, 2026-04-01: share of searches across 41 major US desktop sites, Q4 2025 (Google 73.7 %, commerce ~10 %, social 5.5 %, AI tools 3.2 %); relays a Seer Interactive case (one brand) and Foundation Inc (8,566 keywords, 14 B2B SaaS domains).
+[^sp-search-vs-prompt]: SparkToro, 2026-03-08: Datos (a Semrush company) data on 41 sites with search activity; share of visitors who search or prompt there: Google 97 %, ChatGPT 56 %, Yahoo 35 %.
+[^sp-track-ai-visibility]: SparkToro x Gumshoe.ai (Gumshoe sells AI visibility tracking), 2026-05-07: ~600 volunteers, 142 human-written prompts, 994 runs across 7 model families; average pairwise semantic similarity of prompts 0.0809; Office Hours desktop figures (AI tools ~2.9 % of visits vs search engines 34 %). Video transcript.
+[^sp-influence-5000]: SparkToro, 2026-03-25: Similarweb panel, top 5,000 domains, Jan 2026, apps excluded; Gmail counted as google.com; category shares only in charts.
+[^sp-similarweb-ai-mentions]: SparkToro with Similarweb, 2026-06-28: clickstream panel, sample not stated; 7-day visit lift after an AI recommendation in credit-card answers (American Express +7.2 %, Capital One +14.2 %); only large finance, travel and beauty brands; no counterfactual. Video transcript.
+[^sp-ai-boondoggle]: SparkToro, 2026-10-22: review of studies — Marie Haynes (100 sites, 12 months: LLMs 0.73 % of referral traffic, Google 97 % of conversions), SEOWorks (Sep 2025–Aug 2026: organic ~39× AI traffic; AI converted worse than organic on 23 of 63 sites), Kevin Indig (12 sites: no reliable correlation between AI visibility and branded search or direct traffic). Video transcript; SEOWorks site count given as 95 and as 63.
+[^sp-click-optional]: SparkToro, 2026-06-10: synthesis; SparkToro analysis of 332 million queries (branded ~44 %); relays Adobe Digital Insights Q2 2026 (AI-sourced US retail traffic almost +400 % YoY, converting ~42 % better).
+[^sp-affinity-vs-traffic]: Fractl (a digital PR agency) on the SparkToro blog, 2026-06-17: SparkToro affinity data, 8 industries, aggregate, sample undisclosed; relays Muck Rack 2025 and Stacker.
+[^sp-website-matters]: SparkToro, 2026-08-14: opinion, one case (AI answers about SparkToro's products drew on old content; it built a new help hub).
+[^sp-ultimate-guide]: SparkToro, 2026-04-27: relays Kevin Indig and AirOps, 16,851 queries and 353,799 pages in ChatGPT's retrieval pipeline; associations only.

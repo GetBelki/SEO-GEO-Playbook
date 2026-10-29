@@ -4,27 +4,27 @@ A sourced knowledge base for search (SEO) and AI-search visibility (GEO), writte
 
 You can drop it into any project as a reference that you or your AI agent can rely on. Every claim cites its source and says how strong the evidence is. Where sources disagree, the disagreement is written down instead of quietly settled.
 
-- **35 pages** grouped by task: page types, situations, channels, technical, measurement
-- **45 rules** on one page ([start here](playbook/start-here.md)), each linked to its evidence
-- **29 diagnostic tests** you can repeat on your own data
-- **23 conflicts** where sources disagree, each with the positions, a reading and a working rule
-- **~350 footnoted sources**: Google, OpenAI, Anthropic and other vendor docs, measured studies, leak and trial documents, patents, and practitioner research
+- **36 pages** grouped by task: page types, situations, channels, technical, measurement
+- **49 rules** on one page ([start here](playbook/start-here.md)), each linked to its evidence
+- **35 diagnostic tests** you can repeat on your own data
+- **28 conflicts** where sources disagree, each with the positions, a reading and a working rule
+- **~450 footnoted sources**: vendor documentation from Google, OpenAI, Anthropic and others; Google's web.dev performance course; measured studies and clickstream panels; leak and trial documents; patents; and practitioner research on SEO, analytics, performance and machine-learning methods
 
 ## How the topics fit together
 
 ```mermaid
 flowchart TD
-    START["Start here<br/>45 rules on one page"]
+    START["Start here<br/>49 rules on one page"]
 
     subgraph DO["Do"]
         PT["Page types<br/>product · category · comparison/guide · homepage/brand"]
         SI["Situations<br/>traffic drop · migration · new market ·<br/>seasonal peaks · core update · scaling content"]
         CH["Channels<br/>keywords · feeds · third-party presence ·<br/>links · local · Discover"]
-        TE["Technical<br/>foundations · internal links · titles ·<br/>performance · AI crawlers"]
+        TE["Technical<br/>foundations · internal links · titles ·<br/>performance and Core Web Vitals · AI crawlers"]
     end
 
-    HW["How it works<br/>Google ranking · Google AI features ·<br/>AI assistants · shopping surfaces"]
-    ME["Measure<br/>Search Console · analytics · AI visibility ·<br/>rank tracking · diagnostic tests"]
+    HW["How it works<br/>Google ranking and intent · Google AI features ·<br/>AI assistants incl. Perplexity · shopping surfaces"]
+    ME["Measure<br/>Search Console · analytics · AI visibility ·<br/>rank tracking · ML methods · 35 diagnostic tests"]
     RF["Reference<br/>sources and confidence · conflicts ·<br/>updates timeline · glossary"]
 
     START --> DO
@@ -37,9 +37,45 @@ flowchart TD
 ```
 
 - **Do**: what to change, organised the way work arrives. You either work on a kind of page, deal with a situation, run a channel or fix the technical setup. Each page opens with its rules, then a checklist or steps.
-- **How it works**: the evidence behind the rules, covering how Google ranks, how AI Overviews and AI Mode pick sources, how assistants retrieve and cite, and how shopping surfaces use product data.
-- **Measure**: how to read Search Console, analytics and AI-visibility data correctly, plus repeatable tests that tell you whether a rule holds on your site.
+- **How it works**: the evidence behind the rules. It covers:
+  - how Google ranks and reads intent
+  - how AI Overviews and AI Mode pick sources
+  - how assistants, Perplexity's own index included, retrieve and cite
+  - how shopping surfaces use product data
+- **Measure**: how to read Search Console, analytics, behavioural and AI-visibility data correctly, including:
+  - zero-click rates and margins of error
+  - AI traffic hiding in Direct
+  - machine-learning methods for clustering, audits and redirect maps
+  - repeatable tests that tell you whether a rule holds on your site
 - **Reference**: the source list with a reliability label for each source, the conflicts register, a timeline of Google updates from 2023 to 2026, and a glossary.
+
+## How strong is the evidence?
+
+Every claim carries one of seven confidence labels. Across the playbook, they break down like this:
+
+```mermaid
+pie showData
+    title Claims by confidence label
+    "Practitioner" : 413
+    "Measured" : 391
+    "Official" : 104
+    "Inference" : 63
+    "Patent" : 39
+    "From code" : 29
+    "From the leak" : 28
+```
+
+Most rules rest on measured studies or practitioner experience, and many measured studies come from vendors who sell a related tool; the label says so (*vendor data*). Official documentation tells you what a vendor says its systems do, not what works best. Leak, code and patent claims name real mechanisms whose current weight is unknown.
+
+```mermaid
+flowchart LR
+    S["Source<br/>read in full, URL checked"] --> L["Confidence label<br/>+ footnote"]
+    L --> P["Page section"]
+    P -- "sources disagree" --> C["Conflicts register<br/>positions, reading, working rule"]
+    P -- "important and well supported" --> R["Start-here rule"]
+    C --> R
+    P --> V["Human review<br/>verified stamp"]
+```
 
 ## Add it to your setup
 
@@ -67,8 +103,8 @@ type: Playbook                 # or Guide, Checklist, Reference, Timeline
 title: Category pages
 description: One line, also used in the folder index.
 status: stable                 # draft | stable | deprecated
-generated: { by: …, at: 2026-10-28T12:00:00Z }
-verified: { by: human:…, at: 2026-10-28T13:03:00Z }   # last human review
+generated: { by: …, at: 2026-10-29T08:30:00Z }
+verified: { by: human:…, at: 2026-10-29T08:47:00Z }   # last human review
 
 stale_after: 2027-04-28T00:00:00Z   # re-check after this date
 sources:
@@ -101,7 +137,7 @@ Qualifiers such as *vendor data*, *relayed*, *one case* and *small sample* narro
 ## Scope and limits
 
 - **A snapshot.** The content reflects sources up to **October 2026**. Search changes fast, so each page carries a `stale_after` date and the [log](playbook/log.md) records what changed.
-- **Reviewed, not guaranteed.** Every page is `stable` and has been reviewed by a person (`verified`). The rules are still well-sourced hypotheses: test them on your own data before acting at scale.
+- **Reviewed, not guaranteed.** Every page is `stable` and was reviewed by a person after its last change (`verified`, 29 October 2026). The rules are still well-sourced hypotheses: test them on your own data before acting at scale.
 - **Ecommerce first.** Most of it also applies to publishers, local businesses and SaaS, but the examples and priorities are written for online shops.
 - **Anonymised examples.** The examples come from one German-market online shop (2024–2026). Brand, product and identifying figures have been removed.
 - **Not affiliated** with Google, OpenAI, Anthropic or any source cited. All trademarks belong to their owners. Quotes are short and attributed; for the full argument, follow the footnote to the original.

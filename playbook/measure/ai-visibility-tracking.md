@@ -1,10 +1,11 @@
 ---
 type: Checklist
 title: AI-visibility tracking
-description: How to count AI-assistant traffic and visibility — untagged clicks by design and by accident, Direct spikes that are bots, GA4's AI Assistant channel, one hostname-anchored channel group, the real size of the channel, per-engine reporting, mentions without links, the May 2026 ChatGPT link change, what Bing's AI Performance covers, prompt-tracker pitfalls (personalisation, clean accounts), re-baselining at model changes and fan-out volatility, entity tracking with search on and off, brand-canon accuracy, share of voice beyond presence, and building the prompt set.
+description: How to count AI-assistant traffic and visibility — untagged clicks by design and by accident, Direct spikes that are bots, GA4's AI Assistant channel, one hostname-anchored channel group, the real size of the channel, per-engine reporting, mentions without links, the May 2026 ChatGPT link change, what Bing's AI Performance covers, prompt-tracker pitfalls (personalisation, clean accounts), re-baselining at model changes and fan-out volatility, entity tracking with search on and off, brand-canon accuracy, share of voice beyond presence, building the prompt set, runs and margin of error, AI as a brand channel, dark AI traffic and AI Overview citation tracking.
 tags: [measurement, geo, ga4, chatgpt, ai-assistants, attribution, caveats, prompt-tracking, share-of-voice, brand-accuracy]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: ignite-news
@@ -109,6 +110,24 @@ sources:
   - id: am-unassigned
     resource: "https://www.analyticsmania.com/post/unassigned-in-google-analytics-4/"
     title: "Analytics Mania, Unassigned in GA4 (updated 2026-09-18; plus reader comments)"
+  - id: sp-track-ai-visibility
+    resource: "https://sparktoro.com/blog/office-hours-can-you-actually-track-ai-visibility/"
+    title: "SparkToro, Office Hours: Can you actually track AI visibility? (2026-05-07; SparkToro x Gumshoe.ai, ~600 volunteers, 142 prompts, 994 runs)"
+  - id: mlseo-rank-tracker
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/rank-tracker-ai-search-measurement/"
+    title: "MLforSEO, Your rank tracker is lying to you about AI search (2026-08-03; mostly unsourced figures)"
+  - id: sp-similarweb-ai-mentions
+    resource: "https://sparktoro.com/blog/new-research-from-similarweb-how-ai-brand-mentions-influence-direct-visits-traditional-search-queries/"
+    title: "SparkToro, How AI brand mentions influence direct visits and search (2026-06-28; Similarweb clickstream, sample not stated)"
+  - id: sp-ai-boondoggle
+    resource: "https://sparktoro.com/blog/is-ai-visibility-a-marketing-boondoggle/"
+    title: "SparkToro, Is AI visibility a marketing boondoggle? (2026-10-22; review of 4 third-party studies)"
+  - id: mlseo-dark-ai
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/dark-ai-traffic-hidden-in-direct/"
+    title: "MLforSEO, Dark AI traffic hidden in direct (2026-08-21, updated 2026-10-24; relays Loamly vendor data)"
+  - id: mlseo-aio-tracker
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/track-ai-overviews-python/"
+    title: "MLforSEO, How to track AI Overviews for your keywords (2026-10-24; 29-keyword run, US desktop)"
 ---
 
 # AI-visibility tracking
@@ -125,6 +144,7 @@ How to count the traffic and visibility AI assistants bring, and why the analyti
 - **Sample AI answers every 2–3 days, with several simultaneous runs per prompt drawn from real demand and from category entry points,** and report presence % with share of voice next to it, not position. *Measured, vendor data; practitioner* — [section 7](#7-how-to-track), [section 10](#10-what-prompt-trackers-dont-tell-you), [section 14](#14-share-of-voice-not-only-presence), [section 15](#15-building-the-prompt-set)
 - **Track from clean, unconnected, logged-out accounts and label it a non-personalised baseline;** ask vendors for model, version and access method (API or app). *Measured, relayed* — [section 10](#10-what-prompt-trackers-dont-tell-you)
 - **Keep a brand canon of checkable facts and track accurate, wrong and no-answer rates,** fixing wrong facts on your own site and profiles first. *Measured, one brand* — [section 13](#13-brand-canon-accurate-wrong-no-answer)
+- **Publish the margin and read AI as a brand channel:** state run counts and ± points per pass (one pass of 490 results ≈ ±5 points), and judge AI visibility by correlation with branded search and Direct rather than by referral traffic. *Measured, vendor data; practitioner* — [section 16](#16-runs-phrasings-and-margin-of-error), [section 17](#17-ai-as-a-brand-channel)
 - **Split AI referrals by landing-page type** (homepage, category, product, content); a link-format change can move them between types overnight. *Measured, agency sample* — [section 8](#8-chatgpt-link-change-may-2026)
 
 ## 1. Untagged by design
@@ -147,7 +167,7 @@ How to count the traffic and visibility AI assistants bring, and why the analyti
 - **Email tools with non-standard mediums** (e.g. `campaign`/`flow` instead of `email`) fall into "Unassigned" too.
 
 ## 5. Scale of the channel
-- Across 100 GA4 properties and >145M sessions over 12 months, ChatGPT brought 0.62 % as many sessions as Google organic, all assistants 0.73 %. Of 55 sites tracking conversions, ChatGPT sessions converted at 13.8 % vs 3.02 % for Google organic, but Google organic still drove 96.5 % of the conversions. ChatGPT referrals plateaued after August 2025. *Measured, one author, method not published.*[^mh-geo]
+- Across 100 GA4 properties and >145M sessions over 12 months, ChatGPT brought 0.62 % as many sessions as Google organic, all assistants 0.73 %.[^sp-ai-boondoggle] Of 55 sites tracking conversions, ChatGPT sessions converted at 13.8 % vs 3.02 % for Google organic, but Google organic still drove 96.5 % of the conversions. ChatGPT referrals plateaued after August 2025. *Measured, one author, method not published.*[^mh-geo]
 - In panel data for 40 US sites, AI traffic was about 0.19 % of visits against about 20.45 % organic (shopping/retail: 0.18 % vs 21.79 %); AI Mode was 8.1 % of retail AI traffic.[^aleyda-traffic]
 - **AI Mode sends few clicks.** Under ~3 % of AI Mode searches led to an external click in a 100K-user panel (May – Aug 2025), flat over the period; top destinations were Reddit, YouTube, Wikipedia, Amazon and Facebook.[^ipr-aimode-referrals]
 - Whether assistant traffic converts better is disputed: 13.8 % vs 3.02 % in the sample above, but parity for ecommerce (1.01×) across 78 GA4 properties.[^siege-conversion] Report sessions and conversions side by side, per vertical.
@@ -222,6 +242,37 @@ A review of vendor studies, plus own Bing data. *Measured, relayed vendor studie
 - **Size AI use per audience before setting KPIs.** In SparkToro audience data relayed by one practitioner, "programming" searchers were 111.7 % more likely than average US users to use ChatGPT for search, while ChatGPT wasn't among the top seven discovery channels for "potatoes" searchers. *Relayed vendor data.*[^cc-kpis] Check how much your buyers use assistants before setting AI-visibility targets.
 - Other seeds: Search Console queries rewritten conversationally ([Search Console](search-console.md#12-bot-like-llm-query-bursts)); runs and sizing in [test 9](diagnostic-tests.md#9-prompt-tracking-per-engine).
 
+## 16. Runs, phrasings and margin of error
+From SparkToro (which sells audience research) with Gumshoe.ai (which sells AI-visibility tracking): ~600 volunteers over 5 surveys and 3 months, 142 human-written prompts, 994 runs across 7 model families.[^sp-track-ai-visibility]
+- **Lists don't repeat; presence does.** Getting the same brand list twice took ~124 runs and the same brands in the same order ~1,429 (one prompt). Yet the average visibility of the top 3 brands was stable: ChatGPT 64 %, Claude 73 %, Google AI 68 % (SD ~20 %). One hospital appeared in 69 of 71 ChatGPT answers but ranked first in only about a third. B2B prompts showed much lower visibility. *Measured.*[^sp-track-ai-visibility]
+- **People phrase one goal very differently:** the average pairwise semantic similarity of the prompts was 0.0809. Use several realistic phrasings per need (e.g. derived from search keywords), not one synthetic prompt. *Measured.*[^sp-track-ai-visibility]
+- **Sampling rule:** 10 prompts × 7 phrasings × 7 models = 490 results per pass gives about ±5 points; about 20 passes give ±1 point. Disclose the margin, and distrust tools that don't publish run counts. *Measured; vendor data.*[^sp-track-ai-visibility] Per-prompt margins: [test 9](diagnostic-tests.md#9-prompt-tracking-per-engine).
+- **Drop position as a KPI;** position in an AI answer is close to random. Read citation-correlation studies like ranking-factor correlations, since citations are often added after the answer. *Practitioner.*[^sp-track-ai-visibility]
+- **Missing method.** MLforSEO (which sells courses) recommends citation rate over a fixed question set but gives no number of prompts, runs per prompt or confidence intervals. *Practitioner.*[^mlseo-rank-tracker] The same posts give unsourced figures (visible AI referrals ~0.15 % of traffic, ChatGPT crawl-to-referral ~3,700:1, citation rate 5–15 % unoptimised vs 40–60 % optimised); don't quote them. *Inference (unsourced).*[^mlseo-rank-tracker]
+
+> **Conflict:** drop answer position as a KPI (SparkToro) vs "Prominent" as one of four scored fields in the RAPP audit ([section 14](#14-share-of-voice-not-only-presence)). — [details](../reference/conflicts.md#track-answer-position-or-presence)
+
+## 17. AI as a brand channel
+- **A visit lift after AI recommendations.** In Similarweb clickstream data, devices that saw AI answers recommending a brand were more likely to visit it within 7 days: +7.2 % and +14.2 % for two credit-card brands; recommended brands gained more direct visits and branded search than brands not mentioned (no numbers given). *Measured; vendor data, sample not stated.*[^sp-similarweb-ai-mentions]
+- **Caveats from the author:** only large brands in finance, travel and beauty; no counterfactual; no comparison with a #1 ranking or video presence; B2B unclear. In the same data traditional search was still about 100× more used than AI to start a journey. *Measured + inference.*[^sp-similarweb-ai-mentions]
+- **Small as a traffic channel.** Across 100 sites LLMs sent 0.73 % of referral traffic (ChatGPT 0.62 %), less than DuckDuckGo, and Google drove 97 % of conversions (Marie Haynes); organic search sent ~39× more traffic than AI (SEOWorks). *Measured, relayed.*[^sp-ai-boondoggle]
+- **Budget it as a brand channel** (a "digital billboard"), not a traffic channel. *Practitioner.*[^sp-ai-boondoggle] Read it by correlation with branded search and Direct ([analytics](analytics.md#18-demand-by-correlation-not-last-click)).
+
+> **Conflict:** brand-visit lift after AI recommendations (Similarweb, large brands)[^sp-similarweb-ai-mentions] vs no reliable correlation between AI visibility and branded search or direct traffic on 12 sites (Kevin Indig, relayed)[^sp-ai-boondoggle]. — [details](../reference/conflicts.md#do-ai-recommendations-lift-brand-demand)
+
+## 18. Dark AI traffic
+- **70.6 % of identified AI visits arrived without a referrer** and landed in Direct, in Loamly's data (about 446,000 visits), relayed by MLforSEO; the author calls it one measurement, not a constant, and the headline "70 % of your AI influence" overstates it. *Measured, vendor data, relayed.*[^mlseo-dark-ai]
+- **Proxy:** compare the Direct trend with the Search Console branded-search trend (illustrative: Direct +18 % vs branded +3 %), plus a ten-question citation audit across ChatGPT, Perplexity and Claude. *Practitioner.*[^mlseo-dark-ai] Bot-check Direct first ([test 10](diagnostic-tests.md#10-is-a-direct-spike-real)).
+- AI-referred visits converted at 10.2 % vs 2.5 % for other traffic in the same dataset. *Measured, vendor data, relayed.*[^mlseo-dark-ai]
+
+> **Conflict:** 70.6 % of identified AI visits land in Direct (Loamly) vs AI traces in 0.003 % of Direct in a placebo-tested study ([section 3](#3-direct-spikes-are-mostly-bots-not-hidden-ai)). — [details](../reference/conflicts.md#is-ai-traffic-hiding-in-direct)
+
+> **Conflict:** AI referrals convert 4× better (Loamly, 10.2 % vs 2.5 %) vs parity for ecommerce and worse than organic on 23 of 63 sites (SEOWorks, relayed)[^sp-ai-boondoggle] ([section 5](#5-scale-of-the-channel)). — [details](../reference/conflicts.md#does-ai-traffic-convert-better)
+
+## 19. AI Overview citation tracking
+- **Cited domains differ from ranking domains.** On 29 keywords (US desktop, 2026-10-25) an AI Overview showed on all 29; the median overlap between cited and organically ranking domains was 22 %, and 0 % for seven keywords; one domain was cited first while absent from the organic top 10. *Measured, small sample, vendor tool (DataForSEO).*[^mlseo-aio-tracker]
+- **Method:** run weekly on a fixed set of 50–200 keywords with fixed location, language and device; report share of citations and keyword coverage separately (two domains each had 4 of 19 citations but coverage of 0.667 vs 0.333). Cost is up to ~$0.40 per 100 keywords. Citations aren't clicks. *Practitioner.*[^mlseo-aio-tracker] Rank-tracker view: [rank tracking](rank-tracking.md#7-cited-vs-ranking-domains-across-keywords).
+
 Related: [analytics](analytics.md), [Search Console](search-console.md), [diagnostic tests](diagnostic-tests.md), [AI assistants](../how-it-works/ai-assistants.md), [third-party presence](../channels/third-party-presence.md).
 
 [^ignite-news]: Ignite Visibility weekly recap, read 2026-10-27: GSC impression inflation (week of 2026-04-04), GA4 AI Assistant channel (2026-05-09), GA4 bug (2026-08-29), GPT-6 referral loss with Adobe data (2026-10-10), Comscore, Seer and the field experiment on AIO clicks (2026-04-25), SparkToro zero-click; secondary reporting, primary sources not checked.
@@ -258,3 +309,9 @@ Related: [analytics](analytics.md), [Search Console](search-console.md), [diagno
 [^cc-kpis]: Crystal Carter, Wix AI Search Lab, 2025-07-29 (updated 2025-08-03): relays SparkToro audience data ("programming" searchers +111.7 % likelier to use ChatGPT for search; ChatGPT not in the top seven discovery channels for "potatoes" searchers); framework.
 [^field-notes]: Anonymised shop, 2024–2026: every "Example" on this page; one-week loss of ChatGPT referrer and UTM in October 2026. Dates and sizes from the shop's caveat list are omitted so the shop can't be identified.
 [^am-unassigned]: Analytics Mania, updated 2026-09-18: AI-assistant links with utm_source but no utm_medium land in Unassigned; GA4's AI Assistant channel coverage partial (Sep 2026); custom channel group advised.
+[^sp-track-ai-visibility]: SparkToro (Rand Fishkin), 2026-05-07: SparkToro x Gumshoe.ai study, ~600 volunteers, 142 prompts × 7 model families = 994 runs; ~124 / ~1,429 runs for repeat lists; top-3 visibility 64 / 73 / 68 %; prompt similarity 0.0809; 490 results per pass ≈ ±5 points; video transcript, figures approximate.
+[^mlseo-rank-tracker]: MLforSEO (Beatrice Gamba), 2026-08-03: recommends citation rate without a sampling method; most figures unsourced.
+[^sp-similarweb-ai-mentions]: SparkToro with Similarweb, 2026-06-28: clickstream panel, 7-day window, credit-card answers (+7.2 %, +14.2 %); large brands in finance, travel, beauty only; sample not stated; video transcript.
+[^sp-ai-boondoggle]: SparkToro (Rand Fishkin), 2026-10-22: relays Marie Haynes (100 sites, 12 months), SEOWorks (Sep 2025 – Aug 2026; site count given as 95 and as 63), Kevin Indig (12 sites); citing Mike King for "digital billboard".
+[^mlseo-dark-ai]: MLforSEO (Beatrice Gamba), 2026-08-21, updated 2026-10-24: relays Loamly vendor data (~446,000 identified AI visits; 70.6 % without referrer; CR 10.2 % vs 2.5 %); Direct vs branded proxy is illustrative.
+[^mlseo-aio-tracker]: MLforSEO (Lazarina Stoy), 2026-10-24: DataForSEO-based tracker, 29 keywords, US desktop, 2026-10-25; median cited/organic domain overlap 22 %; cost estimate at October 2026 list prices.

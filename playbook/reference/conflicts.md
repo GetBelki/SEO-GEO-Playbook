@@ -4,10 +4,34 @@ title: Conflicts register
 description: Every point where the sources disagree — the positions with their evidence, how to read them, and what to do meanwhile; other pages link here instead of repeating the argument.
 tags: [conflicts, sources, method, geo, seo, measurement]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: sp-similarweb-ai-mentions
+    resource: "https://sparktoro.com/blog/new-research-from-similarweb-how-ai-brand-mentions-influence-direct-visits-traditional-search-queries/"
+    title: "SparkToro with Similarweb, How AI brand mentions influence direct visits and search (2026-06-28; clickstream panel, sample not stated)"
+  - id: sp-ai-boondoggle
+    resource: "https://sparktoro.com/blog/is-ai-visibility-a-marketing-boondoggle/"
+    title: "SparkToro, Is AI visibility a marketing boondoggle? (2026-10-22; review of 4 third-party studies)"
+  - id: sp-zero-click-2026
+    resource: "https://sparktoro.com/blog/in-2026-less-than-one-third-of-google-searches-still-send-a-click/"
+    title: "SparkToro, In 2026, less than one third of Google searches still send a click (2026-06-09; Similarweb US web panel, Jan–Apr 2026)"
+  - id: mlseo-kw-clustering
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/keyword-research/keyword-clustering-serp-vs-semantic/"
+    title: "MLforSEO, Keyword clustering: SERP-based vs semantic (2026-10-24; synthetic 160 keywords plus 29 real keywords, Google US desktop)"
+  - id: dbb-2mb
+    resource: "https://www.debugbear.com/blog/googlebot-crawler-file-size-limit"
+    title: "DebugBear, What Googlebot's 2MB Crawl Size Limit Means For SEO (2026-02-16; Google docs, forum report, author's own URL Inspection tests)"
+  - id: mlseo-content-audit
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/content-audit/content-audit-template/"
+    title: "MLforSEO, Content audit template (2026-10-24; rules plus synthetic 24-URL site)"
+  - id: mlseo-dark-ai
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/dark-ai-traffic-hidden-in-direct/"
+    title: "MLforSEO, Dark AI traffic hidden in direct (2026-08-21, updated 2026-10-24; relays Loamly vendor data)"
+  - id: sp-track-ai-visibility
+    resource: "https://sparktoro.com/blog/office-hours-can-you-actually-track-ai-visibility/"
+    title: "SparkToro, Office Hours: Can you actually track AI visibility? (2026-05-07; SparkToro x Gumshoe.ai, 142 prompts, 994 runs, 7 model families)"
   - id: google-ai-guide
     resource: "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide"
     title: "Google Search Central, optimizing for generative AI search (updated 2026-07-10)"
@@ -209,6 +233,11 @@ Where the sources disagree. Each entry gives the positions with their evidence, 
 | [How much do AI engines cite Reddit?](#how-much-do-ai-engines-cite-reddit) | Method and time difference | Measure per engine, monthly; invest only where forums rank in Google |
 | [ccTLD or subfolder for a new market?](#cctld-or-subfolder-for-a-new-market) | Open | Follow what the market's results already show |
 | [Does Discover follow Search rankings?](#does-discover-follow-search-rankings) | Open | Expect both to move together after core updates |
+| [Do AI recommendations lift brand demand?](#do-ai-recommendations-lift-brand-demand) | Open | Track branded search and Direct by correlation; don't promise a lift |
+| [How many searches reach AI Mode?](#how-many-searches-reach-ai-mode) | Method and time difference | Quote with period and definition |
+| [Embedding clusters or SERP clusters?](#embedding-clusters-or-serp-clusters) | Leaning | Embeddings to explore, SERP overlap to map keywords to URLs |
+| [Is the 2 MB HTML limit enforced?](#is-the-2-mb-html-limit-enforced) | Open | Keep important content and links well inside the first 2 MB |
+| [Update or merge first when pruning?](#update-or-merge-first-when-pruning) | Settled by scope | Merge true duplicates first; update the rest |
 | [Track answer position or presence?](#track-answer-position-or-presence) | Leaning | Presence % and share of voice first; position as a noisy extra |
 
 ## Google's guidance vs assistant findings
@@ -227,6 +256,7 @@ Where the sources disagree. Each entry gives the positions with their evidence, 
 - **Much better:** ChatGPT sessions converted at 13.8 % vs 3.02 % for Google organic on 55 sites. *Measured, one author, method not published.*[^mh-geo]
 - **About the same:** median AI-to-organic conversion ratio 1.26× across 78 GA4 properties; ecommerce 1.01×, AI ahead on 56 % of sites. *Measured, method published.*[^siege-conversion]
 - **Worse:** an SSRN paper (5585812) on 50,000+ ChatGPT-referred transactions across nearly 1,000 ecommerce sites found ChatGPT referrals converted worse and earned less per visit than every major channel except paid social, at "under 0.2% of total traffic". *Measured, relayed by Bruce Clay; read the paper before quoting.*[^bc-llm-vs-search]
+- **More data, still split:** Adobe reports AI referrals converting ~42 % better and Loamly 10.2 % vs 2.5 %, while SEOWorks found AI converting worse than organic on 23 of 63 sites. *Measured, relayed; vendor data.*[^sp-ai-boondoggle][^mlseo-dark-ai]
 - **Do:** assume parity at best for ecommerce until your own data says otherwise; report AI conversion against organic per vertical ([AI visibility tracking](../measure/ai-visibility-tracking.md)).
 
 ## Is GEO worth the effort?
@@ -239,6 +269,7 @@ Where the sources disagree. Each entry gives the positions with their evidence, 
 - **Mechanism exists:** about 95 % of links ChatGPT displays carry `utm_source=chatgpt.com`; pages the model opened itself never do. *Measured.*[^chatgpt-retrieval]
 - **Large share claimed:** iPullRank cites an estimate that about 70 % of AI traffic lands as Direct, and correlations of AI share of voice with Direct of 0.72 and 0.47. *Relayed, older.*[^ipr-brand]
 - **Small share measured:** in 12 GA4 properties, AI-traced sessions were 0.003 % of Direct; the correlations failed placebo and split-period tests; Direct spikes were mostly bots. *Measured, later.*[^gm-direct]
+- **A higher estimate:** Loamly reports 70.6 % of identified AI visits arriving without a referrer. *Vendor data.*[^mlseo-dark-ai]
 - **Do:** use the tested result; treat the analytics AI line as a floor; rule out bots before explaining a Direct rise ([diagnostic tests](../measure/diagnostic-tests.md#10-is-a-direct-spike-real)).
 
 ## Short or long pages?
@@ -264,7 +295,7 @@ Where the sources disagree. Each entry gives the positions with their evidence, 
 
 ## How high is zero-click?
 - **46.96 %** of 13.1 billion searches (Oct 2024 – Dec 2025, 94.5 % desktop) ended without a click. *Measured.*[^ipr-zero-click]
-- **68.01 %** in early 2026 per SparkToro. *Relayed.*[^ignite-news]
+- **68.01 %** of US Google web searches in Jan–Apr 2026 (Similarweb panel, Google app excluded); Germany 62.1 %, UK 69.5 %. *Measured.*[^sp-zero-click-2026][^ignite-news]
 - **Do:** a method difference, not a contradiction — quote any zero-click rate with its source and device mix.
 
 ## When did num=100 hit?
@@ -343,7 +374,33 @@ The figures describe different layers, not one number:
 ## Track answer position or presence?
 - **Position matters:** score each mention for regularity, accuracy, prominence (listed first) and sentiment. *Practitioner framework.*[^cc-rapp]
 - **Presence and share of voice:** answers are samples — the same brand list repeats less than once in 100 runs, and a single run's position is noise.[^nz-trackers][^ipr-precision] Visibility can rise while share of voice falls (38 % → 44 % visibility, 26 % → 21 % share of voice). *Case and illustration.*[^seer-visibility-lying]
+- **Drop position:** SparkToro and Gumshoe ran 142 prompts 994 times; the same list in the same order took ~1,429 runs, while visibility share stayed stable. *Measured, vendor data.*[^sp-track-ai-visibility]
 - **Do:** report presence % and share of voice as headline metrics, log accuracy and sentiment, and keep position as a secondary field ([AI visibility tracking](../measure/ai-visibility-tracking.md)).
+
+## Do AI recommendations lift brand demand?
+- **Yes, for large brands:** devices that saw an AI answer recommend a brand were more likely to visit it within 7 days (+7.2 % and +14.2 % for two US finance brands). *Measured, Similarweb panel, sample not stated.*[^sp-similarweb-ai-mentions]
+- **No reliable link:** across 12 sites, AI visibility didn't correlate with branded search or Direct traffic. *Measured, relayed (Kevin Indig).*[^sp-ai-boondoggle]
+- **Do:** track branded search, Direct and AI visibility side by side ([AI visibility tracking](../measure/ai-visibility-tracking.md)); a lift is plausible for well-known brands but not shown for smaller ones.
+
+## How many searches reach AI Mode?
+- **0.34 %** of US Google searches reached AI Mode in Jan–Apr 2026. *Measured, Similarweb panel.*[^sp-zero-click-2026]
+- **Just over 1 %** of searches used the AI Mode tab in June 2025, also Similarweb ([Google AI features](../how-it-works/google-ai-features.md)).
+- **Do:** a method and time difference — quote AI Mode share with its period and definition, and expect it to move.
+
+## Embedding clusters or SERP clusters?
+- **Embeddings:** cluster keywords by meaning with a fixed algorithm, the usual tool-based method ([keyword research](../channels/keyword-research.md)).
+- **SERP overlap:** on real data, embedding clusters barely matched clusters built from shared ranking URLs (adjusted Rand index 0.04). *Measured, small sample.*[^mlseo-kw-clustering]
+- **Do:** use embeddings to explore a keyword set; decide which keywords share a URL by SERP overlap.
+
+## Is the 2 MB HTML limit enforced?
+- **Yes:** Google's documentation states a 2 MB limit for HTML, and a forum report saw truncation at about 1.9 MB.[^dbb-2mb]
+- **Not in tests:** URL Inspection live tests didn't truncate pages above 2 MB. *Vendor test, small sample.*[^dbb-2mb]
+- **Do:** keep the main content and links well inside the first 2 MB of HTML ([technical foundations](../technical/technical-foundations.md#24-html-size-limits)).
+
+## Update or merge first when pruning?
+- **Update first:** the pruning order on [scaling content](../situations/scaling-content-and-templates.md#8-pruning-order) improves a page before merging it.
+- **Merge first:** a rule-based audit template checks for duplicates (merge) before decay (update); the first matching rule wins. *Practitioner.*[^mlseo-content-audit]
+- **Do:** settled by scope — merge true duplicates first, then update the pages that remain.
 
 Related: [sources and confidence](sources-and-confidence.md), [glossary](glossary.md).
 
@@ -404,3 +461,11 @@ Related: [sources and confidence](sources-and-confidence.md), [glossary](glossar
 [^thrive-ai-mode-local]: Thrive, 2026-03-02, relaying Whitespark: 57 % of local queries with AI Overview or AI Mode; no method.
 [^bp-soft404]: Botpresso, ≈2026-07: inventory soft-404 handling; promotes its own inspection tool.
 [^g-product-snippet]: Google product snippet structured data, read 2026-10-28: availability values; no guidance on indexing out-of-stock or discontinued products.
+[^sp-similarweb-ai-mentions]: SparkToro with Similarweb, 2026-06-28: 7-day brand visits after AI recommendations; large brands only.
+[^sp-ai-boondoggle]: SparkToro, 2026-10-22: relays Indig (12 sites), Adobe (+42 %), SEOWorks (23 of 63 sites).
+[^sp-zero-click-2026]: SparkToro, 2026-06-09: Similarweb panel Jan–Apr 2026; AI Mode 0.34 %; zero-click 68.01 % US.
+[^mlseo-kw-clustering]: MLforSEO, 2026-10-24: embedding vs SERP-overlap clusters, ARI 0.04.
+[^dbb-2mb]: DebugBear, 2026-02-16: Google's 2 MB documentation, a forum report at ~1.9 MB, own live tests without truncation.
+[^mlseo-content-audit]: MLforSEO, 2026-10-24: rule-based audit template, merge checked before update.
+[^mlseo-dark-ai]: MLforSEO (Beatrice Gamba), 2026-08-21: Loamly data, 70.6 % of identified AI visits without referrer; 10.2 % vs 2.5 % conversion.
+[^sp-track-ai-visibility]: SparkToro x Gumshoe.ai, 2026-05-07: 142 prompts, 7 model families, 994 runs.

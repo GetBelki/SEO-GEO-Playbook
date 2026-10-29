@@ -1,11 +1,11 @@
 ---
 type: Checklist
 title: Search Console
-description: How to read Search Console without being fooled — the comparison checklist, num=100, filtered and inflated impressions, the Generative AI report and AI Mode clicks, where AI Overviews show, text ads, zero-click and organic-decline benchmarks, whole-site CTR benchmarks, brand-verification queries, bot-like LLM query bursts and AI Mode follow-ups, how much volume a title test needs, same-language hreflang click attribution, the URL Inspection API quota and Insights query groups.
+description: How to read Search Console without being fooled — the comparison checklist, num=100, filtered and inflated impressions, the Generative AI report and AI Mode clicks, where AI Overviews show, text ads, zero-click and organic-decline benchmarks, whole-site CTR benchmarks, brand-verification queries, bot-like LLM query bursts and AI Mode follow-ups, how much volume a title test needs, same-language hreflang click attribution, the URL Inspection API quota, Insights query groups, the zero-click series by country, and decay and striking-distance definitions.
 tags: [measurement, search-console, ai-overviews, ctr, zero-click, caveats, branded-search, hreflang, ai-mode]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: ignite-news
@@ -77,6 +77,18 @@ sources:
   - id: gn-aiyear
     resource: "https://www.seoforgooglenews.com/p/googles-ai-adventure-year-one"
     title: "Barry Adams, Google's AI adventure — one year on (2025-05-08; relays Sistrix, Datos/SparkToro)"
+  - id: sp-zero-click-2026
+    resource: "https://sparktoro.com/blog/in-2026-less-than-one-third-of-google-searches-still-send-a-click/"
+    title: "SparkToro, In 2026, less than one third of Google searches still send a click (2026-06-09; Similarweb US panel Jan-Apr 2026)"
+  - id: sp-zero-click-countries
+    resource: "https://sparktoro.com/blog/zero-click-searches-highest-in-the-uk-lowest-in-germany-and-france-has-the-most-efficient-searchers/"
+    title: "SparkToro with Similarweb, Zero-click searches by country (2026-06-16; Similarweb panel, Jan-Apr 2026, 6 countries)"
+  - id: mlseo-content-audit
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/content-audit/content-audit-template/"
+    title: "MLforSEO, Content audit template (2026-10-24; rules plus synthetic 24-URL site)"
+  - id: mlseo-internal-linking
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/internal-link-analysis/automate-internal-linking-ai/"
+    title: "MLforSEO, 10 ways to automate internal linking with AI (2026-10-22; one blog, synthetic DiD demo)"
 ---
 
 # Search Console
@@ -183,6 +195,19 @@ This list applies to all measurement — Search Console, [analytics](analytics.m
 - Search Console Insights added AI-driven query groups in late October 2025. Fan-out queries have no search volume, so these groups are one of the few first-party views of how Google clusters your queries. *Practitioner.*[^ls-semkw]
 - **Do:** use the query groups as a cross-check for your own keyword clusters ([keyword research](../channels/keyword-research.md)).
 
+## 17. Zero-click series and country split
+SparkToro (which sells audience research) with Similarweb panel data.
+- **The series crosses panels.** Zero-click searches: ~45 % (~2016, Jumpshot), 49 % (2019, Jumpshot), 60.45 % (2024, Datos US), 68.01 % (US, Jan–Apr 2026, Similarweb desktop and mobile web panel, Google app excluded, so the true rate is likely higher). The author calls the cross-panel comparison "apples and oranges". *Measured; different panels.*[^sp-zero-click-2026]
+- **What changed, 2024 → 2026:** searches with at least one click fell 9.51 points (−22.9 % relative) and "performed another search" rose 7.2 points; any click counts (organic, paid, Maps, YouTube) except a new search. The 2026 paid/organic split is an estimate, because mobile paid clicks were modelled with an external ratio. *Measured.*[^sp-zero-click-2026]
+- **By country (Jan–Apr 2026, web browsers only):** zero-click Germany 62.1 %, Italy 63.4 %, Canada 63.8 %, France 65.3 %, US 68.0 %, UK 69.5 %; searches with a click: Germany 37.9 %, UK 30.5 %. The non-US period label is ambiguous. *Measured; vendor data.*[^sp-zero-click-countries]
+- **Do:** compare zero-click figures only within one panel and country; for a German-market site use the German figure, not the US one.
+
+## 18. Decay and striking distance from two periods
+From MLforSEO (which sells courses).
+- **Definitions used:** decay = clicks down 30 % or more between two consecutive 3-month periods, for pages with at least 20 clicks in the earlier one; striking distance = average position 4–20 with at least 200 impressions. Two-period comparisons can't detect slow declines or separate seasonality. *Practitioner.*[^mlseo-content-audit]
+- **Internal-link targets from striking distance:** pages at average position 4–20 with at least 50 impressions for 2–7-word queries, linked from pages that mention the query, after a cannibalisation check; on one blog 242 such queries gave 110 suggestions. It misses the long tail, because Search Console omits rare queries. *Practitioner.*[^mlseo-internal-linking] Method: [ML methods for SEO](ml-methods-for-seo.md#3-internal-link-suggestions).
+- **Do:** compare against the same period last year as well before calling a page decayed ([section 1](#1-before-every-comparison)).
+
 Related: [analytics](analytics.md), [AI-visibility tracking](ai-visibility-tracking.md), [rank tracking](rank-tracking.md), [diagnostic tests](diagnostic-tests.md), [traffic drop](../situations/traffic-drop.md), [Google AI features](../how-it-works/google-ai-features.md).
 
 [^ignite-news]: Ignite Visibility weekly recap, read 2026-10-27: GSC impression inflation (week of 2026-04-04), GA4 AI Assistant channel (2026-05-09), GA4 bug (2026-08-29), GPT-6 referral loss with Adobe data (2026-10-10), Comscore, Seer and the field experiment on AIO clicks (2026-04-25), SparkToro zero-click; secondary reporting, primary sources not checked.
@@ -208,3 +233,7 @@ Related: [analytics](analytics.md), [AI-visibility tracking](ai-visibility-track
 [^seer-zero-click-paid]: Seer Interactive, 2026-07-14: client portfolio, 6 verticals, mostly B2B / lead-gen, Dec 2025 – May 2026; nonbrand paid CTR 16.39 % → 14.13 %, impressions +28 %; organic sessions −32.3 %, direct +53.6 %, direct above organic from Nov 2025; organic conversion rate +133 %.
 [^gn-zero]: Barry Adams, SEO for Google News, 2026-03-02: relays Similarweb/Graphite ("two and a half percent" decline to top global sites; Google "nearly 20%" of web visits) and Chartbeat ("33%", skewed by a few large sites and the 2024 US election comparison; Jan–Nov YTD ~−15 %); publisher-focused; primaries not checked.
 [^gn-aiyear]: Barry Adams, SEO for Google News, 2025-05-08: relays Datos via SparkToro, Google queries +"21%" in 2024 vs 2023; "Peak Search" is his reading.
+[^sp-zero-click-2026]: SparkToro (Rand Fishkin), 2026-06-09: Similarweb US desktop and mobile web panel, Jan–Apr 2026 (device mix assumed 2/3 mobile), vs Datos 2024 and Jumpshot 2016/2019; Google app excluded; mobile paid clicks modelled with a 3.12–3.81 % ratio from an external panel.
+[^sp-zero-click-countries]: SparkToro with Similarweb, 2026-06-16: desktop and mobile web panel, Jan–Apr 2026, 6 countries; Google app excluded; period label says "(US)".
+[^mlseo-content-audit]: MLforSEO (Lazarina Stoy), 2026-10-24: decay, striking-distance and thin-content rules on a synthetic 24-URL site.
+[^mlseo-internal-linking]: MLforSEO (Lazarina Stoy), 2026-10-22: Search Console striking-distance linking on one 68–79-post blog; 242 queries → 110 suggestions.

@@ -4,8 +4,8 @@ title: How Google's AI features pick sources
 description: AI Overviews, AI Mode and Gemini — Google's official "still SEO" line, schema and AI citations, grounding from ranking (FastSearch), passage citation, top-10 overlap, fan-out depth, how users behave, ads and citation UI, personalisation, when AI Overviews trigger, the click loss by position, how often answers change, the grounding word budget, reading from the index, uncited Knowledge Graph facts, Personal Intelligence, Pew's click data and how easily thinly covered questions sway AI answers.
 tags: [seo, geo, google, ai-overviews, ai-mode, gemini, citations, fan-out, ctr, branded-search, grounding, knowledge-graph, personalisation, misinformation]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: google-ai-guide
@@ -119,6 +119,15 @@ sources:
   - id: gn-aimode
     resource: "https://www.seoforgooglenews.com/p/initial-thoughts-on-google-ai-mode"
     title: "Barry Adams, Initial thoughts on AI Mode (2025-06-09; Similarweb tab usage)"
+  - id: sp-zero-click-2026
+    resource: "https://sparktoro.com/blog/in-2026-less-than-one-third-of-google-searches-still-send-a-click/"
+    title: "SparkToro, In 2026, less than one third of Google searches still send a click (2026-06-09; Similarweb US web panel, Jan–Apr 2026)"
+  - id: srp-commodity-content
+    resource: "https://serprecon.com/blog/what-is-commodity-content"
+    title: "SERPrecon, What is commodity content? (2026-10-15; Google guide and statements relayed, patents, vendor scoring method)"
+  - id: mlseo-aio-tracker
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/ai-search-optimisation/track-ai-overviews-python/"
+    title: "MLforSEO, How to track AI Overviews for your keywords (2026-10-24; 29-keyword run, US desktop)"
 ---
 
 # How Google's AI features pick sources
@@ -133,7 +142,7 @@ This page answers how AI Overviews and AI Mode choose and show their sources, an
 - Rank well for the core query and its sub-queries, because AI grounding starts from Google's ranking. *Trial documents* [why](#2-grounding-starts-from-ranking)
 - Make the passage that answers a sub-question easy to lift and put the answer, specs and differentiators in the first ~500 words, because citations go to passages and the grounding budget per page is small. *Measured; budget from private data, directional* [why](#3-citations-go-to-passages-not-ranks) · [budget](#10-how-much-of-a-page-grounding-uses)
 - Keep "as of" dates and `dateModified` true and current. *Practitioner* [why](#4-ai-overviews-and-ai-mode-are-separate-but-linked)
-- Don't count on a brand query to bring a click when an AI Overview shows. *Measured* [why](#5-users-behave-differently-on-each-surface)
+- Don't count on a brand query to bring a click when an AI Overview shows; about two thirds of US Google searches end without any click. *Measured; vendor data* [why](#5-users-behave-differently-on-each-surface) · [zero-click](#14-most-searches-end-without-a-click)
 - Track organic position, AIO citation and AI Mode citation separately, sample every 2–3 days rather than one snapshot, and keep Search Console as the source of truth. *Measured, vendor data; inference* [why](#6-the-results-page-keeps-changing) · [volatility](#9-ai-overviews-change-every-few-days)
 - Before blaming content for a click change on an AI surface, check for UI tests and new ad units. *Practitioner* [why](#6-the-results-page-keeps-changing)
 - Keep schema for rich results, not as an AI-citation lever: adding it didn't raise AI citations; put key facts in visible text and keep them identical everywhere, since Knowledge Graph facts reach AI Mode without a link. *Measured, vendor data; from code* [why](#1-googles-official-line-its-still-seo) · [KG](#12-knowledge-graph-facts-arrive-without-a-citation)
@@ -229,6 +238,20 @@ This page answers how AI Overviews and AI Mode choose and show their sources, an
 - **One planted page was enough.** A page with made-up claims on questions no other page covered was indexed "within 12 hours" and repeated "within 24 hours". AI Mode used it for 4 of 5 questions, AI Overviews for 2, Gemini 2, ChatGPT 2, Perplexity 2 (once without a caveat), Claude 0. Engines that looked for agreement across several sources resisted more. *Measured, one run, one page.*[^lr-gullible] AI Mode was the easiest to sway in this test.
 - **Do:** for brand and product questions few pages answer (compatibility, materials, care, delivery to unusual regions), publish the correct facts on your own crawlable page early, and include such obscure attributes in the monthly brand check ([homepage and brand](../page-types/homepage-and-brand.md), [AI visibility tracking](../measure/ai-visibility-tracking.md)). How assistants compare: [AI assistants](ai-assistants.md#15-what-changes-generative-answers).
 
+## 14. Most searches end without a click
+SparkToro sells audience research; its numbers come from Similarweb's clickstream panel.
+- **68 % zero-click.** 68.01 % of US Google web searches ended without a click in January–April 2026. The panel excludes the Google app, so the true rate is likely higher. *Measured, vendor data.*[^sp-zero-click-2026] A click counts any click, including paid results and Google's own properties.
+- **AI Mode is still small.** Only 0.34 % of US Google searches reached AI Mode in the same period, so AI Mode did not cause the zero-click rise; Google's claim of 1bn+ monthly AI Mode users is relayed unverified. *Measured, vendor data.*[^sp-zero-click-2026]
+
+  > **Conflict:** AI Mode at 0.34 % of US searches (Jan–Apr 2026) vs "just over 1%" of searches using the AI Mode tab in June 2025 (section 5); both Similarweb, but different periods and possibly different definitions. — [details](../reference/conflicts.md#how-many-searches-reach-ai-mode)
+- The same post relays Ahrefs: AI Overviews on 20 %+ of searches, cutting CTR by nearly 60 % when present. *Measured, relayed.*[^sp-zero-click-2026] It confirms [section 8](#8-what-an-ai-overview-costs-in-clicks).
+- **Do:** read flat clicks with rising impressions as the market norm before blaming a page ([Search Console](../measure/search-console.md)).
+
+## 15. Google asks for non-commodity content
+- Google's generative-AI features guide has a section headed "Create valuable, non-commodity content"; by SERPrecon's reading (it sells a content-scoring tool), Google says this likely influences AI search presence more than any other suggestion. Its example contrasts a generic "7 tips" listicle with a first-hand article. *Official, relayed.*[^srp-commodity-content] What Google says, and doesn't say, about ranking: [Google ranking](google-ranking.md#13-commodity-content-and-information-gain).
+- **AI Overview citations barely overlap the organic top 10.** On 29 US desktop keywords (25 Oct 2026), every keyword showed an AI Overview; the median overlap between cited and organically ranking domains was 22 %, and 0 % for seven keywords. One domain was cited first while absent from the organic top 10. *Measured, small sample; MLforSEO, which sells courses.*[^mlseo-aio-tracker] Confirms [section 3](#3-citations-go-to-passages-not-ranks).
+- How to test a page's coverage of likely sub-queries: [keyword research](../channels/keyword-research.md#11-checking-a-pages-fan-out-coverage).
+
 Related: [Google ranking](google-ranking.md), [AI assistants](ai-assistants.md), [shopping surfaces](shopping-surfaces.md), [AI crawlers and controls](../technical/ai-crawlers-and-controls.md), [comparison pages and guides](../page-types/comparison-and-guides.md).
 
 [^google-ai-guide]: Google generative-AI optimization guide, updated 2026-07-10.
@@ -268,3 +291,6 @@ Related: [Google ranking](google-ranking.md), [AI assistants](ai-assistants.md),
 [^lr-gullible]: Lily Ray, 2025-06-17: one page with invented claims on uncovered questions, 5 questions, 6 engines, one run; indexed within 12 h, repeated within 24 h; per-engine counts as given.
 [^gn-aiyear]: Barry Adams, 2025-05-08: relays Sistrix (spring 2025) — UK AIO share ~18 %, up from 4 %; ~6 cited sources per AIO. Primary not checked.
 [^gn-aimode]: Barry Adams, 2025-06-09: relays Similarweb — US AI Mode tab usage "just over 1%" in June 2025, about half the News tab.
+[^sp-zero-click-2026]: SparkToro (Rand Fishkin; SparkToro sells audience research), 2026-06-09: Similarweb US desktop+mobile web panel, Jan–Apr 2026; zero-click 68.01 % (Google app excluded; device mix assumed 2/3 mobile, 1/3 desktop); AI Mode 0.34 % of searches; relays Ahrefs on AIO presence (20 %+) and CTR (nearly −60 % when present).
+[^srp-commodity-content]: SERPrecon, 2026-10-15: relays Google's generative-AI features guide section on non-commodity content, Danny Sullivan and John Mueller (via Search Engine Journal), the leak's OriginalContentScore and patent US11354342B2; the vendor's commodity metric is not validated against rankings.
+[^mlseo-aio-tracker]: MLforSEO, 2026-10-24: AI Overview tracker run on 29 keywords, US desktop, 2026-10-25, DataForSEO data.

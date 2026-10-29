@@ -5,7 +5,7 @@ description: Where AI product cards and grids come from (ChatGPT, AI Mode, Googl
 tags: [geo, shopping, feeds, merchant-center, agentic-commerce, chatgpt, ai-mode, eea, dma, product-lines, chrome]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: ignite-news

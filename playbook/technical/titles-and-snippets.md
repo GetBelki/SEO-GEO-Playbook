@@ -5,7 +5,7 @@ description: How often Google rewrites titles and meta descriptions, where title
 tags: [seo, geo, title-tags, meta-descriptions, snippets, content-length, on-page, headings, headlines, tables, grounding, freshness, ecommerce]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: ah-titles

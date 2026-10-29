@@ -4,8 +4,8 @@ title: Scaling content and templates
 description: Programmatic and AI-assisted pages at scale — Google's scaled content abuse policy, what AI-written content data shows, indexation as the quality gate, template inventory and ownership, tickets with money impact, per-template sample crawls, soft 404 rules for out-of-stock products and thin listings, repeated template phrasing and the strip-the-logo test, the pruning order, why not to atomise topics into micro-pages, the August 2026 spam update's feed-generated templates, and programmatic guardrails (minimum data per page, generation from database fields, fact checks, scheduled pruning).
 tags: [seo, programmatic, ai-content, templates, governance, indexing, soft-404, ecommerce, pruning, consolidation, spam-update, fact-checking]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: g-spam
@@ -47,6 +47,12 @@ sources:
   - id: brief-distinct
     resource: "https://seobrief.substack.com/p/when-the-logo-comes-off-is-it-still"
     title: "Jes Scholz, SEO Brief: distinctiveness (2026-06-18; essay + one client case)"
+  - id: mlseo-content-audit
+    resource: "https://www.mlforseo.com/machine-learning-implementation-guides/content-audit/content-audit-template/"
+    title: "ML for SEO, Content audit template (2026-10-24; rules plus synthetic 24-URL site)"
+  - id: srp-commodity-content
+    resource: "https://serprecon.com/blog/what-is-commodity-content"
+    title: "SERPrecon, What is commodity content? (2026-10-15; Google guide and statements relayed, vendor scoring method)"
 ---
 
 # Scaling content and templates
@@ -62,7 +68,7 @@ Use this page before you generate pages at scale — programmatic category or fi
 - **Crawl a fixed URL sample per template daily after launches, and a smaller sample after every production push** ([section 5](#5-per-template-sample-crawls)). *Practitioner.*
 - **Write down soft 404 rules for inventory** — when a product gets 410, when a thin listing is noindexed — and keep temporarily out-of-stock products indexable by default ([section 6](#6-soft-404s-on-inventory)). *Practitioner; Google's docs give no rule.*
 - **Audit repeated template phrases before rolling copy out across thousands of pages** — boilerplate that reads like low-quality sites can drag the whole set ([section 7](#7-template-phrasing-propagates)). *Patent.*
-- **Prune in order: update, merge, 301, remove last** — and check what a page feeds before removing it ([section 8](#8-pruning-order)). *Practitioner, qualitative.*
+- **Prune in order: update, merge, 301, remove last** — and check what a page feeds before removing it; pick candidates with fixed audit rules, e.g. decay = clicks down 30 % or more ([section 8](#8-pruning-order), [section 11](#11-content-audit-rules)). *Practitioner, qualitative.*
 - **Don't atomise a topic into micro-pages**; split only when the search results differ ([section 9](#9-dont-atomise-into-micro-pages)). *Official statements, relayed; practitioner test.*
 - **Set a minimum number of unique data fields per template page, generate text only from database fields, and fact-check the output against the source** — titles, metadata and alt text included ([section 10](#10-programmatic-guardrails)). *Practitioner.*
 
@@ -75,7 +81,7 @@ Use this page before you generate pages at scale — programmatic category or fi
 6. **Set up monitoring:** a fixed sample of URLs per template, crawled daily after launch and after each push ([section 5](#5-per-template-sample-crawls)).
 7. **Write the inventory rules:** discontinued, temporarily out of stock, empty or near-empty listings ([section 6](#6-soft-404s-on-inventory)); watch the Soft 404 count by page type.
 8. **File issues by template** with an owner, acceptance criteria and money impact ([section 4](#4-governance-templates-owners-tickets)).
-9. **Prune** weak pages in order — update, merge, 301, remove — after checking what links and anchors they feed ([section 8](#8-pruning-order)); schedule a regular review of unindexed and unvisited pages per template ([section 10](#10-programmatic-guardrails)).
+9. **Prune** weak pages in order — update, merge, 301, remove — after checking what links and anchors they feed ([section 8](#8-pruning-order)); schedule a regular review of unindexed and unvisited pages per template ([section 10](#10-programmatic-guardrails)) and run the audit rules quarterly ([section 11](#11-content-audit-rules)).
 
 ## 1. The policy line
 - Google's spam policies define **scaled content abuse**: "many pages are generated for the primary purpose of manipulating search rankings". The policy targets the purpose, not the production method.[^g-spam] See [links and spam policies](../technical/technical-foundations.md#11-links-and-spam-policies).
@@ -131,6 +137,16 @@ Use this page before you generate pages at scale — programmatic category or fi
 - **Scheduled pruning.** Review unindexed and unvisited pages per template on a fixed schedule, then apply the pruning order ([section 8](#8-pruning-order)).
 - **Not a shortcut: the Indexing API.** The same author withdrew her 2024 advice to push programmatic pages through the Indexing API, which covers only JobPosting and BroadcastEvent pages ([migration](migration.md#6-pre-launch-checks)).
 
+## 11. Content audit rules
+ML for SEO sells courses; its audit template was demonstrated on a synthetic 24-URL site.
+- **Fixed rules, first match wins.** 3xx → redirect; 4xx/5xx → redirect if the URL has clicks or referring domains, else prune; noindexed or canonicalised → keep; overlapping a stronger page (semantic similarity ≥ 0.9 or near-duplicate ≥ 90 %) with no key events → merge; decaying, in striking distance or thin with demand → update; under 10 clicks, 200 impressions and 20 sessions with no key events → prune; otherwise keep. *Practitioner.*[^mlseo-content-audit]
+- **Definitions.** Decay = clicks down 30 % or more between two consecutive 3-month Search Console periods, for pages with at least 20 clicks in the earlier one; striking distance = average position 4–20 with at least 200 impressions; thin = under 300 words, and only when there is demand. A two-period comparison can't see slow declines or separate seasonality. *Practitioner.*[^mlseo-content-audit]
+- **Commodity is a strength question, not a penalty.** Google's Danny Sullivan said commodity content isn't necessarily your strength and to emphasise what is original; Google hasn't said commodity content is penalised or that a commodity score exists. *Official, relayed.*[^srp-commodity-content] (SERPrecon sells a commodity-scoring tool.)
+
+> **Conflict:** [section 8](#8-pruning-order) puts update before merge; the audit template checks merge before update (first match wins). — [details](../reference/conflicts.md#update-or-merge-first-when-pruning)
+
+- **Do:** run the rules per template each quarter, compare seasonal pages with the same months last year rather than the previous period, and apply the [pruning order](#8-pruning-order) to what the rules flag.
+
 Related: [migration](migration.md), [category pages](../page-types/category-pages.md), [product pages](../page-types/product-pages.md), [technical foundations](../technical/technical-foundations.md), [internal linking](../technical/internal-linking.md), [core-update recovery](core-update-recovery.md), [diagnostic tests](../measure/diagnostic-tests.md).
 
 [^g-spam]: Google, spam policies, read 2026-10-27: scaled content abuse, site reputation abuse, expired domain abuse definitions.
@@ -146,3 +162,5 @@ Related: [migration](migration.md), [category pages](../page-types/category-page
 [^ls-pseo]: Lazarina Stoy, programmatic SEO guide, 2026-10-22 update: minimum-data rule, generation only from database fields, automated fact checks, same scrutiny for metadata and alt text, scheduled pruning of unindexed/unvisited pages; withdrew her 2024 Indexing API advice. Practitioner.
 [^gg-spam]: Glenn Gabe, 2026-08-31: 4 August 2026 spam update cases; content, not links; feed-built affiliate site (some pages without images, footer text 97 %+ likely AI-written) lost 14K+ queries; 1.5M-URL product-information site ~85 % programmatic, site-wide hit; recovery takes months.
 [^brief-distinct]: Jes Scholz, 2026-06-18: essay; strip-the-logo test (relays NN/g and System1, primaries not read, their figures not used here).
+[^mlseo-content-audit]: ML for SEO, 2026-10-24: rule order, first match wins; decay = clicks −30 % or more between two consecutive 3-month Search Console periods (≥20 clicks earlier); striking distance = position 4–20 with ≥200 impressions; thin = <300 words with demand; prune if <10 clicks, <200 impressions, <20 sessions and no key events. Demonstrated on a synthetic 24-URL site.
+[^srp-commodity-content]: SERPrecon, 2026-10-15: relays Google's generative-AI guide ("non-commodity content"), Danny Sullivan via Search Engine Journal and John Mueller (2019); Google hasn't said commodity content is penalised or that a commodity score exists; de-commoditising procedure. Vendor sells a commodity-scoring tool; no validation data.

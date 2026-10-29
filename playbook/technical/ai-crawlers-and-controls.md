@@ -5,7 +5,7 @@ description: Official per-vendor reference for AI crawlers and user agents (Open
 tags: [geo, crawling, robots-txt, llms-txt, markdown, openai, anthropic, perplexity, google, bing, apple, google-extended, knowledge-graph, webmcp, waf, sitemaps, server-logs, status-codes, reference]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-01-28T00:00:00Z
 sources:
   - id: openai-bots

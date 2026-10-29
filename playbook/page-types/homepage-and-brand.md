@@ -5,7 +5,7 @@ description: What to do on the homepage and brand-intent pages — verifiable pr
 tags: [seo, geo, homepage, brand, knowledge-panel, merchant-center, third-party, ecommerce, ai-overviews, entity, knowledge-graph, chatgpt, meta-description, gemini, favicon, site-name, brand-accuracy, multilingual]
 status: stable
 generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: siege-credibility
