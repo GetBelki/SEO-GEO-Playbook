@@ -1,13 +1,18 @@
 ---
 type: Guide
 title: How AI assistants retrieve and cite
-description: What ChatGPT, Gemini, Claude and Perplexity actually read — the ~200 characters after the H1 and per-chunk scores on fetched pages, mostly static HTML (Gemini reads JavaScript content), no schema, discovery, mode and model effects, English fan-out, engines that don't agree, citations outside Google's top 10, fresher content, ChatGPT's search config, rerankers and hybrid retrieval, HTML extraction, shrinking, volatile and site-restricted fan-outs, updated-vs-published recency, what models already know about brands, and what academic GEO tests found.
+description: What ChatGPT, Gemini, Claude and Perplexity actually read — the ~200 characters after the H1 and per-chunk scores on fetched pages, mostly static HTML (Gemini reads JavaScript content), no schema, discovery, mode and model effects, English fan-out, engines that don't agree, citations outside Google's top 10, fresher content, ChatGPT's search config, rerankers and hybrid retrieval, HTML extraction, shrinking, volatile and site-restricted fan-outs, updated-vs-published recency, what models already know about brands, what academic GEO tests found, and how Perplexity's own index (Photon) ranks pages.
 tags: [geo, chatgpt, gemini, perplexity, claude, crawling, citations, fan-out, schema, freshness, rerankers, reddit, javascript, bing]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:00:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: pplx-photon
+    resource: "https://www.perplexity.ai/hub/blog/photon"
+    title: "Perplexity Engineering, Photon: retrieval and ranking engine (2026-09-24)"
+  - id: serprecon-photon
+    resource: "https://www.serprecon.com/blog/how-to-rank-in-perplexity-photon"
+    title: "SERPrecon (Ryan Jones), How to rank in Perplexity Photon (2026-10-14; vendor commentary, no own test)"
   - id: ignite-news
     resource: "https://ignitevisibility.com/digital-marketing-news/"
     title: "Ignite Visibility, weekly digital marketing news recap (Jan – Oct 2026; relays third-party studies)"
@@ -306,6 +311,14 @@ Leaked and dumped configs are snapshots of 2025; values may have changed since.
 - **Academic GEO tests.** Aggarwal et al. (KDD 2024) found that adding citations, quotations and statistics to a page raised its visibility in generative answers "by up to 40%", while keyword stuffing had little effect. Liu et al. (2023) found that only 51.5 % of generative-search sentences were fully supported by their citations. *Research papers, relayed by Lazarina Stoy; both predate today's production engines.*[^ls-context] **Do:** back claims with sources, quotes and numbers; don't stuff keywords.
 - **One page can plant a claim.** In a one-run test, a page with invented claims on uncovered questions was repeated by AI Mode for 4 of 5 questions, by ChatGPT, Perplexity and Gemini for 2 each, and by Claude for none; engines that sought agreement across sources resisted more. *Measured, one run.*[^lr-gullible] Details and what to do: [Google AI features](google-ai-features.md#13-thinly-covered-questions-are-easy-to-sway).
 
+## 16. Perplexity's own index (Photon)
+- **Perplexity ranks from its own web index.** Photon, in service since September 2026, retrieves and ranks candidates per index shard, then merges them into the shortlist the answer model reads. *Official.*[^pplx-photon]
+- **Lexical matching first.** Candidates are scored on weighted query-term coverage plus term frequency. Strict coverage of the query's terms comes first, and the requirement is relaxed only when too few pages qualify. Term frequency is length-normalised and capped, so repeating a term stops paying off quickly. Each field (unnamed) is matched in its own pass and weighted. *Official.*[^pplx-photon]
+- **A per-document "usefulness" signal decides which pages are checked first.** Perplexity doesn't define it. *Official; the definition is unknown.*[^pplx-photon]
+- **Fast refresh.** The full index rebuilds in a single-digit number of hours, and documents in freshness-sensitive verticals arrive within minutes. *Official.*[^pplx-photon]
+- **Do:** use the buyer's exact terms (including attribute words) in the title, headings and the opening passage, rather than repeating the head term. Cover every term of the question a page should answer, so it passes the strict-coverage pass. *Inference from the published ranking design; a practitioner tool vendor gives the same advice.*[^pplx-photon][^serprecon-photon]
+- **Read vendor write-ups carefully.** One SEO tool vendor's summary adds BM25 and "answers quote passages" to Perplexity's design. The post names neither. *Practitioner, vendor.*[^serprecon-photon]
+
 Related: [Google AI features](google-ai-features.md), [Google ranking](google-ranking.md), [third-party presence](../channels/third-party-presence.md), [AI crawlers and controls](../technical/ai-crawlers-and-controls.md), [AI visibility tracking](../measure/ai-visibility-tracking.md).
 
 [^chatgpt-retrieval]: Resoneo × Oncrawl, read 2026-10-27: funnel 58k retrieved → 7.6k shown → 5k cited → 760 opened; ~202-character snippet from the H1; JSON-LD stripped; bot roles and cache; utm on ~95 % of displayed links; instant vs thinking search counts.
@@ -360,3 +373,5 @@ Related: [Google AI features](google-ai-features.md), [Google ranking](google-ra
 [^seer-recency]: Seer Interactive, 2026-07-24: 7,683 dated pages, 47,097 citations, ChatGPT/Gemini/Perplexity, 4 brands incl. pet retail, Mar–Jun 2026; dates from schema, sitemaps and headers; correlational.
 [^cc-sd]: Crystal Carter, Wix SEO Hub, 2026-03-30 (updated 2026-04-06): one-query comparison (7 of 8 Perplexity sources vs 2 of 5 ChatGPT sources matching Google's 9 recipe rich results); the "Google and Microsoft say" statement has no quote or source.
 [^cc-entity]: Crystal Carter, ≈2026-03: practitioner note on training cut-offs and recent launches.
+[^pplx-photon]: Perplexity Engineering, 2026-09-24: Photon architecture; scoring by "weighted query-term coverage and a frequency contribution", strict then relaxed coverage, "document-length normalization and a cap on gains from repeated terms", per-field passes with field weights, posting lists ordered by "usefulness"; index rebuild in single-digit hours, freshness-sensitive documents in single-digit minutes. Fields and usefulness not specified.
+[^serprecon-photon]: SERPrecon (sells an SEO/GEO measurement tool), 2026-10-14: summary of Perplexity's post plus recommendations; BM25 and passage-level quoting are the author's reading; no own test; case study without method.

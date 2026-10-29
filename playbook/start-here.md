@@ -1,11 +1,10 @@
 ---
 type: Guide
 title: Start here
-description: The playbook on one page — about 45 rules for SEO, AI-search visibility and measurement, each with its confidence level and a link to the evidence, plus where to go next by task.
+description: The playbook on one page — 45 rules for SEO, AI-search visibility and measurement, each with its confidence level and a link to the evidence, plus where to go next by task.
 tags: [start-here, rules, seo, geo, measurement, ecommerce]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: playbook
@@ -77,6 +76,7 @@ The playbook on one page, for an ecommerce site in any market. Each rule ends wi
 42. **Never put prices, stock or labels in CSS pseudo-content, and don't let height-based CSS change what Google renders.** *Official and practitioner.* → [technical foundations](technical/technical-foundations.md)
 43. **Generate sitemaps, hreflang, canonicals and feed availability from one record**, so a change reaches every output at once. *Practitioner.* → [migration](situations/migration.md)
 44. **When branded CTR drops but impressions and position hold, check the favicon and site name in the results first.** *One case.* → [traffic drop](situations/traffic-drop.md)
+45. **Keep UTMs, click IDs and `_gl` intact from ad or AI link to purchase, and give AI sources their own channel group.** A link with `utm_source` but no `utm_medium` lands in Unassigned, and GA4's own AI Assistant channel is still partial. *Practitioner.* → [analytics](measure/analytics.md#12-ga4-attribution-leaks-utms-consent-and-cross-domain)
 
 ## Crawlers
 21. **Decide AI crawler access per role:** allow search bots and user fetchers; training bots are a business decision. Check robots.txt daily against a written policy. *Official.* → [AI crawlers and controls](technical/ai-crawlers-and-controls.md)

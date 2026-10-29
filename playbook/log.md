@@ -1,6 +1,16 @@
 # Log
 
+## 2026-10-29
+
+**Update** — Added Resoneo's search-intent and KScorer analyses (Oct 2026; internal schemas, provenance not stated): google-ranking sections 10 (Intent Brain, Orbit page categories, five commerce roles, freshness tiers, listicle label) and 11 (KScorer: query interpretation, 1/rank weights, click confidence N/(20+N), entity harmonic mean, local quality); comparison-and-guides section 11; intent per market in keyword-research. A prompt addressed to AI agents on the KScorer page was ignored. These three pages lost their `verified` stamp.
+**Update** — Added Aleyda Solis's third-party citation prioritisation framework (2026-10-28, read in a browser): channels/third-party-presence section 15 — external share 69.6–82.3 % across verticals (marketplaces and competitor domains lead for ecommerce), six scoring criteria, formats to invest in and to avoid; first rule extended. The page lost its `verified` stamp.
+**Update** — Added Perplexity's Photon engineering post (official) and SERPrecon's commentary (vendor): new how-it-works/ai-assistants section 16 on how Perplexity's own index ranks pages (strict query-term coverage, capped term frequency, per-field weights, an undefined usefulness signal, fast refresh). The commentary's BM25 and passage-quoting claims are not in Perplexity's post and are marked as such. ai-assistants lost its `verified` stamp.
+**Lint** — 0 errors, 0 warnings; all section anchors, footnotes and sources resolve.
+
 ## 2026-10-28
+
+**Update** — Added Analytics Mania (8 GA4/GTM troubleshooting posts, 28 items): new analytics sections 12–14 (attribution leaks: UTMs, consent, cross-domain; ecommerce events and revenue checks; GTM's optimized tagging, Oct 2026), diagnostic tests 27–29 (GA4 no-data and missing-revenue triage, UTM survival, consent signal check), AI links landing in Unassigned, parameter stripping in migrations, content groups per page type; start-here rule 45; glossary +4 terms. Not used yet: DebugBear and web.dev (read only from search extracts; to be re-read with real fetches), ML for SEO (the reading cited pages that don't exist), FullStory and SparkToro (not read). Pages changed in substance lost their `verified` stamp: measure/analytics, measure/diagnostic-tests, measure/ai-visibility-tracking, situations/migration, page-types/category-pages, start-here, reference/glossary, reference/sources-and-confidence.
+**Lint** — 0 errors, 0 warnings; all section anchors, footnotes and sources resolve.
 
 **Update** — Human review: all 35 concept pages set to `status: stable` and stamped `verified` (Martin Aberastegue). Prepared the public release: new README, CC BY 4.0 license; three identifying example details removed.
 

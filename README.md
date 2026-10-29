@@ -5,8 +5,8 @@ A sourced knowledge base for search (SEO) and AI-search visibility (GEO), writte
 You can drop it into any project as a reference that you or your AI agent can rely on. Every claim cites its source and says how strong the evidence is. Where sources disagree, the disagreement is written down instead of quietly settled.
 
 - **35 pages** grouped by task: page types, situations, channels, technical, measurement
-- **44 rules** on one page ([start here](playbook/start-here.md)), each linked to its evidence
-- **26 diagnostic tests** you can repeat on your own data
+- **45 rules** on one page ([start here](playbook/start-here.md)), each linked to its evidence
+- **29 diagnostic tests** you can repeat on your own data
 - **23 conflicts** where sources disagree, each with the positions, a reading and a working rule
 - **~350 footnoted sources**: Google, OpenAI, Anthropic and other vendor docs, measured studies, leak and trial documents, patents, and practitioner research
 
@@ -14,7 +14,7 @@ You can drop it into any project as a reference that you or your AI agent can re
 
 ```mermaid
 flowchart TD
-    START["Start here<br/>44 rules on one page"]
+    START["Start here<br/>45 rules on one page"]
 
     subgraph DO["Do"]
         PT["Page types<br/>product · category · comparison/guide · homepage/brand"]

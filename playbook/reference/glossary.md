@@ -4,8 +4,7 @@ title: Glossary
 description: Short definitions of the terms, systems and acronyms used across the playbook — Google systems from the leak and trial, AI-search surfaces, crawlers, feeds and measurement terms — each linked to the page that explains it.
 tags: [glossary, reference, terms]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: playbook
@@ -75,6 +74,10 @@ One-line definitions; follow the link for evidence and sources.[^playbook] Terms
 - **Poisoned SERP** — a rank-tracker capture that doesn't match what users see. → [rank tracking](../measure/rank-tracking.md)
 - **Prompt tracking** — running a fixed set of prompts through AI engines repeatedly to measure citations and mentions. → [diagnostic tests](../measure/diagnostic-tests.md#9-prompt-tracking-per-engine)
 - **Exposure / behaviour / outcomes** — a monthly read of AI visibility, branded search and Direct, and orders together. → [diagnostic tests](../measure/diagnostic-tests.md#11-monthly-read-exposure-behaviour-outcomes)
+- **Unassigned** — GA4's bucket for sessions no channel rule matches, e.g. a `utm_source` without `utm_medium`; AI-assistant links often land here. → [analytics](../measure/analytics.md)
+- **Consent Mode** — Google's signals telling tags whether analytics and ad storage are allowed; denied events are only modelled, and a misconfigured setup can block purchases. → [analytics](../measure/analytics.md)
+- **Content group** — a GA4 dimension grouping pages by type (product, category, guide), set per page; it isn't retroactive. → [analytics](../measure/analytics.md)
+- **_gl linker** — the URL parameter GA4 uses to carry a visitor's IDs across domains, e.g. to an external checkout. → [analytics](../measure/analytics.md)
 - **Structural break** — a change in measurement or the results page that makes before/after comparisons misleading. → [Search Console](../measure/search-console.md), [analytics](../measure/analytics.md)
 
 Related: [start here](../start-here.md), [conflicts register](conflicts.md).

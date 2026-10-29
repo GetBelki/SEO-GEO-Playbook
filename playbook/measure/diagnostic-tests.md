@@ -4,8 +4,7 @@ title: Diagnostic tests
 description: Repeatable checks, with a symptom-to-test table — exact-term gap, satisfaction per page type, loss by directory, fetching a page as an AI assistant does, feed attribute coverage, country controls, prompt tracking, AI-bot logs, raw vs rendered internal links, daily index status per URL, passage tests with open rerankers, order-swapped LLM comparisons, ChatGPT site: fan-outs, Gemini's indexed view of a page, brand-canon accuracy, AI-invented URLs, Google-selected canonicals, anomaly detection without LLMs and support-type queries.
 tags: [seo, geo, method, search-console, ga4, feeds, testing, internal-links, indexing, passages, canonicals, anomaly-detection]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: aleyda-prompts
@@ -134,6 +133,27 @@ sources:
   - id: ja-bugreport
     resource: "https://www.jonoalderson.com/conjecture/search-volume-bug-report/"
     title: "Jono Alderson, Sometimes search volume is a bug report (2026-10-17; argument)"
+  - id: am-optimized-tagging
+    resource: "https://www.analyticsmania.com/post/optimized-tagging-experience-in-gtm/"
+    title: "Analytics Mania, GTM Optimized Tagging Experience (2026-10-21; author's test container)"
+  - id: am-utm-not-working
+    resource: "https://www.analyticsmania.com/post/utm-parameters-not-working-in-google-analytics-4/"
+    title: "Analytics Mania, UTM parameters not working in GA4 (updated 2026-10-12)"
+  - id: am-no-data
+    resource: "https://www.analyticsmania.com/post/no-data-available-in-google-analytics-4-here-are-the-solutions/"
+    title: "Analytics Mania, No data available in GA4 (updated 2026-10-12)"
+  - id: am-cross-domain
+    resource: "https://www.analyticsmania.com/post/google-analytics-4-cross-domain-tracking-not-working/"
+    title: "Analytics Mania, GA4 cross-domain tracking not working (updated 2026-10-12)"
+  - id: am-unassigned
+    resource: "https://www.analyticsmania.com/post/unassigned-in-google-analytics-4/"
+    title: "Analytics Mania, Unassigned in GA4 (updated 2026-09-18; plus reader comments)"
+  - id: am-no-revenue
+    resource: "https://www.analyticsmania.com/post/no-revenue-in-google-analytics-4/"
+    title: "Analytics Mania, Missing revenue in GA4 (undated)"
+  - id: am-events-not-showing
+    resource: "https://www.analyticsmania.com/post/google-analytics-4-events-not-showing-up-in-reports/"
+    title: "Analytics Mania, GA4 events not showing up (undated)"
 ---
 
 # Diagnostic tests
@@ -170,6 +190,9 @@ Each test turns a claim from the principles pages ([Google ranking](../how-it-wo
 | Google picks other canonicals, or one country's property loses clicks | [24](#24-google-selected-canonicals-per-page-type), [17](#17-daily-index-status-per-url) |
 | Flag unusual days in Search Console or analytics automatically | [25](#25-anomaly-detection-without-llms) |
 | Queries about returns, delivery, contact or cancellation rise or fall | [26](#26-support-type-queries) |
+| Analytics shows no data, missing events or missing revenue | [27](#27-ga4-no-data-and-missing-revenue-triage), [29](#29-consent-signal-check-in-the-network-request) |
+| Campaign or AI-assistant visits land in Direct or Unassigned | [28](#28-utm-survival-check), [27](#27-ga4-no-data-and-missing-revenue-triage) |
+| Does the tag respect the visitor's consent choice? | [29](#29-consent-signal-check-in-the-network-request) |
 
 ## 1. Exact-term gap on lost queries
 **Claim tested:** terms missing from title, H1 or slug cost rankings.[^qus]
@@ -377,6 +400,33 @@ Aleyda Solis' 12-step checklist works as the outline: steps 1–2 measure presen
 
 **Reading:** fixing the cause can lower traffic. *Practitioner, argument.*[^ja-bugreport] Related but different: queries people use to check out an unfamiliar shop ([Search Console](search-console.md#11-brand-verification-queries)).
 
+## 27. GA4 "no data" and missing-revenue triage
+**Claim tested:** most missing analytics data has a small set of setup causes. Source: Analytics Mania (a practitioner who sells GA4/GTM courses).[^am-no-data]
+1. Rule out the obvious: date range before installation, wrong `G-` ID, unpublished GTM workspace, blocking triggers, an active internal-traffic filter (Admin > Data filters), a consent update that never fires, CMP auto-blocking, privacy extensions, strict CSP. *Practitioner.*[^am-no-data]
+2. Look at the hits: DevTools Network filtered on `collect`, Console for CSP errors, View Source for `gtag` / `G-`, GTM Preview fired vs not fired. CSP must allow `*.google-analytics.com` and `*.analytics.google.com` in `connect-src` and `img-src`. *Practitioner.*[^am-no-data][^am-events-not-showing]
+3. Missing ecommerce data in GTM: check the "Send Ecommerce Data" option on the GA4 event tag, Modify Event rules and whether the user's permissions hide revenue. *Practitioner.*[^am-no-revenue] Required parameters: [analytics](analytics.md#13-ecommerce-events-and-revenue-checks).
+4. After a migration to GTM's optimized tagging: the wizard is missing when the Tag ID is a Lookup Table variable (use a temporary static ID); a "cannot detect destination" warning is ignorable if events arrive; a destination can show "Optimized" while its link shows "Not linked". *Practitioner, one case.*[^am-optimized-tagging] A hard-coded gtag.js snippet next to the optimized setup broke tracking in one reader's case; test in Preview and revert to a legacy Google Tag if needed. *Practitioner, reader comment.*[^am-optimized-tagging]
+5. Wait 24–48 h before judging standard reports; Realtime should show hits within ~30 min. *Practitioner.*[^am-unassigned][^am-no-data]
+
+**Reading:** some Unassigned is normal. Readers reported 3–5 % of sessions missing `session_start` across 10 ecommerce sites (2023), and a ~10× holiday spike causing temporary Unassigned that cleared in ~24 h (2024); one reader saw "+3000 %" Unassigned after delaying the config tag until consent (2025), which the author attributes to other misconfiguration. *Practitioner, reader comments, small sample.*[^am-unassigned]
+
+## 28. UTM survival check
+**Claim tested:** UTMs and `_gl` get lost in redirects, parameter stripping and code before analytics reads them.[^am-utm-not-working]
+1. Open each tagged link (campaign, newsletter, AI-assistant test link) in an incognito window.
+2. If the UTMs vanish from the URL, suspect server or JavaScript redirects: trace them with a redirect-path checker and look for redirect code in GTM. Check routing and CDN rules for stripped `utm_*` and `_gl`.[^am-cross-domain]
+3. If they stay, check `page_location`, source, medium and campaign in DebugView.
+4. Confirm the values are lowercase and that both `utm_source` and `utm_medium` are set.
+
+**Reading:** a link with a source but no medium lands in Unassigned ([analytics](analytics.md#12-ga4-attribution-leaks-utms-consent-and-cross-domain)). *Practitioner.*[^am-utm-not-working][^am-unassigned]
+
+## 29. Consent signal check in the network request
+**Claim tested:** the consent state reaches GA4 with each hit and can be read in the request.[^am-optimized-tagging]
+1. Open the site in a clean browser, deny analytics and ad storage, load a page and read the `gcs` parameter of the `page_view` request in DevTools (Network, filter `collect`).
+2. Grant both, reload and read `gcs` again.
+3. Repeat with a test purchase in GTM Preview (Consent tab) to confirm the purchase tag behaves as intended.[^am-no-revenue]
+
+**Reading:** in one test, denied gave `gcs=G100` and granted gave `gcs=G111`. This checks the signal only, not every Consent Mode setting. *Measured, one case.*[^am-optimized-tagging]
+
 Related: [Search Console](search-console.md), [analytics](analytics.md), [AI-visibility tracking](ai-visibility-tracking.md), [rank tracking](rank-tracking.md), [sources and confidence](../reference/sources-and-confidence.md), [traffic drop](../situations/traffic-drop.md), [core-update recovery](../situations/core-update-recovery.md).
 
 [^qus]: Resoneo, QUS, 2025-07-22: per-term scoring, title weight.
@@ -421,3 +471,10 @@ Related: [Search Console](search-console.md), [analytics](analytics.md), [AI-vis
 [^gg-canonical]: Glenn Gabe (GSQi), 2026-02-17: 3 client cases; Google chose weaker secondary pages on "tens of thousands" of URLs; noindex on on-site-only pages fixed it, canonical alone didn't; carry-over to ChatGPT citations is his inference; same-language hreflang case with relayed Google confirmation.
 [^lr-techseo]: Lily Ray, 2025-12-05, summarising Sam Torres' Tech SEO Connect talk: LLMs hallucinate reading numeric tables; Isolation Forest, Local Outlier Factor or forecast residuals for GSC/GA4 anomalies; LLM writes the code.
 [^ja-bugreport]: Jono Alderson, 2026-10-17: argument; support-type query volume (hidden contact, cancellation, pricing, compatibility); "double the volume" test; fixing it can lower traffic.
+[^am-optimized-tagging]: Analytics Mania, 2026-10-21: optimized-tagging migration bugs in the author's test container; gcs=G100 denied vs G111 granted on page_view (one test); one reader's gtag.js conflict.
+[^am-utm-not-working]: Analytics Mania, updated 2026-10-12: incognito and redirect-path triage, DebugView fields, lowercase and required UTMs.
+[^am-no-data]: Analytics Mania, updated 2026-10-12: "no data" checklist, DevTools and CSP checks, Realtime within ~30 min.
+[^am-cross-domain]: Analytics Mania, updated 2026-10-12: redirects and stripped parameters break the _gl linker.
+[^am-unassigned]: Analytics Mania, updated 2026-09-18, plus reader comments: processing delay 24–48 h; reader reports of missing session_start (3–5 %, 10 sites, 2023), holiday spike (2024), config tag delayed until consent (2025, disputed by the author).
+[^am-no-revenue]: Analytics Mania, undated, read 2026-10-28: Send Ecommerce Data option, Modify Event rules, revenue-restricted permissions, consent test in GTM Preview.
+[^am-events-not-showing]: Analytics Mania, undated, read 2026-10-28: DevTools and CSP checks for missing events.

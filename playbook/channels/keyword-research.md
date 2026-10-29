@@ -4,10 +4,12 @@ title: Keyword research
 description: How far to trust search volume, valuing topics by the traffic of the page that ranks, long-tail and zero-volume keywords, multi-facet intent, clustering and keyword-to-URL mapping, secondary keywords, customer vocabulary and complementary sub-needs, seeding AI prompts from Search Console, how reliable AI classification is, and support-type volume as a bug report.
 tags: [seo, keyword-research, search-volume, long-tail, intent, clustering, keyword-mapping, cannibalisation, synonyms, fan-out, embeddings, classification, ecommerce]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:00:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: rs-intent
+    resource: "https://think.resoneo.com/search-intent/"
+    title: "Resoneo, How Google matches pages to search intent (Oct 2026; internal schemas, a 2011 patent, SERP captures for 8 queries in the US and France)"
   - id: ah-volume
     resource: "https://ahrefs.com/blog/keyword-search-volume/"
     title: "Ahrefs, Keyword search volume (2021-12-01)"
@@ -100,6 +102,7 @@ How far to trust keyword data, how to value and group keywords, and how to map t
 - **Multi-facet intent.** Beyond the four classes, tag the facets that change what the page must offer: main category, desired format, knowledge level, persona, implicit struggle and context. Classify in three passes — rules first, then ML or zero-shot classification, then a human-checked sample — and keep only the dominant intent as the label. *Practitioner.*[^ls-semkw]
 - **Buyer signals:** modifiers (buy, price, best, review, alternatives, near me), Shopping ads on the SERP, high CPC.[^ah-intent] Keywords with Shopping ads are category or product targets ([category pages](../page-types/category-pages.md), [product pages](../page-types/product-pages.md)).
 - **AI Overviews follow intent.** They showed on 21.4 % of informational SERPs, 4.3 % commercial, 2.1 % transactional and 0.9 % navigational (the article's body text says "0.09%"; its table says 0.9 %). *Measured, vendor data, Sept 2025.*[^ah-aio-triggers] Full trigger data: [Google AI features](../how-it-works/google-ai-features.md).
+- **Check intent per market, not per word.** Google reads intent per query, language and country, and the same term can mean a brand in one market and a planet in another; read each market's results before mapping a keyword ([Google ranking](../how-it-works/google-ranking.md#10-intent-decides-the-kind-of-page-per-market)). *From the leak, measured on 8 queries.*[^rs-intent]
 
 ## 5. Clustering and mapping
 - **Cluster by SERP overlap or shared parent topic**, not by wording. Building separate pages for keywords Google already ranks the same pages for is "a waste of time".[^ah-clustering] *Practitioner, plus one tool comparison on 4,703 keywords, dated 2023.*
@@ -146,3 +149,4 @@ Related: [category pages](../page-types/category-pages.md), [comparison and guid
 [^ls-audit]: Lazarina Stoy, 2026-10-25: content-audit workflow with confidence thresholds (e.g. 70 %, 85 %) and manual review below them; save the model version and a labelled check set.
 [^lr-techseo]: Lily Ray, 2025-12-05, her summary of Tech SEO Connect 2025 talks; this item is Michael King's statement that 95 % of fan-out queries have no monthly search volume. Not checked against the slides.
 [^ja-bugreport]: Jono Alderson, 2026-10-17: argument that some search volume signals product or service friction (contact, cancellation, pricing, compatibility); "double the volume" test; fixing the cause can lower traffic. No data.
+[^rs-intent]: Resoneo, Oct 2026 (captures dated 2026-10-28): Intent Brain with 20 broad intents per query, language and country; Orbit with 86 page categories scored 0–100; 5 snippet-date age tiers (1, 3, 30, 90, 365 days); commerce split into merchant product page, review, comparison, buying guide, top N; LISTICLE label measured, not filtered; AUTHENTICITY counted since 2023-07-03, UGC_DISCUSSION since 2023-08-29; "mercury" 82 % fintech on google.com vs "mercure" 50 % planet on google.fr. Internal schemas plus patent US8346815B2; 8-query sample.

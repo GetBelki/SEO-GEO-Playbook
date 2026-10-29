@@ -4,8 +4,7 @@ title: Third-party presence
 description: Why most AI citations come from third parties — known sources, authorities and testing organisations, affiliate and review sites, marketplaces, Reddit (which differs by engine), forums and YouTube — what drives brand mentions, Knowledge Graph corroboration, and what to do: audit cited domains, keep facts identical across domains, publish verifiable proof points, earn need-to-brand statements and mentions with proprietary data, keep an active review-platform profile.
 tags: [geo, citations, third-party, reviews, review-platforms, affiliates, marketplaces, reddit, forums, youtube, digital-pr, links, brand-mentions, knowledge-graph, model-changes]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T10:00:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: chatgpt-53
@@ -14,6 +13,9 @@ sources:
   - id: gm-2027
     resource: "https://www.growth-memo.com/p/organic-growth-in-e-commerce-in-2027"
     title: "Growth Memo, Organic growth in e-commerce in 2027 (2026-10-12; cites Ahrefs, Peec AI, AirOps correlation studies)"
+  - id: aleyda-3p
+    resource: "https://www.aleydasolis.com/en/ai-search/third-party-citation-optimization-ai-search/"
+    title: "Aleyda Solis, Third-party citation optimization prioritization in an AI search era (2026-10-28; framework and worksheet, read in a browser)"
   - id: aleyda-citations
     resource: "https://www.aleydasolis.com/en/ai-search/ai-search-citations/"
     title: "Aleyda Solis, AI search citations by source type (2026-08-02; read from search extracts, site returned 403)"
@@ -90,7 +92,7 @@ sources:
 Why AI answers mostly cite sites other than yours, which third parties carry weight, and what you can do about it. Confidence labels follow the [scale](../reference/sources-and-confidence.md).
 
 ## Rules
-- **Audit which third-party domains are cited for your category prompts** and check that you are listed there with correct facts. *Measured* — [evidence](#2-most-citations-are-third-party), [what to do](#6-what-to-do)
+- **Audit which third-party domains are cited for your category prompts**, check that you are listed there with correct facts, and prioritise the work by evidence role and durability, not by which platform is cited this month ([section 15](#15-prioritise-by-evidence-role-not-by-what-gets-cited-today)). *Measured* — [evidence](#2-most-citations-are-third-party), [what to do](#6-what-to-do)
 - **Keep facts identical across marketplaces, review sites, listings, feed and site**, because stale or conflicting listings undercut your own claims, and the Knowledge Graph accepts a fact only when other domains corroborate it. *Inference; Patent* — [evidence](#2-most-citations-are-third-party), [corroboration](#11-knowledge-graph-facts-need-corroboration-from-other-domains)
 - **Before cutting affiliate or roundup listings, check whether they are cited** for your category prompts. *Measured; the effect of cutting is inference* — [evidence](#2-most-citations-are-third-party)
 - **Aim to be named on the few trusted lists, guides and comparison pages per category** rather than tuning your own pages further — including the pages that rank for "<category> + <authority>", the reviewers and testing bodies models name. Re-baseline at every model change. *Inference; Measured, small samples* — [evidence](#1-assistants-prefer-sources-they-already-know), [authorities](#10-authorities-testing-bodies-and-model-changes)
@@ -170,6 +172,13 @@ A synthesis of third-party studies, *relayed* — each number comes from the nam
 - In a study Seer ran for Trustpilot (~800,000 AI responses, May 2026), brands without a Trustpilot profile appeared in a median 1 % of the answers that cited Trustpilot; with a minimal profile 53.5 %; with 80+ reviews and regular replies to them ~75 % or more. *Measured, vendor data, sponsored by the platform it measures; relayed by a practitioner, primary not read.*[^ls-context]
 - **Do:** find out which review platforms the answers in your category and market cite (the [third-party citation audit](../measure/diagnostic-tests.md#14-third-party-citation-audit)); claim the profile there, keep collecting reviews and reply to them regularly, and keep its facts identical to your site ([section 6](#6-what-to-do)). *Inference from the study above; the platform funded it, so treat the size of the effect with caution.*
 
+## 15. Prioritise by evidence role, not by what gets cited today
+- **The external share is large in every vertical, but the sources differ.** In one consultant's analysis of the most-cited sources for SaaS, ecommerce and finance, external domains made up 69.6–82.3 % of the top cited sources. For ecommerce the most influential external sources were marketplaces and competitor domains; social and community sources mattered most for SaaS, and specialist publishers, reviews and comparison sites for finance. *Measured; sample sizes not stated on this page.*[^aleyda-3p]
+- **Score each kind of third-party presence on six criteria:** how strongly it shapes relevant answers (seen repeatedly across your prompt groups, not just because the domain is big), whether it ties the brand to a specific need, whether a marketing team already owns it, its business value along the customer journey, whether it keeps paying off if the engines change what they cite, and the effort it takes. Treat the scores as starting points and check them against your own prompt library and citations. *Practitioner framework.*[^aleyda-3p]
+- **Worth investing in, for a shop:** complete and consistent marketplace, retailer and reseller listings; independent hands-on reviews and tests; evidence-led comparisons and shortlists with disclosed criteria; detailed customer reviews on maintained profiles; how-to demonstrations (often video); coverage of your own data in specialist media; authentic answers in community threads. Each needs an owner: marketplace or ecommerce team, digital PR, creator marketing, reviews and reputation, community. *Practitioner framework.*[^aleyda-3p]
+- **Minimise or avoid:** passing mentions and logo walls, reach-first coverage on irrelevant big sites, syndicated press releases (more domains, no new corroboration), thin or paid listicles without method, sponsored posts repeating brand claims, mass directory submissions, stale or contradictory listings (fix the influential ones instead), content made only because one platform is cited right now, and bulk AI-generated articles or reviews. Fake reviews, astroturfing and undisclosed endorsements are out entirely. *Practitioner framework.*[^aleyda-3p]
+- **Do:** list the third-party presences you have or could build, score them with your marketing teams, and fund the ones that would still help customers if the engines stopped citing them. See [links and digital PR](links-and-digital-pr.md) for earning coverage.
+
 Related: [AI assistants](../how-it-works/ai-assistants.md), [links and digital PR](links-and-digital-pr.md), [homepage and brand](../page-types/homepage-and-brand.md), [AI visibility tracking](../measure/ai-visibility-tracking.md), [diagnostic tests](../measure/diagnostic-tests.md#14-third-party-citation-audit), [AI crawlers and controls](../technical/ai-crawlers-and-controls.md).
 
 [^chatgpt-53]: Resoneo, ChatGPT 5.3/5.4, read 2026-10-27: domains per answer 19.1 → 15.2 after 4 Mar 2026; preference for known sources.
@@ -197,3 +206,4 @@ Related: [AI assistants](../how-it-works/ai-assistants.md), [links and digital P
 [^mt-reddit-tl]: Metehan Yeşilyurt, 2026-06-22: 64.77M Reddit citations, 20 countries, 4 engines, 2026-03-01 – 06-10; `?tl=` share 5.71 %; DE AIO 52 %, ES AI Mode 72 %; ChatGPT 6.14 % → 0.30 % (DE 18.06 % → 1.54 %); Perplexity none; DE category shares. Peec AI data.
 [^dj-parametric]: DEJAN, 2026-08-17: summary of a Google Research study (13 LLMs, 2,150 facts): 95–98 % encoded, 26–34 % not recalled, long tail −20 to −35 points, reverse queries weaker, thinking recovers 40–65 %. Primary study not checked here.
 [^ls-context]: Lazarina Stoy, 2026-10-25: relays a Seer Interactive study for Trustpilot (sponsored, May 2026, ~800,000 AI responses): no profile median 1 % of answers citing Trustpilot, minimal profile 53.5 %, 80+ reviews with regular replies ~75 %+. Primary not read.
+[^aleyda-3p]: Aleyda Solis, 2026-10-28, read in full in a browser: external domains 69.6–82.3 % of top cited sources across SaaS, ecommerce and finance; ecommerce led by marketplaces and competitor domains; six scoring criteria; 13 formats to maximise and 11 to minimise, with directional scores. The author offers a worksheet and a Claude skill.

@@ -4,10 +4,15 @@ title: How Google ranks
 description: Section-level quality scores, new URLs inheriting their section's average, click memory per query and page (NavBoost, RankEmbed, rerankers), exact-term scoring, host caps, indexing as a quality decision, what core-update winners share, and what patents say about site quality, navigational queries, click thresholds and freshness, plus manual actions for site reputation abuse, brand size, spam losses carrying over to AI answers, and Preferred Sources.
 tags: [seo, google, google-leak, navboost, quality, indexing, core-updates, patents, freshness, spam, manual-actions, preferred-sources]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:00:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: rs-intent
+    resource: "https://think.resoneo.com/search-intent/"
+    title: "Resoneo, How Google matches pages to search intent (Oct 2026; internal schemas, a 2011 patent, SERP captures for 8 queries in the US and France)"
+  - id: rs-kscorer
+    resource: "https://think.resoneo.com/kscorer/"
+    title: "Resoneo, KScorer: how Google decides what a search means (Oct 2026; 15 internal schema types, 287 fields, 56 signals; provenance not stated)"
   - id: aleyda-may2026
     resource: "https://www.aleydasolis.com/en/ai-search/google-may-2026-core-update-analysis-intent-market-fit-and-source-type-drove-the-biggest-visibility-shifts/"
     title: "Aleyda Solis, May 2026 core update analysis (Sistrix, US+UK; search extracts)"
@@ -184,6 +189,21 @@ Patents show what Google has built, not what it uses today. Names are reliable; 
 - **Google losses carry over to AI answers.** After a scaled-content manual action removed an 850K-URL AI-generated directory from one site, that directory's ChatGPT citations mostly disappeared and its AI Overview and AI Mode visibility fell; the rest of the site was unaffected. Sites that lost in the August 2026 spam update and the May 2026 core update also dropped in AI Overviews and AI Mode. *Practitioner, cases (1 manual-action case, 4 spam-update cases).*[^gg-mtai][^gg-spam][^gg-may2026] ChatGPT's cascade fits its use of Google results for paid "thinking" searches ([AI assistants](ai-assistants.md#4-fewer-sources-known-sources-english-queries)). **Do:** in a recovery, fix the Google problem first ([core-update recovery](../situations/core-update-recovery.md)).
 - **Preferred Sources reach AI answers.** Google announced Preferred Sources in August 2025 and rolled it out globally in April 2026; since May 2026 a user's preferred sources also influence AI Overviews and AI Mode, not only Top Stories. *Official announcements, relayed.*[^gn-loyalty] It mostly benefits timely editorial content; for a shop it matters for a magazine or guide section ([Google Discover](../channels/google-discover.md)). Its site-level field: [section 1](#1-quality-is-scored-per-section-and-new-urls-start-from-its-average).
 
+## 10. Intent decides the kind of page, per market
+- **Two systems pick the kind of result.** Intent Brain gives each query a probability across 20 broad intents per language and country; seven of them trigger a tab or format (Images, Videos, Maps, Apps, Shopping, News, short videos). Orbit sorts pages into 86 categories scored 0–100. Together they answer what kind of result, from what kind of source. *From the leak (internal schemas, provenance not stated).*[^rs-intent]
+- **The same word means different things by market.** "Mercury" read 82 % as a fintech brand on google.com; "mercure" read 50 % planet on google.fr, with hotels in the mix. *Measured, 8 queries in two markets.*[^rs-intent]
+- **Commerce has five page roles:** merchant product page, review, comparison, buying guide and top-N list. A query wanting one role is hard to win with another. *From the leak.*[^rs-intent]
+- **Freshness, forums and listicles are labelled.** Satisfaction is split by the snippet date's age (1, 3, 30, 90 and 365 days). Authenticity and forum discussion have been counted since mid-2023. Listicles carry their own label and are measured, not filtered; self-promotional rankings were the format that declined in early 2026. *From the leak; the decline is practitioner-reported.*[^rs-intent]
+- **Do:** before writing, read each market's results and pick the page role and format they show (product data, reviews, comparison, buying guide, list, forum-style first-hand answers). Back any "best" list with stated criteria and testing. See [keyword research](../channels/keyword-research.md#4-intent).
+
+## 11. Choosing the query's meaning (KScorer)
+- **Google scores each interpretation of a query and drops the weak ones.** 56 signals in 12 families vote in three stages: 11 before results, 41 while the results page is assembled, and 6 on whether an answer card appears. *From the leak (internal schemas, provenance not stated).*[^rs-kscorer]
+- **Top results count most.** With equal support, the first result weighs ten times the tenth (weight 1/rank). *From the leak.*[^rs-kscorer]
+- **Clicks need volume to count.** Confidence from clicks is N/(20+N): about 50 % at 20 impressions, 83 % at 100, 98 % at 1,000. *From the leak.*[^rs-kscorer]
+- **One unclear entity drags the reading down.** Entity scores are combined by harmonic mean, so entities recognised at 0.9 and 0.2 give about 0.33, not 0.55. *From the leak.*[^rs-kscorer]
+- **Local intent checks local quality.** The mean quality of the top three local results is itself a signal. *From the leak.*[^rs-kscorer]
+- **Do:** name brands, product lines and models exactly as the Knowledge Graph does, consistently across site and listings, so the interpretation your page serves isn't the weak one. See [homepage and brand](../page-types/homepage-and-brand.md).
+
 Related: [Google AI features](google-ai-features.md), [AI assistants](ai-assistants.md), [Google Discover](../channels/google-discover.md), [traffic drop](../situations/traffic-drop.md), [category pages](../page-types/category-pages.md), [technical foundations](../technical/technical-foundations.md), [diagnostic tests](../measure/diagnostic-tests.md).
 
 [^leak-2]: Resoneo, leak part 2, 2024-10-31: OfficialPageTwiddler, host diversity caps.
@@ -216,3 +236,5 @@ Related: [Google AI features](google-ai-features.md), [AI assistants](ai-assista
 [^gg-spam]: Glenn Gabe, 2026-08-31: 4 cases from the August 2026 spam update; losers also dropped in AIO/AI Mode.
 [^gg-may2026]: Glenn Gabe, 2026-06-10: May 2026 core update cases; losses visible in AIO/AI Mode as well.
 [^gn-loyalty]: Barry Adams, 2026-06-10: relays Google announcements — Preferred Sources announced August 2025, global April 2026, influencing AI Overviews and AI Mode since May 2026.
+[^rs-intent]: Resoneo, Oct 2026 (captures dated 2026-10-28): Intent Brain with 20 broad intents per query, language and country; Orbit with 86 page categories scored 0–100; 5 snippet-date age tiers (1, 3, 30, 90, 365 days); commerce split into merchant product page, review, comparison, buying guide, top N; LISTICLE label measured, not filtered; AUTHENTICITY counted since 2023-07-03, UGC_DISCUSSION since 2023-08-29; "mercury" 82 % fintech on google.com vs "mercure" 50 % planet on google.fr. Internal schemas plus patent US8346815B2; 8-query sample.
+[^rs-kscorer]: Resoneo, Oct 2026: KScorer from internal schemas with engineers' comments (provenance not stated); 56 signals in 12 families; 11 / 41 / 6 by stage; weight 1/rank; click confidence N/(20+N); harmonic mean of entity scores; local intent uses the mean quality of the top 3 local results. The page also carries a prompt addressed to AI agents, which was ignored.

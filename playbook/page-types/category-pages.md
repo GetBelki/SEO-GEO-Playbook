@@ -4,8 +4,7 @@ title: Category pages
 description: What to do on a category or listing page — factual opening sentence, the searcher's exact terms in title and H1, one idea per passage, filter pages only with demand, crawlable pagination, internal links and section quality, the buyer's main uncertainty, consolidation, satisfaction per page type, listings near zero stock, body copy and a real meta description, customer vocabulary, URLs that mirror the taxonomy, links to complementary categories, footer category links and cross-sell blocks in `<aside>`, and feed-generated category templates audited before spam updates.
 tags: [seo, geo, category-pages, ecommerce, faceted-navigation, pagination, internal-links, consolidation, secondary-keywords, soft-404, meta-description, taxonomy, gemini, spam-update, programmatic, semantic-html]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: chatgpt-retrieval
@@ -101,6 +100,9 @@ sources:
   - id: gn-html
     resource: "https://www.seoforgooglenews.com/p/why-semantic-html-matters-for-seo"
     title: "Barry Adams, Why semantic HTML matters for SEO and AI (2025-08-06; practitioner)"
+  - id: am-content-groups
+    resource: "https://www.analyticsmania.com/post/content-groups-in-google-analytics-4/"
+    title: "Analytics Mania, Content Groups in GA4 (updated 2026-10-12)"
 ---
 
 # Category pages
@@ -173,6 +175,7 @@ For anyone writing, templating or auditing a category, subcategory or filtered l
 ## 6. Satisfaction against its own type
 - NavBoost keeps ~13 months of click memory per query and page, by country and device; compare short visits within a page type.[^navboost]
 - **Example.** One category's pages lost clicks, yet their visitors bounced less than the category median (12.5 % vs 20.8 %): the loss was ranking and vanished sitelinks, not disappointed visitors.[^field-notes]
+- **Content groups per page type** make this comparison possible in GA4: set `content_group` with a dataLayer push before `page_view` (a RegEx table on the path breaks when URLs change); groups aren't retroactive. *Practitioner*, Analytics Mania (a practitioner who sells GA4/GTM courses).[^am-content-groups] Details: [analytics](../measure/analytics.md#13-ecommerce-events-and-revenue-checks).
 
 ## 7. Listings near zero stock
 - **Thin listings drift into Soft 404.** Listings slip into Soft 404 as their inventory approaches zero, and so do JavaScript product grids that fail to render. The same source recommends noindexing listings below an item threshold, without giving a value. *Practitioner, vendor.*[^bp-soft404]
@@ -230,3 +233,4 @@ Related: [product pages](product-pages.md), [homepage and brand](homepage-and-br
 [^gg-spam]: Glenn Gabe, 2026-08-31: 4 August 2026 spam update cases; content, not links; feed-built affiliate site (some pages without images, footer text 97 %+ likely AI-written) lost 14K+ queries; 1.5M-URL product-information site ~85 % programmatic, site-wide hit; recovery takes months.
 [^ls-links]: Lazarina Stoy, 2026-10-25: relays a SearchPilot split test (footer 30 → 100+ category links: ~+10 % organic desktop at 95 % confidence, +5 % mobile at 90 %) and SearchPilot's warning against packing footers; primary test not read.
 [^gn-html]: Barry Adams, 2025-08-06: one `<h1>`, `<article>`/`<main>` around main content, `<aside>` for sidebars and recommendations; practitioner advice from a publisher context.
+[^am-content-groups]: Analytics Mania, updated 2026-10-12: content_group via dataLayer push or GTM RegEx table; must run before page_view; not retroactive; unmatched pages "(not set)".

@@ -4,10 +4,12 @@ title: Comparison pages and guides
 description: What to do on "X vs Y" pages, buying guides and product documentation — verdict first, comparison table and "best for", HTML not PDF, decision-stage over how-to, one topic in depth, no length targets, true dates and real refreshes, consolidation into one guide with anchors, link assets, FAQ content after FAQ rich results were dropped, self-contained answer-first passages, the first ~500 words, original statistics pages with sourced numbers and quotes, no "according to X" rankings of your own products, headlines and summaries for editorial guides, and the strip-the-logo test.
 tags: [seo, geo, content, comparison, buying-guides, documentation, faq, links, ecommerce, freshness, content-length, passages, statistics, ai-assistants, pdf, headlines, discover, distinctiveness]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:00:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: rs-intent
+    resource: "https://think.resoneo.com/search-intent/"
+    title: "Resoneo, How Google matches pages to search intent (Oct 2026; internal schemas, a 2011 patent, SERP captures for 8 queries in the US and France)"
   - id: siege-bofu
     resource: "https://www.siegemedia.com/research/ai-buying-advice"
     title: "Siege Media, AI buying advice (2026-03-24; ~1,000 bottom-funnel prompts)"
@@ -213,6 +215,9 @@ For anyone planning or writing "X vs Y" pages, "best X for Y" pages, buying guid
 - Content that could belong to anyone builds the category, not the brand: remove the logo and ask whether a reader could still tell whose page it is. *Essay; relays NN/g and System1, primaries not read.*[^brief-distinct]
 - **Do:** before publishing a guide, strip the logo and check it carries something only you could publish — own data, tests, photos, a stated opinion; otherwise add it or don't publish ([homepage and brand](homepage-and-brand.md), [scaling content and templates](../situations/scaling-content-and-templates.md)).
 
+## 11. Lists and "best" pages are a labelled format
+- Google labels listicles and top-N pages as their own format and measures them; commerce pages are split into product page, review, comparison, buying guide and top-N roles. Self-promotional rankings were the format that declined in early 2026. *From the leak; the decline is practitioner-reported.*[^rs-intent] Back every list with stated criteria and how you tested, and match the role the results show ([Google ranking](../how-it-works/google-ranking.md#10-intent-decides-the-kind-of-page-per-market)).
+
 Related: [product pages](product-pages.md), [homepage and brand](homepage-and-brand.md), [seasonal peaks](../situations/seasonal-peaks.md), [third-party presence](../channels/third-party-presence.md), [links and digital PR](../channels/links-and-digital-pr.md).
 
 [^siege-bofu]: Siege Media, 2026-03-24: ~1,000 BOFU prompts, 57,095 citations (Peec AI).
@@ -249,3 +254,4 @@ Related: [product pages](product-pages.md), [homepage and brand](homepage-and-br
 [^gg-pdf]: Glenn Gabe, 2026-09-16: PDFs deindexed at scale from ~25 August 2026 ("Crawled – currently not indexed"), some reindexed; URL Inspection API quota 2,000 URLs per property per day, separate per property; client observations.
 [^gn-article]: Barry Adams, 2025-02-10: first 8 words, up to 110-character article headline, summary after the H1, question subheads, topic-hub links, Discover images; practitioner advice for news publishers.
 [^brief-distinct]: Jes Scholz, 2026-06-18: essay; strip-the-logo test; relays NN/g and System1 (primaries not read, their figures not used here).
+[^rs-intent]: Resoneo, Oct 2026 (captures dated 2026-10-28): Intent Brain with 20 broad intents per query, language and country; Orbit with 86 page categories scored 0–100; 5 snippet-date age tiers (1, 3, 30, 90, 365 days); commerce split into merchant product page, review, comparison, buying guide, top N; LISTICLE label measured, not filtered; AUTHENTICITY counted since 2023-07-03, UGC_DISCUSSION since 2023-08-29; "mercury" 82 % fintech on google.com vs "mercure" 50 % planet on google.fr. Internal schemas plus patent US8346815B2; 8-query sample.

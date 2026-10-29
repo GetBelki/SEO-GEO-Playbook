@@ -4,8 +4,7 @@ title: AI-visibility tracking
 description: How to count AI-assistant traffic and visibility — untagged clicks by design and by accident, Direct spikes that are bots, GA4's AI Assistant channel, one hostname-anchored channel group, the real size of the channel, per-engine reporting, mentions without links, the May 2026 ChatGPT link change, what Bing's AI Performance covers, prompt-tracker pitfalls (personalisation, clean accounts), re-baselining at model changes and fan-out volatility, entity tracking with search on and off, brand-canon accuracy, share of voice beyond presence, and building the prompt set.
 tags: [measurement, geo, ga4, chatgpt, ai-assistants, attribution, caveats, prompt-tracking, share-of-voice, brand-accuracy]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: ignite-news
@@ -107,6 +106,9 @@ sources:
   - id: gg-gsclinks
     resource: "https://www.gsqi.com/marketing-blog/chatgpt-links-in-google-search-console/"
     title: "Glenn Gabe, ChatGPT links in Google Search Console (2026-03-18; client properties)"
+  - id: am-unassigned
+    resource: "https://www.analyticsmania.com/post/unassigned-in-google-analytics-4/"
+    title: "Analytics Mania, Unassigned in GA4 (updated 2026-09-18; plus reader comments)"
 ---
 
 # AI-visibility tracking
@@ -117,7 +119,7 @@ How to count the traffic and visibility AI assistants bring, and why the analyti
 - **Treat the analytics AI-referral line as a floor,** because some assistant clicks never carry a referrer or UTM. *Measured* — [section 1](#1-untagged-by-design)
 - **Mark model-release weeks with lost referrers as reporting gaps** instead of reading them as a decline. *Measured, relayed* — [section 2](#2-untagged-by-accident)
 - **Rule out bots before explaining a Direct rise with AI,** segmenting Direct by landing page, country, browser, OS and screen size. *Measured* — [section 3](#3-direct-spikes-are-mostly-bots-not-hidden-ai)
-- **Build one custom channel group from assistant source names, anchored on hostnames,** and keep one definition per time series. *Practitioner* — [section 4](#4-one-channel-definition)
+- **Build one custom channel group from assistant source names, anchored on hostnames,** and keep one definition per time series; AI-assistant links with `utm_source` but no `utm_medium` land in Unassigned, and GA4's own AI Assistant channel is still partial. *Practitioner* — [section 4](#4-one-channel-definition)
 - **Report assistant sessions and conversions side by side, per vertical, next to Google organic,** and read them with exposure and branded search rather than by referral clicks alone. *Measured; practitioner* — [section 5](#5-scale-of-the-channel), [section 7](#7-how-to-track)
 - **Report visibility per engine with a fixed model and reasoning mode, log the model per answer and re-baseline at every model change,** never as one blended AI score; count mentions separately from linked citations, since most mentions carry no link. *Measured, small samples; single brand for links* — [section 6](#6-one-ai-score-hides-more-than-it-shows), [section 11](#11-re-baseline-at-every-model-change)
 - **Sample AI answers every 2–3 days, with several simultaneous runs per prompt drawn from real demand and from category entry points,** and report presence % with share of voice next to it, not position. *Measured, vendor data; practitioner* — [section 7](#7-how-to-track), [section 10](#10-what-prompt-trackers-dont-tell-you), [section 14](#14-share-of-voice-not-only-presence), [section 15](#15-building-the-prompt-set)
@@ -139,8 +141,8 @@ How to count the traffic and visibility AI assistants bring, and why the analyti
 > **Conflict:** an older estimate that ~70 % of AI traffic lands as Direct vs AI traces in 0.003 % of Direct in the later, placebo-tested study[^ipr-brand][^gm-direct] — [details](../reference/conflicts.md#is-ai-traffic-hiding-in-direct)
 
 ## 4. One channel definition
-- **GA4's own AI channel.** GA4 added a native "AI Assistant" default channel (medium `ai-assistant`) in May 2026 (dated 13 May 2026 in a later source).[^ignite-news][^nz-aimeas] Check whether it matches your own source regex before switching; keep one definition per time series.
-- **Split over channels.** In GA4's default grouping, assistant traffic lands across "AI Assistant", "Unassigned" and "Referral". Build one custom group from source names (chatgpt.com, perplexity, gemini, copilot, claude.ai…).
+- **GA4's own AI channel.** GA4 added a native "AI Assistant" default channel (medium `ai-assistant`) in May 2026 (dated 13 May 2026 in a later source).[^ignite-news][^nz-aimeas] Check whether it matches your own source regex before switching; keep one definition per time series. Analytics Mania (a practitioner who sells GA4/GTM courses) called its coverage "partial and still changing" in September 2026; don't rely on it alone. *Practitioner.*[^am-unassigned]
+- **Split over channels.** In GA4's default grouping, assistant traffic lands across "AI Assistant", "Unassigned" and "Referral". Build one custom group from source names (chatgpt.com, perplexity, gemini, copilot, claude.ai…). Links tagged `utm_source=chatgpt.com` without `utm_medium` land in Unassigned: once GA4 sees any UTM it ignores the referrer, and a source without a medium matches no channel rule. Check Session source / medium. *Practitioner.*[^am-unassigned] More UTM leaks: [analytics](analytics.md#12-ga4-attribution-leaks-utms-consent-and-cross-domain).
 - **Anchor the regex on hostnames.** One published GA4 setup matches 16 source patterns (chatgpt.com, chat.openai.com, perplexity.ai, gemini.google.com, claude.ai, copilot, meta.ai, poe.com, you.com, jina.ai…); unanchored patterns also match unrelated sources that merely contain the word. *Practitioner.*[^bp-ga4-ai] Example: `^(chatgpt\.com|chat\.openai\.com|(www\.)?perplexity\.ai|gemini\.google\.com|claude\.ai|copilot\.microsoft\.com)$` on session source, extended as new assistants appear (*inference*).
 - **Email tools with non-standard mediums** (e.g. `campaign`/`flow` instead of `email`) fall into "Unassigned" too.
 
@@ -255,3 +257,4 @@ Related: [analytics](analytics.md), [Search Console](search-console.md), [diagno
 [^gg-gsclinks]: Glenn Gabe (GSQi), 2026-03-18: shared ChatGPT conversations in the GSC Links report on client properties ("thousands of links" for some), noindex/nofollow, sometimes only in directory properties.
 [^cc-kpis]: Crystal Carter, Wix AI Search Lab, 2025-07-29 (updated 2025-08-03): relays SparkToro audience data ("programming" searchers +111.7 % likelier to use ChatGPT for search; ChatGPT not in the top seven discovery channels for "potatoes" searchers); framework.
 [^field-notes]: Anonymised shop, 2024–2026: every "Example" on this page; one-week loss of ChatGPT referrer and UTM in October 2026. Dates and sizes from the shop's caveat list are omitted so the shop can't be identified.
+[^am-unassigned]: Analytics Mania, updated 2026-09-18: AI-assistant links with utm_source but no utm_medium land in Unassigned; GA4's AI Assistant channel coverage partial (Sep 2026); custom channel group advised.

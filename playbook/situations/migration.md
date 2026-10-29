@@ -4,8 +4,7 @@ title: Site migration and URL renames
 description: How to rename URLs, move a domain or relaunch a site without losing search, ads or AI visibility — Google's official move rules, same-day internal links and sitemaps, a control set, redirects that keep query strings, feed and ad URLs, pre-launch checks on staging, a separate bucket for parameter and facet URLs, short stable core URLs, daily per-URL and per-template monitoring afterwards, signals derived from one record so sitemaps, hreflang, canonicals and feeds don't drift, and the Removals tool only as a stopgap for a leaked staging or login host.
 tags: [seo, migration, redirects, url-renames, site-move, hreflang, google-ads, feeds, staging, monitoring, faceted-navigation, parameters, signal-drift, removals-tool, replatforming]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: g-indexing-api
@@ -80,6 +79,12 @@ sources:
   - id: gg-canonical
     resource: "https://www.gsqi.com/marketing-blog/rel-canonical-hint-cascade-chatgpt/"
     title: "Glenn Gabe, Rel canonical is just a hint — cascade to ChatGPT (2026-02-17; 3 client cases)"
+  - id: am-utm-not-working
+    resource: "https://www.analyticsmania.com/post/utm-parameters-not-working-in-google-analytics-4/"
+    title: "Analytics Mania, UTM parameters not working in GA4 (updated 2026-10-12)"
+  - id: am-cross-domain
+    resource: "https://www.analyticsmania.com/post/google-analytics-4-cross-domain-tracking-not-working/"
+    title: "Analytics Mania, GA4 cross-domain tracking not working (updated 2026-10-12)"
 ---
 
 # Site migration and URL renames
@@ -130,6 +135,7 @@ Use this page before any change that alters URLs: slug renames, category restruc
 
 ## 3. Ads, feeds and AI crawlers
 - **Query strings.** In one shop some old URLs redirected without the query string; ad clicks lost gclid and UTM, and affected campaigns were undercounted for months.[^field-notes]
+- **Parameter stripping.** Sites, single-page apps and CDNs that strip or 404 on unknown query parameters kill UTMs and the cross-domain `_gl` linker; whitelist `utm_*` and `_gl` in the new platform's routing and caching rules, and run the [UTM survival check](../measure/diagnostic-tests.md#28-utm-survival-check). *Practitioner*, Analytics Mania (a practitioner who sells GA4/GTM courses).[^am-utm-not-working][^am-cross-domain]
 - **Landing page as ad input.** Google Ads builds an LLM summary of each landing page and checks generated assets for faithfulness against it. *From code.*[^google-ads] When a final URL changes, check that headlines and descriptions describe the new page.
 - **Feed links are landing URLs.** Free-listing clicks now go straight to the retailer page set in the feed (Shopping tab, Chrome default, AI Mode grids).[^brodie-notes] Check them for redirects, lost parameters and the right variant.
 - **Backend renames move slugs.** Change product titles in the feed, not the shop backend: a backend rename can change the URL slug and needs redirects and an ads URL check. *Practitioner.*[^gmc-audit]
@@ -196,3 +202,5 @@ Related: [technical foundations](../technical/technical-foundations.md), [new ma
 [^sbs-navqueries]: SEO by the Sea, 2012-12-09: patent US 8,326,826 (filed 2009-01-15, likely expired); navigational resources from session patterns and long clicks; shorter URLs and shallower depth favoured.
 [^ja-brain]: Jono Alderson, 2026-10-04: worked examples of signal drift (noindex at 09:00, sitemap at midnight → ~15 h conflict); hreflang, canonicals, schema availability and feeds from one record; event-driven updates; valid-but-wrong output.
 [^gg-canonical]: Glenn Gabe, 2026-02-17: client cases; Removals tool hid a public login subdomain in ~8–10 hours but doesn't deindex; pair with 404/410, noindex or auth; robots.txt not a fix; list every subdomain in Search Console.
+[^am-utm-not-working]: Analytics Mania, updated 2026-10-12: sites, SPAs and CDNs stripping or 404ing on unknown parameters lose UTMs.
+[^am-cross-domain]: Analytics Mania, updated 2026-10-12: stripped query strings break the _gl cross-domain linker.

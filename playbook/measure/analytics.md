@@ -4,8 +4,7 @@ title: Analytics
 description: Where web analytics under- and over-counts — missing orders, payment redirects, double page views, session bugs, meaningless bounce, click IDs lost in redirects, Performance Max channel quirks, paused feeds, engagement benchmarks, self-reported attribution, AI-assistant referrals (referrers, UTMs, bots, server-log checks, conversion value), speculative prefetch hits and anomaly detection without LLMs.
 tags: [measurement, ga4, google-ads, tracking, attribution, caveats, ai-assistants, server-logs, anomaly-detection]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: ignite-news
@@ -38,6 +37,30 @@ sources:
   - id: lr-techseo
     resource: "https://lilyray.nyc/tech-seo-connect-2025-summary-takeaways/"
     title: "Lily Ray, Tech SEO Connect 2025 takeaways (2025-12-05; talk summaries, speakers named per item)"
+  - id: am-optimized-tagging
+    resource: "https://www.analyticsmania.com/post/optimized-tagging-experience-in-gtm/"
+    title: "Analytics Mania, GTM Optimized Tagging Experience (2026-10-21; author's test container)"
+  - id: am-utm-not-working
+    resource: "https://www.analyticsmania.com/post/utm-parameters-not-working-in-google-analytics-4/"
+    title: "Analytics Mania, UTM parameters not working in GA4 (updated 2026-10-12)"
+  - id: am-no-data
+    resource: "https://www.analyticsmania.com/post/no-data-available-in-google-analytics-4-here-are-the-solutions/"
+    title: "Analytics Mania, No data available in GA4 (updated 2026-10-12)"
+  - id: am-cross-domain
+    resource: "https://www.analyticsmania.com/post/google-analytics-4-cross-domain-tracking-not-working/"
+    title: "Analytics Mania, GA4 cross-domain tracking not working (updated 2026-10-12)"
+  - id: am-content-groups
+    resource: "https://www.analyticsmania.com/post/content-groups-in-google-analytics-4/"
+    title: "Analytics Mania, Content Groups in GA4 (updated 2026-10-12)"
+  - id: am-unassigned
+    resource: "https://www.analyticsmania.com/post/unassigned-in-google-analytics-4/"
+    title: "Analytics Mania, Unassigned in GA4 (updated 2026-09-18; plus reader comments)"
+  - id: am-no-revenue
+    resource: "https://www.analyticsmania.com/post/no-revenue-in-google-analytics-4/"
+    title: "Analytics Mania, Missing revenue in GA4 (undated)"
+  - id: am-events-not-showing
+    resource: "https://www.analyticsmania.com/post/google-analytics-4-events-not-showing-up-in-reports/"
+    title: "Analytics Mania, GA4 events not showing up (undated)"
 ---
 
 # Analytics
@@ -54,6 +77,7 @@ Which analytics numbers can't be taken at face value — orders, page views, ses
 - **Ask buyers how they heard of you after purchase,** with an "AI assistant" option. *Practitioner, single case* — [section 6](#6-self-reported-attribution)
 - **Bot-filter the AI channel and read AI referrals next to server logs;** most assistant clicks arrive without a referrer and some tagged visits are bots. Count AI bots only from server or CDN logs, verified against the vendors' published IP ranges — client-side trackers see none. *Measured; one site for the bot logs* — [section 7](#7-ai-assistant-referrals-referrers-utms-and-bots), [section 8](#8-ai-bots-live-in-server-logs-only)
 - **Log `Sec-Purpose` and exclude speculative prefetch hits from demand counts** (site search, add-to-cart). *Practitioner, no measurements* — [section 10](#10-speculative-prefetch-hits)
+- **Keep UTMs, click IDs and `_gl` alive from ad to purchase:** whitelist `utm_*` and `_gl` in routing, CDN and cache rules, never strip query strings from `page_location`, keep UTM values lowercase with source and medium both set, and test a purchase without accepting the consent banner. *Practitioner* — [section 12](#12-ga4-attribution-leaks-utms-consent-and-cross-domain), [section 13](#13-ecommerce-events-and-revenue-checks)
 - **Find anomalies with statistical models, not an LLM reading tables of numbers;** let the LLM write the code. *Practitioner, relayed* — [section 11](#11-anomaly-detection-without-llms)
 
 ## 1. Analytics doesn't see every order
@@ -71,7 +95,7 @@ Which analytics numbers can't be taken at face value — orders, page views, ses
 - **`(not set)` landing pages** (7.5 % of organic sessions in one example) and session restarts inside checkout must be excluded from landing-page analyses.
 
 ## 3. Ads and attribution
-- **Redirects that drop click IDs.** Example: some old URLs redirected without the query string, so ad clicks lost gclid and UTM and neither the ad platform nor analytics could attribute them; affected campaigns were undercounted for months. Check every ad landing URL with a test gclid weekly.
+- **Redirects that drop click IDs.** Example: some old URLs redirected without the query string, so ad clicks lost gclid and UTM and neither the ad platform nor analytics could attribute them; affected campaigns were undercounted for months. Check every ad landing URL with a test gclid weekly.[^am-utm-not-working]
 - **Performance Max in GA4** lands in "Cross-network", not "Paid Search". Compare the two only combined, or use source / medium `google / cpc`.
 - **Cost by date in GA4.** Example: querying `advertiserAdCost` together with a date dimension repeated the range total on every row; query one date range per month instead. Microsoft Ads costs aren't in GA4 at all.
 - **Checkout rebuilds break ad conversions.** Example: after a checkout rebuild, Google Ads and Microsoft Ads conversion tracking stayed broken for 6–8 months. Re-verify conversions after every checkout release.
@@ -119,6 +143,35 @@ What server logs show that analytics misses, from logs compared with GA4 on seve
 - LLMs hallucinate when they read tables of numbers. For Search Console and analytics anomalies, use Isolation Forest, Local Outlier Factor or forecast residuals, and have an LLM write the code rather than read the numbers. *Practitioner, relayed talk summary.*[^lr-techseo]
 - **Do:** run the check on daily clicks, sessions and orders per page type, and review flagged days against the caveats list ([section 1 of Search Console](search-console.md#1-before-every-comparison)); the method is [test 25](diagnostic-tests.md#25-anomaly-detection-without-llms).
 
+## 12. GA4 attribution leaks: UTMs, consent and cross-domain
+Points from Analytics Mania (a practitioner who sells GA4/GTM courses).
+- **A source without a medium is Unassigned.** Once GA4 sees any UTM it ignores the referrer, so an assistant link with `utm_source=chatgpt.com` and no `utm_medium` matches no channel rule. Check Session source / medium and build a custom channel group for AI sources ([AI-visibility tracking](ai-visibility-tracking.md#4-one-channel-definition)). *Practitioner.*[^am-unassigned]
+- **Non-standard mediums** (`mail`, `em`, `pdf`) match none of GA4's 18 default channel groups and land in Unassigned. *Practitioner.*[^am-unassigned]
+- **Don't judge attribution on same-day data.** Standard reports need 24–48 h and Unassigned shrinks as processing completes; Realtime should show hits within ~30 min, so an empty Realtime means a collection problem. *Practitioner.*[^am-unassigned][^am-no-data]
+- **Stripped parameters.** Sites, single-page apps and CDNs that strip or 404 on unknown query parameters kill UTMs and the `_gl` linker; whitelist `utm_*` and `_gl` in routing and caching rules ([migration](../situations/migration.md#3-ads-feeds-and-ai-crawlers)). *Practitioner.*[^am-utm-not-working][^am-cross-domain]
+- **A custom `page_location` that removes query strings** silently destroys campaign attribution, and the data can't be recovered. *Practitioner.*[^am-utm-not-working]
+- **UTMs on internal links** mid-session don't re-attribute; find such clicks in Explore with Page location containing `utm_`. *Practitioner.*[^am-utm-not-working]
+- **Consent before navigation.** If visitors move on before accepting the banner, landing-page UTMs can be lost; options are persisting UTMs, a more prominent banner or Advanced Consent Mode (with legal review). *Practitioner.*[^am-utm-not-working]
+- **Auto-tagging wins.** Google Ads auto-tagging (gclid) overrides manual UTMs as `google / cpc`; the manual values remain in "Session manual source" and "Session manual campaign". UTMs are case-sensitive (enforce lowercase), and `utm_source` and `utm_medium` are both required. *Practitioner.*[^am-utm-not-working]
+- **Cross-domain checkout** passes IDs via `_gl`. It fails when a domain is missing from "Configure your domains", redirects drop the query string, click handlers stop propagation, buttons or divs replace `<a>` links, forms are used (form decoration only in gtag.js), or iframes, different measurement IDs or inconsistent consent sit between the domains. Subdomains need no setup. *Practitioner.*[^am-cross-domain]
+- **Measurement Protocol events** need `client_id` and `session_id` to join a session (otherwise "(not set)"); for sessions up to 72 h old also send `timestamp_micros`. *Practitioner.*[^am-unassigned]
+- **Thresholding** hides small rows, mostly when demographic dimensions are in the report; the threshold is unknown (the author guesses under ~50). Remove those dimensions. *Practitioner.*[^am-events-not-showing]
+- **Do:** check new campaign links with [test 28](diagnostic-tests.md#28-utm-survival-check) and consent with [test 29](diagnostic-tests.md#29-consent-signal-check-in-the-network-request).
+
+## 13. Ecommerce events and revenue checks
+- **Purchase revenue** needs a `purchase` event with `transaction_id`, `value` and an ISO currency code, plus an `items` array with `item_id`, `item_name`, `price` and `quantity` (no quantity, no item revenue); send numbers without thousands separators. *Practitioner.*[^am-no-revenue]
+- **Basic Consent Mode v2:** with `analytics_storage` denied the purchase tag can be blocked entirely; test a purchase without accepting the banner in GTM Preview (Consent tab). *Practitioner.*[^am-no-revenue]
+- **Denied-consent events** don't appear in DebugView or Realtime; they reach standard reports only as modelled data with Blended reporting identity. *Practitioner.*[^am-events-not-showing]
+- **Event limits and lags:** event names max 40 characters; unregistered parameters are visible only for the last 30 min; custom dimensions take up to 48 h and aren't retroactive; Admin > Events lags behind reports. *Practitioner.*[^am-events-not-showing]
+- **Content groups per page type:** set `content_group` with a dataLayer push (robust) or a GTM RegEx table on the path (breaks when URLs change; first match wins). The push must run before `page_view`; groups aren't retroactive and unmatched pages show "(not set)". *Practitioner.*[^am-content-groups] Use them for satisfaction per page type ([test 2](diagnostic-tests.md#2-satisfaction-per-page-type)).
+- **Do:** when revenue or events go missing, run [test 27](diagnostic-tests.md#27-ga4-no-data-and-missing-revenue-triage).
+
+## 14. GTM's optimized tagging (2026)
+- GTM's Optimized Tagging Experience (October 2026) replaces the Google Tag with destination tag types (Google Analytics, Google Ads, Floodlight), moves shared settings into the container and sends data without extra Google tag libraries; Conversion Linker is marked Legacy. *Practitioner.*[^am-optimized-tagging]
+- There is no page-speed promise for the optimized setup; measure on your own site. *Practitioner.*[^am-optimized-tagging]
+- A container rollback restores tags but not the permissions granted during optimization (revoke them under Admin > External account links). Server-side GTM needs no change; `server_container_url` stays on the GA destination tag. *Practitioner.*[^am-optimized-tagging]
+- **Do:** after migrating, check consent signals ([test 29](diagnostic-tests.md#29-consent-signal-check-in-the-network-request)) and the known migration bugs ([test 27](diagnostic-tests.md#27-ga4-no-data-and-missing-revenue-triage)).
+
 Related: [Search Console](search-console.md), [AI-visibility tracking](ai-visibility-tracking.md), [diagnostic tests](diagnostic-tests.md), [traffic drop](../situations/traffic-drop.md), [migration](../situations/migration.md).
 
 [^ignite-news]: Ignite Visibility weekly recap, read 2026-10-27: GSC impression inflation (week of 2026-04-04), GA4 AI Assistant channel (2026-05-09), GA4 bug (2026-08-29), GPT-6 referral loss with Adobe data (2026-10-10), Comscore, Seer and the field experiment on AIO clicks (2026-04-25), SparkToro zero-click; secondary reporting, primary sources not checked.
@@ -131,3 +184,11 @@ Related: [Search Console](search-console.md), [AI-visibility tracking](ai-visibi
 [^ja-specevil]: Jono Alderson, 2026-04-14: third-party speculation rules can target uncached URLs (`/search?q=*`, `/cart?add-to-cart=*`); detectable via `Sec-Purpose: prefetch`, often without referrer; no cross-site opt-out; technical argument, no measurements.
 [^lr-techseo]: Lily Ray, 2025-12-05, summarising Sam Torres' Tech SEO Connect talk: LLMs hallucinate reading numeric tables; Isolation Forest, Local Outlier Factor or forecast residuals for GSC/GA4 anomalies; LLM writes the code.
 [^field-notes]: Anonymised shop, 2024–2026: every "Example" on this page. The shop's own caveat list records dates and sizes; they are omitted here so the shop can't be identified.
+[^am-optimized-tagging]: Analytics Mania, 2026-10-21: GTM Optimized Tagging Experience in the author's test container; destination tag types, Conversion Linker Legacy, no speed promise, rollback and permissions, server-side unchanged.
+[^am-utm-not-working]: Analytics Mania, updated 2026-10-12: causes of lost UTMs — redirects, stripped parameters, custom page_location, internal UTMs, consent timing, auto-tagging override, case sensitivity.
+[^am-no-data]: Analytics Mania, updated 2026-10-12: "no data" causes and checks; Realtime within ~30 min.
+[^am-cross-domain]: Analytics Mania, updated 2026-10-12: _gl linker failure modes in cross-domain tracking.
+[^am-content-groups]: Analytics Mania, updated 2026-10-12: content_group via dataLayer push or GTM RegEx table; timing before page_view; not retroactive.
+[^am-unassigned]: Analytics Mania, updated 2026-09-18: Unassigned causes — UTM without medium, non-standard mediums, 18 default channel groups, processing delay 24–48 h, Measurement Protocol session joining.
+[^am-no-revenue]: Analytics Mania, undated, read 2026-10-28: required purchase parameters, Basic Consent Mode blocking the purchase tag.
+[^am-events-not-showing]: Analytics Mania, undated, read 2026-10-28: denied-consent events, thresholding, event-name and parameter limits, custom-dimension delay.

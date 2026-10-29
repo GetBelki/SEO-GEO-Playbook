@@ -4,10 +4,15 @@ title: Sources and confidence
 description: The research sources, what each is good for, the six-level confidence scale, how to read research, and what not to adopt.
 tags: [sources, confidence, research, method]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-28T13:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T16:00:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: serprecon
+    resource: "https://www.serprecon.com/blog/how-to-rank-in-perplexity-photon"
+    title: "SERPrecon (Ryan Jones), How to rank in Perplexity Photon (2026-10-14)"
+  - id: analyticsmania
+    resource: "https://www.analyticsmania.com/blog/"
+    title: "Analytics Mania (Julius Fedorovicius), GA4 and GTM troubleshooting guides, 8 posts updated Sep–Oct 2026"
   - id: official-docs
     resource: "https://developers.google.com/search/docs"
     title: "Vendor documentation: Google Search Central, OpenAI, Anthropic, Perplexity, Apple, Bing, IndexNow (read 2026-10-27)"
@@ -142,7 +147,9 @@ A claim relayed by a secondary source (an agency blog citing a study) says "rela
 - **Jono Alderson.**[^alderson] Technical guides (HTTP caching, fonts, rendering, speculation rules) and well-argued positions (signal drift, machine-only versions); few measurements.
 - **Jes Scholz** (SEO Brief).[^scholz] Brand-science essays applied to SEO and GEO; four posts, inactive since July 2026. Pew's primary study, which she cites, was read directly.
 - **Crystal Carter.**[^carter] Practitioner frameworks for AI visibility (RAPP audit, KPIs) and entity work; no measured study of her own.
-- **Not read:** SparkToro and MobileMoxie were queued in the same batch, but those readers were stopped before reporting. Their figures quoted here come via other sources.
+- **Analytics Mania** (Julius Fedorovicius).[^analyticsmania] GA4 and Google Tag Manager troubleshooting: UTMs, Unassigned traffic, consent mode, cross-domain checkout, ecommerce events, GTM's 2026 optimized tagging. Practitioner procedures, tested in the author's own containers; few measurements. The author sells GA4/GTM courses.
+- **SERPrecon** (Ryan Jones).[^serprecon] SEO tool vendor; one commentary on Perplexity's Photon post. Used only where it matches the primary post, which was read directly.
+- **Not read yet:** SparkToro, MobileMoxie, FullStory, DebugBear and web.dev's performance course. Their figures quoted here come via other sources. ML for SEO was attempted, but the result cited pages that don't exist, so none of it is used.
 - **Brodie Clark** (brodieclark.com).[^brodie] Dated sightings of Google and ChatGPT SERP tests, nearly all with screenshots, plus a few how-to articles. Best source for *when a surface changed*. No measured data; notes have no permalinks, only month anchors.
 - **Searchind** (searchind.com).[^searchind] One consultant's ecommerce SEO blog. Practical checklists (Merchant Center audit, seasonal SEO, D2C, market analysis). Case results are anecdotal, never quantified. Use it for *procedures*, not for evidence.
 - **Thrive and Ignite Visibility.**[^thrive][^ignite] Agency blogs with almost no original research. Used only for third-party studies they relay (Ahrefs, Moz, SE Ranking, Adobe…), marked "relayed"; their own case figures have no baseline or method and are not used.
@@ -176,6 +183,8 @@ Related: [conflicts register](conflicts.md), [glossary](glossary.md), [Google up
 [^adams]: SEO for Google News, read 2026-10-28: 10 posts, Feb 2025 – Sep 2026.
 [^alderson]: Jono Alderson, read 2026-10-28: 12 posts, Jul 2025 – Oct 2026.
 [^scholz]: SEO Brief, read 2026-10-28: 4 posts, Apr – Jul 2026.
+[^serprecon]: SERPrecon, 2026-10-14: read alongside Perplexity's own Photon post (2026-09-24), which is cited as vendor documentation.
+[^analyticsmania]: Analytics Mania, read 2026-10-28: 8 troubleshooting posts (most marked updated 12 Oct 2026; the GTM optimized-tagging post dated 21 Oct 2026).
 [^carter]: Crystal Carter, read 2026-10-28: 6 resources incl. Wix SEO Hub / AI Search Lab articles; her book not read.
 [^natzir]: Natzir Turrado, read 2026-10-28: 16 articles, May 2025 – Oct 2026.
 [^dejan]: DEJAN, read 2026-10-28: 17 posts, Dec 2025 – Oct 2026; blog index truncated around post 222.
