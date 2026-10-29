@@ -4,10 +4,13 @@ title: Site migration and URL renames
 description: How to rename URLs, move a domain or relaunch a site without losing search, ads or AI visibility — Google's official move rules, same-day internal links and sitemaps, a control set, redirects that keep query strings, feed and ad URLs, pre-launch checks on staging, a separate bucket for parameter and facet URLs, short stable core URLs, daily per-URL and per-template monitoring afterwards, signals derived from one record so sitemaps, hreflang, canonicals and feeds don't drift, and the Removals tool only as a stopgap for a leaked staging or login host.
 tags: [seo, migration, redirects, url-renames, site-move, hreflang, google-ads, feeds, staging, monitoring, faceted-navigation, parameters, signal-drift, removals-tool, replatforming]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:15:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T09:22:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: chuleta-geo2027
+    resource: "https://newsletter.chuletaseo.com/p/geo-2027-la-guia-de-los-expertos"
+    title: "Chuleta SEO (Emilio Rodríguez García), GEO 2027: la guía de los expertos (2026-10-29; Spanish newsletter, own projects plus relayed studies)"
   - id: g-indexing-api
     resource: "https://developers.google.com/search/apis/indexing-api/v3/quickstart"
     title: "Google Search Central, Indexing API quickstart (updated 2026-10-16)"
@@ -191,6 +194,7 @@ A term in the title adds ~3.5 to its query score on average; some terms must mat
 ML for SEO sells courses and promotes its own notebooks; the methods below come without accuracy benchmarks.
 - **Score candidates, then review.** Match old to new URLs by fuzzy string matching (Levenshtein, via libraries such as TheFuzz, RapidFuzz or PolyFuzz) on URL, title, H1, H2 and meta description, score 0–100, and count how many algorithms agree; flag every match below 70. Priority URLs are those with at least 100 clicks or 5 referring domains. In the author's example a 71-score partial still pointed at the wrong page, and a 38 led to a 410 rather than a homepage redirect. *Practitioner.*[^mlseo-migration]
 - **Thresholds depend on the data.** Use 60–70 for inconsistent datasets and 85–90 for minor URL variations; label Exact = 100, Partial = 50 to under 100, No match = under 50; partials of 70 or more can be pre-built redirects but still need a manual check. No-code tools suffice below about 100–300 URLs; use Python above about 1,000. *Practitioner, no accuracy benchmark.*[^mlseo-404-fuzzy]
+- **What a homepage redirect costs.** A rental portal that redirected a whole section to its homepage fell from an estimated 21,645 to 3,065 monthly visits for that section, losing rankings for established commercial terms. *Practitioner, one case, third-party visibility estimate.*[^chuleta-geo2027]
 - **Do:** check every priority URL and every partial match by hand; send "no match" URLs to 404 or 410, not to the homepage ([section 1](#1-googles-official-rules)).
 
 Related: [technical foundations](../technical/technical-foundations.md), [new market](new-market.md), [feeds and Merchant Center](../channels/feeds-and-merchant-center.md), [scaling content and templates](scaling-content-and-templates.md), [internal linking](../technical/internal-linking.md), [links and digital PR](../channels/links-and-digital-pr.md).
@@ -224,3 +228,4 @@ Related: [technical foundations](../technical/technical-foundations.md), [new ma
 [^mlseo-migration]: ML for SEO, 2026-10-24: 43-check procedure; one hop 301/308 to a 200, daily monitoring for 2 weeks, reviews at 3, 6, 12 months, redirects kept permanently; fuzzy-matched redirect map (URL, title, H1, H2, meta description; flag <70; priority = ≥100 clicks or ≥5 referring domains); AI-search baseline, stable @id, robots.txt diff, IndexNow.
 [^wd-html]: web.dev, 2023-11-01: avoid redirects and chains (e.g. HTTP → HTTPS then trailing slash); link to final URLs; each redirect adds a request.
 [^mlseo-404-fuzzy]: ML for SEO, 2025-08-09: fuzzy thresholds 60–70 for inconsistent data, 85–90 for minor URL variations; Exact 100 / Partial 50–<100 / No match <50; no-code below ~100–300 URLs, Python above ~1,000. Method, no accuracy benchmark.
+[^chuleta-geo2027]: Chuleta SEO (Emilio Rodríguez García), 2026-10-29, Spanish newsletter, read in full; claims translated. Own projects: a section redirected to the homepage (Sistrix estimate 21,645 → 3,065), ~9,340 robots.txt-blocked pages still indexed (Search Console, Aug–Oct 2026). Relays SE Ranking: 82.5 % of US brand searches show an AI Overview, 62 % of cited pages rank outside the organic top 10 (sample and period not stated).

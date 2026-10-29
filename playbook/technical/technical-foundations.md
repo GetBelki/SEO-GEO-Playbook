@@ -4,10 +4,13 @@ title: Technical foundations (Google's official rules)
 description: Google's documented rules for the technical basics that decide what gets crawled, indexed and shown — faceted navigation, canonicals, site moves, product variants, pagination, crawl budget, JavaScript, structured data policies, Core Web Vitals, hreflang and link spam — plus labelled additions on rendering checks, 404 vs 410 vs 301, URL hierarchy, server location, Gemini reading the indexed copy, Chrome-side AI features, Google-selected canonicals carrying over to ChatGPT, the Removals tool, PDF deindexing, viewport and CSS rendering pitfalls, signal drift between outputs, semantic landmarks, and HTML size limits for Googlebot and Bing.
 tags: [seo, technical-seo, google, crawling, indexing, canonical, migration, hreflang, structured-data, core-web-vitals, rendering, status-codes, url-structure, hosting, pdf, lazy-loading, semantic-html, html-size, cdn, ecommerce]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:15:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T09:22:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: chuleta-geo2027
+    resource: "https://newsletter.chuletaseo.com/p/geo-2027-la-guia-de-los-expertos"
+    title: "Chuleta SEO (Emilio Rodríguez García), GEO 2027: la guía de los expertos (2026-10-29; Spanish newsletter, own projects plus relayed studies)"
   - id: g-facets
     resource: "https://developers.google.com/search/docs/crawling-indexing/crawling-managing-faceted-navigation"
     title: "Google Search Central, Managing crawling of faceted navigation URLs (updated 2025-12-18)"
@@ -129,7 +132,7 @@ These are Google's own documented rules, so they rank above every practitioner c
 ## 2. Canonicals and duplicates
 - **Signal strength:** redirects and `rel="canonical"` are "a strong signal"; sitemap inclusion is "a weak signal". Signals add up.[^g-canonical]
 - **Don't:**
-  - use robots.txt to canonicalise — Google "may still index URLs that are disallowed in robots.txt without their content";
+  - use robots.txt to canonicalise — Google "may still index URLs that are disallowed in robots.txt without their content" (one practitioner saw about 9,340 blocked pages still indexed over three months; use noindex on crawlable pages to keep them out[^chuleta-geo2027]);
   - use noindex for it: "We don't recommend using noindex to prevent selection of a canonical page within a single site";
   - send mixed signals: "Don't specify different URLs as canonical for the same page using different canonicalization techniques";
   - use fragments or the URL removal tool.[^g-canonical]
@@ -303,3 +306,4 @@ Related: [migration](../situations/migration.md), [AI crawlers and controls](ai-
 [^dbb-2mb]: DebugBear, 2026-02-16: Googlebot docs list 2 MB uncompressed HTML (was 15 MB, changed ~Feb 2026), subresources separate, PDFs excepted; forum report of truncation at ~1.9 MB vs the author's URL Inspection tests without truncation; relays Dave Smart (median ~20 KB, p90 ~392 KB); Bing 1 MB soft limit, also affects DuckDuckGo. Vendor blog.
 [^dbb-cdn-seo]: DebugBear, 2026-05-04: a CDN improves TTFB/LCP, reliability and crawl efficiency, no direct ranking boost. Explainer, no before/after data.
 [^dbb-psi]: DebugBear, 2025-03-09 (upd. 2026-10-08): confirms the thresholds and 28-day p75 CrUX window; field data can take 28 days to reflect a fix. Explainer, vendor.
+[^chuleta-geo2027]: Chuleta SEO (Emilio Rodríguez García), 2026-10-29, Spanish newsletter, read in full; claims translated. Own projects: a section redirected to the homepage (Sistrix estimate 21,645 → 3,065), ~9,340 robots.txt-blocked pages still indexed (Search Console, Aug–Oct 2026). Relays SE Ranking: 82.5 % of US brand searches show an AI Overview, 62 % of cited pages rank outside the organic top 10 (sample and period not stated).

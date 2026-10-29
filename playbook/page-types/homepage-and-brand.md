@@ -4,10 +4,13 @@ title: Homepage and brand pages
 description: What to do on the homepage and brand-intent pages — verifiable proof points as text, one page per branded intent, brand queries that no longer guarantee a click, the merchant knowledge panel fed by Merchant Center and Business Profile, clicks without citations, brand identity in core updates, third-party listings that match the site, AI Overviews on branded queries, entity hygiene and Knowledge Graph facts, AI referrals landing on the homepage, brand-verification queries, homepage body copy and "need → brand" statements, short stable brand URLs, hallucinated variants of your hostname, brand display in results (favicon, site name, logo, OG image), and a brand canon of checkable facts with accuracy tracking, early facts for obscure questions, per-language anchor pages and the training cut-off.
 tags: [seo, geo, homepage, brand, knowledge-panel, merchant-center, third-party, ecommerce, ai-overviews, entity, knowledge-graph, chatgpt, meta-description, gemini, favicon, site-name, brand-accuracy, multilingual]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:15:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T09:22:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: chuleta-geo2027
+    resource: "https://newsletter.chuletaseo.com/p/geo-2027-la-guia-de-los-expertos"
+    title: "Chuleta SEO (Emilio Rodríguez García), GEO 2027: la guía de los expertos (2026-10-29; Spanish newsletter, own projects plus relayed studies)"
   - id: siege-credibility
     resource: "https://www.siegemedia.com/research/credibility-statements"
     title: "Siege Media, Credibility statements and AI visibility (2026-10-26; 585 brands, 63 categories, Peec AI)"
@@ -184,6 +187,7 @@ For anyone responsible for the homepage, the pages that answer branded searches,
 
 ## 7. What the AI Overview says about your brand
 - **Branded searches now get AI Overviews.** In Sept 2026, AI Overviews showed on 73.3 % of branded keywords on average (83 % on 29 Sep) vs 78.3 % of non-branded ones — up from 13.1 % of branded keywords in the Nov 2025 study. *Measured, vendor data, US desktop.*[^ah-aio-branded]
+- **A second study agrees.** SE Ranking found AI Overviews on 82.5 % of US brand searches. *Measured, relayed; sample and period not stated.*[^chuleta-geo2027]
 - **The summary sits on top and is written from third parties.** Of 100 bare brand names, 63 showed an AI Overview, 76.2 % of those at position 1. Its citations came from Wikipedia (71.9 %), YouTube (38.6 %) and LinkedIn (22.8 %) (n=57); 3.4 % mentioned competitors. *Measured, vendor data.*[^ah-aio-branded]
 - **Do:** read the AI Overview for your bare brand name every month; fix wrong facts where they come from — Wikipedia and Wikidata, your YouTube channel, your LinkedIn page. *Inference from the citation shares.* How AI Overviews work: [Google AI features](../how-it-works/google-ai-features.md).
 
@@ -269,3 +273,4 @@ Related: [comparison pages and guides](comparison-and-guides.md), [category page
 [^lr-gsc-meetup]: Lily Ray, 2025-03-24: her account of Google staff statements at the Search Central meetup NYC, March 2025 (brand size not judged; recognisable brands "often have signals that perform well").
 [^ja-multiling]: Jono Alderson, 2025-08-08: opinion, no data; LLMs borrow from other languages or similar companies; anchor pages per language.
 [^cc-entity]: Crystal Carter, ≈2026-03: practitioner; training cut-off can explain a missing launch; recheck after the next model update.
+[^chuleta-geo2027]: Chuleta SEO (Emilio Rodríguez García), 2026-10-29, Spanish newsletter, read in full; claims translated. Own projects: a section redirected to the homepage (Sistrix estimate 21,645 → 3,065), ~9,340 robots.txt-blocked pages still indexed (Search Console, Aug–Oct 2026). Relays SE Ranking: 82.5 % of US brand searches show an AI Overview, 62 % of cited pages rank outside the organic top 10 (sample and period not stated).

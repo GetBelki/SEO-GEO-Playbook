@@ -137,7 +137,7 @@ Qualifiers such as *vendor data*, *relayed*, *one case* and *small sample* narro
 ## Scope and limits
 
 - **A snapshot.** The content reflects sources up to **October 2026**. Search changes fast, so each page carries a `stale_after` date and the [log](playbook/log.md) records what changed.
-- **Reviewed, not guaranteed.** Every page is `stable` and was reviewed by a person after its last change (`verified`, 29 October 2026). The rules are still well-sourced hypotheses: test them on your own data before acting at scale.
+- **Reviewed, not guaranteed.** Every page is `stable` and was reviewed by a person after its last change (`verified`). The rules are still well-sourced hypotheses: test them on your own data before acting at scale.
 - **Ecommerce first.** Most of it also applies to publishers, local businesses and SaaS, but the examples and priorities are written for online shops.
 - **Anonymised examples.** The examples come from one German-market online shop (2024–2026). Brand, product and identifying figures have been removed.
 - **Not affiliated** with Google, OpenAI, Anthropic or any source cited. All trademarks belong to their owners. Quotes are short and attributed; for the full argument, follow the footnote to the original.

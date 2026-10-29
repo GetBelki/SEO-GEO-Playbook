@@ -4,10 +4,13 @@ title: AI-visibility tracking
 description: How to count AI-assistant traffic and visibility — untagged clicks by design and by accident, Direct spikes that are bots, GA4's AI Assistant channel, one hostname-anchored channel group, the real size of the channel, per-engine reporting, mentions without links, the May 2026 ChatGPT link change, what Bing's AI Performance covers, prompt-tracker pitfalls (personalisation, clean accounts), re-baselining at model changes and fan-out volatility, entity tracking with search on and off, brand-canon accuracy, share of voice beyond presence, building the prompt set, runs and margin of error, AI as a brand channel, dark AI traffic and AI Overview citation tracking.
 tags: [measurement, geo, ga4, chatgpt, ai-assistants, attribution, caveats, prompt-tracking, share-of-voice, brand-accuracy]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:15:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T09:22:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: chuleta-timelines
+    resource: "https://newsletter.chuletaseo.com/p/google-admite-que-el-seo-se-nota"
+    title: "Chuleta SEO (Emilio Rodríguez García), Google admite que el SEO se nota (2026-10-22; Spanish newsletter relaying Gary Illyes at Search Central Live Barcelona)"
   - id: ignite-news
     resource: "https://ignitevisibility.com/digital-marketing-news/"
     title: "Ignite Visibility, weekly digital marketing news recap (Jan – Oct 2026; relays Google confirmations and third-party studies)"
@@ -196,6 +199,7 @@ How to count the traffic and visibility AI assistants bring, and why the analyti
 - **Do:** split AI referrals by landing-page type (homepage, category, product, content) and mark 7 May 2026 as a break in that split. If homepage share jumps, make sure bestsellers and category entry points sit above the fold there ([homepage and brand](../page-types/homepage-and-brand.md)).
 
 ## 9. Bing AI Performance: what it covers
+- **Citation gaps (beta).** Bing Webmaster Tools' Topics Portfolio adds "Opportunity Queries": queries where other sites are cited in AI answers and yours isn't. *Practitioner report of a beta feature; no figures.*[^chuleta-timelines]
 - Across 6 sites, Bing's query-to-page mapping covered 24.6–96.6 % of citations and 10–25 % of pages on mid-sized and large sites; the report is of little use under about 200 citations. *Measured, 6 sites.*[^nz-bingai]
 - 7–33 % of grounding queries (0.4–20 % weighted by citations) had no Google or Bing impressions, and URLs cited only in AI (with no search impressions) were 0.009–0.9 % of citations. Most AI citations go to pages that already rank in search — it supports "rank in search first". *Measured, 6 sites.*[^nz-bingai][^nz-trackers]
 - **Do:** treat the report as a sample of your citations, not the total; set-up in [AI crawlers and controls](../technical/ai-crawlers-and-controls.md), Search Console's equivalent in [Search Console](search-console.md#4-ai-reports-search-console-and-bing).
@@ -315,3 +319,4 @@ Related: [analytics](analytics.md), [Search Console](search-console.md), [diagno
 [^sp-ai-boondoggle]: SparkToro (Rand Fishkin), 2026-10-22: relays Marie Haynes (100 sites, 12 months), SEOWorks (Sep 2025 – Aug 2026; site count given as 95 and as 63), Kevin Indig (12 sites); citing Mike King for "digital billboard".
 [^mlseo-dark-ai]: MLforSEO (Beatrice Gamba), 2026-08-21, updated 2026-10-24: relays Loamly vendor data (~446,000 identified AI visits; 70.6 % without referrer; CR 10.2 % vs 2.5 %); Direct vs branded proxy is illustrative.
 [^mlseo-aio-tracker]: MLforSEO (Lazarina Stoy), 2026-10-24: DataForSEO-based tracker, 29 keywords, US desktop, 2026-10-25; median cited/organic domain overlap 22 %; cost estimate at October 2026 list prices.
+[^chuleta-timelines]: Chuleta SEO, 2026-10-22, Spanish, read in full; claims translated. Paraphrases Gary Illyes at Search Central Live Barcelona (no direct quote or recording given): new page discovered in ~20 hours, existing page re-crawled ~30 days, link signals processed in minutes to 3 weeks, title updates 1–2 days, site migration 1–3 months, core-update recovery 3–6 months (up to a year); the author notes the steps add up. Also relays a Cloudflare–OpenAI discovery pilot ("hundreds of millions" of pages, no method) and Bing's Topics Portfolio beta.

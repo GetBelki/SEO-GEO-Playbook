@@ -4,10 +4,13 @@ title: Search Console
 description: How to read Search Console without being fooled — the comparison checklist, num=100, filtered and inflated impressions, the Generative AI report and AI Mode clicks, where AI Overviews show, text ads, zero-click and organic-decline benchmarks, whole-site CTR benchmarks, brand-verification queries, bot-like LLM query bursts and AI Mode follow-ups, how much volume a title test needs, same-language hreflang click attribution, the URL Inspection API quota, Insights query groups, the zero-click series by country, and decay and striking-distance definitions.
 tags: [measurement, search-console, ai-overviews, ctr, zero-click, caveats, branded-search, hreflang, ai-mode]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:15:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T09:22:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: chuleta-timelines
+    resource: "https://newsletter.chuletaseo.com/p/google-admite-que-el-seo-se-nota"
+    title: "Chuleta SEO (Emilio Rodríguez García), Google admite que el SEO se nota (2026-10-22; Spanish newsletter relaying Gary Illyes at Search Central Live Barcelona)"
   - id: ignite-news
     resource: "https://ignitevisibility.com/digital-marketing-news/"
     title: "Ignite Visibility, weekly digital marketing news recap (Jan – Oct 2026; relays Google confirmations and third-party studies)"
@@ -208,6 +211,11 @@ From MLforSEO (which sells courses).
 - **Internal-link targets from striking distance:** pages at average position 4–20 with at least 50 impressions for 2–7-word queries, linked from pages that mention the query, after a cannibalisation check; on one blog 242 such queries gave 110 suggestions. It misses the long tail, because Search Console omits rare queries. *Practitioner.*[^mlseo-internal-linking] Method: [ML methods for SEO](ml-methods-for-seo.md#3-internal-link-suggestions).
 - **Do:** compare against the same period last year as well before calling a page decayed ([section 1](#1-before-every-comparison)).
 
+## 19. How long changes take to show
+- **Google's typical times,** as relayed from a Search Central Live talk: a new page is discovered in about 20 hours, an existing page is re-crawled about every 30 days, link signals are processed within minutes to 3 weeks, and title changes show in 1–2 days. A site migration settles in 1–3 months, and recovery from a core update takes 3–6 months, sometimes up to a year. *Official statement, relayed and paraphrased (no direct quote or recording).*[^chuleta-timelines]
+- **The steps add up.** Discovery, crawling, indexing and serving happen one after another, so a page change can take one to three weeks to show. *Practitioner.*[^chuleta-timelines]
+- **Do:** before concluding a change failed, check the page's last crawl date in URL Inspection, and compare absolute numbers, not only shares. See [diagnostic tests](diagnostic-tests.md).
+
 Related: [analytics](analytics.md), [AI-visibility tracking](ai-visibility-tracking.md), [rank tracking](rank-tracking.md), [diagnostic tests](diagnostic-tests.md), [traffic drop](../situations/traffic-drop.md), [Google AI features](../how-it-works/google-ai-features.md).
 
 [^ignite-news]: Ignite Visibility weekly recap, read 2026-10-27: GSC impression inflation (week of 2026-04-04), GA4 AI Assistant channel (2026-05-09), GA4 bug (2026-08-29), GPT-6 referral loss with Adobe data (2026-10-10), Comscore, Seer and the field experiment on AIO clicks (2026-04-25), SparkToro zero-click; secondary reporting, primary sources not checked.
@@ -237,3 +245,4 @@ Related: [analytics](analytics.md), [AI-visibility tracking](ai-visibility-track
 [^sp-zero-click-countries]: SparkToro with Similarweb, 2026-06-16: desktop and mobile web panel, Jan–Apr 2026, 6 countries; Google app excluded; period label says "(US)".
 [^mlseo-content-audit]: MLforSEO (Lazarina Stoy), 2026-10-24: decay, striking-distance and thin-content rules on a synthetic 24-URL site.
 [^mlseo-internal-linking]: MLforSEO (Lazarina Stoy), 2026-10-22: Search Console striking-distance linking on one 68–79-post blog; 242 queries → 110 suggestions.
+[^chuleta-timelines]: Chuleta SEO, 2026-10-22, Spanish, read in full; claims translated. Paraphrases Gary Illyes at Search Central Live Barcelona (no direct quote or recording given): new page discovered in ~20 hours, existing page re-crawled ~30 days, link signals processed in minutes to 3 weeks, title updates 1–2 days, site migration 1–3 months, core-update recovery 3–6 months (up to a year); the author notes the steps add up. Also relays a Cloudflare–OpenAI discovery pilot ("hundreds of millions" of pages, no method) and Bing's Topics Portfolio beta.

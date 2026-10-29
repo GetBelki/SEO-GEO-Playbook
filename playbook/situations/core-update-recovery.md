@@ -4,10 +4,13 @@ title: Core update recovery
 description: What to do after losing visibility in a Google core update — confirm the dates and wait out mid-rollout tremors, compare clicks in clean windows, find the loss by directory and page type, compare with what winners and losers share (including intrusive ads and sister sites), treat indexing as a quality signal, tell spam and manual actions from core (feed-generated templates, site reputation abuse), avoid rewrites that only win briefly, watch brand demand and unlinked mentions, and expect the loss to carry into AI answers.
 tags: [seo, core-update, spam-update, recovery, quality, google, diagnosis, brand, pruning, manual-actions, ai-overviews, chatgpt, discover]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:15:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-29T09:22:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: chuleta-timelines
+    resource: "https://newsletter.chuletaseo.com/p/google-admite-que-el-seo-se-nota"
+    title: "Chuleta SEO (Emilio Rodríguez García), Google admite que el SEO se nota (2026-10-22; Spanish newsletter relaying Gary Illyes at Search Central Live Barcelona)"
   - id: status
     resource: "https://status.search.google.com/products/rGHU1u87FJnkP6W2GwMi/history"
     title: "Google Search Status Dashboard, Ranking history (42 entries since Nov 2021) and the per-incident pages, read 2026-10-27"
@@ -101,6 +104,7 @@ Use this page once [traffic drop](traffic-drop.md) has ruled out measurement bre
 - **Find where the loss sits — by directory, then by page type** ([step 2](#2-locate-the-loss)). *From the leak; trial / leak.*
 - **Compare your lost pages with what winners share** — follow-ups, first-hand testing, trust and customer service, brand identity, intent and market fit — and check what losers share: intrusive ads, sister sites on one setup ([step 3](#3-what-winners-share)). *Practitioner cases; measured visibility.*
 - **Treat falling indexed counts as part of the same quality problem**, and before pruning check whether the pages feed internal links to the category ([step 4](#4-indexing-is-part-of-the-verdict)). *Case observations plus statements; Practitioner, qualitative.*
+- **Google's own rough timeline** for core-update recovery is 3–6 months, up to a year, and 1–3 months for a site migration. *Official statement, relayed.*[^chuleta-timelines]
 - **Plan for months, not weeks:** recovery often comes only with a later core update ([step 5](#5-recovery-time-spam-vs-core-and-what-not-to-do)). *Practitioner, four cases.*
 - **Don't rewrite pages for embeddings or mass-rewrite and judge on first gains** ([step 5](#5-recovery-time-spam-vs-core-and-what-not-to-do)). *Statement plus anecdotes.*
 - **Track branded and navigational demand and unlinked mentions per section, not only links** ([step 6](#6-brand-demand-and-mentions)). *Patent.*
@@ -197,3 +201,4 @@ Related: [Google ranking](../how-it-works/google-ranking.md), [traffic drop](tra
 [^sp-5-features]: SparkToro (Rand Fishkin), 2026-04-20: relays Cyrus Shepard/Zyppy, 400+ sites, 2024–2026 YoY Google traffic; win rate 13.5 % with 0 traits, ~15 % with 1, 68.1 % with 4, 69.7 % with 5; Fishkin's view that tactical SEO can't save a replaceable business model. Video transcript; figures approximate.
 [^srp-commodity-content]: SERPrecon, 2026-10-15: relays Google's generative-AI guide ("non-commodity content"), Danny Sullivan via Search Engine Journal and John Mueller (2019); Google hasn't said commodity content is penalised or that a commodity score exists; de-commoditising procedure. Vendor sells a commodity-scoring tool; no validation data.
 [^mlseo-content-audit]: ML for SEO, 2026-10-24: rule order, first match wins; decay = clicks −30 % or more between two consecutive 3-month Search Console periods (≥20 clicks earlier); striking distance = position 4–20 with ≥200 impressions; thin = <300 words with demand; prune if <10 clicks, <200 impressions, <20 sessions and no key events. Demonstrated on a synthetic 24-URL site.
+[^chuleta-timelines]: Chuleta SEO, 2026-10-22, Spanish, read in full; claims translated. Paraphrases Gary Illyes at Search Central Live Barcelona (no direct quote or recording given): new page discovered in ~20 hours, existing page re-crawled ~30 days, link signals processed in minutes to 3 weeks, title updates 1–2 days, site migration 1–3 months, core-update recovery 3–6 months (up to a year); the author notes the steps add up. Also relays a Cloudflare–OpenAI discovery pilot ("hundreds of millions" of pages, no method) and Bing's Topics Portfolio beta.
