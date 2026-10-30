@@ -1,5 +1,11 @@
 # Log
 
+## 2026-10-30
+
+**Update** — Human review: the 4 pages changed by the Gemini UTM correction stamped `verified` again (Martin Aberastegue).
+**Update** — Search Engine Roundtable (2026-10-30): Gemini's `utm_source=gemini` tag ran from early September to about 28 September 2026 and has stopped; the iOS app sends no referrer (Direct, `GeminiiOS` in logs). Corrected analytics, ai-visibility-tracking and ai-assistants, which had presented the tag as current. These pages and sources-and-confidence lost their `verified` stamp.
+**Lint** — 0 errors, 0 warnings; all section anchors, footnotes and sources resolve.
+
 ## 2026-10-29
 
 **Update** — Human review: the 16 pages changed by the Steve Toth update stamped `verified` again (Martin Aberastegue).

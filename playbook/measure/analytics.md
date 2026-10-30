@@ -4,10 +4,13 @@ title: Analytics
 description: Where web analytics under- and over-counts — missing orders, payment redirects, double page views, session bugs, meaningless bounce, click IDs lost in redirects, Performance Max channel quirks, paused feeds, engagement benchmarks, self-reported attribution, AI-assistant referrals (referrers, UTMs, bots, server-log checks, conversion value), speculative prefetch hits, anomaly detection without LLMs, friction signals, GA4 bounce and conversion benchmarks, AI shopping agents, demand by correlation, URL joins and real-user Web Vitals outside Chrome.
 tags: [measurement, ga4, google-ads, tracking, attribution, caveats, ai-assistants, server-logs, anomaly-detection]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-30T11:41:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-30T11:42:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: ser-gemini-utm
+    resource: "https://www.seroundtable.com/gemini-utm-parameters-42399.html"
+    title: "Search Engine Roundtable (Barry Schwartz), Gemini stops adding UTM parameters (2026-10-30; relays Natzir Turrado's data and John Mueller)"
   - id: ignite-news
     resource: "https://ignitevisibility.com/digital-marketing-news/"
     title: "Ignite Visibility, weekly digital marketing news recap (Jan – Oct 2026; relays Google confirmations and third-party studies)"
@@ -175,7 +178,7 @@ Which analytics numbers can't be taken at face value — orders, page views, ses
 What server logs show that analytics misses, from logs compared with GA4 on several sites. *Measured.*[^nz-aimeas]
 - **ChatGPT:** web citations carry `utm_source=chatgpt.com`, but 96–99 % arrive without a referrer; free-plan inline links and app clicks land in Direct. When OpenAI's search was probed through the API, cited links carried `utm_source=openai` — segment that source too. *Measured, probing, one query.*[^dj-grounding]
 - **Claude** uses dated referral paths (`claude.ai/referral/YYYY-MM-DD`); group them under one source.
-- **Gemini:** the iOS app (user agent `GeminiiOS`) lands in Direct. Google's grounding citations are wrapped in `vertexaisearch.cloud.google.com/grounding/...` links.[^dj-grounding] In the Gemini web app, outbound citation links carry `utm_source=gemini`, and 383 of 389 citation spans added a `#:~:text=` fragment pointing to the quoted words. *Measured, vendor data (Steve Toth, who sells a paid AI-search membership).*[^st-gemini]
+- **Gemini:** the iOS app (user agent `GeminiiOS`) lands in Direct. Google's grounding citations are wrapped in `vertexaisearch.cloud.google.com/grounding/...` links.[^dj-grounding] From early September 2026 Gemini added `utm_source=gemini` to cited links, then stopped around 28 September; desktop visits still arrive with a gemini.google.com referrer, while the iOS app opens links in its own WebView with no referrer at all, so those visits land in Direct and show only as `GeminiiOS` in server logs. *Measured, one practitioner's data, relayed; no Google statement.*[^ser-gemini-utm] In the Gemini web app, 383 of 389 citation spans added a `#:~:text=` fragment pointing to the quoted words. *Measured, vendor data (Steve Toth, who sells a paid AI-search membership).*[^st-gemini]
 - **GA4 "AI Assistant" channel** since 13 May 2026 (dated May 2026 elsewhere); channel definition in [AI-visibility tracking](ai-visibility-tracking.md#4-one-channel-definition).
 - **UTM bug, 7–16 Oct 2026:** ChatGPT-attributed visits fell 68–74 % in server logs and 20–60 % in GA4. Mark the window as a gap ([AI-visibility tracking](ai-visibility-tracking.md#2-untagged-by-accident)).
 - **Bots inside the AI channel:** on one site up to 35 % of visits tagged chatgpt.com were bots (data-centre IPs, outdated user agents). ChatGPT-User fetches 2–7× more pages than the visits it sends.
@@ -305,3 +308,4 @@ Related: [Search Console](search-console.md), [AI-visibility tracking](ai-visibi
 [^mlseo-content-audit]: MLforSEO (Lazarina Stoy), 2026-10-24: URL join rules and coverage check on a synthetic 24-URL site.
 [^dbb-ff-safari]: DebugBear, 2025-12-15, updated 2026-03-19: Safari 26.2 adds LCP and INP; Firefox supports LCP and INP; CrUX Chrome-only; the Firefox INP date in the source is likely wrong.
 [^st-gemini]: Steve Toth, undated guide: 47 Gemini conversations (32 signed in, 15 signed out); 383 of 389 citation spans with a `#:~:text=` fragment; outbound links tagged `utm_source=gemini`; 3.6 Flash signed in, 3.5 Flash-Lite signed out; `ProductComparisonTable` seen signed out only; tables lifted from source pages for 5 citations signed in, 12 signed out.
+[^ser-gemini-utm]: Search Engine Roundtable, 2026-10-30: Gemini added `utm_source=gemini` to cited links from early September 2026 and stopped around 28 September (Natzir Turrado's chart; also seen by John Mueller); gemini.google.com referrer visits stayed flat on desktop; the iOS app opens links in a WebView with no referrer (Direct in GA4), visible only as the `GeminiiOS` user agent in server logs. No Google statement.

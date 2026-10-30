@@ -4,10 +4,13 @@ title: AI-visibility tracking
 description: How to count AI-assistant traffic and visibility — untagged clicks by design and by accident, Direct spikes that are bots, GA4's AI Assistant channel, one hostname-anchored channel group, the real size of the channel, per-engine reporting, mentions without links, the May 2026 ChatGPT link change, what Bing's AI Performance covers, prompt-tracker pitfalls (personalisation, clean accounts), re-baselining at model changes and fan-out volatility, entity tracking with search on and off, brand-canon accuracy, share of voice beyond presence, building the prompt set, runs and margin of error, AI as a brand channel, dark AI traffic, AI Overview citation tracking, retrieved vs cited vs named, replay and sign-in skew, AI Mode journeys from Search Console follow-ups and Gemini link tags.
 tags: [measurement, geo, ga4, chatgpt, ai-assistants, attribution, caveats, prompt-tracking, share-of-voice, brand-accuracy]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-10-30T11:41:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-10-30T11:42:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: ser-gemini-utm
+    resource: "https://www.seroundtable.com/gemini-utm-parameters-42399.html"
+    title: "Search Engine Roundtable (Barry Schwartz), Gemini stops adding UTM parameters (2026-10-30; relays Natzir Turrado's data and John Mueller)"
   - id: chuleta-timelines
     resource: "https://newsletter.chuletaseo.com/p/google-admite-que-el-seo-se-nota"
     title: "Chuleta SEO (Emilio Rodríguez García), Google admite que el SEO se nota (2026-10-22; Spanish newsletter relaying Gary Illyes at Search Central Live Barcelona)"
@@ -307,7 +310,8 @@ Steve Toth sells a paid AI-search membership, so his recordings are labelled ven
 - **Track monthly:** follow-up impressions, commercial follow-up impressions and product-page replies. They are floors, because Search Console hides rare queries. On one property 454 of 2,226 query rows (~20 %) were follow-ups. *Practitioner; measured, one case.*[^st-pronoun-queries]
 
 ## 23. Gemini links: utm_source and text fragments
-- Gemini's outbound links carry `utm_source=gemini`, and 383 of 389 citation spans linked to the quoted words with a `#:~:text=` fragment. *Measured, vendor data.*[^st-gemini] Add the source to the channel group ([section 4](#4-one-channel-definition)); browsers don't send the fragment to the server, so the cited passage is visible in the answer, not in analytics ([analytics](analytics.md#7-ai-assistant-referrals-referrers-utms-and-bots)).
+- **The UTM tag was temporary.** Gemini tagged cited links with `utm_source=gemini` from early September 2026 and stopped around 28 September. Match Gemini by referrer (gemini.google.com) as well as by UTM, and expect iOS-app visits in Direct, identifiable only by the `GeminiiOS` user agent in server logs. *Measured, one practitioner's data, relayed; no Google statement.*[^ser-gemini-utm]
+- In recorded sessions, Gemini's outbound links carried `utm_source=gemini` (before it stopped), and 383 of 389 citation spans linked to the quoted words with a `#:~:text=` fragment. *Measured, vendor data.*[^st-gemini] Add the source to the channel group ([section 4](#4-one-channel-definition)); browsers don't send the fragment to the server, so the cited passage is visible in the answer, not in analytics ([analytics](analytics.md#7-ai-assistant-referrals-referrers-utms-and-bots)).
 
 Related: [analytics](analytics.md), [Search Console](search-console.md), [diagnostic tests](diagnostic-tests.md), [AI assistants](../how-it-works/ai-assistants.md), [third-party presence](../channels/third-party-presence.md).
 
@@ -356,3 +360,4 @@ Related: [analytics](analytics.md), [Search Console](search-console.md), [diagno
 [^st-gemini]: Steve Toth, undated guide: 47 Gemini conversations (32 signed in, 15 signed out); 383 of 389 citation spans with a `#:~:text=` fragment; outbound links tagged `utm_source=gemini`; 3.6 Flash signed in, 3.5 Flash-Lite signed out; `ProductComparisonTable` seen signed out only; tables lifted from source pages for 5 citations signed in, 12 signed out.
 [^st-ai-mode]: Steve Toth, undated guide: 30 AI Mode conversations, 280 cited sources; citations attach to output slots (up to 8 pages each); side panel and "Show all" agreed at the top in 10 of 34 answers; replays after click-outs raised one brand's count from 12 to 26.
 [^st-pronoun-queries]: Steve Toth, 2026-10-06: method plus one property's GSC export (2,226 rows → 2,158 candidates → 1,745 without brand → 454 follow-up keywords) and client examples; relays John Mueller via Search Engine Roundtable that AI Mode follow-ups appear as pronoun queries.
+[^ser-gemini-utm]: Search Engine Roundtable, 2026-10-30: Gemini added `utm_source=gemini` to cited links from early September 2026 and stopped around 28 September (Natzir Turrado's chart; also seen by John Mueller); gemini.google.com referrer visits stayed flat on desktop; the iOS app opens links in a WebView with no referrer (Direct in GA4), visible only as the `GeminiiOS` user agent in server logs. No Google statement.
