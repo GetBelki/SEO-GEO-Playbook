@@ -4,10 +4,13 @@ title: Homepage and brand pages
 description: What to do on the homepage and brand-intent pages — verifiable proof points as text, one page per branded intent, brand queries that no longer guarantee a click, the merchant knowledge panel fed by Merchant Center and Business Profile, clicks without citations, brand identity in core updates, third-party listings that match the site, AI Overviews on branded queries, entity hygiene and Knowledge Graph facts, AI referrals landing on the homepage, brand-verification queries, homepage body copy and "need → brand" statements, short stable brand URLs, hallucinated variants of your hostname, brand display in results (favicon, site name, logo, OG image), and a brand canon of checkable facts with accuracy tracking, early facts for obscure questions, per-language anchor pages and the training cut-off.
 tags: [seo, geo, homepage, brand, knowledge-panel, merchant-center, third-party, ecommerce, ai-overviews, entity, knowledge-graph, chatgpt, meta-description, gemini, favicon, site-name, brand-accuracy, multilingual]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T09:15:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T09:22:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:06:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-03T08:07:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: rs-kg-sources
+    resource: "https://think.resoneo.com/knowledge-graph-sources/"
+    title: "Resoneo, Knowledge Graph: how Google feeds it, maintains it and makes it grow (Oct 2026; 2024 leak schemas, US trial exhibits, patents, Kalicube data)"
   - id: chuleta-geo2027
     resource: "https://newsletter.chuletaseo.com/p/geo-2027-la-guia-de-los-expertos"
     title: "Chuleta SEO (Emilio Rodríguez García), GEO 2027: la guía de los expertos (2026-10-29; Spanish newsletter, own projects plus relayed studies)"
@@ -235,6 +238,17 @@ For anyone responsible for the homepage, the pages that answer branded searches,
 - **Other languages.** With no local-language footprint, models borrow from other languages or from similar companies. *Opinion, no data.*[^ja-multiling] Publish a few accurate anchor pages per language (About, flagship products) and clean up mistranslated mentions ([new market](../situations/new-market.md)).
 - **Do:** keep a brand canon — checkable facts on locations, what you sell and don't sell, delivery and returns; score answers monthly as accurate, wrong or no answer; fix wrong facts on your own site and profiles first; answer obscure brand and product questions on your own pages early, and include them in the checks ([AI visibility tracking](../measure/ai-visibility-tracking.md), [third-party presence](../channels/third-party-presence.md)).
 
+## 15. How brand facts enter and stay in the Knowledge Graph
+- **Three independent sites, not three pages.** Facts flagged for triangulation need three distinct hostnames; ten pages on your own site count as one. Weakly sourced data loses when values conflict. *From the leak (schemas).*[^rs-kg-sources] Consistent with [third-party presence](../channels/third-party-presence.md#11-knowledge-graph-facts-need-corroboration-from-other-domains).
+- **Products are reconciled with brands.** The Shopping Graph holds over 60 billion listings, about 2 billion refreshed every hour, and matches brands to Knowledge Graph entities; merchant data can carry flags that limit where products appear. *From the leak and Google statements.*[^rs-kg-sources]
+- **Corrections need evidence.** Google records a correction with a legal document or a primary source; a bare claim isn't kept. Organisations often enter late: six in ten more than three months after founding. *From the leak; measured on dated entities.*[^rs-kg-sources]
+- **Do:**
+  - Keep core facts identical on the site, Wikidata, Maps, Merchant Center and retailers.
+  - Give the brand a Wikidata item (type, industry) linked from Organization markup with `sameAs`.
+  - Claim the knowledge panel.
+  - Use the same GTINs everywhere.
+  - Earn mentions on several independent domains for each key claim.
+
 Related: [comparison pages and guides](comparison-and-guides.md), [category pages](category-pages.md), [Google AI features](../how-it-works/google-ai-features.md), [third-party presence](../channels/third-party-presence.md), [analytics](../measure/analytics.md).
 
 [^siege-credibility]: Siege Media, 2026-10-26: 585 brands, Peec mention share 20 Sep – 19 Oct 2026, controlled for DR and organic traffic; AI-assisted scoring (inter-rater 0.90); correlational.
@@ -274,3 +288,4 @@ Related: [comparison pages and guides](comparison-and-guides.md), [category page
 [^ja-multiling]: Jono Alderson, 2025-08-08: opinion, no data; LLMs borrow from other languages or similar companies; anchor pages per language.
 [^cc-entity]: Crystal Carter, ≈2026-03: practitioner; training cut-off can explain a missing launch; recheck after the next model update.
 [^chuleta-geo2027]: Chuleta SEO (Emilio Rodríguez García), 2026-10-29, Spanish newsletter, read in full; claims translated. Own projects: a section redirected to the homepage (Sistrix estimate 21,645 → 3,065), ~9,340 robots.txt-blocked pages still indexed (Search Console, Aug–Oct 2026). Relays SE Ranking: 82.5 % of US brand searches show an AI Overview, 62 % of cited pages rank outside the organic top 10 (sample and period not stated).
+[^rs-kg-sources]: Resoneo, Oct 2026: 5 billion entities, 500 billion facts; facts flagged requires_triangulation need three distinct hostnames; weak_data loses conflicts; names from 21 sources with a trust threshold above 0.6; Shopping Graph over 60 billion listings, ~2 billion refreshed hourly, brands reconciled with entities; merchant data flags can limit where products appear; corrections recorded only with evidence (legal document, primary source); six in ten organisations enter more than three months after founding; Kalicube measured a 6.26 % entity drop in June 2025.

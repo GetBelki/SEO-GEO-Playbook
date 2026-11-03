@@ -4,10 +4,13 @@ title: How Google's AI features pick sources
 description: AI Overviews, AI Mode and Gemini — Google's official "still SEO" line, schema and AI citations, grounding from ranking (FastSearch), passage citation, top-10 overlap, fan-out depth, how users behave, ads and citation UI, personalisation, when AI Overviews trigger, the click loss by position, how often answers change, the grounding word budget, reading from the index, uncited Knowledge Graph facts, Personal Intelligence, Pew's click data and how easily thinly covered questions sway AI answers.
 tags: [seo, geo, google, ai-overviews, ai-mode, gemini, citations, fan-out, ctr, branded-search, grounding, knowledge-graph, personalisation, misinformation]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:06:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-03T08:07:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: rs-aio-aimode
+    resource: "https://think.resoneo.com/ai-overviews-ai-mode/"
+    title: "Resoneo, AI Overviews and AI Mode: what Google's AI reads before it answers (Oct 2026; internal schemas, provenance not stated, two single-case tests)"
   - id: chuleta-geo2027
     resource: "https://newsletter.chuletaseo.com/p/geo-2027-la-guia-de-los-expertos"
     title: "Chuleta SEO (Emilio Rodríguez García), GEO 2027: la guía de los expertos (2026-10-29; Spanish newsletter, own projects plus relayed studies)"
@@ -276,6 +279,13 @@ Steve Toth sells a paid research membership; the measurements below are his vend
 - **Gemini** ran one Google Search block per turn and consulted 5–10 pages per answer, with search strings "mostly different from what was typed"; signed in Gemini 3.6 Flash, signed out 3.5 Flash-Lite. *Measured, vendor data, small sample.*[^st-gemini] Details per assistant: [AI assistants](ai-assistants.md#20-per-assistant-search-behaviour-recorded-sessions).
 - **Do:** de-duplicate AI Mode citations per answer before counting them, record side panel and "Show all" separately, and check a page's coverage of likely sub-queries rather than the typed query alone ([AI visibility tracking](../measure/ai-visibility-tracking.md)).
 
+## 17. What AI Overviews and AI Mode read before answering
+- **Web pages are one input among many.** The query and its fan-outs go to about 100 providers across 138 result types; results are ranked by Search's own signals before the answer is written. *From the leak (internal schemas, provenance not stated).*[^rs-aio-aimode]
+- **Only one of nine source types is a link to a page.** The others include Knowledge Graph facts, Google-generated content, reviews and shopping data. A Knowledge Graph fact keeps its URL only when it's marked as requiring a citation, so many facts reach the answer unlinked; two single-case tests saw exactly that. *From the leak, plus two cases.*[^rs-aio-aimode]
+- **Commerce is built in.** 21 commerce result types (price insights, review summaries, merchant status) and the Shopping Graph, Merchant Center feeds, Google reviews and Business Profiles are answer sources in their own right ([feeds and Merchant Center](../channels/feeds-and-merchant-center.md)). *From the leak.*[^rs-aio-aimode]
+- **Google-Extended doesn't remove a site from AI Overviews or AI Mode**, consistent with [AI crawlers and controls](../technical/ai-crawlers-and-controls.md). *From the leak, consistent with official docs.*[^rs-aio-aimode]
+- **Do:** state price, availability and specs in passages that answer on their own, keep feeds and reviews accurate, and fix brand facts at their source, since uncited graph facts can still shape the answer ([homepage and brand](../page-types/homepage-and-brand.md)).
+
 Related: [Google ranking](google-ranking.md), [AI assistants](ai-assistants.md), [shopping surfaces](shopping-surfaces.md), [AI crawlers and controls](../technical/ai-crawlers-and-controls.md), [comparison pages and guides](../page-types/comparison-and-guides.md).
 
 [^google-ai-guide]: Google generative-AI optimization guide, updated 2026-07-10.
@@ -322,3 +332,4 @@ Related: [Google ranking](google-ranking.md), [AI assistants](ai-assistants.md),
 [^st-ai-mode]: Steve Toth, undated guide, read 2026-10-29: 30 AI Mode conversations, 280 cited sources; pool size inferred from `srcId`; relays Google's AI Mode announcement (UK, 2025-07-28) and Search Central; vendor data.
 [^st-aio]: Steve Toth, undated guide, read 2026-10-29: 24 conversations; load times on 13 pages with and 46 without an Overview; no citation counts; vendor data.
 [^st-gemini]: Steve Toth, undated guide, read 2026-10-29: 47 Gemini conversations (32 signed in, 15 signed out); 389 citation spans; vendor data.
+[^rs-aio-aimode]: Resoneo, Oct 2026: internal schemas (how obtained not stated): Query Result Service sends query and fan-outs to ~100 providers across 138 result types, ranked by RankLab signals before the writing system (magi); 9 source types, only LINKED_SOURCE is a page link; Knowledge Graph facts keep a URL only if marked REQUIRES_CITATION; 21 commerce result types (price insights, review summaries, merchant status); Google-Extended does not remove a site from AI Overviews or AI Mode. Two single-case tests (Natzir Turrado, DEJAN, Oct 2026) saw uncited Knowledge Graph facts.

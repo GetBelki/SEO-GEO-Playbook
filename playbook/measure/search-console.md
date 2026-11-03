@@ -4,10 +4,16 @@ title: Search Console
 description: How to read Search Console without being fooled — the comparison checklist, num=100, filtered and inflated impressions, the Generative AI report and AI Mode clicks, where AI Overviews show, text ads, zero-click and organic-decline benchmarks, whole-site CTR benchmarks, brand-verification queries, bot-like LLM query bursts and AI Mode follow-ups, how much volume a title test needs, same-language hreflang click attribution, the URL Inspection API quota, Insights query groups, the zero-click series by country, and decay and striking-distance definitions.
 tags: [measurement, search-console, ai-overviews, ctr, zero-click, caveats, branded-search, hreflang, ai-mode]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:02:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-03T08:03:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: seocrawl-no-sitemap
+    resource: "https://seocrawl.ai/blog/google-search-console-no-referring-sitemaps-detected"
+    title: "SEOcrawl AI, No referring sitemaps detected (2026-10-16; guide quoting Google's help docs)"
+  - id: seocrawl-cni
+    resource: "https://seocrawl.ai/blog/google-search-console-crawled-currently-not-indexed"
+    title: "SEOcrawl AI, Crawled – currently not indexed (2026-10-09; guide quoting Google's help docs)"
   - id: chuleta-timelines
     resource: "https://newsletter.chuletaseo.com/p/google-admite-que-el-seo-se-nota"
     title: "Chuleta SEO (Emilio Rodríguez García), Google admite que el SEO se nota (2026-10-22; Spanish newsletter relaying Gary Illyes at Search Central Live Barcelona)"
@@ -225,6 +231,10 @@ From Steve Toth, who sells a paid AI-search membership.
 - **Filter:** regex `\b(it|its|they|them|their|this|these|those)\b` on queries, then exclude every brand spelling (one retailer had 27 variants), drop the dummy "it" and "IT", keep nicknames. On one property 2,226 rows gave 454 follow-up keywords (~20 %). *Practitioner; measured, one case.*[^st-pronoun-queries]
 - **Group by intent:** price checks, free or plan, stock and availability, link requests, "find this" photo queries, fit or variant, brand doubt, brand pivots, clarifiers; each group maps to a page fix. *Practitioner.*[^st-pronoun-queries] Full method: [test 36](diagnostic-tests.md#36-rebuild-ai-mode-conversations-from-pronoun-queries).
 
+## 21. Two indexing statuses, read correctly
+- **"No referring sitemaps detected" is informational.** It says how Google found the URL, not that something failed; Google notes that "in a few cases" it doesn't report the sitemap even for a page that was in one. Check the exact URL form in the sitemap (slash, protocol, host) only if the page isn't indexed. *Official, relayed.*[^seocrawl-no-sitemap]
+- **"Crawled – currently not indexed": decide per URL pattern, not per URL.** The report lists at most 1,000 example URLs, and an issue stays listed for 90 days after its last instance, so group the examples by pattern (tag pages, sort parameters, thin products) and choose one outcome per group: improve, merge with a 301, noindex (on a crawlable page), or remove with 404/410. Requesting indexing for an unchanged page only repeats Google's decision. *Official, relayed; practitioner method.*[^seocrawl-cni] See [Google ranking](../how-it-works/google-ranking.md) for why it's usually quality.
+
 Related: [analytics](analytics.md), [AI-visibility tracking](ai-visibility-tracking.md), [rank tracking](rank-tracking.md), [diagnostic tests](diagnostic-tests.md), [traffic drop](../situations/traffic-drop.md), [Google AI features](../how-it-works/google-ai-features.md).
 
 [^ignite-news]: Ignite Visibility weekly recap, read 2026-10-27: GSC impression inflation (week of 2026-04-04), GA4 AI Assistant channel (2026-05-09), GA4 bug (2026-08-29), GPT-6 referral loss with Adobe data (2026-10-10), Comscore, Seer and the field experiment on AIO clicks (2026-04-25), SparkToro zero-click; secondary reporting, primary sources not checked.
@@ -256,3 +266,5 @@ Related: [analytics](analytics.md), [AI-visibility tracking](ai-visibility-track
 [^mlseo-internal-linking]: MLforSEO (Lazarina Stoy), 2026-10-22: Search Console striking-distance linking on one 68–79-post blog; 242 queries → 110 suggestions.
 [^chuleta-timelines]: Chuleta SEO, 2026-10-22, Spanish, read in full; claims translated. Paraphrases Gary Illyes at Search Central Live Barcelona (no direct quote or recording given): new page discovered in ~20 hours, existing page re-crawled ~30 days, link signals processed in minutes to 3 weeks, title updates 1–2 days, site migration 1–3 months, core-update recovery 3–6 months (up to a year); the author notes the steps add up. Also relays a Cloudflare–OpenAI discovery pilot ("hundreds of millions" of pages, no method) and Bing's Topics Portfolio beta.
 [^st-pronoun-queries]: Steve Toth, 2026-10-06: method plus one property's GSC export (2,226 rows → 2,158 candidates → 1,745 without brand → 454 follow-up keywords) and client examples; relays John Mueller via Search Engine Roundtable that AI Mode follow-ups appear as pronoun queries.
+[^seocrawl-no-sitemap]: SEOcrawl AI, 2026-10-16: quotes Google's URL Inspection help ("Google couldn't identify a sitemap that refers to this page"; "In a few cases, we don't report the sitemap for a page that was submitted in a sitemap"); causes and fixes; no own data.
+[^seocrawl-cni]: SEOcrawl AI, 2026-10-09: quotes Google's Page indexing help; report lists up to 1,000 example URLs; an issue stays listed 90 days after its last instance; worked example of grouping 300 URLs into 3 patterns; Google's cited timelines (recrawl a few days to weeks, Validate fix up to ~2 weeks); no own data.

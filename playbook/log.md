@@ -1,5 +1,15 @@
 # Log
 
+## 2026-11-03
+
+**Update** — Human review: the 5 pages changed by the Resoneo update stamped `verified` again (Martin Aberastegue).
+**Update** — Added three Resoneo analyses (twiddlers; AI Overviews and AI Mode; Knowledge Graph sources) — the NavBoost/Glue, KScorer and search-intent pages were already in. New sections: google-ranking 14 (re-ranking after ranking), google-ai-features 17 (what AI Overviews and AI Mode read), homepage-and-brand 15 (how brand facts enter the Knowledge Graph), feeds-and-merchant-center 5 (feeds as AI answer sources). Labelled from the leak; schema provenance not stated. Changed pages lost their `verified` stamp.
+**Update** — Human review: the 3 pages changed by the SEOcrawl guides stamped `verified` again (Martin Aberastegue).
+**Update** — Added three SEOcrawl AI guides: search-console section 21 (reading "No referring sitemaps detected" and "Crawled – currently not indexed": decide per URL pattern), titles-and-snippets section 10 (CTR by position with and without an AI answer, relayed from First Page Sage, method not stated). Uncited figures and product claims were not added. Three pages lost their `verified` stamp.
+**Update** — Human review: the 5 pages changed by the SEOcrawl update stamped `verified` again (Martin Aberastegue).
+**Update** — Added SEOcrawl AI's AI-vs-organic study (2026-10-23; blog post and report PDF; 16,661 sites in Search Console, 3,949 in GA4; vendor's own users): AI scale (1.25 AI visits per 100 Google organic, 1.99 for shops) in ai-visibility-tracking, Google click decline benchmark in traffic-drop, assistant shares for shops in ai-assistants, new evidence on "Is GEO worth the effort?". Changed pages lost their `verified` stamp.
+**Lint** — 0 errors, 0 warnings; all section anchors, footnotes and sources resolve.
+
 ## 2026-10-30
 
 **Update** — Human review: the 4 pages changed by the Gemini UTM correction stamped `verified` again (Martin Aberastegue).

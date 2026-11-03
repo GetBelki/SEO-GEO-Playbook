@@ -4,10 +4,16 @@ title: Feeds and Merchant Center
 description: Feed audit checklist for Shopping and AI product cards — plain-word attributes, specific categories, data-source hygiene, feed-only title tests, feed links as landing URLs, promotions, reviews — plus constraint copy that answers "will it fit?", consistent product-line naming, Merchant Center limits, GTIN rules, price matching and the 2026 attribute and API changes.
 tags: [geo, feeds, merchant-center, shopping, agentic-commerce, product-data, gtin, merchant-api, product-lines]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:06:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-03T08:07:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: rs-aio-aimode
+    resource: "https://think.resoneo.com/ai-overviews-ai-mode/"
+    title: "Resoneo, AI Overviews and AI Mode: what Google's AI reads before it answers (Oct 2026; internal schemas, provenance not stated, two single-case tests)"
+  - id: rs-kg-sources
+    resource: "https://think.resoneo.com/knowledge-graph-sources/"
+    title: "Resoneo, Knowledge Graph: how Google feeds it, maintains it and makes it grow (Oct 2026; 2024 leak schemas, US trial exhibits, patents, Kalicube data)"
   - id: aleyda-ecom
     resource: "https://www.aleydasolis.com/en/ai-search/ecommerce-ai-search-citations-optimization/"
     title: "Aleyda Solis, Ecommerce AI search citations (May 2026; 25 US ecommerce sites, 5 subverticals; search extracts)"
@@ -97,6 +103,10 @@ From a practitioner's setup guide, *practitioner*, ≈2026;[^bp-gmc] check again
 - **Product lines are detected from titles.** A Google patent for product search detects brand product lines from the pattern [brand][line][attribute] and adds them to the category's attribute dictionary. *Patent; use in today's Shopping systems unknown.*[^sbs-productlines] **Do:** write each line's name identically in product titles, the feed and filter labels, and give each line a filterable, linkable facet on the category page ([faceted navigation](../technical/technical-foundations.md#1-faceted-navigation)).
 - **AI Mode layout tags (hypothesis).** A leaked AI Mode prompt reads as if product offers are shown only for "single, concrete product iterations" (a SKU-level product with a GTIN), and carousels or image grids need at least 3 validated items of one entity type. *Hypothesis only — prompt-leak content, unverified.*[^dj-tags] It points the same way as the rules above: one item per real SKU, with a valid GTIN. How the cards are built: [shopping surfaces](../how-it-works/shopping-surfaces.md).
 
+## 5. Feeds as AI answer sources
+- Merchant Center feeds, the Shopping Graph, Google reviews and merchant status are answer sources in AI Overviews and AI Mode in their own right, not only inputs to Shopping ads; the Shopping Graph refreshes about 2 billion of its 60 billion listings every hour and reconciles brands with Knowledge Graph entities. *From the leak.*[^rs-aio-aimode][^rs-kg-sources]
+- **Do:** treat feed accuracy (price, availability, GTIN, brand, category) as AI visibility work, and check Merchant Center for flags that limit where products show.
+
 Related: [shopping surfaces](../how-it-works/shopping-surfaces.md), [product pages](../page-types/product-pages.md), [third-party presence](third-party-presence.md), [local](local.md), [diagnostic tests](../measure/diagnostic-tests.md#5-feed-attribute-coverage-and-title-tests), [product variants](../technical/technical-foundations.md#4-product-variants).
 
 [^ucp]: Searchind, agentic commerce, read 2026-10-27: eligibility over rank, constraint-based copy. No Google sources cited.
@@ -111,3 +121,5 @@ Related: [shopping surfaces](../how-it-works/shopping-surfaces.md), [product pag
 [^bp-gmc]: Botpresso, how to add products to Google Merchant Center, updated ≈2026 (no publish date shown): account limits, title and description lengths, GTIN check digit and restricted prefixes, `identifier_exists`, price mismatch, 2026 attributes, "Merchant Center Next" name dropped July 2026, Merchant API replacing the Content API. Agency how-to; not re-checked against Google's help pages.
 [^sbs-productlines]: SEO by the Sea (Bill Slawski), 2020-01-27: patent US 10,394,816 (filed 2012-12-27) on detecting new product lines ([brand][line][attribute]) and adding them to category attribute dictionaries. Patent analysis; blog inactive since 2022.
 [^dj-tags]: DEJAN, 2026-09-20: AI Mode layout tags from leaked prompt content (`<ShoppingOffers>` for SkuLevelProduct with GTIN; `<Carousel>` / `<ImageGrid>` with ≥ 3 validated children of one entity type). Unverified; hypothesis only.
+[^rs-aio-aimode]: Resoneo, Oct 2026: internal schemas (how obtained not stated): Query Result Service sends query and fan-outs to ~100 providers across 138 result types, ranked by RankLab signals before the writing system (magi); 9 source types, only LINKED_SOURCE is a page link; Knowledge Graph facts keep a URL only if marked REQUIRES_CITATION; 21 commerce result types (price insights, review summaries, merchant status); Google-Extended does not remove a site from AI Overviews or AI Mode. Two single-case tests (Natzir Turrado, DEJAN, Oct 2026) saw uncited Knowledge Graph facts.
+[^rs-kg-sources]: Resoneo, Oct 2026: 5 billion entities, 500 billion facts; facts flagged requires_triangulation need three distinct hostnames; weak_data loses conflicts; names from 21 sources with a trust threshold above 0.6; Shopping Graph over 60 billion listings, ~2 billion refreshed hourly, brands reconciled with entities; merchant data flags can limit where products appear; corrections recorded only with evidence (legal document, primary source); six in ten organisations enter more than three months after founding; Kalicube measured a 6.26 % entity drop in June 2025.

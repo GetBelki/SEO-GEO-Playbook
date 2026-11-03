@@ -4,10 +4,13 @@ title: Conflicts register
 description: Every point where the sources disagree — the positions with their evidence, how to read them, and what to do meanwhile; other pages link here instead of repeating the argument.
 tags: [conflicts, sources, method, geo, seo, measurement]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:00:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-03T08:01:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: seocrawl-ai-vs-organic
+    resource: "https://seocrawl.ai/blog/ai-traffic-vs-organic-search-study"
+    title: "SEOcrawl AI (David Kaufmann), AI traffic vs Google organic in 2026 (2026-10-23; 16,661 sites in Search Console, 3,949 in GA4; vendor's own users; report PDF read too)"
   - id: st-chatgpt
     resource: "https://stevetoth.ai/how-chatgpt-search-works"
     title: "Steve Toth, How ChatGPT search works (undated; 53 conversations; vendor data)"
@@ -266,6 +269,7 @@ Where the sources disagree. Each entry gives the positions with their evidence, 
 ## Is GEO worth the effort?
 - **No (for now):** ChatGPT brought 0.62 % as many sessions as Google organic, all assistants 0.73 %; citation tracking "is a distraction". *Measured plus opinion.*[^mh-geo]
 - **Yes:** 88 % of AI Mode shoppers took the AI shortlist as given and 74 % picked the top product. *Measured, 185 tasks.*[^gm-highstakes] Judging AI search by referral clicks is "a category error": ChatGPT mentions brands 3.2× more often than it cites them. *Relayed.*[^ipr-brand]
+- **A bigger sample, same picture:** across 3,949 sites, AI assistants sent 1.25 visits per 100 Google organic visits (1.99 for shops) — small, but up 44.6 % in a year while Google clicks fell 15 %. *Measured, vendor data, referrer-based floor.*[^seocrawl-ai-vs-organic]
 - **Reading:** both can hold — the traffic is small, but the decision may be made before the click.
 - **Do:** weigh effort by your own assistant share and conversion; read branded search alongside it ([diagnostic tests](../measure/diagnostic-tests.md#11-monthly-read-exposure-behaviour-outcomes)).
 
@@ -479,3 +483,4 @@ Related: [sources and confidence](sources-and-confidence.md), [glossary](glossar
 [^mlseo-dark-ai]: MLforSEO (Beatrice Gamba), 2026-08-21: Loamly data, 70.6 % of identified AI visits without referrer; 10.2 % vs 2.5 % conversion.
 [^sp-track-ai-visibility]: SparkToro x Gumshoe.ai, 2026-05-07: 142 prompts, 7 model families, 994 runs.
 [^st-chatgpt]: Steve Toth, 2026: recorded ChatGPT app sessions (53 conversations, B2B vendor comparisons); 3–9 searches per lookup.
+[^seocrawl-ai-vs-organic]: SEOcrawl AI, 2026-10-23, blog post and 32-page report: Search Console clicks for 16,661 sites (Sep 2025 – Aug 2026 vs the year before) and GA4 AI-referred sessions for 3,949 sites (Mar 2025 – Aug 2026); sites are the vendor's own users who opted in, not a random sample; AI traffic counted only by referrer, so a floor. Google clicks −15.0 % in total, median site −20.1 %, 69 % of sites down, impressions +0.4 %; AI sessions +44.6 %, 0.36 % of all sessions, 1.25 per 100 Google organic sessions; assistant shares Mar–Aug 2026: ChatGPT 83.3 %, Gemini 6.0 %, Perplexity 4.7 %, Claude 3.7 %, Copilot 2.1 %. Ecommerce and retail (1,581 sites): median Google clicks −15 %, 70 % of sites down, 1.99 AI visits per 100 Google visits, AI referrals +54 % (76 % of sites grew), ChatGPT 90.4 % of AI referrals.

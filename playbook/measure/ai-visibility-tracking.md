@@ -4,10 +4,13 @@ title: AI-visibility tracking
 description: How to count AI-assistant traffic and visibility — untagged clicks by design and by accident, Direct spikes that are bots, GA4's AI Assistant channel, one hostname-anchored channel group, the real size of the channel, per-engine reporting, mentions without links, the May 2026 ChatGPT link change, what Bing's AI Performance covers, prompt-tracker pitfalls (personalisation, clean accounts), re-baselining at model changes and fan-out volatility, entity tracking with search on and off, brand-canon accuracy, share of voice beyond presence, building the prompt set, runs and margin of error, AI as a brand channel, dark AI traffic, AI Overview citation tracking, retrieved vs cited vs named, replay and sign-in skew, AI Mode journeys from Search Console follow-ups and Gemini link tags.
 tags: [measurement, geo, ga4, chatgpt, ai-assistants, attribution, caveats, prompt-tracking, share-of-voice, brand-accuracy]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-30T11:41:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-30T11:42:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:00:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-03T08:01:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: seocrawl-ai-vs-organic
+    resource: "https://seocrawl.ai/blog/ai-traffic-vs-organic-search-study"
+    title: "SEOcrawl AI (David Kaufmann), AI traffic vs Google organic in 2026 (2026-10-23; 16,661 sites in Search Console, 3,949 in GA4; vendor's own users; report PDF read too)"
   - id: ser-gemini-utm
     resource: "https://www.seroundtable.com/gemini-utm-parameters-42399.html"
     title: "Search Engine Roundtable (Barry Schwartz), Gemini stops adding UTM parameters (2026-10-30; relays Natzir Turrado's data and John Mueller)"
@@ -185,6 +188,7 @@ How to count the traffic and visibility AI assistants bring, and why the analyti
 - **Email tools with non-standard mediums** (e.g. `campaign`/`flow` instead of `email`) fall into "Unassigned" too.
 
 ## 5. Scale of the channel
+- **Largest sample so far.** Across 3,949 sites in GA4, AI-referred sessions grew 44.6 % in a year but were still 0.36 % of all sessions (0.42 % in August 2026): 1.25 AI visits per 100 Google organic visits, so Google sends roughly 80 times more. For 1,581 ecommerce and retail sites the median was 1.99 per 100, with AI referrals up 54 %. ChatGPT sent 83.3 % of AI referrals (90.4 % for shops), Gemini 6.0 %, Perplexity 4.7 %, Claude 3.7 %, Copilot 2.1 %. *Measured, vendor data (SEOcrawl AI, which sells AI-visibility tracking; its own opted-in users); referrer-based, so a floor.*[^seocrawl-ai-vs-organic]
 - Across 100 GA4 properties and >145M sessions over 12 months, ChatGPT brought 0.62 % as many sessions as Google organic, all assistants 0.73 %.[^sp-ai-boondoggle] Of 55 sites tracking conversions, ChatGPT sessions converted at 13.8 % vs 3.02 % for Google organic, but Google organic still drove 96.5 % of the conversions. ChatGPT referrals plateaued after August 2025. *Measured, one author, method not published.*[^mh-geo]
 - In panel data for 40 US sites, AI traffic was about 0.19 % of visits against about 20.45 % organic (shopping/retail: 0.18 % vs 21.79 %); AI Mode was 8.1 % of retail AI traffic.[^aleyda-traffic]
 - **AI Mode sends few clicks.** Under ~3 % of AI Mode searches led to an external click in a 100K-user panel (May – Aug 2025), flat over the period; top destinations were Reddit, YouTube, Wikipedia, Amazon and Facebook.[^ipr-aimode-referrals]
@@ -361,3 +365,4 @@ Related: [analytics](analytics.md), [Search Console](search-console.md), [diagno
 [^st-ai-mode]: Steve Toth, undated guide: 30 AI Mode conversations, 280 cited sources; citations attach to output slots (up to 8 pages each); side panel and "Show all" agreed at the top in 10 of 34 answers; replays after click-outs raised one brand's count from 12 to 26.
 [^st-pronoun-queries]: Steve Toth, 2026-10-06: method plus one property's GSC export (2,226 rows → 2,158 candidates → 1,745 without brand → 454 follow-up keywords) and client examples; relays John Mueller via Search Engine Roundtable that AI Mode follow-ups appear as pronoun queries.
 [^ser-gemini-utm]: Search Engine Roundtable, 2026-10-30: Gemini added `utm_source=gemini` to cited links from early September 2026 and stopped around 28 September (Natzir Turrado's chart; also seen by John Mueller); gemini.google.com referrer visits stayed flat on desktop; the iOS app opens links in a WebView with no referrer (Direct in GA4), visible only as the `GeminiiOS` user agent in server logs. No Google statement.
+[^seocrawl-ai-vs-organic]: SEOcrawl AI, 2026-10-23, blog post and 32-page report: Search Console clicks for 16,661 sites (Sep 2025 – Aug 2026 vs the year before) and GA4 AI-referred sessions for 3,949 sites (Mar 2025 – Aug 2026); sites are the vendor's own users who opted in, not a random sample; AI traffic counted only by referrer, so a floor. Google clicks −15.0 % in total, median site −20.1 %, 69 % of sites down, impressions +0.4 %; AI sessions +44.6 %, 0.36 % of all sessions, 1.25 per 100 Google organic sessions; assistant shares Mar–Aug 2026: ChatGPT 83.3 %, Gemini 6.0 %, Perplexity 4.7 %, Claude 3.7 %, Copilot 2.1 %. Ecommerce and retail (1,581 sites): median Google clicks −15 %, 70 % of sites down, 1.99 AI visits per 100 Google visits, AI referrals +54 % (76 % of sites grew), ChatGPT 90.4 % of AI referrals.

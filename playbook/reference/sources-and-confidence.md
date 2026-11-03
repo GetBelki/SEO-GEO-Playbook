@@ -4,10 +4,13 @@ title: Sources and confidence
 description: The research sources, what each is good for, the six-level confidence scale, how to read research, and what not to adopt.
 tags: [sources, confidence, research, method]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-30T11:41:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-30T11:42:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:06:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-03T08:07:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: seocrawl
+    resource: "https://seocrawl.ai/blog/ai-traffic-vs-organic-search-study"
+    title: "SEOcrawl AI, AI traffic vs Google organic 2026 (study and report PDF)"
   - id: seroundtable
     resource: "https://www.seroundtable.com/"
     title: "Search Engine Roundtable (Barry Schwartz)"
@@ -182,6 +185,7 @@ A claim relayed by a secondary source (an agency blog citing a study) says "rela
 - **Chuleta SEO** (Emilio Rodríguez García).[^chuleta] Spanish-language practitioner newsletter: own-project cases (redirects, robots.txt indexing), relayed third-party studies, and a paraphrase of Google's typical crawl, indexing and recovery times from Search Central Live. Claims are translated; one-case evidence; its 2027 predictions are opinion and not used.
 - **Steve Toth** (stevetoth.ai).[^toth] Recorded sessions (browser traffic captures) of 8 AI search platforms in 277 conversations: what each assistant retrieves, cites and shows, signed in and out; a Search Console method for AI Mode follow-ups; a LinkedIn ranking study. Sells a paid membership, so his data is vendor data; all test conversations were B2B vendor comparisons, not shopping, and per-platform samples are small.
 - **Search Engine Roundtable** (Barry Schwartz).[^seroundtable] Daily news on Google and AI search; used for dated changes it reports with screenshots or named sources, labelled relayed.
+- **SEOcrawl AI** (David Kaufmann).[^seocrawl] SEO and AI-visibility tool vendor; one large study of AI vs Google organic traffic from 16,661 of its own users' sites, plus how-to guides that restate Google's help documentation (used only for the quoted Google wording). Strong on scale and by-industry medians; the sample is self-selected and AI traffic is counted by referrer only.
 - **Not read:** MobileMoxie (reading stopped). A first ML for SEO reading cited pages that don't exist and was discarded; the source was re-read with every page fetched and every URL checked.
 - **Brodie Clark** (brodieclark.com).[^brodie] Dated sightings of Google and ChatGPT SERP tests, nearly all with screenshots, plus a few how-to articles. Best source for *when a surface changed*. No measured data; notes have no permalinks, only month anchors.
 - **Searchind** (searchind.com).[^searchind] One consultant's ecommerce SEO blog. Practical checklists (Merchant Center audit, seasonal SEO, D2C, market analysis). Case results are anecdotal, never quantified. Use it for *procedures*, not for evidence.
@@ -216,6 +220,7 @@ Related: [conflicts register](conflicts.md), [glossary](glossary.md), [Google up
 [^adams]: SEO for Google News, read 2026-10-28: 10 posts, Feb 2025 – Sep 2026.
 [^alderson]: Jono Alderson, read 2026-10-28: 12 posts, Jul 2025 – Oct 2026.
 [^scholz]: SEO Brief, read 2026-10-28: 4 posts, Apr – Jul 2026.
+[^seocrawl]: SEOcrawl AI, read 2026-11-03: the study post and its 32-page report PDF (text extracted), and three guides (sitemaps, crawled-not-indexed, CTR).
 [^seroundtable]: Search Engine Roundtable, read 2026-10-30: one post on Gemini UTM parameters.
 [^toth]: Steve Toth, read 2026-10-29: 12 pages (research index, the cornerstone study, a method, a LinkedIn study, 8 platform guides; two guides read to their first 100,000 characters). Nothing behind the paywall.
 [^chuleta]: Chuleta SEO, read 2026-10-29: two Spanish posts (2026-10-22 and 2026-10-29), translated; unrelated news items were ignored.
@@ -244,6 +249,6 @@ Related: [conflicts register](conflicts.md), [glossary](glossary.md), [Google up
 [^haynes]: Marie Haynes, read 2026-10-27 via the post sitemap (the blog index paginates by script).
 [^growth-memo]: Growth Memo, read 2026-10-27 via the archive API; paywalled bodies not read.
 [^status]: Google Search Status Dashboard, read 2026-10-27.
-[^resoneo]: Resoneo studies 2024–2026; sample sizes per study as stated in each article. See the per-claim footnotes on the other pages.
+[^resoneo]: Updated 2026-11-03 with three more think.resoneo.com analyses (twiddlers, AI Overviews and AI Mode, Knowledge Graph sources). Resoneo studies 2024–2026; sample sizes per study as stated in each article. See the per-claim footnotes on the other pages.
 [^searchind]: Searchind articles Aug 2025 – Sep 2026; incl. "eCommerce SEO for Google is not enough" (PBN recommendation).
 [^field-notes]: Anonymised; no figures here identify the shop.

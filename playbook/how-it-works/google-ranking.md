@@ -4,10 +4,13 @@ title: How Google ranks
 description: Section-level quality scores, new URLs inheriting their section's average, click memory per query and page (NavBoost, RankEmbed, rerankers), exact-term scoring, host caps, indexing as a quality decision, what core-update winners share, and what patents say about site quality, navigational queries, click thresholds and freshness, plus manual actions for site reputation abuse, brand size, spam losses carrying over to AI answers, and Preferred Sources.
 tags: [seo, google, google-leak, navboost, quality, indexing, core-updates, patents, freshness, spam, manual-actions, preferred-sources]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T08:30:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:06:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-03T08:07:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: rs-twiddlers
+    resource: "https://think.resoneo.com/twiddlers/"
+    title: "Resoneo, Twiddlers: what still moves a result after ranking (Nov 2026; a 2018 internal Google document, the 2024 leak, internal schema names, Google announcements)"
   - id: rs-intent
     resource: "https://think.resoneo.com/search-intent/"
     title: "Resoneo, How Google matches pages to search intent (Oct 2026; internal schemas, a 2011 patent, SERP captures for 8 queries in the US and France)"
@@ -233,6 +236,13 @@ SERPrecon, which sells an SEO content-scoring tool, compiled the leaks, DOJ test
 - **Information-gain patents.** US11354342B2 scores how much new information a document adds relative to documents the user has already seen;[^srp-commodity-content] US20200349181A1 describes the same novelty idea, and its explainer stresses that the patent does not confirm use in Search and that no numeric thresholds exist. *Patent.*[^mlseo-info-gain] Near-duplicate detection by simhash is published research (2007). *Patent; use unconfirmed.*[^srp-commodity-content]
 - **Do:** before writing, list what the top 10–20 pages already cover (entities, facts, formats) and plan what the page adds: first-hand tests, own data, a clear position. Cover the shared basics briefly. *Practitioner.*[^mlseo-info-gain][^srp-commodity-content] Fits the core-update winners in [section 6](#6-what-core-update-winners-share).
 
+## 14. What moves a result after ranking (twiddlers)
+- **Re-ranking is a separate layer.** A 2018 internal Google document describes "more than 65" twiddlers in web search: small isolated rules that boost, filter, cap (`max_total`) or space out (`stride`) results after the main scoring, some before snippets exist and some on the top results only. Internal schemas name about 120 today. *From the leak (internal document and schema names); weights unknown.*[^rs-twiddlers] The host-slot limit in [section 4](#4-one-host-gets-limited-slots) is one of them.
+- **Shopping has its own twiddlers:** specialty merchants, deals pages, product tags, shopping personalisation and category refinements, so a specialist shop or a deals page can move ahead of a better-scored page on product queries. *From the leak.*[^rs-twiddlers]
+- **Freshness and repeat queries.** One twiddler reads page dates and estimated content dates; another moves results a user has already seen down on repeat searches. *From the leak.*[^rs-twiddlers]
+- **Copyright notices count domain-wide.** Past a volume of valid removal notices, the whole domain is demoted, product pages included. *From the leak; Google announced the DMCA signal in 2012.*[^rs-twiddlers]
+- **Do:** date real updates clearly, treat DMCA notices as a site-wide risk, and on shopping queries check which specialist and deals sites the results favour ([third-party presence](../channels/third-party-presence.md)).
+
 Related: [Google AI features](google-ai-features.md), [AI assistants](ai-assistants.md), [Google Discover](../channels/google-discover.md), [traffic drop](../situations/traffic-drop.md), [category pages](../page-types/category-pages.md), [technical foundations](../technical/technical-foundations.md), [diagnostic tests](../measure/diagnostic-tests.md).
 
 [^leak-2]: Resoneo, leak part 2, 2024-10-31: OfficialPageTwiddler, host diversity caps.
@@ -271,3 +281,4 @@ Related: [Google AI features](google-ai-features.md), [AI assistants](ai-assista
 [^srp-semantic-seo]: SERPrecon, 2025-09-25: explainer, no data; BM25 described as the lexical component of search engines.
 [^srp-commodity-content]: SERPrecon, 2026-10-15: relays Google's generative-AI features guide section on non-commodity content, Danny Sullivan and John Mueller (via Search Engine Journal), the leak's OriginalContentScore and patent US11354342B2; the vendor's commodity metric is not validated against rankings.
 [^mlseo-info-gain]: MLforSEO, 2026-05-11 (upd. 2026-10-24): explainer of patent US20200349181A1; states the patent does not confirm use in Search.
+[^rs-twiddlers]: Resoneo, Nov 2026: 2018 internal document ("more than 65" twiddlers in web search; predoc and lazy twiddlers; actions boost, filter, max_total, stride); 120 twiddler names in internal schemas by family (shopping includes specialty merchants, deals, product tags, categorical refinements); DMCA demotion applies domain-wide past a volume of valid notices; freshness reads page and estimated content dates; repeat-query demotion of already-seen results. No boost values given.

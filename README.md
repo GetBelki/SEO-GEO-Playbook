@@ -10,7 +10,7 @@ You can drop it into any project as a reference that you or your AI agent can re
 - **51 rules** on one page ([start here](playbook/start-here.md)), each linked to its evidence
 - **36 diagnostic tests** you can repeat on your own data
 - **29 conflicts** where sources disagree, each with the positions, a reading and a working rule
-- **~470 footnoted sources**: vendor documentation from Google, OpenAI, Anthropic and others; Google's web.dev performance course; measured studies and clickstream panels; leak and trial documents; patents; and practitioner research on SEO, analytics, performance and machine-learning methods
+- **~480 footnoted sources**: vendor documentation from Google, OpenAI, Anthropic and others; Google's web.dev performance course; measured studies and clickstream panels; leak and trial documents; patents; and practitioner research on SEO, analytics, performance and machine-learning methods
 
 ## How the topics fit together
 
@@ -58,13 +58,13 @@ Every claim carries one of seven confidence labels. Across the playbook, they br
 ```mermaid
 pie showData
     title Claims by confidence label
+    "Measured" : 434
     "Practitioner" : 427
-    "Measured" : 427
-    "Official" : 112
+    "Official" : 114
     "Inference" : 67
+    "From the leak" : 40
     "Patent" : 39
     "From code" : 29
-    "From the leak" : 28
 ```
 
 Most rules rest on measured studies or practitioner experience, and many measured studies come from vendors who sell a related tool; the label says so (*vendor data*). Official documentation tells you what a vendor says its systems do, not what works best. Leak, code and patent claims name real mechanisms whose current weight is unknown.

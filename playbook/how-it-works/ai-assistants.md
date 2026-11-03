@@ -4,10 +4,13 @@ title: How AI assistants retrieve and cite
 description: What ChatGPT, Gemini, Claude and Perplexity actually read — the ~200 characters after the H1 and per-chunk scores on fetched pages, mostly static HTML (Gemini reads JavaScript content), no schema, discovery, mode and model effects, English fan-out, engines that don't agree, citations outside Google's top 10, fresher content, ChatGPT's search config, rerankers and hybrid retrieval, HTML extraction, shrinking, volatile and site-restricted fan-outs, updated-vs-published recency, what models already know about brands, what academic GEO tests found, and how Perplexity's own index (Photon) ranks pages.
 tags: [geo, chatgpt, gemini, perplexity, claude, crawling, citations, fan-out, schema, freshness, rerankers, reddit, javascript, bing]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-30T11:41:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-30T11:42:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:00:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-03T08:01:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: seocrawl-ai-vs-organic
+    resource: "https://seocrawl.ai/blog/ai-traffic-vs-organic-search-study"
+    title: "SEOcrawl AI (David Kaufmann), AI traffic vs Google organic in 2026 (2026-10-23; 16,661 sites in Search Console, 3,949 in GA4; vendor's own users; report PDF read too)"
   - id: ser-gemini-utm
     resource: "https://www.seroundtable.com/gemini-utm-parameters-42399.html"
     title: "Search Engine Roundtable (Barry Schwartz), Gemini stops adding UTM parameters (2026-10-30; relays Natzir Turrado's data and John Mueller)"
@@ -306,6 +309,7 @@ This page answers what ChatGPT, Gemini, Claude and Perplexity actually fetch, re
 - **But local sources still win a large minority.** Local ccTLDs took about 41 % of citations in Brazil, 38 % in the UK and 24 % in Spain; Gemini's local share ranged from 51.7 % (Brazil) to 16.6 % (Spain), AI Mode's stayed at 22.6–27.5 %. Home/DIY had among the highest local shares. *Measured; read from search extracts.*[^aleyda-local] Measure per market and per engine; don't assume English sources cover local prompts ([new market](../situations/new-market.md)).
 
 ## 5. Shopping answers are a separate system
+- **Which assistants send shoppers.** For 1,581 ecommerce and retail sites, ChatGPT sent 90.4 % of AI referrals, Gemini 4.0 %, Perplexity 3.3 % and Claude 1.0 % (Mar–Aug 2026); across all sites Claude referrals grew about 6.6× and Perplexity's fell by half. *Measured, vendor data.*[^seocrawl-ai-vs-organic]
 Product cards don't come from web citations; they come from merchant feeds and shopping graphs. See [shopping surfaces](shopping-surfaces.md).
 
 ## 6. The engines don't agree
@@ -485,3 +489,4 @@ Related: [Google AI features](google-ai-features.md), [Google ranking](google-ra
 [^st-perplexity]: Steve Toth, undated guide, read 2026-10-29 (first ~100k characters): 48 Perplexity conversations (33 signed in, 15 incognito); vendor data.
 [^st-brave]: Steve Toth, undated guide, read 2026-10-29: 26 Brave Search sessions with the AI answer off; vendor data.
 [^ser-gemini-utm]: Search Engine Roundtable, 2026-10-30: Gemini added `utm_source=gemini` to cited links from early September 2026 and stopped around 28 September (Natzir Turrado's chart; also seen by John Mueller); gemini.google.com referrer visits stayed flat on desktop; the iOS app opens links in a WebView with no referrer (Direct in GA4), visible only as the `GeminiiOS` user agent in server logs. No Google statement.
+[^seocrawl-ai-vs-organic]: SEOcrawl AI, 2026-10-23, blog post and 32-page report: Search Console clicks for 16,661 sites (Sep 2025 – Aug 2026 vs the year before) and GA4 AI-referred sessions for 3,949 sites (Mar 2025 – Aug 2026); sites are the vendor's own users who opted in, not a random sample; AI traffic counted only by referrer, so a floor. Google clicks −15.0 % in total, median site −20.1 %, 69 % of sites down, impressions +0.4 %; AI sessions +44.6 %, 0.36 % of all sessions, 1.25 per 100 Google organic sessions; assistant shares Mar–Aug 2026: ChatGPT 83.3 %, Gemini 6.0 %, Perplexity 4.7 %, Claude 3.7 %, Copilot 2.1 %. Ecommerce and retail (1,581 sites): median Google clicks −15 %, 70 % of sites down, 1.99 AI visits per 100 Google visits, AI referrals +54 % (76 % of sites grew), ChatGPT 90.4 % of AI referrals.

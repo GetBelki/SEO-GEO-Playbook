@@ -4,10 +4,13 @@ title: Titles and snippets
 description: How often Google rewrites titles and meta descriptions, where titles and descriptions are worth hand-writing (including meta descriptions as Gemini grounding text on category and home pages), why content length has no target, answer-first openings and the first ~500 words, self-explanatory headings, tables plus a prose conclusion, which changes count as a content update, and editorial headlines on guide pages (H1 vs title) — with the FAQ/HowTo schema advice and keyword-appended titles not adopted.
 tags: [seo, geo, title-tags, meta-descriptions, snippets, content-length, on-page, headings, headlines, tables, grounding, freshness, ecommerce]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-28T12:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T08:47:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:02:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-03T08:03:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: seocrawl-ctr
+    resource: "https://seocrawl.ai/blog/click-through-rate"
+    title: "SEOcrawl AI, Click-through rate guide (2026-10-03; relays First Page Sage, Sep 2026)"
   - id: ah-titles
     resource: "https://ahrefs.com/blog/title-tag-seo/"
     title: "Ahrefs, Title tag SEO (updated 2024-11-06; Site Audit, 1M+ sites)"
@@ -110,6 +113,10 @@ What goes into titles, meta descriptions and the opening of a page, how much Goo
 - Put a one-sentence summary right after the H1, use question-style subheads where readers ask questions, and link consistently to the matching topic hub (for a shop: the category page).
 - **Do:** on buying guides and magazine pages, write a descriptive H1 headline with the topic in its first 8 words, a summary sentence under it, and a link to the category hub ([comparison and guides](../page-types/comparison-and-guides.md), [section 4](#4-answer-first-openings)). For Discover, use large images ([Google Discover](../channels/google-discover.md)).
 
+## 10. CTR by position, with and without an AI answer
+- One CTR model puts position 1 at 22.6 % without an AI answer on the page and 3.6 % with one (7.1 % blended); position 2 at 10.2 % vs 1.4 %; position 3 at 5.8 % vs 0.8 %. *Measured, relayed; sample and method not stated.*[^seocrawl-ctr] Old "position 1 gets ~30 %" rules of thumb no longer hold.
+- **Do:** judge a page's CTR against queries of the same type (branded or not, with or without an AI answer, same device), not against a site-wide average.
+
 Related: [category pages](../page-types/category-pages.md), [product pages](../page-types/product-pages.md), [comparison and guides](../page-types/comparison-and-guides.md), [keyword research](../channels/keyword-research.md), [internal linking](internal-linking.md), [Search Console](../measure/search-console.md), [conflicts](../reference/conflicts.md#short-or-long-pages).
 
 [^ah-titles]: Ahrefs, updated 2024-11-06: Site Audit data from 1M+ sites, shares at site level (68.54 % rewritten, 63.19 % too long, 32.76 % too short, 5.55 % missing, 3.04 % multiple); ~600 px truncation; Mueller 2021 quote.
@@ -124,3 +131,4 @@ Related: [category pages](../page-types/category-pages.md), [product pages](../p
 [^dj-chunks]: DEJAN, 2025-12-20, restated 2026-06-21: 7,060 queries, 2,275 pages, 883,262 snippets; budget median 1,929 words (p95 2,798), #1 531 words (28 %), #5 266 (13 %), median 377 per source, plateau ~540 words, coverage 61 % (< 1,000 words) vs 13 % (> 3,000), average chunk 15.5 words. Private data, not reproducible.
 [^gn-article]: Barry Adams, 2025-02-10: the "perfectly optimised" news article — headline up to 110 characters for the on-page/article headline (not the `<title>`), first 8 words carry most weight, summary sentence after the H1, question subheads, consistent links to topic hubs, large Discover images. Publisher-focused practitioner advice.
 [^lr-seoweek]: Lily Ray, 2025-05-08, her summary of SEO Week 2025 talks; this item is Michael King's statement that clicks rose when Search Console keywords were appended to titles. No data given.
+[^seocrawl-ctr]: SEOcrawl AI, 2026-10-03: relays First Page Sage, "Google CTR by Ranking Position" (Sep 2026; sample and method not stated): position 1 at 7.1 % blended, 22.6 % without an AI answer, 3.6 % with one; position 2 10.2 % vs 1.4 %; position 3 5.8 % vs 0.8 %.
