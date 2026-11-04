@@ -4,10 +4,13 @@ title: Search Console
 description: How to read Search Console without being fooled — the comparison checklist, num=100, filtered and inflated impressions, the Generative AI report and AI Mode clicks, where AI Overviews show, text ads, zero-click and organic-decline benchmarks, whole-site CTR benchmarks, brand-verification queries, bot-like LLM query bursts and AI Mode follow-ups, how much volume a title test needs, same-language hreflang click attribution, the URL Inspection API quota, Insights query groups, the zero-click series by country, and decay and striking-distance definitions.
 tags: [measurement, search-console, ai-overviews, ctr, zero-click, caveats, branded-search, hreflang, ai-mode]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:02:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-11-03T08:03:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-04T12:42:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-04T12:42:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: mh-click-spikes
+    resource: "https://www.mariehaynes.com/google-search-console-click-spikes-november-2026/"
+    title: "Marie Haynes, Google Search Console click spikes, November 2026 (2026-11-03; three anonymised sites; largely written by Gemini and fact-checked by the author)"
   - id: seocrawl-no-sitemap
     resource: "https://seocrawl.ai/blog/google-search-console-no-referring-sitemaps-detected"
     title: "SEOcrawl AI, No referring sitemaps detected (2026-10-16; guide quoting Google's help docs)"
@@ -235,6 +238,11 @@ From Steve Toth, who sells a paid AI-search membership.
 - **"No referring sitemaps detected" is informational.** It says how Google found the URL, not that something failed; Google notes that "in a few cases" it doesn't report the sitemap even for a page that was in one. Check the exact URL form in the sitemap (slash, protocol, host) only if the page isn't indexed. *Official, relayed.*[^seocrawl-no-sitemap]
 - **"Crawled – currently not indexed": decide per URL pattern, not per URL.** The report lists at most 1,000 example URLs, and an issue stays listed for 90 days after its last instance, so group the examples by pattern (tag pages, sort parameters, thin products) and choose one outcome per group: improve, merge with a 301, noindex (on a crawlable page), or remove with 404/410. Requesting indexing for an unchanged page only repeats Google's decision. *Official, relayed; practitioner method.*[^seocrawl-cni] See [Google ranking](../how-it-works/google-ranking.md) for why it's usually quality.
 
+## 22. Click spikes from 2 November 2026
+- **Clicks without impressions.** From 31 October and sharply on 2 November 2026, some sites saw Search Console clicks jump 2–6× while impressions stayed flat: mostly desktop, often one country, spread over pages ranking at positions 11–54 with impossible CTRs of 45–100 %, and on one site 23 reworded versions of one query. The cause is unconfirmed (scrapers, click-manipulation networks, AI-agent retrieval or a gap in Google's bot filtering), and Google hasn't commented. *Measured, three cases, relayed by a practitioner.*[^mh-click-spikes]
+- **Check:** filter by country and device; in the Pages tab filter position > 10 and sort by clicks; compare clicks with impressions and with analytics sessions for the same pages.
+- **Do:** don't change pages or disavow anything because of it; mark early November 2026 as a [break](#1-before-every-comparison) in every comparison until it's explained.
+
 Related: [analytics](analytics.md), [AI-visibility tracking](ai-visibility-tracking.md), [rank tracking](rank-tracking.md), [diagnostic tests](diagnostic-tests.md), [traffic drop](../situations/traffic-drop.md), [Google AI features](../how-it-works/google-ai-features.md).
 
 [^ignite-news]: Ignite Visibility weekly recap, read 2026-10-27: GSC impression inflation (week of 2026-04-04), GA4 AI Assistant channel (2026-05-09), GA4 bug (2026-08-29), GPT-6 referral loss with Adobe data (2026-10-10), Comscore, Seer and the field experiment on AIO clicks (2026-04-25), SparkToro zero-click; secondary reporting, primary sources not checked.
@@ -268,3 +276,4 @@ Related: [analytics](analytics.md), [AI-visibility tracking](ai-visibility-track
 [^st-pronoun-queries]: Steve Toth, 2026-10-06: method plus one property's GSC export (2,226 rows → 2,158 candidates → 1,745 without brand → 454 follow-up keywords) and client examples; relays John Mueller via Search Engine Roundtable that AI Mode follow-ups appear as pronoun queries.
 [^seocrawl-no-sitemap]: SEOcrawl AI, 2026-10-16: quotes Google's URL Inspection help ("Google couldn't identify a sitemap that refers to this page"; "In a few cases, we don't report the sitemap for a page that was submitted in a sitemap"); causes and fixes; no own data.
 [^seocrawl-cni]: SEOcrawl AI, 2026-10-09: quotes Google's Page indexing help; report lists up to 1,000 example URLs; an issue stays listed 90 days after its last instance; worked example of grouping 300 URLs into 3 patterns; Google's cited timelines (recrawl a few days to weeks, Validate fix up to ~2 weeks); no own data.
+[^mh-click-spikes]: Marie Haynes, 2026-11-03 (page says it was mostly generated by Gemini and fact-checked by the author): three sites, rise from 31 Oct – 1 Nov 2026 and a spike on 2 Nov; a multi-location service site from ~50 to 327 clicks a day (91 % desktop, US, 120 pages), a regional service site ~16 to 66 (83 % desktop), a Q&A site ~68 to 144 (Canada ~11 to 75, US flat; one page 40 clicks from 23 reworded queries); impressions flat; pages at positions 11–54 with CTR ~45–100 %. Causes proposed, none confirmed: scrapers or headless browsers, CTR-manipulation networks, AI-agent fan-out retrieval, a gap in Google's bot filtering. No Google statement.

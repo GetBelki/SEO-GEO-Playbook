@@ -1,5 +1,11 @@
 # Log
 
+## 2026-11-04
+
+**Update** — Human review: search-console stamped `verified` again (Martin Aberastegue).
+**Update** — Added Marie Haynes's note on Search Console click spikes from 2 November 2026 (three anonymised sites; cause unconfirmed, no Google statement): search-console section 22, marked as a measurement break. The page's ready-made agent prompt was not run. search-console lost its `verified` stamp.
+**Lint** — 0 errors, 0 warnings; all section anchors, footnotes and sources resolve.
+
 ## 2026-11-03
 
 **Update** — Human review: the 5 pages changed by the Resoneo update stamped `verified` again (Martin Aberastegue).
