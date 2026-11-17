@@ -4,10 +4,13 @@ title: Feeds and Merchant Center
 description: Feed audit checklist for Shopping and AI product cards — plain-word attributes, specific categories, data-source hygiene, feed-only title tests, feed links as landing URLs, promotions, reviews — plus constraint copy that answers "will it fit?", consistent product-line naming, Merchant Center limits, GTIN rules, price matching and the 2026 attribute and API changes.
 tags: [geo, feeds, merchant-center, shopping, agentic-commerce, product-data, gtin, merchant-api, product-lines]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:06:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-11-03T08:07:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-12T11:55:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-17T10:25:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: rs-shopping
+    resource: "https://think.resoneo.com/google-shopping-ai-mode/"
+    title: "Resoneo, Google Shopping and AI Mode (Nov 2026; internal schema names, Merchant Center docs, constructed examples)"
   - id: rs-aio-aimode
     resource: "https://think.resoneo.com/ai-overviews-ai-mode/"
     title: "Resoneo, AI Overviews and AI Mode: what Google's AI reads before it answers (Oct 2026; internal schemas, provenance not stated, two single-case tests)"
@@ -107,6 +110,11 @@ From a practitioner's setup guide, *practitioner*, ≈2026;[^bp-gmc] check again
 - Merchant Center feeds, the Shopping Graph, Google reviews and merchant status are answer sources in AI Overviews and AI Mode in their own right, not only inputs to Shopping ads; the Shopping Graph refreshes about 2 billion of its 60 billion listings every hour and reconciles brands with Knowledge Graph entities. *From the leak.*[^rs-aio-aimode][^rs-kg-sources]
 - **Do:** treat feed accuracy (price, availability, GTIN, brand, category) as AI visibility work, and check Merchant Center for flags that limit where products show.
 
+## 6. Images and deals that pass Shopping's filters
+- **Main image:** a clean background with the product filling 75–90 % of the frame; Shopping scores background, framing and quality. *Official (Merchant Center), plus leak.*[^rs-shopping]
+- **Strikethrough prices:** the reference price must have applied on 30 of the last 200 days, the discount must be 5–90 %, and both prices must show on the page — check before Black Friday. *Official (Merchant Center rules), relayed.*[^rs-shopping]
+- **Do:** declare loyalty benefits and conversational attributes (including Q&A) in Merchant Center; AI answers read them ([shopping surfaces](../how-it-works/shopping-surfaces.md#6-how-google-shopping-ranks-and-filters-offers)).
+
 Related: [shopping surfaces](../how-it-works/shopping-surfaces.md), [product pages](../page-types/product-pages.md), [third-party presence](third-party-presence.md), [local](local.md), [diagnostic tests](../measure/diagnostic-tests.md#5-feed-attribute-coverage-and-title-tests), [product variants](../technical/technical-foundations.md#4-product-variants).
 
 [^ucp]: Searchind, agentic commerce, read 2026-10-27: eligibility over rank, constraint-based copy. No Google sources cited.
@@ -123,3 +131,4 @@ Related: [shopping surfaces](../how-it-works/shopping-surfaces.md), [product pag
 [^dj-tags]: DEJAN, 2026-09-20: AI Mode layout tags from leaked prompt content (`<ShoppingOffers>` for SkuLevelProduct with GTIN; `<Carousel>` / `<ImageGrid>` with ≥ 3 validated children of one entity type). Unverified; hypothesis only.
 [^rs-aio-aimode]: Resoneo, Oct 2026: internal schemas (how obtained not stated): Query Result Service sends query and fan-outs to ~100 providers across 138 result types, ranked by RankLab signals before the writing system (magi); 9 source types, only LINKED_SOURCE is a page link; Knowledge Graph facts keep a URL only if marked REQUIRES_CITATION; 21 commerce result types (price insights, review summaries, merchant status); Google-Extended does not remove a site from AI Overviews or AI Mode. Two single-case tests (Natzir Turrado, DEJAN, Oct 2026) saw uncited Knowledge Graph facts.
 [^rs-kg-sources]: Resoneo, Oct 2026: 5 billion entities, 500 billion facts; facts flagged requires_triangulation need three distinct hostnames; weak_data loses conflicts; names from 21 sources with a trust threshold above 0.6; Shopping Graph over 60 billion listings, ~2 billion refreshed hourly, brands reconciled with entities; merchant data flags can limit where products appear; corrections recorded only with evidence (legal document, primary source); six in ten organisations enter more than three months after founding; Kalicube measured a 6.26 % entity drop in June 2025.
+[^rs-shopping]: Resoneo, Nov 2026: internal schema names (interpretation not verified) plus Merchant Center rules: Shopping Graph >60 billion listings; 4 catalog scores (relevance, salient-term similarity, NavBoost clicks, predicted CTR for new products); 82 filters in ten groups (offer truthfulness, price confidence, merchant risk, deal validation…); image score reads background, framing and quality (Merchant Center: product fills 75–90 % of the frame); strikethrough prices need a reference price in force 30 of the last 200 days and a 5–90 % discount; AI answers read five fact sheets (product 27 fields, offer 30 incl. price history, return policy, merchant rating, Q&A, agentic-checkout eligibility); universal cart open in the US since 2026-10-15, agentic checkout in the US and Australia; Google-Agent uses published IP ranges and may ignore robots.txt.

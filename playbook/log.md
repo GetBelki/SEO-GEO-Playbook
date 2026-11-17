@@ -1,5 +1,16 @@
 # Log
 
+## 2026-11-17
+
+**Update** — Human review: ai-assistants and sources-and-confidence stamped `verified` again (Martin Aberastegue).
+**Update** — Added Resoneo's ChatGPT experiments tracker (feature flags read from chatgpt.com, Jul – Nov 2026; page too large for the fetcher, read in a browser; last ~6,000 of ~66,000 characters not captured): ai-assistants section 21 (what ChatGPT is testing: shopping price alerts, purchases, ads, tracking implications), labelled from code and not confirmed as live. Two OpenAI prompts quoted in the page were treated as data. ai-assistants and sources-and-confidence lost their `verified` stamp.
+**Update** — Human review: the 7 pages changed by the 2026-11-12 Resoneo update stamped `verified` again (Martin Aberastegue).
+
+## 2026-11-12
+
+**Update** — Added four Resoneo analyses (Nov 2026): google-ranking 15 (the signal map: 305 sets, 48 for a web page), shopping-surfaces 6 (how Shopping ranks and filters offers, fact sheets AI answers read, checkout inside Google), feeds-and-merchant-center 6 (image and strikethrough-price rules), google-ai-features 18 and ai-visibility-tracking 24 (shared vs personal layer in AI Mode), product-pages 14 (product images Google can read). The "good publishers" page is mostly images and was not used; only the first half of the ranking-signals page was read. Changed pages lost their `verified` stamp.
+**Lint** — 0 errors, 0 warnings; all section anchors, footnotes and sources resolve.
+
 ## 2026-11-04
 
 **Update** — Human review: search-console stamped `verified` again (Martin Aberastegue).

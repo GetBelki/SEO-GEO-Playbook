@@ -58,11 +58,11 @@ Every claim carries one of seven confidence labels. Across the playbook, they br
 ```mermaid
 pie showData
     title Claims by confidence label
-    "Measured" : 434
-    "Practitioner" : 427
-    "Official" : 114
+    "Measured" : 436
+    "Practitioner" : 428
+    "Official" : 120
     "Inference" : 67
-    "From the leak" : 40
+    "From the leak" : 48
     "Patent" : 39
     "From code" : 29
 ```

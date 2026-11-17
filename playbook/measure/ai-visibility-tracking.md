@@ -4,10 +4,13 @@ title: AI-visibility tracking
 description: How to count AI-assistant traffic and visibility — untagged clicks by design and by accident, Direct spikes that are bots, GA4's AI Assistant channel, one hostname-anchored channel group, the real size of the channel, per-engine reporting, mentions without links, the May 2026 ChatGPT link change, what Bing's AI Performance covers, prompt-tracker pitfalls (personalisation, clean accounts), re-baselining at model changes and fan-out volatility, entity tracking with search on and off, brand-canon accuracy, share of voice beyond presence, building the prompt set, runs and margin of error, AI as a brand channel, dark AI traffic, AI Overview citation tracking, retrieved vs cited vs named, replay and sign-in skew, AI Mode journeys from Search Console follow-ups and Gemini link tags.
 tags: [measurement, geo, ga4, chatgpt, ai-assistants, attribution, caveats, prompt-tracking, share-of-voice, brand-accuracy]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:00:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-11-03T08:01:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-12T11:55:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-17T10:25:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: rs-personal
+    resource: "https://think.resoneo.com/ai-mode-personalization/"
+    title: "Resoneo, What Google personalises, from the SERP to AI Mode (Nov 2026; Google help docs and blog, internal identifiers)"
   - id: seocrawl-ai-vs-organic
     resource: "https://seocrawl.ai/blog/ai-traffic-vs-organic-search-study"
     title: "SEOcrawl AI (David Kaufmann), AI traffic vs Google organic in 2026 (2026-10-23; 16,661 sites in Search Console, 3,949 in GA4; vendor's own users; report PDF read too)"
@@ -317,6 +320,9 @@ Steve Toth sells a paid AI-search membership, so his recordings are labelled ven
 - **The UTM tag was temporary.** Gemini tagged cited links with `utm_source=gemini` from early September 2026 and stopped around 28 September. Match Gemini by referrer (gemini.google.com) as well as by UTM, and expect iOS-app visits in Direct, identifiable only by the `GeminiiOS` user agent in server logs. *Measured, one practitioner's data, relayed; no Google statement.*[^ser-gemini-utm]
 - In recorded sessions, Gemini's outbound links carried `utm_source=gemini` (before it stopped), and 383 of 389 citation spans linked to the quoted words with a `#:~:text=` fragment. *Measured, vendor data.*[^st-gemini] Add the source to the channel group ([section 4](#4-one-channel-definition)); browsers don't send the fragment to the server, so the cited passage is visible in the answer, not in analytics ([analytics](analytics.md#7-ai-assistant-referrals-referrers-utms-and-bots)).
 
+## 24. Shared layer vs personal layer
+- AI Mode's web results are the same signed in or out for the same context; personalisation comes from a separate layer (purchases, bookings, preferred sources) that differs per user. Track the shared layer signed out, and treat any signed-in run as one customer's view, not a benchmark. *Official docs, relayed.*[^rs-personal] Consistent with [section 21](#21-replays-and-sign-in-state-skew-counts).
+
 Related: [analytics](analytics.md), [Search Console](search-console.md), [diagnostic tests](diagnostic-tests.md), [AI assistants](../how-it-works/ai-assistants.md), [third-party presence](../channels/third-party-presence.md).
 
 [^ignite-news]: Ignite Visibility weekly recap, read 2026-10-27: GSC impression inflation (week of 2026-04-04), GA4 AI Assistant channel (2026-05-09), GA4 bug (2026-08-29), GPT-6 referral loss with Adobe data (2026-10-10), Comscore, Seer and the field experiment on AIO clicks (2026-04-25), SparkToro zero-click; secondary reporting, primary sources not checked.
@@ -366,3 +372,4 @@ Related: [analytics](analytics.md), [Search Console](search-console.md), [diagno
 [^st-pronoun-queries]: Steve Toth, 2026-10-06: method plus one property's GSC export (2,226 rows → 2,158 candidates → 1,745 without brand → 454 follow-up keywords) and client examples; relays John Mueller via Search Engine Roundtable that AI Mode follow-ups appear as pronoun queries.
 [^ser-gemini-utm]: Search Engine Roundtable, 2026-10-30: Gemini added `utm_source=gemini` to cited links from early September 2026 and stopped around 28 September (Natzir Turrado's chart; also seen by John Mueller); gemini.google.com referrer visits stayed flat on desktop; the iOS app opens links in a WebView with no referrer (Direct in GA4), visible only as the `GeminiiOS` user agent in server logs. No Google statement.
 [^seocrawl-ai-vs-organic]: SEOcrawl AI, 2026-10-23, blog post and 32-page report: Search Console clicks for 16,661 sites (Sep 2025 – Aug 2026 vs the year before) and GA4 AI-referred sessions for 3,949 sites (Mar 2025 – Aug 2026); sites are the vendor's own users who opted in, not a random sample; AI traffic counted only by referrer, so a floor. Google clicks −15.0 % in total, median site −20.1 %, 69 % of sites down, impressions +0.4 %; AI sessions +44.6 %, 0.36 % of all sessions, 1.25 per 100 Google organic sessions; assistant shares Mar–Aug 2026: ChatGPT 83.3 %, Gemini 6.0 %, Perplexity 4.7 %, Claude 3.7 %, Copilot 2.1 %. Ecommerce and retail (1,581 sites): median Google clicks −15 %, 70 % of sites down, 1.99 AI visits per 100 Google visits, AI referrals +54 % (76 % of sites grew), ChatGPT 90.4 % of AI referrals.
+[^rs-personal]: Resoneo, Nov 2026: Google help pages and blog posts plus internal identifiers: AI Mode's web tools use a non-personalised search cache (same results signed in or out in the same context); personal layer for eligible users (18+, history on) from 16 sources incl. Gmail, Calendar, purchases and bookings; personal features fewest in the EEA, UK and Switzerland; preferred sources picked by over 600,000 distinct sources by Aug 2026; recommends schema markup in order and booking emails.

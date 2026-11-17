@@ -4,8 +4,8 @@ title: Sources and confidence
 description: The research sources, what each is good for, the six-level confidence scale, how to read research, and what not to adopt.
 tags: [sources, confidence, research, method]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:06:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-11-03T08:07:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-17T10:28:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-17T10:28:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
   - id: seocrawl
@@ -249,6 +249,6 @@ Related: [conflicts register](conflicts.md), [glossary](glossary.md), [Google up
 [^haynes]: Marie Haynes, read 2026-10-27 via the post sitemap (the blog index paginates by script).
 [^growth-memo]: Growth Memo, read 2026-10-27 via the archive API; paywalled bodies not read.
 [^status]: Google Search Status Dashboard, read 2026-10-27.
-[^resoneo]: Updated 2026-11-03 with three more think.resoneo.com analyses (twiddlers, AI Overviews and AI Mode, Knowledge Graph sources). Resoneo studies 2024–2026; sample sizes per study as stated in each article. See the per-claim footnotes on the other pages.
+[^resoneo]: Updated 2026-11-03 and 2026-11-12 with seven more think.resoneo.com analyses (twiddlers, AI Overviews and AI Mode, Knowledge Graph sources, ranking signals, Shopping and AI Mode, AI Mode personalisation, Google Images); the "good publishers" page is mostly images and isn't cited; 2026-11-17 the ChatGPT experiments tracker (feature flags, read in a browser). Resoneo studies 2024–2026; sample sizes per study as stated in each article. See the per-claim footnotes on the other pages.
 [^searchind]: Searchind articles Aug 2025 – Sep 2026; incl. "eCommerce SEO for Google is not enough" (PBN recommendation).
 [^field-notes]: Anonymised; no figures here identify the shop.

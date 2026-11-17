@@ -4,10 +4,13 @@ title: How shopping surfaces pick products
 description: Where AI product cards and grids come from (ChatGPT, AI Mode, Google Shopping), shortlist behaviour, ads in grids and in ChatGPT answers, checkout on Google and agent readiness (native controls, offer accuracy, standing conditions), the 2026 EEA free-listings removal, and how Google reads product lines, Chrome's shopping classifier and AI Mode layout tags.
 tags: [geo, shopping, feeds, merchant-center, agentic-commerce, chatgpt, ai-mode, eea, dma, product-lines, chrome]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-12T11:55:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-17T10:25:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: rs-shopping
+    resource: "https://think.resoneo.com/google-shopping-ai-mode/"
+    title: "Resoneo, Google Shopping and AI Mode (Nov 2026; internal schema names, Merchant Center docs, constructed examples)"
   - id: ignite-news
     resource: "https://ignitevisibility.com/digital-marketing-news/"
     title: "Ignite Visibility, weekly digital marketing news recap (Jan – Oct 2026; relays third-party studies)"
@@ -170,6 +173,13 @@ Steve Toth sells a paid research membership; his recorded sessions (vendor data,
 - **Gemini lifts comparison tables.** Gemini showed a `ProductComparisonTable` for product comparisons, seen only signed out; comparison tables were lifted from source pages for 5 citations signed in and 12 signed out. `EntityCard` (Google's own records) was rare. *Measured, vendor data, small sample.*[^st-gemini] **Do:** put product comparisons in plain HTML tables on the page, which Gemini can reuse. *Inference.*
 - **Perplexity classifies shopping intent.** A named `shopping_intent` classifier appears in its traffic; no figures on what it changes. *Measured, vendor data.*[^st-perplexity]
 
+## 6. How Google Shopping ranks and filters offers
+- **Four catalog scores:** text relevance, salient-term similarity, measured clicks and predicted click-through (which lets new products rank before they have clicks). *From the leak (schema names, interpretation not verified).*[^rs-shopping]
+- **82 filters before ranking**, including offer truthfulness, price confidence, merchant risk and deal validation: an offer whose price or stock disagrees between feed, markup and page can be dropped. *From the leak.*[^rs-shopping]
+- **AI answers read five fact sheets** per product: product (27 fields), offer (30 fields, including price history, return policy, merchant rating, Q&A and agentic-checkout eligibility), reviews, brand and store. *From the leak.*[^rs-shopping]
+- **Checkout inside Google.** The universal cart has been open in the US since 15 October 2026 and agentic checkout runs in the US and Australia, so some sales close without a site visit; Google-Agent uses published IP ranges and may ignore robots.txt. *Official announcements, relayed.*[^rs-shopping]
+- **Do:** keep price and stock identical in feed, markup and page; fill return, shipping, review and Q&A attributes; verify Google-Agent by IP rather than blocking it; track orders placed inside Google separately ([analytics](../measure/analytics.md)).
+
 Related: [feeds and Merchant Center](../channels/feeds-and-merchant-center.md), [AI assistants](ai-assistants.md), [Google AI features](google-ai-features.md), [product pages](../page-types/product-pages.md), [Google updates timeline](../reference/google-updates-timeline.md).
 
 [^chatgpt-retrieval]: Resoneo × Oncrawl, read 2026-10-27: shopping catalogue, Google data inputs, card caching.
@@ -203,3 +213,4 @@ Related: [feeds and Merchant Center](../channels/feeds-and-merchant-center.md), 
 [^st-ai-mode]: Steve Toth, undated guide, read 2026-10-29: 30 AI Mode conversations, 280 cited sources; pool size inferred from `srcId`; relays Google's AI Mode announcement (UK, 2025-07-28) and Search Central; vendor data.
 [^st-gemini]: Steve Toth, undated guide, read 2026-10-29: 47 Gemini conversations (32 signed in, 15 signed out); 389 citation spans; vendor data.
 [^st-perplexity]: Steve Toth, undated guide, read 2026-10-29 (first ~100k characters): 48 Perplexity conversations (33 signed in, 15 incognito); vendor data.
+[^rs-shopping]: Resoneo, Nov 2026: internal schema names (interpretation not verified) plus Merchant Center rules: Shopping Graph >60 billion listings; 4 catalog scores (relevance, salient-term similarity, NavBoost clicks, predicted CTR for new products); 82 filters in ten groups (offer truthfulness, price confidence, merchant risk, deal validation…); image score reads background, framing and quality (Merchant Center: product fills 75–90 % of the frame); strikethrough prices need a reference price in force 30 of the last 200 days and a 5–90 % discount; AI answers read five fact sheets (product 27 fields, offer 30 incl. price history, return policy, merchant rating, Q&A, agentic-checkout eligibility); universal cart open in the US since 2026-10-15, agentic checkout in the US and Australia; Google-Agent uses published IP ranges and may ignore robots.txt.

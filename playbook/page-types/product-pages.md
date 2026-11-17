@@ -4,10 +4,13 @@ title: Product pages
 description: What to do on a product page — factual opening sentence, price, specs and stock as server-rendered text in one main container (never in CSS pseudo-content), model codes as visible text, descriptive titles and URLs, variant URLs and markup, the same facts as the feed, "will it fit?" and use-case copy tested with task-style prompts, reviews and Q&A, own images for Lens and indexing, the page as ad landing page, "confirm and go" for AI visitors, out-of-stock and discontinued products, image and video speed, and checkout and form friction.
 tags: [seo, geo, product-pages, ecommerce, structured-data, variants, feeds, lens, google-ads, out-of-stock, soft-404, html-extraction, reviews, indexing, rendering, css, performance, lcp, checkout]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-10-29T11:50:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-10-29T11:56:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-12T11:55:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-17T10:25:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: rs-images
+    resource: "https://think.resoneo.com/google-images/"
+    title: "Resoneo, What Google sees in an image (Nov 2026; 67,499 Gemini-labelled images, Cloud Vision tests, 2024 leak)"
   - id: chatgpt-retrieval
     resource: "https://think.resoneo.com/chatgpt-retrieval/"
     title: "Resoneo × Oncrawl, What ChatGPT pulls, shows and cites (Jul–Aug 2026; 1,249 answers, 88k results, server logs of 325k URLs)"
@@ -295,6 +298,15 @@ From Steve Toth, who sells a paid AI-search membership. His test conversations w
 - **Follow-ups show what the first answer left open.** Grouped Search Console pronoun queries fall into price checks, stock and availability, link requests, "find this" photo queries, fit or variant, and brand doubt. Fix the page each group lands on: a price passage where price is asked, a feed fix when "find me the link" goes to a reseller. On one retailer, "yes" replies landed on dozens of product pages. *Practitioner; measured, one case.*[^st-pronoun-queries] Method: [test 36](../measure/diagnostic-tests.md#36-rebuild-ai-mode-conversations-from-pronoun-queries).
 - **Plain HTML tables get reused.** Gemini lifted comparison tables from source pages for 5 citations signed in and 12 signed out, and showed its own product comparison table only signed out. *Measured, vendor data, small sample.*[^st-gemini] Put specs in an HTML table, not an image or a script-built widget. *Inference.*
 
+## 14. Product images Google can read
+- **Google labels images with Shopping's own filter names** (sleeve style, length, mounting). It reads some categories far better than others: clothing length was labelled in 90 % of images, furniture style in under 1 %. *Measured on Gemini labels, plus leak.*[^rs-images]
+- **Copies compete for one spot.** Google groups duplicates, so a manufacturer or stock photo reused across many shops competes with all of them; some CDNs also strip the C2PA and IPTC metadata that carries origin and licence. *From the leak and tests.*[^rs-images]
+- **Do:**
+  - Show the whole product and the detail a filter asks for, on a clean background.
+  - Publish your own photos on your site before syndicating them through feeds.
+  - Serve a full-size original and keep its metadata.
+  - Place the image next to the text it illustrates, with consistent alt text and caption.
+
 Related: [category pages](category-pages.md), [comparison pages and guides](comparison-and-guides.md), [shopping surfaces](../how-it-works/shopping-surfaces.md), [satisfaction per page type](../measure/diagnostic-tests.md#2-satisfaction-per-page-type), [titles and snippets](../technical/titles-and-snippets.md).
 
 [^chatgpt-retrieval]: Resoneo × Oncrawl, read 2026-10-27: funnel 58k retrieved → 7.6k shown → 5k cited → 760 opened; ~202-character snippet from the H1; JSON-LD stripped; bot roles and cache; utm on ~95 % of displayed links; instant vs thinking search counts.
@@ -350,3 +362,4 @@ Related: [category pages](category-pages.md), [comparison pages and guides](comp
 [^dbb-ecom-seo]: DebugBear, 2026-02-04 (upd. 2026-04-24): practitioner guide; restrictive facets only, sort parameters rarely rank, crawlable pagination (rel next/prev dropped by Google 2019, used by Bing); out-of-stock handling; Black Friday interest rises from summer.
 [^st-gemini]: Steve Toth, undated guide: 47 Gemini conversations (32 signed in, 15 signed out); 383 of 389 citation spans with a `#:~:text=` fragment; outbound links tagged `utm_source=gemini`; 3.6 Flash signed in, 3.5 Flash-Lite signed out; `ProductComparisonTable` seen signed out only; tables lifted from source pages for 5 citations signed in, 12 signed out.
 [^st-pronoun-queries]: Steve Toth, 2026-10-06: method plus one property's GSC export (2,226 rows → 2,158 candidates → 1,745 without brand → 454 follow-up keywords) and client examples; relays John Mueller via Search Engine Roundtable that AI Mode follow-ups appear as pronoun queries.
+[^rs-images]: Resoneo, Nov 2026: 67,499 Gemini-labelled images (up to 100 labels each), Cloud Vision tests, 2024 leak: labels are Knowledge Graph entities, dimensions and values reusing Shopping filter names; clothing length labelled in 90 % of cases, furniture style in under 1 %; images filtered before ranking (86 flags at indexing); aesthetic and technical scores, page relevance and click signals including a "click magnet" flag; copies grouped, so reused stock photos compete for one spot; some CDNs strip C2PA and IPTC metadata.

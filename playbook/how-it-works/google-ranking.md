@@ -4,10 +4,13 @@ title: How Google ranks
 description: Section-level quality scores, new URLs inheriting their section's average, click memory per query and page (NavBoost, RankEmbed, rerankers), exact-term scoring, host caps, indexing as a quality decision, what core-update winners share, and what patents say about site quality, navigational queries, click thresholds and freshness, plus manual actions for site reputation abuse, brand size, spam losses carrying over to AI answers, and Preferred Sources.
 tags: [seo, google, google-leak, navboost, quality, indexing, core-updates, patents, freshness, spam, manual-actions, preferred-sources]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:06:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-11-03T08:07:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-12T11:55:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-17T10:25:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: rs-signals
+    resource: "https://think.resoneo.com/ranking-signals/"
+    title: "Resoneo, Google's ranking signals and the 48 that apply to a web page (Nov 2026; 2024 leak, trial exhibits, Google statements; first half of the page read)"
   - id: rs-twiddlers
     resource: "https://think.resoneo.com/twiddlers/"
     title: "Resoneo, Twiddlers: what still moves a result after ranking (Nov 2026; a 2018 internal Google document, the 2024 leak, internal schema names, Google announcements)"
@@ -243,6 +246,12 @@ SERPrecon, which sells an SEO content-scoring tool, compiled the leaks, DOJ test
 - **Copyright notices count domain-wide.** Past a volume of valid removal notices, the whole domain is demoted, product pages included. *From the leak; Google announced the DMCA signal in 2012.*[^rs-twiddlers]
 - **Do:** date real updates clearly, treat DMCA notices as a site-wide risk, and on shopping queries check which specialist and deals sites the results favour ([third-party presence](../channels/third-party-presence.md)).
 
+## 15. The signal map
+- **305 signal sets, 48 for a web page.** The 2024 leak lists 167 sets per result and 138 per query; 48 apply to a web page and 31 of those score it. 34 sets serve generative AI. *From the leak; weights unknown.*[^rs-signals]
+- **Families that score a page:** rankers (base score, fast scoring, RankBrain), quality and authority (expertise, authenticity, topic authority, "hidden gems", first-hand "human voices"), demotions (DMCA, SafeSearch), freshness and personalisation. *From the leak.*[^rs-signals]
+- **The base score gates the rest.** RankBrain only rereads the results that are already near the top, so a page has to get there on its basic relevance and quality first. *From the leak and trial testimony.*[^rs-signals]
+- **Shops are judged as shops.** A brand selling online gets the "specialty merchants" treatment, a specialist site topic authority; know which type your page is before deciding what to strengthen ([section 14](#14-what-moves-a-result-after-ranking-twiddlers)). *From the leak, applied by the source.*[^rs-signals]
+
 Related: [Google AI features](google-ai-features.md), [AI assistants](ai-assistants.md), [Google Discover](../channels/google-discover.md), [traffic drop](../situations/traffic-drop.md), [category pages](../page-types/category-pages.md), [technical foundations](../technical/technical-foundations.md), [diagnostic tests](../measure/diagnostic-tests.md).
 
 [^leak-2]: Resoneo, leak part 2, 2024-10-31: OfficialPageTwiddler, host diversity caps.
@@ -282,3 +291,4 @@ Related: [Google AI features](google-ai-features.md), [AI assistants](ai-assista
 [^srp-commodity-content]: SERPrecon, 2026-10-15: relays Google's generative-AI features guide section on non-commodity content, Danny Sullivan and John Mueller (via Search Engine Journal), the leak's OriginalContentScore and patent US11354342B2; the vendor's commodity metric is not validated against rankings.
 [^mlseo-info-gain]: MLforSEO, 2026-05-11 (upd. 2026-10-24): explainer of patent US20200349181A1; states the patent does not confirm use in Search.
 [^rs-twiddlers]: Resoneo, Nov 2026: 2018 internal document ("more than 65" twiddlers in web search; predoc and lazy twiddlers; actions boost, filter, max_total, stride); 120 twiddler names in internal schemas by family (shopping includes specialty merchants, deals, product tags, categorical refinements); DMCA demotion applies domain-wide past a volume of valid notices; freshness reads page and estimated content dates; repeat-query demotion of already-seen results. No boost values given.
+[^rs-signals]: Resoneo, Nov 2026: 2024 leak (RankLab features, index modules), Oct 2023 trial transcript and the remedies opinion: 305 signal sets (167 per result, 138 per query); 48 apply to a web page, 31 of them score it; 34 serve generative AI; families include rankers, quality and authority (expertise, authenticity, topic authority, hidden gems, human voices), demotions, freshness and personalisation; RankBrain rereads only the top results; "specialty merchants" applies to brands selling online. Only the first half of the page (100,000 of 202,000 characters) was read.

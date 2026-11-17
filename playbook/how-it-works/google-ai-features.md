@@ -4,10 +4,13 @@ title: How Google's AI features pick sources
 description: AI Overviews, AI Mode and Gemini — Google's official "still SEO" line, schema and AI citations, grounding from ranking (FastSearch), passage citation, top-10 overlap, fan-out depth, how users behave, ads and citation UI, personalisation, when AI Overviews trigger, the click loss by position, how often answers change, the grounding word budget, reading from the index, uncited Knowledge Graph facts, Personal Intelligence, Pew's click data and how easily thinly covered questions sway AI answers.
 tags: [seo, geo, google, ai-overviews, ai-mode, gemini, citations, fan-out, ctr, branded-search, grounding, knowledge-graph, personalisation, misinformation]
 status: stable
-generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T08:06:00Z }
-verified: { by: human:martin-aberastegue, at: 2026-11-03T08:07:00Z }
+generated: { by: claude-code/claude-opus-5-5, at: 2026-11-12T11:55:00Z }
+verified: { by: human:martin-aberastegue, at: 2026-11-17T10:25:00Z }
 stale_after: 2027-04-28T00:00:00Z
 sources:
+  - id: rs-personal
+    resource: "https://think.resoneo.com/ai-mode-personalization/"
+    title: "Resoneo, What Google personalises, from the SERP to AI Mode (Nov 2026; Google help docs and blog, internal identifiers)"
   - id: rs-aio-aimode
     resource: "https://think.resoneo.com/ai-overviews-ai-mode/"
     title: "Resoneo, AI Overviews and AI Mode: what Google's AI reads before it answers (Oct 2026; internal schemas, provenance not stated, two single-case tests)"
@@ -286,6 +289,11 @@ Steve Toth sells a paid research membership; the measurements below are his vend
 - **Google-Extended doesn't remove a site from AI Overviews or AI Mode**, consistent with [AI crawlers and controls](../technical/ai-crawlers-and-controls.md). *From the leak, consistent with official docs.*[^rs-aio-aimode]
 - **Do:** state price, availability and specs in passages that answer on their own, keep feeds and reviews accurate, and fix brand facts at their source, since uncited graph facts can still shape the answer ([homepage and brand](../page-types/homepage-and-brand.md)).
 
+## 18. What AI Mode personalises
+- **The web layer is the same for everyone in a context.** AI Mode's web tools use a non-personalised search cache: signed-in and signed-out users with the same location, language and device get the same web results. *Official docs plus internal identifiers, relayed.*[^rs-personal]
+- **A personal layer sits on top** for eligible users (18+, history on): Gmail, Calendar, purchases and bookings can add brands already bought or a booked hotel. It is thinnest in the EEA, the UK and Switzerland. *Official docs, relayed.*[^rs-personal]
+- **Do:** measure AI visibility signed out for the shared layer ([AI visibility tracking](../measure/ai-visibility-tracking.md)); add schema markup to order and shipping emails, and offer the "Add to preferred sources" button. *Practitioner recommendation.*[^rs-personal]
+
 Related: [Google ranking](google-ranking.md), [AI assistants](ai-assistants.md), [shopping surfaces](shopping-surfaces.md), [AI crawlers and controls](../technical/ai-crawlers-and-controls.md), [comparison pages and guides](../page-types/comparison-and-guides.md).
 
 [^google-ai-guide]: Google generative-AI optimization guide, updated 2026-07-10.
@@ -333,3 +341,4 @@ Related: [Google ranking](google-ranking.md), [AI assistants](ai-assistants.md),
 [^st-aio]: Steve Toth, undated guide, read 2026-10-29: 24 conversations; load times on 13 pages with and 46 without an Overview; no citation counts; vendor data.
 [^st-gemini]: Steve Toth, undated guide, read 2026-10-29: 47 Gemini conversations (32 signed in, 15 signed out); 389 citation spans; vendor data.
 [^rs-aio-aimode]: Resoneo, Oct 2026: internal schemas (how obtained not stated): Query Result Service sends query and fan-outs to ~100 providers across 138 result types, ranked by RankLab signals before the writing system (magi); 9 source types, only LINKED_SOURCE is a page link; Knowledge Graph facts keep a URL only if marked REQUIRES_CITATION; 21 commerce result types (price insights, review summaries, merchant status); Google-Extended does not remove a site from AI Overviews or AI Mode. Two single-case tests (Natzir Turrado, DEJAN, Oct 2026) saw uncited Knowledge Graph facts.
+[^rs-personal]: Resoneo, Nov 2026: Google help pages and blog posts plus internal identifiers: AI Mode's web tools use a non-personalised search cache (same results signed in or out in the same context); personal layer for eligible users (18+, history on) from 16 sources incl. Gmail, Calendar, purchases and bookings; personal features fewest in the EEA, UK and Switzerland; preferred sources picked by over 600,000 distinct sources by Aug 2026; recommends schema markup in order and booking emails.
